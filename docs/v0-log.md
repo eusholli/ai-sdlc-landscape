@@ -74,3 +74,13 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_E3J0IkwHvon, demo https://demo-kzmixkmatu8dd8bu2hke.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..Nb2FzVRwnNIQIpX7.iugL4-AI08QJYj_OiYJE2cX5Rh4yi7KkPe8fnpNFMn_qmg0wh4Sn-ec7607RDfzY_cv1kXBLYSquArHHYKdwqk7Wda-848npLzUEpG9vMB9nyzjH0yNAs2cV9u3o-ZmW8rZFSfKe55XRjhflNLaqX99ygLTscQGCX2aRV2eKKIHSLencvkKbvA7I3JGFiLtfAviN6re0sTUjmEVirK39586obrsn54tDEaTC9oOjW8I7rKCVINtpjkj_GSgZCGHMf38LxvqnetW5W5hWf1xnxC9l_sL6FusK.Rtv55x4InxmQrYGGDoWquw&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
 - credits before: 21.9298396 of 20, after: 20.4894774 of 20
 - files written: 18; fix rounds: 0; gate: passed
+
+## Recovery: steps 7 to 9 completed
+
+- 2026-10-21
+- version: b_wVAP8zaA3w9 (settled), pulled with --pull, no credits spent
+- cause: the runner took v0's first completed version as the end of a turn, so steps 7 to 9
+  were committed half done and each next prompt cut the running turn short. Fixed in the
+  runner, which now waits for the chat to settle.
+- by hand: added the shadcn `table` component v0 assumed; widened one facet check's type
+- gate: passed (build 574 pages, 14 tests, lint clean)

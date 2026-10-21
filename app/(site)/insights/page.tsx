@@ -1,86 +1,129 @@
 import type { Metadata } from "next";
 import { CoverageHeatmap } from "@/components/insights/coverage-heatmap";
-import { CrowdedPhases } from "@/components/insights/crowded-phases";
-import { FieldCompleteness } from "@/components/insights/field-completeness";
-import type { HeatmapData } from "@/components/insights/types";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { coverageMatrix, fieldCompleteness, layers, phases, segments, toolsByPhase } from "@/lib/data";
+import { phaseColor } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Insights",
-  description: "Where the AI SDLC tools sit, which phases are crowded, and how much vendors publish about themselves.",
+  description: "Where AI tools cluster across the software lifecycle, and how much vendors publish about themselves.",
 };
 
-const ROW_ORDER = ["full-lifecycle", "multi-phase", "point", "layer"] as const;
-
-function heatmapData(): HeatmapData {
-  const phaseList = phases();
-  const cells = coverageMatrix();
-  const segmentLabel = new Map(segments().map((s) => [s.id as string, s.label]));
-  segmentLabel.set("layer", layers().find((l) => l.id === "agent-infra")?.label ?? "Agent infrastructure layer");
-
-  const rows = ROW_ORDER.map((id) => ({
-    id,
-    label: segmentLabel.get(id) ?? id,
-    counts: Object.fromEntries(cells.filter((c) => c.segment === id).map((c) => [c.phase, c.count])),
-  }));
-  const max = Math.max(1, ...cells.map((c) => c.count));
-
-  return { phases: phaseList.map((p) => ({ id: p.id, label: p.label })), rows, max };
+function Section({
+  id,
+  title,
+  intro,
+  children,
+}: {
+  id: string;
+  title: string;
+  intro: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section aria-labelledby={id} className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1">
+        <h2 id={id} className="text-xl font-semibold tracking-tight">
+          {title}
+        </h2>
+        <p className="max-w-2xl text-sm text-pretty text-muted-foreground">{intro}</p>
+      </div>
+      {children}
+    </section>
+  );
 }
 
-function crowdedRows() {
-  const byPhase = toolsByPhase();
-  return phases()
-    .map((p) => ({ id: p.id, label: p.label, count: byPhase[p.id].length, order: p.order }))
-    .sort((a, b) => b.count - a.count || a.order - b.order)
-    .map(({ id, label, count }) => ({ id, label, count }));
+function BarRow({ label, value, max, colour, trailing }: { label: string; value: number; max: number; colour: string; trailing: string }) {
+  return (
+    <li className="grid grid-cols-[minmax(7rem,12rem)_minmax(0,1fr)_auto] items-center gap-3 text-sm sm:grid-cols-[14rem_minmax(0,1fr)_auto]">
+      <span className="truncate">{label}</span>
+      <span aria-hidden className="h-2.5 overflow-hidden rounded-full bg-muted">
+        <span className="block h-full rounded-full" style={{ width: `${(value / max) * 100}%`, background: colour }} />
+      </span>
+      <span className="text-right font-mono text-xs whitespace-nowrap text-muted-foreground tabular-nums">
+        {trailing}
+      </span>
+    </li>
+  );
 }
 
 export default function InsightsPage() {
+  const phaseList = phases();
+  const columns = phaseList.map((p) => ({ id: p.id, label: p.label }));
+  const infraLabel = layers().find((l) => l.id === "agent-infra")?.label ?? "Agent infrastructure";
+  const rows = [...segments().map((s) => ({ id: s.id as string, label: s.label })), { id: "layer", label: infraLabel }];
+  const counts = Object.fromEntries(coverageMatrix().map((c) => [`${c.segment}|${c.phase}`, c.count]));
+
+  const grouped = toolsByPhase();
+  const crowded = phaseList
+    .map((phase) => ({ phase, count: grouped[phase.id].length }))
+    .sort((a, b) => b.count - a.count || a.phase.order - b.phase.order);
+  const crowdedMax = Math.max(1, crowded[0]?.count ?? 1);
+  const most = crowded[0];
+  const least = crowded[crowded.length - 1];
+
   const completeness = fieldCompleteness();
-  const total = completeness[0]?.total ?? 0;
 
   return (
-    <main id="main" className={`${SITE_CONTAINER} py-8`}>
-      <div className="mx-auto max-w-5xl">
-        <h1 className="text-2xl font-semibold tracking-tight">Insights</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Where the tools sit, which phases are crowded, and how much vendors say about themselves.
-        </p>
+    <main id="main" className={`${SITE_CONTAINER} py-10`}>
+      <div className="mx-auto flex max-w-4xl flex-col gap-14">
+        <header className="flex flex-col gap-3">
+          <h1 className="text-3xl font-semibold tracking-tight text-balance">Insights</h1>
+          <p className="max-w-2xl text-pretty text-muted-foreground">
+            Where tools cluster across the lifecycle, and how much vendors say about themselves. Counts cover the tools
+            in the census, not the model providers.
+          </p>
+        </header>
 
-        <section aria-labelledby="coverage-heading" className="mt-10">
-          <h2 id="coverage-heading" className="text-lg font-semibold tracking-tight">
-            Coverage by phase and segment
-          </h2>
-          <p className="mt-1 mb-5 max-w-2xl text-sm text-muted-foreground">
-            Each cell counts the tools that cover a phase. A tool that covers several phases counts once in each.
-          </p>
-          <CoverageHeatmap data={heatmapData()} />
-        </section>
+        <Section
+          id="coverage-heading"
+          title="Coverage by phase and segment"
+          intro="Each cell counts tools that cover a phase at all, not only those whose main phase it is, so a full-lifecycle platform appears in every phase it spans."
+        >
+          <CoverageHeatmap columns={columns} rows={rows} counts={counts} />
+        </Section>
 
-        <section aria-labelledby="crowded-heading" className="mt-14">
-          <h2 id="crowded-heading" className="text-lg font-semibold tracking-tight">
-            Most and least crowded phases
-          </h2>
-          <p className="mt-1 mb-4 max-w-2xl text-sm text-muted-foreground">
-            Tools per primary phase. Agent infrastructure and model providers sit outside the phases and are not counted.
-          </p>
-          <CrowdedPhases rows={crowdedRows()} />
-        </section>
+        <Section
+          id="crowded-heading"
+          title="Most and least crowded phases"
+          intro={
+            most && least
+              ? `${most.phase.label} has the most tools (${most.count}). ${least.phase.label} has the fewest (${least.count}). Each tool counts once, under its primary phase.`
+              : "Each tool counts once, under its primary phase."
+          }
+        >
+          <ol className="flex flex-col gap-2.5">
+            {crowded.map(({ phase, count }) => (
+              <BarRow
+                key={phase.id}
+                label={phase.label}
+                value={count}
+                max={crowdedMax}
+                colour={phaseColor(phase.id)}
+                trailing={`${count} ${count === 1 ? "tool" : "tools"}`}
+              />
+            ))}
+          </ol>
+        </Section>
 
-        <section aria-labelledby="published-heading" className="mt-14">
-          <h2 id="published-heading" className="text-lg font-semibold tracking-tight">
-            What vendors publish
-          </h2>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-            Go-to-market partners are published for few tools. Treat thin fields as a floor, not a census.
-          </p>
-          <p className="mt-1 mb-4 max-w-2xl text-sm text-muted-foreground">
-            Known of {total} tools, by field.
-          </p>
-          <FieldCompleteness rows={completeness.map(({ label, known, total }) => ({ label, known, total }))} />
-        </section>
+        <Section
+          id="published-heading"
+          title="What vendors publish"
+          intro="Go-to-market partners are published for few tools. Treat thin fields as a floor, not a census."
+        >
+          <ul className="flex flex-col gap-2.5">
+            {completeness.map(({ field, label, known, total }) => (
+              <BarRow
+                key={field}
+                label={label}
+                value={known}
+                max={total}
+                colour="color-mix(in oklab, var(--foreground) 70%, var(--background))"
+                trailing={`${known} of ${total}`}
+              />
+            ))}
+          </ul>
+        </Section>
       </div>
     </main>
   );

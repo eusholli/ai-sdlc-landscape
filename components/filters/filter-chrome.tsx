@@ -20,7 +20,9 @@ export function FilterChrome({
       <Suspense fallback={null}>
         <SearchPalette tools={tools} phases={phases} />
       </Suspense>
-      <FilterBar tools={tools} phases={phases} segments={segments} />
+      <div className="hidden md:block">
+        <FilterBar tools={tools} phases={phases} segments={segments} />
+      </div>
     </>
   );
 }

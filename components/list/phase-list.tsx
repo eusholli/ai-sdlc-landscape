@@ -1,0 +1,154 @@
+"use client";
+
+import { useQueryStates } from "nuqs";
+import { useEffect, useMemo, useState } from "react";
+import { FilterSheet } from "@/components/list/filter-sheet";
+import { Logo } from "@/components/logo";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { CLEAR_ALL_FILTERS } from "@/components/filters/facets";
+import { phaseColor } from "@/lib/format";
+import { applyFilters, filterParsers } from "@/lib/filters";
+import type { Layer, Phase, Segment, ToolLite } from "@/lib/types";
+
+export interface PhaseListProps {
+  tools: ToolLite[];
+  phases: Phase[];
+  layers: Layer[];
+  segments: Segment[];
+  fullLifecycleIds: string[];
+}
+
+interface Group {
+  id: string;
+  label: string;
+  colour: string;
+  tools: ToolLite[];
+}
+
+const byName = (a: ToolLite, b: ToolLite) => a.name.localeCompare(b.name);
+
+function useStickyHeaderHeight(): number {
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>("header.sticky");
+    if (!header) return;
+    const update = () => setHeight(header.offsetHeight);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+  return height;
+}
+
+export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }: PhaseListProps) {
+  const [query, setQuery] = useQueryStates(filterParsers);
+  const headerHeight = useStickyHeaderHeight();
+
+  const groups = useMemo<Group[]>(() => {
+    const platformIds = new Set(fullLifecycleIds);
+    const platforms = tools.filter((t) => platformIds.has(t.id)).sort(byName);
+    const phaseGroups = [...phases]
+      .sort((a, b) => a.order - b.order)
+      .map((phase) => ({
+        id: phase.id,
+        label: phase.label,
+        colour: phaseColor(phase.id),
+        tools: tools.filter((t) => !t.layer && !platformIds.has(t.id) && t.primaryPhase === phase.id).sort(byName),
+      }));
+    const layerGroups = query.layers
+      ? layers.map((layer) => ({
+          id: `layer-${layer.id}`,
+          label: layer.label,
+          colour: "var(--muted-foreground)",
+          tools: tools.filter((t) => t.layer === layer.id).sort(byName),
+        }))
+      : [];
+    return [
+      { id: "platforms", label: "Full-lifecycle platforms", colour: "var(--muted-foreground)", tools: platforms },
+      ...phaseGroups,
+      ...layerGroups,
+    ];
+  }, [tools, phases, layers, fullLifecycleIds, query.layers]);
+
+  const matched = useMemo(() => new Set(applyFilters(tools, query).map((t) => t.id)), [tools, query]);
+
+  const visible = useMemo(
+    () =>
+      groups
+        .map((group) => ({ ...group, shown: group.tools.filter((t) => matched.has(t.id)) }))
+        .filter((group) => group.shown.length > 0),
+    [groups, matched],
+  );
+
+  return (
+    <div className="border-b">
+      <div className="flex flex-col gap-2 border-b bg-background p-3 md:hidden">
+        <div role="search" className="flex gap-2">
+          <Input
+            type="search"
+            aria-label="Search tools"
+            placeholder="Search tools"
+            value={query.q}
+            onChange={(event) => void setQuery({ q: event.target.value || null }, { history: "replace" })}
+            className="h-9 flex-1"
+          />
+          <FilterSheet tools={tools} phases={phases} segments={segments} />
+        </div>
+        <p aria-live="polite" className="text-xs text-muted-foreground">
+          Showing <span className="font-mono tabular-nums">{matched.size}</span> of{" "}
+          <span className="font-mono tabular-nums">{tools.length}</span>
+        </p>
+      </div>
+
+      <div className="mx-auto max-w-3xl">
+        {visible.length === 0 ? (
+          <div role="status" className="flex flex-col items-start gap-3 p-6 text-sm">
+            <p>No tools match these filters.</p>
+            <Button variant="outline" size="sm" onClick={() => void setQuery({ ...CLEAR_ALL_FILTERS })}>
+              Clear all filters
+            </Button>
+          </div>
+        ) : (
+          visible.map((group) => (
+            <section key={group.id} aria-labelledby={`list-${group.id}`}>
+              <h2
+                id={`list-${group.id}`}
+                className="sticky z-10 flex items-baseline justify-between border-y-0 border-t-2 border-b bg-background px-4 py-2 text-sm font-semibold"
+                style={{ top: headerHeight, borderTopColor: group.colour }}
+              >
+                {group.label}
+                <span className="font-mono text-xs font-normal text-muted-foreground tabular-nums">
+                  {group.shown.length === group.tools.length
+                    ? group.tools.length
+                    : `${group.shown.length} of ${group.tools.length}`}
+                </span>
+              </h2>
+              <ul className="divide-y">
+                {group.shown.map((tool) => (
+                  <li key={tool.id}>
+                    <button
+                      type="button"
+                      onClick={() => void setQuery({ tool: tool.id })}
+                      className="flex min-h-14 w-full items-center gap-3 px-4 py-2 text-left outline-none hover:bg-muted focus-visible:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset"
+                    >
+                      <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={36} />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-medium">{tool.name}</span>
+                        <span className="block truncate text-xs text-muted-foreground">
+                          {tool.company}
+                          {tool.moved && " \u00B7 Acquired or shut down"}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}

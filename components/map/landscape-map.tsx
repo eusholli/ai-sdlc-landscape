@@ -5,13 +5,16 @@ import { useQueryStates } from "nuqs";
 import { useCallback, useMemo } from "react";
 import { applyFilters, filterParsers, isFiltered } from "@/lib/filters";
 import { cn } from "@/lib/utils";
-import type { External, Layer, LayerId, Phase, PhaseId, RelationLite, ToolLite } from "@/lib/types";
+import type { External, Layer, LayerId, Phase, PhaseId, RelationLite, Segment, ToolLite } from "@/lib/types";
+import { PhaseList } from "@/components/list/phase-list";
 import { NetworkView } from "@/components/network/network-view";
 import { LayerBands, type LayerBand } from "./layer-bands";
 import { MapControls } from "./map-controls";
 import { WORLD_PAD, WORLD_W } from "./map-layout";
 import { PhaseColumns } from "./phase-columns";
 import { PlatformBars } from "./platform-bars";
+import { handleTileArrowKeys } from "./tile-keys";
+import { useIsMobile } from "./use-is-mobile";
 import { usePanZoom } from "./use-pan-zoom";
 
 export interface LandscapeMapProps {
@@ -20,11 +23,27 @@ export interface LandscapeMapProps {
   externals: External[];
   phases: Phase[];
   layers: Layer[];
+  segments: Segment[];
   fullLifecycleIds: string[];
 }
 
 export function LandscapeMap(props: LandscapeMapProps) {
   const [{ view }] = useQueryStates(filterParsers);
+  const isMobile = useIsMobile();
+  if (view === "list" || (view === "map" && isMobile)) {
+    return (
+      <PhaseList
+        tools={props.tools}
+        phases={props.phases}
+        layers={props.layers}
+        segments={props.segments}
+        fullLifecycleIds={props.fullLifecycleIds}
+      />
+    );
+  }
+  if (view === "map" && isMobile === null) {
+    return <div aria-hidden className="h-[calc(100dvh-10.5rem)] min-h-[32rem] border-b bg-muted/30" />;
+  }
   if (view === "network") {
     return (
       <NetworkView
@@ -34,13 +53,6 @@ export function LandscapeMap(props: LandscapeMapProps) {
         phases={props.phases}
         layers={props.layers}
       />
-    );
-  }
-  if (view !== "map") {
-    return (
-      <p className="mx-auto max-w-3xl p-8 text-sm text-muted-foreground">
-        The {view} view is not built yet. Choose Map or Network to see the landscape.
-      </p>
     );
   }
   return <MapCanvas {...props} />;
@@ -81,7 +93,7 @@ function MapCanvas({ tools, phases, layers, fullLifecycleIds }: LandscapeMapProp
         ref={viewportRef}
         role="group"
         aria-roledescription="map"
-        aria-label="AI SDLC landscape. Drag to pan, scroll or pinch to zoom. Plus and minus zoom, 0 fits, arrow keys pan."
+        aria-label="AI SDLC landscape. Drag to pan, scroll or pinch to zoom. Plus and minus zoom, 0 fits, arrow keys pan. Tab into the map, then arrow keys move between tools."
         tabIndex={0}
         className={cn(
           "h-full w-full touch-none overflow-hidden outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset",
@@ -91,6 +103,7 @@ function MapCanvas({ tools, phases, layers, fullLifecycleIds }: LandscapeMapProp
       >
         <motion.div
           ref={worldRef}
+          onKeyDown={handleTileArrowKeys}
           style={{ x, y, scale, originX: 0, originY: 0, width: WORLD_W, padding: WORLD_PAD }}
           className="absolute top-0 left-0 flex flex-col gap-6"
         >

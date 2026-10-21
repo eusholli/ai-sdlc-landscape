@@ -2,47 +2,50 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { MoveEntry } from "@/components/moves/move-entry";
-import type { MoveItem } from "@/components/moves/types";
+import { phaseColor } from "@/lib/format";
+import { MoveEntry, type MoveItem } from "./move-entry";
 
-function TimelineRow({ item, reduceMotion }: { item: MoveItem; reduceMotion: boolean }) {
+function TimelineItem({ item }: { item: MoveItem }) {
   const ref = useRef<HTMLLIElement>(null);
-  // Progress is 0.5 when the entry is centred in the viewport, whatever its height.
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.95, 0.97, 1, 0.97, 0.95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.6, 0.8, 1, 0.8, 0.6]);
-  const dotScale = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.6, 0.8, 1.35, 0.8, 0.6]);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 90%", "end 10%"] });
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1, 0.94]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.45, 1, 0.45]);
 
   return (
-    <li ref={ref} className="relative">
-      <motion.span
+    <motion.li
+      ref={ref}
+      style={reduceMotion ? undefined : { scale, opacity, transformOrigin: "left center" }}
+      className="relative"
+    >
+      <span
         aria-hidden
-        className="absolute top-6 -left-[35.5px] size-3 rounded-full bg-foreground ring-4 ring-background"
-        style={reduceMotion ? undefined : { scale: dotScale }}
+        className="absolute top-5 -left-[2.375rem] size-3 rounded-full ring-4 ring-background"
+        style={{ background: phaseColor(item.phase) }}
       />
-      <motion.div className="origin-left" style={reduceMotion ? undefined : { scale, opacity }}>
-        <MoveEntry item={item} />
-      </motion.div>
-    </li>
+      <MoveEntry item={item} />
+    </motion.li>
   );
 }
 
 export function MovesTimeline({ items }: { items: MoveItem[] }) {
-  const reduceMotion = useReducedMotion() ?? false;
   const listRef = useRef<HTMLOListElement>(null);
-  const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 70%", "end 50%"] });
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 60%", "end 60%"] });
 
   return (
-    <ol ref={listRef} className="relative space-y-6 pl-10">
-      <span aria-hidden className="absolute top-3 bottom-3 left-2.5 w-px bg-border" />
-      <motion.span
+    <div className="relative">
+      <div aria-hidden className="absolute top-0 bottom-0 left-4 w-px bg-border" />
+      <motion.div
         aria-hidden
-        className="absolute top-3 bottom-3 left-2.5 w-px origin-top bg-foreground"
+        className="absolute top-0 bottom-0 left-4 w-px origin-top bg-foreground/60"
         style={{ scaleY: reduceMotion ? 1 : scrollYProgress }}
       />
-      {items.map((item) => (
-        <TimelineRow key={item.toolId} item={item} reduceMotion={reduceMotion} />
-      ))}
-    </ol>
+      <ol ref={listRef} className="flex flex-col gap-6 pl-12">
+        {items.map((item) => (
+          <TimelineItem key={item.id} item={item} />
+        ))}
+      </ol>
+    </div>
   );
 }
