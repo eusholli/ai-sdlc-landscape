@@ -1,10 +1,8 @@
 "use client";
 
-import { Check, Plus } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { useEffect, useMemo, useState } from "react";
-import { useCompare } from "@/components/compare/use-compare";
 import { Logo } from "@/components/logo";
 import {
   Command,
@@ -34,9 +32,7 @@ const reasonFor = (hit: SearchHit): string => {
 export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Phase[] }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [highlighted, setHighlighted] = useState("");
   const [, setState] = useQueryStates(filterParsers);
-  const { has, toggle } = useCompare((id) => tools.find((t) => t.id === id)?.name);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -82,18 +78,7 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
       description="Find a tool by name, company or customer, or filter the map by phase."
       className="sm:max-w-xl"
     >
-      <Command
-        shouldFilter={false}
-        loop
-        value={highlighted}
-        onValueChange={setHighlighted}
-        onKeyDown={(event) => {
-          if (event.key !== "Enter" || !event.shiftKey || event.nativeEvent.isComposing) return;
-          if (!highlighted.startsWith("tool:")) return;
-          event.preventDefault();
-          toggle(highlighted.slice("tool:".length));
-        }}
-      >
+      <Command shouldFilter={false} loop>
         <CommandInput
           value={query}
           onValueChange={setQuery}
@@ -104,36 +89,18 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
 
           {toolHits.length > 0 && (
             <CommandGroup heading="Tools">
-              {toolHits.map((hit) => {
-                const inSet = has(hit.id);
-                const Icon = inSet ? Check : Plus;
-                return (
-                  <CommandItem key={hit.id} value={`tool:${hit.id}`} onSelect={() => openTool(hit.id)}>
-                    <Logo name={hit.name} src={hit.logo} phase={hit.primaryPhase} size={28} />
-                    <span className="flex min-w-0 flex-1 flex-col">
-                      <span className="truncate font-medium">{hit.name}</span>
-                      <span className="truncate text-xs text-muted-foreground">{hit.company}</span>
-                    </span>
-                    <span className="max-w-32 shrink-0 truncate text-xs text-muted-foreground">
-                      {reasonFor(hit)}
-                    </span>
-                    <button
-                      type="button"
-                      tabIndex={-1}
-                      aria-pressed={inSet}
-                      aria-label={inSet ? `Remove ${hit.name} from compare` : `Add ${hit.name} to compare`}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        toggle(hit.id, hit.name);
-                      }}
-                      className="inline-flex shrink-0 items-center gap-1 rounded-md border bg-background px-1.5 py-0.5 text-xs text-muted-foreground outline-none hover:text-foreground"
-                    >
-                      <Icon className="size-3" aria-hidden />
-                      {inSet ? "Added" : "Compare"}
-                    </button>
-                  </CommandItem>
-                );
-              })}
+              {toolHits.map((hit) => (
+                <CommandItem key={hit.id} value={`tool:${hit.id}`} onSelect={() => openTool(hit.id)}>
+                  <Logo name={hit.name} src={hit.logo} phase={hit.primaryPhase} size={28} />
+                  <span className="flex min-w-0 flex-1 flex-col">
+                    <span className="truncate font-medium">{hit.name}</span>
+                    <span className="truncate text-xs text-muted-foreground">{hit.company}</span>
+                  </span>
+                  <span className="max-w-40 shrink-0 truncate text-xs text-muted-foreground">
+                    {reasonFor(hit)}
+                  </span>
+                </CommandItem>
+              ))}
             </CommandGroup>
           )}
 
@@ -153,9 +120,6 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
             </CommandGroup>
           )}
         </CommandList>
-        <p className="border-t px-3 py-2 text-xs text-muted-foreground">
-          Enter opens a tool. Shift and Enter adds it to compare.
-        </p>
       </Command>
     </CommandDialog>
   );

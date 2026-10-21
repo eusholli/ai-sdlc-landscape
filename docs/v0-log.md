@@ -66,3 +66,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_WslGaJ29PJO, demo https://demo-kzmlpdh51m7sm45yuu6n.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..aU1kPx2gCIxw4ohX.2eIxlpfGpWGf7w9UAJVwV_nITls-WBo-0N6VlE8H-KxdUjzazZWGIpnRLNtjoZm078bBs-Bm6-NDFmZnLZL0g3-hsLEXpE84LOLYPvxQfKEHdNXTBH8V1sbhEGp_BRILIdBpkh4bZCqaxwLkF_nSWucsQ8iZRBHW4uge2tVdhVBhhUC8TVg_NZ9jzRLhyiMdXpR77Ca-82nwKgvddEtUBR7i-l3eg_Th1n_uCYKsch8eQMu-C5kZLJHqkMlJKayUZpdX6BAVbQcraQN3JfKZQAWnUAqOclzO.QE8IsERELwc7a3_35tLzOQ&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
 - credits before: 22.4083644 of 20, after: 21.9298396 of 20
 - files written: 7; fix rounds: 0; gate: passed
+
+## Step 9: About, share images, mobile list and accessibility
+
+- 2026-10-21T21:43:52.316Z
+- chat: https://v0.app/chat/EKXETuWnLzG
+- version: b_E3J0IkwHvon, demo https://demo-kzmixkmatu8dd8bu2hke.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..Nb2FzVRwnNIQIpX7.iugL4-AI08QJYj_OiYJE2cX5Rh4yi7KkPe8fnpNFMn_qmg0wh4Sn-ec7607RDfzY_cv1kXBLYSquArHHYKdwqk7Wda-848npLzUEpG9vMB9nyzjH0yNAs2cV9u3o-ZmW8rZFSfKe55XRjhflNLaqX99ygLTscQGCX2aRV2eKKIHSLencvkKbvA7I3JGFiLtfAviN6re0sTUjmEVirK39586obrsn54tDEaTC9oOjW8I7rKCVINtpjkj_GSgZCGHMf38LxvqnetW5W5hWf1xnxC9l_sL6FusK.Rtv55x4InxmQrYGGDoWquw&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
+- credits before: 21.9298396 of 20, after: 20.4894774 of 20
+- files written: 18; fix rounds: 0; gate: passed
