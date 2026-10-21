@@ -5,7 +5,8 @@ import { useQueryStates } from "nuqs";
 import { useCallback, useMemo } from "react";
 import { applyFilters, filterParsers, isFiltered } from "@/lib/filters";
 import { cn } from "@/lib/utils";
-import type { Layer, LayerId, Phase, PhaseId, RelationLite, ToolLite } from "@/lib/types";
+import type { External, Layer, LayerId, Phase, PhaseId, RelationLite, ToolLite } from "@/lib/types";
+import { NetworkView } from "@/components/network/network-view";
 import { LayerBands, type LayerBand } from "./layer-bands";
 import { MapControls } from "./map-controls";
 import { WORLD_PAD, WORLD_W } from "./map-layout";
@@ -16,6 +17,7 @@ import { usePanZoom } from "./use-pan-zoom";
 export interface LandscapeMapProps {
   tools: ToolLite[];
   relations: RelationLite[];
+  externals: External[];
   phases: Phase[];
   layers: Layer[];
   fullLifecycleIds: string[];
@@ -23,10 +25,21 @@ export interface LandscapeMapProps {
 
 export function LandscapeMap(props: LandscapeMapProps) {
   const [{ view }] = useQueryStates(filterParsers);
+  if (view === "network") {
+    return (
+      <NetworkView
+        tools={props.tools}
+        externals={props.externals}
+        relations={props.relations}
+        phases={props.phases}
+        layers={props.layers}
+      />
+    );
+  }
   if (view !== "map") {
     return (
       <p className="mx-auto max-w-3xl p-8 text-sm text-muted-foreground">
-        The {view} view is not built yet. Choose Map to see the landscape.
+        The {view} view is not built yet. Choose Map or Network to see the landscape.
       </p>
     );
   }

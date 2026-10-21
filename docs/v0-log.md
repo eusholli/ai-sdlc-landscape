@@ -42,3 +42,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_OSPrMODoQUK, demo https://demo-kzmkgxvmpipppf2torbf.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..yzmMkevdftG1qsIT.zVSg5WsT7Nyspk_d02QBAoTKm9vf8Ewhg99QxvDN0shQJgqhshhWUrNcOB2y48w9nSXrOVCVbFvk1mw-hE6lYRxvqCycE_Zwe4MqsCCjawYOqHk0oMFJTtilFpy1ghwqgVV6h9-U8TMmZYH5pmYupL8GoFheQR4lO_4UIsIk5gHiv_gvUI7eDSBmZl63d5i6MD6txJ6lRiiavHAxgcWBLcUqyPBqEk82oY6czms1eJPOilkxXlpsCyfJFwqZbwAv9oCyaL6aaU2byy0fMsudl12FPLdmj0Ax.z8TEDt8sXZMqMMP516p_gw&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
 - credits before: 25.0754705 of 20, after: 24.2334127 of 20
 - files written: 11; fix rounds: 0; gate: passed
+
+## Step 6: Network view
+
+- 2026-10-21T21:37:03.160Z
+- chat: https://v0.app/chat/EKXETuWnLzG
+- version: b_Ta29a8aWii6, demo https://demo-kzml8kvbkj6vnzizfcqe.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..nMEHjuGWIZvSmSxx.76VTJpFR0buwpOE-DkvY7R9aNyCfQasEQU6O3BTsLW0D-ZQ9DG-Jb8WUY2Urrty_5Rl0aBlMHTBq7uDWFodgI_eAUPAaGjZecdPLMwLs0CndbRHNZb3Fgo61IWEMs_J6mXdJ6pCmzJEyFeN0MRjBUqxuLTcpX-7qmd33zNAx7oEJV525ALQ2W9-SFVYCJf8uJ-pbfKbBmNrJ2gQ9khU5faU5SyNOJRoJnzMVJ8OJRqx814mSGPMQR7Hg073K2g0r1MX9z0l-QADtUmcGmAG3o1nQLON_4C1o.gNCmFoxzGggJCdDhZ71DRA&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
+- credits before: 24.2334127 of 20, after: 23.0795853 of 20
+- files written: 7; fix rounds: 1; gate: passed

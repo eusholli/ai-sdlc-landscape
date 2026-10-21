@@ -1,5 +1,5 @@
 {
-  "lastStep": 5,
+  "lastStep": 6,
   "chatId": "EKXETuWnLzG",
   "webUrl": "https://v0.app/chat/EKXETuWnLzG",
   "files": [
@@ -80,7 +80,12 @@
     "components/filters/search-palette.tsx",
     "components/filters/filter-chrome.tsx",
     "app/(site)/layout.tsx",
+    "components/network/graph-model.ts",
+    "components/network/use-palette.ts",
+    "components/network/network-panel.tsx",
+    "components/network/network-view.tsx",
     "components/map/landscape-map.tsx",
-    "app/(site)/page.tsx"
+    "app/(site)/page.tsx",
+    "components/network/network-canvas.tsx"
   ]
 }

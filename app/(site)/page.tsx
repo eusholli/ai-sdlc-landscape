@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { LandscapeMap } from "@/components/map/landscape-map";
-import { fullLifecycle, layers, phases, relationsLite, toolsLite } from "@/lib/data";
+import { externals, fullLifecycle, layers, phases, relationsLite, toolsLite } from "@/lib/data";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
         <LandscapeMap
           tools={toolsLite()}
           relations={relationsLite()}
+          externals={externals()}
           phases={phases()}
           layers={layers()}
           fullLifecycleIds={fullLifecycle().map((t) => t.id)}
