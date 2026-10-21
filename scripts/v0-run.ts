@@ -4,6 +4,7 @@
 //   npx tsx scripts/v0-run.ts --step 1           run one step
 //   npx tsx scripts/v0-run.ts --from 3           run steps 3..9 (no pause)
 //   npx tsx scripts/v0-run.ts                    run from the next step, pausing after step 2
+//   npx tsx scripts/v0-run.ts --pull            re-pull v0's latest version and gate it, spend nothing
 //   npx tsx scripts/v0-run.ts --whoami          check the key and the credit balance, spend nothing
 //   flags: --no-push (commit only), --new-chat (forget the saved chat)
 //   V0_WAIT_MINUTES caps the wait for each version (default 30)
@@ -172,7 +173,7 @@ const clean = (name: string) => name.replace(/^\/+/, "");
 
 /**
  * Write v0's files into the tree, skipping locked paths, and delete files v0 dropped since its
- * previous version (`previous`). Deletion only touches paths v0 has held, never locked ones.
+ * previous version (`previous`). Deletion only touches source paths v0 has held, never locked ones.
  * Returns the paths written or deleted.
  */
 export function pull(files: { name: string; content: string }[], previous: string[]): string[] {
@@ -187,6 +188,8 @@ export function pull(files: { name: string; content: string }[], previous: strin
     changed.push(name);
   }
   for (const name of previous) {
+    // v0 leaves config files out of some versions, so only source folders are ever pruned.
+    if (!/^(app|components|hooks|lib)\//.test(name)) continue;
     if (current.has(name) || isLocked(name) || name.includes("..") || !existsSync(name)) continue;
     rmSync(name);
     changed.push(`-${name}`);
@@ -222,6 +225,19 @@ async function main() {
 
   if (flag("--whoami")) {
     console.log(`credits: ${await balance(v0())}`);
+    return;
+  }
+  if (flag("--pull")) {
+    // Re-pull the chat's latest version and gate it, spending nothing. For recovering a step.
+    const client = v0();
+    const chat = await client.chats.getById({ chatId: state.chatId! });
+    const version = await client.chats.getVersion({ chatId: chat.id, versionId: chat.latestVersion!.id });
+    const changed = pull(version.files, state.files ?? []);
+    state.files = version.files.map((f) => clean(f.name));
+    saveState(state);
+    console.log(`pulled ${version.id}: ${changed.length} changed\n${changed.join("\n")}`);
+    const result = gate();
+    console.log(result.ok ? "gate: passed" : `gate: FAILED\n${result.report}`);
     return;
   }
   if (sh("git", ["status", "--porcelain"])) throw new Error("working tree is not clean; commit or stash first");

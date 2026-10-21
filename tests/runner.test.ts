@@ -12,6 +12,7 @@ describe("v0 runner pull", () => {
     mkdirSync("lib", { recursive: true });
     writeFileSync("app/page.tsx", "old page");
     writeFileSync("lib/data.ts", "ours");
+    writeFileSync("tsconfig.json", "{}");
   });
   afterEach(() => process.chdir(home));
 
@@ -21,11 +22,12 @@ describe("v0 runner pull", () => {
         { name: "app/(site)/page.tsx", content: "new page" },
         { name: "/lib/data.ts", content: "v0 rewrite" },
       ],
-      ["app/page.tsx", "lib/data.ts", "lib/types.ts"],
+      ["app/page.tsx", "lib/data.ts", "lib/types.ts", "tsconfig.json"],
     );
     expect(readFileSync("app/(site)/page.tsx", "utf8")).toBe("new page");
     expect(existsSync("app/page.tsx")).toBe(false);
     expect(readFileSync("lib/data.ts", "utf8")).toBe("ours");
+    expect(existsSync("tsconfig.json")).toBe(true);
     expect(changed.sort()).toEqual(["-app/page.tsx", "app/(site)/page.tsx"]);
   });
 });
