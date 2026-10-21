@@ -1,0 +1,15 @@
+<svg width="202" height="202" viewBox="0 0 202 202" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Favicon-specific copy of the NeuBird iconmark.
+     The brand iconmarks (neubird-iconmark-light/-sage.png) leave the bird as
+     negative space, which needs a contrasting backdrop to read. A favicon has
+     no such guarantee: it lands on Chrome's light tab strip, the near-white
+     bookmarks bar, a dark tab strip, and an iOS home screen (where transparent
+     pixels render black). So this copy fills the bird instead.
+
+     Painted in two layers so the bird has no antialiasing seam: a full sage
+     rounded square underneath, then the white square-with-bird-notch on top.
+     What shows through the notch is the sage bird. -->
+<rect width="202" height="202" rx="5.61523" fill="#2F4439"/>
+<path fill="#FFFFFF" d="M196.385 0H5.61523C2.52314 0 0 2.52314 0 5.61523V196.385C0 199.477 2.52314 202 5.61523 202H38.0698V152.403C38.0698 127.988 56.5481 107.951 80.3201 105.428C83.1896 105.082 85.3911 102.707 85.3911 99.8374C85.3911 98.5016 84.8717 97.1163 83.9564 96.0774L35.0272 42.2256C33.5925 40.6177 34.7056 38.0698 36.8577 38.0698H98.2047C148.247 38.0698 163.905 84.6738 163.905 133.108V202H196.385C199.477 202 202 199.477 202 196.385V5.61523C202 2.52314 199.477 0 196.385 0Z"/>
+<path fill="#FFFFFF" d="M120.641 69.2629C111.859 73.5423 107.481 77.896 103.226 86.7023C102.336 88.5575 99.6888 88.5575 98.7983 86.7023C94.5188 77.9207 90.1404 73.5423 81.3342 69.2629C79.5037 68.3724 79.5036 65.7255 81.3589 64.835C90.1404 60.5803 94.5188 56.2019 98.7983 47.4204C99.6888 45.5651 102.336 45.5651 103.226 47.4204C107.481 56.2019 111.835 60.5803 120.641 64.835C122.496 65.7255 122.496 68.3724 120.641 69.2629Z"/>
+</svg>

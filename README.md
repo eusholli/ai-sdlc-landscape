@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI SDLC Landscape
 
-## Getting Started
+An interactive map of the AI tools that work across the software development lifecycle: 179
+tools across 13 phases, two cross-cutting layers (agent infrastructure and model providers) and
+268 typed relations between them. Every fact on a tool links to the public page it came from.
+Where a vendor does not publish a fact, the site says "Not published".
 
-First, run the development server:
+The site is static Next.js on Vercel. The data is a single JSON file you can download from the
+site or read in `data/landscape.json`.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm check      # type check and tests
+pnpm build      # static build: every tool page and per-tool JSON
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How the code is laid out
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What is there |
+|---|---|
+| `data/` | the dataset (`landscape.json`, `phases.json`) |
+| `lib/types.ts`, `lib/data.ts` | typed records and the server-side selectors over the dataset |
+| `lib/filters.ts`, `lib/format.ts` | facets, search, URL state and display helpers, safe on the client |
+| `components/logo.tsx` | vendor logo with a monogram fallback |
+| `app/data/tools/[id]` | one static JSON file per tool, fetched by the tool drawer |
+| `docs/design-brief.md` | the design contract |
+| `scripts/guard.ts` | fails when generated code edits the data layer or ships the dataset to the client |
+| `scripts/v0-run.ts` | drives v0 one prompt at a time from `docs/v0-prompts.md`, with a build gate |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Client components never import `lib/data.ts` or the JSON. Server components pass a slim
+projection (`toolsLite()`), and the drawer fetches `/data/tools/<id>.json`. `scripts/guard.ts`
+enforces this.
 
-## Learn More
+## Building the UI with v0
 
-To learn more about Next.js, take a look at the following resources:
+The UI was built with [v0](https://v0.app) through its Platform API. The runner seeds one v0 chat
+with the design brief, the data layer (locked, so v0 cannot change it) and a trimmed sample of the
+data, then sends each prompt in `docs/v0-prompts.md` in turn. After each step it pulls the files,
+runs the guard, the build and the tests, sends any failure back to v0 at most twice, then commits
+and pushes so Vercel posts a preview.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.example .env.local          # add V0_API_KEY
+npx tsx scripts/v0-run.ts --dry-run # show what would be sent, spend nothing
+npx tsx scripts/v0-run.ts           # run from the next step; pauses after step 2
+npx tsx scripts/v0-run.ts --from 3  # carry on
+npx tsx scripts/v0-run.ts --step 5  # re-run one step
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Each step is logged in `docs/v0-log.md` with the v0 version, its demo URL and credits used.
 
-## Deploy on Vercel
+## Updating the data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The dataset is maintained outside this repo and exported here whole. A refresh is:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Update the source records and rebuild the dataset.
+2. Run the public export into this repo's `data/`, and fetch logos for any new tools into
+   `public/logos/`.
+3. `pnpm check && pnpm build`, then commit. Vercel redeploys on push.
+
+## Corrections
+
+Spotted a wrong or stale fact? [Open a correction](../../issues/new?template=correction.yml) with
+a link to a public page that states the right one.
+
+## Licence and logos
+
+Code is MIT. The dataset is published under CC BY 4.0. Logos and product names belong to their
+owners and are shown only to identify each product.

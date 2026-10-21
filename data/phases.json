@@ -1,0 +1,118 @@
+{
+ "version": "2026-10-21",
+ "phases": [
+  {
+   "id": "plan",
+   "order": 1,
+   "label": "Plan and specify",
+   "description": "Requirements, PRDs, tickets and spec-driven development: turning intent into a spec an agent can build against."
+  },
+  {
+   "id": "design",
+   "order": 2,
+   "label": "Design and architecture",
+   "description": "UI design to code, system and architecture design, diagrams."
+  },
+  {
+   "id": "code",
+   "order": 3,
+   "label": "Write code",
+   "description": "Generating and editing code.",
+   "sub_kinds": [
+    "ide-assistant",
+    "cli-agent",
+    "autonomous-agent",
+    "app-builder"
+   ]
+  },
+  {
+   "id": "review",
+   "order": 4,
+   "label": "Code review",
+   "description": "Reviewing pull requests and changes before merge."
+  },
+  {
+   "id": "test",
+   "order": 5,
+   "label": "Test and QA",
+   "description": "Generating, running and healing tests; end-to-end and unit."
+  },
+  {
+   "id": "security",
+   "order": 6,
+   "label": "Security",
+   "description": "Finding and fixing vulnerabilities in code and dependencies."
+  },
+  {
+   "id": "cicd",
+   "order": 7,
+   "label": "CI/CD and release",
+   "description": "Build, pipeline, merge queue, release and feature management."
+  },
+  {
+   "id": "deploy",
+   "order": 8,
+   "label": "Deploy and infrastructure",
+   "description": "Infrastructure as code, cloud provisioning and hosting."
+  },
+  {
+   "id": "operate",
+   "order": 9,
+   "label": "Operate",
+   "description": "Observability, incident response and AI SRE agents."
+  },
+  {
+   "id": "maintain",
+   "order": 10,
+   "label": "Maintain and modernize",
+   "description": "Upgrades, migrations, legacy modernization and tech debt."
+  },
+  {
+   "id": "understand",
+   "order": 11,
+   "label": "Code understanding and knowledge",
+   "description": "Code graphs, context engines, code search and generated documentation."
+  },
+  {
+   "id": "measure",
+   "order": 12,
+   "label": "Engineering intelligence",
+   "description": "Metrics on delivery, developer experience and AI impact."
+  },
+  {
+   "id": "platform",
+   "order": 13,
+   "label": "Developer portals and platform",
+   "description": "Internal developer portals, service catalogs and platform engineering."
+  }
+ ],
+ "layers": [
+  {
+   "id": "agent-infra",
+   "label": "Agent infrastructure",
+   "description": "Sandboxes, orchestration, agent harnesses, MCP tooling, context sharing and evaluation that agents run on. Cross-cuts every phase."
+  },
+  {
+   "id": "model",
+   "label": "Model providers",
+   "description": "Foundation model vendors that tools build on. Nodes for built_on_model edges, not scored as tools."
+  }
+ ],
+ "segments": [
+  {
+   "id": "full-lifecycle",
+   "label": "Full-lifecycle platform",
+   "description": "Claims to cover most of the lifecycle in one product."
+  },
+  {
+   "id": "multi-phase",
+   "label": "Multi-phase",
+   "description": "Covers two to four phases."
+  },
+  {
+   "id": "point",
+   "label": "Point tool",
+   "description": "Does one phase."
+  }
+ ]
+}

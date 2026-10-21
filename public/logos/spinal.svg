@@ -1,0 +1,9 @@
+<!-- The Spinal mark with fixed colours and a square viewBox (D:web.logo-rings). Drawn by logo/logo.py, which also writes ui/logo.svg: edit the script, not this file. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-72 2 347 347">
+  <style>:root{color:#1a1a1a}@media(prefers-color-scheme:dark){:root{color:#f2f2f2}}</style>
+  <g fill="none" stroke="currentColor" stroke-width="18">
+    <path d="M94.5 65C94.5 107.8 11.3 117.2 11.3 160C11.3 199.6 154.5 208.4 154.5 248C154.5 284.9 78.5 293.1 78.5 330"/>
+    <path d="M168.3 120.7C150.9 175.6 66.7 140.9 66.7 198.5"/>
+    <circle cx="94.5" cy="43" r="22"/><circle cx="173.7" cy="103.5" r="18"/>
+  </g>
+</svg>
