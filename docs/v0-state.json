@@ -1,5 +1,5 @@
 {
-  "lastStep": 3,
+  "lastStep": 4,
   "chatId": "EKXETuWnLzG",
   "webUrl": "https://v0.app/chat/EKXETuWnLzG",
   "files": [
@@ -43,7 +43,6 @@
     "components/stats-strip.tsx",
     "components/site-footer.tsx",
     "components/stage-legend.tsx",
-    "app/(site)/layout.tsx",
     "app/landscape.json/route.ts",
     "app/layout.tsx",
     "lib/utils.ts",
@@ -61,6 +60,22 @@
     "components/map/relation-index.ts",
     "components/map/map-interaction.tsx",
     "components/map/relation-curves.tsx",
-    "components/map/relation-legend.tsx"
+    "components/map/relation-legend.tsx",
+    "components/tool/types.ts",
+    "lib/tool-refs.ts",
+    "components/tool/facts.ts",
+    "components/tool/section-heading.tsx",
+    "components/tool/tool-logo.tsx",
+    "components/tool/tool-actions.tsx",
+    "components/tool/phase-coverage.tsx",
+    "components/tool/facts-grid.tsx",
+    "components/tool/relation-groups.tsx",
+    "components/tool/source-list.tsx",
+    "components/tool/tool-detail.tsx",
+    "components/tool/tool-detail-skeleton.tsx",
+    "components/tool/tool-drawer.tsx",
+    "app/(site)/tools/[id]/page.tsx",
+    "app/(site)/layout.tsx",
+    "components/ui/skeleton.tsx"
   ]
 }

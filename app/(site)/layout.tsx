@@ -3,6 +3,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
 import { StatsStrip } from "@/components/stats-strip";
+import { ToolDrawer } from "@/components/tool/tool-drawer";
+import { toolDetailRefs } from "@/lib/tool-refs";
 
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -27,6 +29,9 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       <StatsStrip />
       <div className="flex-1">{children}</div>
       <SiteFooter />
+      <Suspense fallback={null}>
+        <ToolDrawer refs={toolDetailRefs()} />
+      </Suspense>
     </div>
   );
 }
