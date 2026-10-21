@@ -1,0 +1,32 @@
+import { Suspense } from "react";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
+import { StatsStrip } from "@/components/stats-strip";
+
+export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <div className="flex min-h-dvh flex-col">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:ring-3 focus:ring-ring/50"
+      >
+        Skip to content
+      </a>
+      <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+        <Suspense
+          fallback={
+            <div className={`${SITE_CONTAINER} ${HEADER_GRID}`}>
+              <SiteName />
+            </div>
+          }
+        >
+          <SiteHeader />
+        </Suspense>
+      </header>
+      <StatsStrip />
+      <div className="flex-1">{children}</div>
+      <SiteFooter />
+    </div>
+  );
+}
