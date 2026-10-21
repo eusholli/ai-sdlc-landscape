@@ -29,8 +29,15 @@ export function Logo({
     return (
       <span
         aria-hidden
-        className={cn(box, "font-semibold text-white")}
-        style={{ width: size, height: size, background: phaseColor(phase), fontSize: Math.max(9, size * 0.38) }}
+        className={cn(box, "font-semibold text-foreground")}
+        style={{
+          width: size,
+          height: size,
+          // A tint, not the full stage colour: white on the brighter stages fails 4.5:1.
+          background: `color-mix(in oklch, ${phaseColor(phase)} 30%, var(--card))`,
+          boxShadow: `inset 0 -3px 0 ${phaseColor(phase)}`,
+          fontSize: Math.max(9, size * 0.38),
+        }}
       >
         {monogram(name)}
       </span>

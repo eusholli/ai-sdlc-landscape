@@ -32,7 +32,7 @@ export function FactsGrid({
                   <sup className="ml-0.5 text-[10px] tabular-nums">
                     <a
                       href={`#${sourceAnchor(tool.id, fact.field)}`}
-                      aria-label={`Source for ${fact.label}`}
+                      aria-label={`${sourceNumber}, source for ${fact.label}`}
                       className="rounded-sm px-0.5 text-muted-foreground underline-offset-2 outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
                     >
                       {sourceNumber}

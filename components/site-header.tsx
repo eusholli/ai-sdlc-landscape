@@ -46,10 +46,10 @@ export function SiteHeader() {
       </div>
 
       <div className="flex items-center justify-end gap-1.5">
-        <Button variant="outline" size="sm" onClick={() => emit(OPEN_SEARCH_EVENT)} aria-label="Search tools">
+        <Button variant="outline" size="sm" onClick={() => emit(OPEN_SEARCH_EVENT)}>
           <Search aria-hidden />
-          <span className="hidden sm:inline">Search</span>
-          <Kbd className="hidden md:inline-flex">⌘K</Kbd>
+          <span className="sr-only sm:not-sr-only">Search</span>
+          <Kbd aria-hidden className="hidden md:inline-flex">⌘K</Kbd>
         </Button>
 
         <Button asChild variant="outline" size="sm">

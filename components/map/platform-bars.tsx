@@ -35,13 +35,13 @@ export function PlatformBars({ platforms, matched, selectedId, onSelect }: Platf
           const covered = runs.reduce((n, r) => n + r.phases.length, 0);
           return (
             <li key={tool.id} style={COLUMN_GRID}>
-              {runs.map((run) => (
+              {runs.map((run, i) => (
                 <button
                   key={run.start}
+                  tabIndex={i === 0 ? undefined : -1}
                   type="button"
                   onClick={() => onSelect(tool.id)}
                   aria-pressed={selectedId === tool.id}
-                  aria-label={`${tool.name}, covers ${covered} of 13 phases`}
                   data-tool={tool.id}
                   style={{ gridColumn: `${run.start + 1} / ${run.end + 2}`, gridRow: 1 }}
                   className={cn(
@@ -53,7 +53,9 @@ export function PlatformBars({ platforms, matched, selectedId, onSelect }: Platf
                   <span className="flex h-7 items-center gap-2 px-2">
                     <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={20} />
                     <span className="truncate text-xs font-semibold">{tool.name}</span>
+                    <span className="sr-only">, </span>
                     <span className="truncate text-xs text-muted-foreground">{tool.company}</span>
+                    <span className="sr-only">, covers {covered} of 13 phases</span>
                   </span>
                   <span
                     aria-hidden

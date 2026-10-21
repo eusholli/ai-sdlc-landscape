@@ -3,11 +3,11 @@
 import { useQueryStates } from "nuqs";
 import { useEffect, useMemo, useState } from "react";
 import { FilterSheet } from "@/components/list/filter-sheet";
+import { buildGroups } from "@/components/list/groups";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CLEAR_ALL_FILTERS } from "@/components/filters/facets";
-import { phaseColor } from "@/lib/format";
 import { applyFilters, filterParsers } from "@/lib/filters";
 import type { Layer, Phase, Segment, ToolLite } from "@/lib/types";
 
@@ -18,15 +18,6 @@ export interface PhaseListProps {
   segments: Segment[];
   fullLifecycleIds: string[];
 }
-
-interface Group {
-  id: string;
-  label: string;
-  colour: string;
-  tools: ToolLite[];
-}
-
-const byName = (a: ToolLite, b: ToolLite) => a.name.localeCompare(b.name);
 
 function useStickyHeaderHeight(): number {
   const [height, setHeight] = useState(0);
@@ -46,31 +37,10 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
   const [query, setQuery] = useQueryStates(filterParsers);
   const headerHeight = useStickyHeaderHeight();
 
-  const groups = useMemo<Group[]>(() => {
-    const platformIds = new Set(fullLifecycleIds);
-    const platforms = tools.filter((t) => platformIds.has(t.id)).sort(byName);
-    const phaseGroups = [...phases]
-      .sort((a, b) => a.order - b.order)
-      .map((phase) => ({
-        id: phase.id,
-        label: phase.label,
-        colour: phaseColor(phase.id),
-        tools: tools.filter((t) => !t.layer && !platformIds.has(t.id) && t.primaryPhase === phase.id).sort(byName),
-      }));
-    const layerGroups = query.layers
-      ? layers.map((layer) => ({
-          id: `layer-${layer.id}`,
-          label: layer.label,
-          colour: "var(--muted-foreground)",
-          tools: tools.filter((t) => t.layer === layer.id).sort(byName),
-        }))
-      : [];
-    return [
-      { id: "platforms", label: "Full-lifecycle platforms", colour: "var(--muted-foreground)", tools: platforms },
-      ...phaseGroups,
-      ...layerGroups,
-    ];
-  }, [tools, phases, layers, fullLifecycleIds, query.layers]);
+  const groups = useMemo(
+    () => buildGroups(tools, phases, layers, fullLifecycleIds, query.layers),
+    [tools, phases, layers, fullLifecycleIds, query.layers],
+  );
 
   const matched = useMemo(() => new Set(applyFilters(tools, query).map((t) => t.id)), [tools, query]);
 
