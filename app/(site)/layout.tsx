@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { FilterChrome } from "@/components/filters/filter-chrome";
+import { Notices } from "@/components/notices";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
@@ -35,6 +36,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       <Suspense fallback={null}>
         <ToolDrawer refs={toolDetailRefs()} />
       </Suspense>
+      <Notices />
     </div>
   );
 }

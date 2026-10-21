@@ -10,11 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { ViewSwitcher } from "@/components/view-switcher";
+import { normalizeCompare } from "@/lib/compare";
 import { filterParsers } from "@/lib/filters";
-import { OPEN_COMPARE_EVENT, OPEN_SEARCH_EVENT, emit } from "@/lib/ui-events";
+import { OPEN_SEARCH_EVENT, emit } from "@/lib/ui-events";
 
 export function SiteHeader() {
   const [{ compare }] = useQueryStates(filterParsers);
+  const compareIds = normalizeCompare(compare);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -42,19 +44,19 @@ export function SiteHeader() {
           <Kbd className="hidden md:inline-flex">⌘K</Kbd>
         </Button>
 
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => emit(OPEN_COMPARE_EVENT)}
-          aria-label={compare.length ? `Compare, ${compare.length} selected` : "Compare"}
-        >
-          <ArrowLeftRight aria-hidden />
-          <span className="hidden md:inline">Compare</span>
-          {compare.length > 0 && (
-            <Badge variant="secondary" className="min-w-5 px-1.5 font-mono tabular-nums">
-              {compare.length}
-            </Badge>
-          )}
+        <Button asChild variant="outline" size="sm">
+          <Link
+            href={compareIds.length ? `/compare?compare=${compareIds.map(encodeURIComponent).join(",")}` : "/compare"}
+            aria-label={compareIds.length ? `Compare, ${compareIds.length} selected` : "Compare"}
+          >
+            <ArrowLeftRight aria-hidden />
+            <span className="hidden md:inline">Compare</span>
+            {compareIds.length > 0 && (
+              <Badge variant="secondary" className="min-w-5 px-1.5 font-mono tabular-nums">
+                {compareIds.length}
+              </Badge>
+            )}
+          </Link>
         </Button>
 
         <ThemeToggle />

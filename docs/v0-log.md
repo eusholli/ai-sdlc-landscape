@@ -58,3 +58,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_XfK2ypzLMzW, demo https://demo-kzmluk8qylr0c6jx5v87.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..P-P3w92EEK8Gl2Ac.N_1k9Fx6TnZ_zWqsENH2dOWWs-o2-6-L1U_IDMRk-xrn2uV8D2qXDXb9g4sk-Iud0TPaBFg3K3dYNjelW_H_E56NHHf3E0R0qVIYQdV4OA528LA5_5SALCDCAcYDIEDM7XkqCpqWY-RwP74WGmM6CkmXJH_WJs3kSfBIDFp4kxLwB4JQQgXuAZpZH6TSfjhC39ik2c_nBTcdqH2B1YSt3-rcLj3FMDBiHS2jAV0d1l5k7hun8CtwakKKF-z0lrrciOKLeqBO64IaDR96YRM0Y3iRUWB30RR3.77pm-5ol9qQIuwD21G9fXA&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
 - credits before: 23.0795853 of 20, after: 22.4083644 of 20
 - files written: 10; fix rounds: 0; gate: passed
+
+## Step 8: Market moves and insights
+
+- 2026-10-21T21:41:29.252Z
+- chat: https://v0.app/chat/EKXETuWnLzG
+- version: b_WslGaJ29PJO, demo https://demo-kzmlpdh51m7sm45yuu6n.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..aU1kPx2gCIxw4ohX.2eIxlpfGpWGf7w9UAJVwV_nITls-WBo-0N6VlE8H-KxdUjzazZWGIpnRLNtjoZm078bBs-Bm6-NDFmZnLZL0g3-hsLEXpE84LOLYPvxQfKEHdNXTBH8V1sbhEGp_BRILIdBpkh4bZCqaxwLkF_nSWucsQ8iZRBHW4uge2tVdhVBhhUC8TVg_NZ9jzRLhyiMdXpR77Ca-82nwKgvddEtUBR7i-l3eg_Th1n_uCYKsch8eQMu-C5kZLJHqkMlJKayUZpdX6BAVbQcraQN3JfKZQAWnUAqOclzO.QE8IsERELwc7a3_35tLzOQ&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
+- credits before: 22.4083644 of 20, after: 21.9298396 of 20
+- files written: 7; fix rounds: 0; gate: passed
