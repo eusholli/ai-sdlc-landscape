@@ -1,25 +1,19 @@
-// Placeholder until v0 step 2 builds the map. Shows the data layer is wired.
-import { StageLegend } from "@/components/stage-legend";
-import { allTools, dataDate, phases, toolsByPhase } from "@/lib/data";
+import { Suspense } from "react";
+import { LandscapeMap } from "@/components/map/landscape-map";
+import { fullLifecycle, layers, phases, relationsLite, toolsLite } from "@/lib/data";
 
 export default function Home() {
-  const byPhase = toolsByPhase();
-  const tools = allTools().filter((t) => t.kind === "tool");
   return (
-    <main id="main" className="mx-auto max-w-3xl p-8">
-      <h1 className="text-2xl font-semibold">AI SDLC Landscape</h1>
-      <p className="text-muted-foreground mt-2">
-        {tools.length} tools across {phases().length} phases. Data as of {dataDate()}.
-      </p>
-      <StageLegend className="mt-4" />
-      <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {phases().map((p) => (
-          <li key={p.id} className="rounded-md border p-3">
-            <div className="font-medium">{p.label}</div>
-            <div className="text-muted-foreground text-sm">{byPhase[p.id].length} tools</div>
-          </li>
-        ))}
-      </ul>
+    <main id="main">
+      <Suspense fallback={<div aria-hidden className="h-[calc(100dvh-7rem)] min-h-[32rem] border-b bg-muted/30" />}>
+        <LandscapeMap
+          tools={toolsLite()}
+          relations={relationsLite()}
+          phases={phases()}
+          layers={layers()}
+          fullLifecycleIds={fullLifecycle().map((t) => t.id)}
+        />
+      </Suspense>
     </main>
   );
 }

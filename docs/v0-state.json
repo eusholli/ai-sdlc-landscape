@@ -1,5 +1,5 @@
 {
-  "lastStep": 1,
+  "lastStep": 2,
   "chatId": "EKXETuWnLzG",
   "webUrl": "https://v0.app/chat/EKXETuWnLzG",
   "files": [
@@ -44,9 +44,18 @@
     "components/site-footer.tsx",
     "components/stage-legend.tsx",
     "app/(site)/layout.tsx",
-    "app/(site)/page.tsx",
     "app/landscape.json/route.ts",
     "app/layout.tsx",
-    "lib/utils.ts"
+    "lib/utils.ts",
+    "components/map/zoom-level.ts",
+    "components/map/map-layout.ts",
+    "components/map/use-pan-zoom.ts",
+    "components/map/tool-tile.tsx",
+    "components/map/platform-bars.tsx",
+    "components/map/phase-columns.tsx",
+    "components/map/layer-bands.tsx",
+    "components/map/map-controls.tsx",
+    "components/map/landscape-map.tsx",
+    "app/(site)/page.tsx"
   ]
 }
