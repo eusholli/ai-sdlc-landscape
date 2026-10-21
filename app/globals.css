@@ -153,3 +153,9 @@
     @apply font-sans;
   }
 }
+
+/* The map's hover card only informs. Radix positions it in a wrapper that would otherwise catch the
+   pointer over neighbouring tiles and swallow their hover. */
+[data-radix-popper-content-wrapper]:has(> [data-map-card]) {
+  pointer-events: none;
+}

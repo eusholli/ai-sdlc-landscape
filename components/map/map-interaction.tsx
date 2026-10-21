@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
-import { createContext, useContext, type PointerEvent, type ReactElement } from "react";
+import { createContext, useContext, type KeyboardEvent, type PointerEvent, type ReactElement } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { notPublished } from "@/lib/format";
 import type { ToolLite } from "@/lib/types";
@@ -13,6 +13,11 @@ export interface MapInteraction {
   /** The active tile plus every tile on the map it relates to; null when nothing is active. */
   related: ReadonlySet<string> | null;
   setActive: (id: string | null) => void;
+  /**
+   * Clears the active id only if it is still `id`. Leave, blur and tooltip-close events from a
+   * tile the pointer already passed can land after the next tile's enter; they must not clear it.
+   */
+  release: (id: string) => void;
   edgesOf: (id: string) => RelationEdge[];
   nameOf: (id: string) => string;
   /** Shared logo layout animation is switched on after the first paint, so load does not animate. */
@@ -31,7 +36,7 @@ export function useMapInteraction(): MapInteraction {
 
 /** Hover, focus, dimming and the shared logo id for one tile. */
 export function useTileBehaviour(tool: ToolLite, filterDimmed: boolean) {
-  const { related, setActive, animateLevels } = useMapInteraction();
+  const { related, setActive, release, animateLevels } = useMapInteraction();
   const reduceMotion = useReducedMotion();
   const id = tool.id;
 
@@ -44,10 +49,14 @@ export function useTileBehaviour(tool: ToolLite, filterDimmed: boolean) {
     },
     onPointerLeave: (e: PointerEvent<HTMLElement>) => {
       if (e.pointerType === "touch") return;
-      setActive(null);
+      release(id);
     },
     onFocus: () => setActive(id),
-    onBlur: () => setActive(null),
+    onBlur: () => release(id),
+    // The card is dismissible without moving the pointer or focus (WCAG 1.4.13).
+    onKeyDown: (e: KeyboardEvent<HTMLElement>) => {
+      if (e.key === "Escape") release(id);
+    },
   };
 
   return {
@@ -69,9 +78,7 @@ function HoverCardBody({ tool }: { tool: ToolLite }) {
         <p className="text-[13px] font-semibold">{tool.name}</p>
         <p className="opacity-70">{tool.company}</p>
       </div>
-      <p className="line-clamp-3 opacity-90">
-        {tool.summary ? `\u201C${tool.summary}\u201D` : notPublished(null)}
-      </p>
+      <p className="line-clamp-3 opacity-90">{tool.summary ? `\u201C${tool.summary}\u201D` : notPublished(null)}</p>
       <p className="font-mono tabular-nums opacity-70">
         {edges.length} {edges.length === 1 ? "relation" : "relations"}
       </p>
@@ -81,8 +88,9 @@ function HoverCardBody({ tool }: { tool: ToolLite }) {
 }
 
 /**
- * Wraps a tile in a controlled tooltip. Open state comes from the shared active id, so pointer
- * hover and keyboard focus behave the same and the card never fights the dimming.
+ * Wraps a tile in a controlled tooltip. Open state comes only from the shared active id, so pointer
+ * hover and keyboard focus behave the same and the card never fights the dimming. Radix's own
+ * open and close events are not wired in: they arrive late and cleared the next tile's hover.
  */
 export function TileHover({
   tool,
@@ -94,16 +102,13 @@ export function TileHover({
   enabled?: boolean;
   children: ReactElement;
 }) {
-  const { activeId, setActive } = useMapInteraction();
+  const { activeId } = useMapInteraction();
   return (
-    <Tooltip
-      open={enabled && activeId === tool.id}
-      onOpenChange={(next) => {
-        if (!next) setActive(null);
-      }}
-    >
+    <Tooltip open={enabled && activeId === tool.id} disableHoverableContent>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent side="top" sideOffset={8} collisionPadding={12}>
+      {/* The card only informs. Its wrapper is made pointer-transparent in globals.css: a card that takes
+          the pointer and then unmounts leaves React without an enter event for the tile beneath. */}
+      <TooltipContent side="top" sideOffset={8} collisionPadding={12} className="pointer-events-none" data-map-card="">
         <HoverCardBody tool={tool} />
       </TooltipContent>
     </Tooltip>

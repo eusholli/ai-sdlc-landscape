@@ -6,6 +6,7 @@ import { phaseColor } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { ToolLite } from "@/lib/types";
 import { COLUMN_GRID, COL_GAP, coverageRuns } from "./map-layout";
+import { useMapInteraction } from "./map-interaction";
 
 interface PlatformBarsProps {
   platforms: ToolLite[];
@@ -15,6 +16,7 @@ interface PlatformBarsProps {
 }
 
 export function PlatformBars({ platforms, matched, selectedId, onSelect }: PlatformBarsProps) {
+  const { related, setActive, release } = useMapInteraction();
   if (!platforms.length) return null;
 
   return (
@@ -32,6 +34,7 @@ export function PlatformBars({ platforms, matched, selectedId, onSelect }: Platf
         {platforms.map((tool) => {
           const runs = coverageRuns(tool.phases);
           const dimmed = matched !== null && !matched.has(tool.id);
+          const unrelated = related !== null && !related.has(tool.id);
           const covered = runs.reduce((n, r) => n + r.phases.length, 0);
           return (
             <li key={tool.id} style={COLUMN_GRID}>
@@ -41,13 +44,21 @@ export function PlatformBars({ platforms, matched, selectedId, onSelect }: Platf
                   tabIndex={i === 0 ? undefined : -1}
                   type="button"
                   onClick={() => onSelect(tool.id)}
+                  onPointerEnter={(e) => {
+                    if (e.pointerType !== "touch" && e.buttons === 0) setActive(tool.id);
+                  }}
+                  onPointerLeave={(e) => {
+                    if (e.pointerType !== "touch") release(tool.id);
+                  }}
+                  onFocus={() => setActive(tool.id)}
+                  onBlur={() => release(tool.id)}
                   aria-pressed={selectedId === tool.id}
                   data-tool={tool.id}
                   style={{ gridColumn: `${run.start + 1} / ${run.end + 2}`, gridRow: 1 }}
                   className={cn(
                     "flex min-w-0 flex-col overflow-hidden rounded-md border bg-card text-left outline-none transition-[opacity,background-color,border-color] duration-150 hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
                     selectedId === tool.id && "border-foreground/40",
-                    dimmed && "opacity-15",
+                    unrelated ? "opacity-20" : dimmed && "opacity-15",
                   )}
                 >
                   <span className="flex h-7 items-center gap-2 px-2">

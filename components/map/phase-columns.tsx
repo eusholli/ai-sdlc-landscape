@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { STAGES, phaseColor } from "@/lib/format";
 import { PHASE_ORDER } from "@/lib/filters";
 import type { Phase, PhaseId, ToolLite } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { COLUMN_GRID } from "./map-layout";
 import { ToolTile } from "./tool-tile";
 import type { ZoomLevel } from "./zoom-level";
@@ -22,11 +23,20 @@ interface PhaseColumnsProps {
 function useEntrance(index: number) {
   const reduceMotion = useReducedMotion();
   return reduceMotion
-    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.15 } }
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        transition: { duration: 0.15 },
+      }
     : {
         initial: { opacity: 0, y: 16 },
         animate: { opacity: 1, y: 0 },
-        transition: { type: "spring" as const, stiffness: 260, damping: 28, delay: index * STAGGER },
+        transition: {
+          type: "spring" as const,
+          stiffness: 260,
+          damping: 28,
+          delay: index * STAGGER,
+        },
       };
 }
 
@@ -45,9 +55,28 @@ interface ColumnProps extends Omit<PhaseColumnsProps, "phases" | "byPhase"> {
   phase: Phase;
   index: number;
   tools: ToolLite[];
+  /** The largest column's count, which sets full intensity for the overview heat block. */
+  max: number;
 }
 
-function PhaseColumn({ phase, index, tools, matched, selectedId, level, onSelect }: ColumnProps) {
+/** Overview level: the column as one block, count in large type, stage colour deeper with more tools. */
+function HeatBlock({ phase, shown, max }: { phase: Phase; shown: number; max: number }) {
+  const strength = max ? Math.round(12 + 68 * (shown / max)) : 12;
+  return (
+    <motion.div
+      layout
+      className="flex h-56 flex-col items-center justify-center rounded-lg"
+      style={{
+        background: `color-mix(in oklch, ${phaseColor(phase.id)} ${strength}%, var(--card))`,
+      }}
+    >
+      <span className="font-mono text-7xl leading-none font-semibold tabular-nums">{shown}</span>
+      <span className="mt-2 text-lg">{shown === 1 ? "tool" : "tools"}</span>
+    </motion.div>
+  );
+}
+
+function PhaseColumn({ phase, index, tools, max, matched, selectedId, level, onSelect }: ColumnProps) {
   const entrance = useEntrance(index);
   const shown = matched ? tools.filter((t) => matched.has(t.id)).length : tools.length;
   const noun = tools.length === 1 ? "tool" : "tools";
@@ -61,25 +90,30 @@ function PhaseColumn({ phase, index, tools, matched, selectedId, level, onSelect
           {matched ? `${shown} of ${tools.length}` : tools.length} {noun}
         </p>
       </header>
-      <ul className="grid grid-cols-2 gap-1 px-1">
-        {tools.map((tool) => (
-          <li key={tool.id} className="min-w-0">
-            <ToolTile
-              tool={tool}
-              level={level}
-              dimmed={matched !== null && !matched.has(tool.id)}
-              selected={selectedId === tool.id}
-              onSelect={onSelect}
-            />
-          </li>
-        ))}
-      </ul>
+      {level === "overview" ? (
+        <HeatBlock phase={phase} shown={shown} max={max} />
+      ) : (
+        <ul className={cn("grid gap-1 px-1", level === "cards" ? "grid-cols-1" : "grid-cols-2")}>
+          {tools.map((tool) => (
+            <li key={tool.id} className="min-w-0">
+              <ToolTile
+                tool={tool}
+                level={level}
+                dimmed={matched !== null && !matched.has(tool.id)}
+                selected={selectedId === tool.id}
+                onSelect={onSelect}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </motion.section>
   );
 }
 
 export function PhaseColumns({ phases, byPhase, matched, selectedId, level, onSelect }: PhaseColumnsProps) {
   const phaseById = new Map(phases.map((p) => [p.id, p]));
+  const max = Math.max(...PHASE_ORDER.map((id) => byPhase[id]?.length ?? 0));
   return (
     <div className="flex flex-col gap-3">
       <div style={COLUMN_GRID}>
@@ -97,6 +131,7 @@ export function PhaseColumns({ phases, byPhase, matched, selectedId, level, onSe
               phase={phase}
               index={index}
               tools={byPhase[id]}
+              max={max}
               matched={matched}
               selectedId={selectedId}
               level={level}

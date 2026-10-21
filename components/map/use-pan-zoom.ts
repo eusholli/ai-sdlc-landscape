@@ -3,7 +3,7 @@
 import { animate, useMotionValue, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent, PointerEvent, UIEvent } from "react";
-import { zoomLevelFor, type ZoomLevel } from "./zoom-level";
+import { OVERVIEW_BELOW, zoomLevelFor, type ZoomLevel } from "./zoom-level";
 
 const MIN_SCALE = 0.2;
 const MAX_SCALE = 3;
@@ -86,16 +86,16 @@ export function usePanZoom() {
   );
 
   const fit = useCallback(
-    (smooth = false) => {
+    (smooth = false, maxScale = 1) => {
       const vp = viewportRef.current;
       const world = worldRef.current;
       if (!vp || !world || !vp.clientWidth || !world.offsetWidth) return;
       userMoved.current = false;
       const vw = vp.clientWidth;
       const vh = vp.clientHeight;
-      const k = clampScale(
-        Math.min((vw - FIT_MARGIN * 2) / world.offsetWidth, (vh - FIT_MARGIN * 2) / world.offsetHeight, 1),
-      );
+      // Fit the width only. The busiest columns make the world far taller than wide, and fitting
+      // the height shrank every tile past reading; the rest is a vertical pan away.
+      const k = clampScale(Math.min((vw - FIT_MARGIN * 2) / world.offsetWidth, maxScale));
       const nx = (vw - world.offsetWidth * k) / 2;
       const ny = Math.max(FIT_MARGIN, (vh - world.offsetHeight * k) / 2);
       moveTo(nx, ny, k, smooth);
@@ -104,6 +104,12 @@ export function usePanZoom() {
   );
 
   const zoomIn = useCallback(() => zoomFromCentre(BUTTON_STEP), [zoomFromCentre]);
+  // The overview step fits the width instead of a fixed scale, held inside the overview range, so
+  // the whole lifecycle fills the screen rather than sitting small in the middle.
+  const zoomTo = useCallback(
+    (k: number) => (k < OVERVIEW_BELOW ? fit(true, OVERVIEW_BELOW * 0.95) : zoomFromCentre(k / scale.get())),
+    [fit, scale, zoomFromCentre],
+  );
   const zoomOut = useCallback(() => zoomFromCentre(1 / BUTTON_STEP), [zoomFromCentre]);
   const fitSmooth = useCallback(() => fit(true), [fit]);
 
@@ -269,6 +275,7 @@ export function usePanZoom() {
     dragging,
     zoomIn,
     zoomOut,
+    zoomTo,
     fit: fitSmooth,
     viewportProps: {
       onPointerDown,

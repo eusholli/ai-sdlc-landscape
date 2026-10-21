@@ -9,6 +9,7 @@ import { buildGroups } from "@/components/list/groups";
 import type { PhaseListProps } from "@/components/list/phase-list";
 
 export function PhaseListStatic({ tools, phases, layers, fullLifecycleIds }: PhaseListProps) {
+  const census = tools.filter((t) => t.layer !== "model").length;
   const groups = buildGroups(tools, phases, layers, fullLifecycleIds, false).filter((g) => g.tools.length > 0);
   return (
     <div className="border-b">
@@ -23,8 +24,8 @@ export function PhaseListStatic({ tools, phases, layers, fullLifecycleIds }: Pha
           </div>
         </div>
         <p className="text-xs text-muted-foreground">
-          Showing <span className="font-mono tabular-nums">{tools.length}</span> of{" "}
-          <span className="font-mono tabular-nums">{tools.length}</span>
+          Showing <span className="font-mono tabular-nums">{census}</span> of{" "}
+          <span className="font-mono tabular-nums">{census}</span>
         </p>
       </div>
       <div className="mx-auto max-w-3xl">

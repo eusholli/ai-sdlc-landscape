@@ -59,7 +59,9 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
     [facets, tools, state],
   );
 
-  const shown = useMemo(() => applyFilters(tools, state).length, [tools, state]);
+  // Counts cover the census tools; the model providers are context, not part of the count.
+  const census = useMemo(() => tools.filter((t) => t.layer !== "model"), [tools]);
+  const shown = useMemo(() => applyFilters(census, state).length, [census, state]);
 
   function patchUrl(values: Record<string, string[] | boolean | null>) {
     void setState(values as never, { history: "replace" });
@@ -77,7 +79,11 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
       chips.push({
         id: `${def.key}:${value}`,
         label: `${def.label}: ${labelFor(def, value)}`,
-        remove: () => setFacet(def.key, selected.filter((v) => v !== value)),
+        remove: () =>
+          setFacet(
+            def.key,
+            selected.filter((v) => v !== value),
+          ),
       });
     }
   }
@@ -126,7 +132,7 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
           </div>
           <p aria-live="polite" className="shrink-0 text-xs whitespace-nowrap text-muted-foreground">
             Showing <span className="font-mono tabular-nums">{shown}</span> of{" "}
-            <span className="font-mono tabular-nums">{tools.length}</span>
+            <span className="font-mono tabular-nums">{census.length}</span>
           </p>
         </div>
 

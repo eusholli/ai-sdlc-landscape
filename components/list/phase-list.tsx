@@ -43,6 +43,9 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
   );
 
   const matched = useMemo(() => new Set(applyFilters(tools, query).map((t) => t.id)), [tools, query]);
+  // Counts cover the census tools; the model providers are context, not part of the count.
+  const census = useMemo(() => tools.filter((t) => t.layer !== "model"), [tools]);
+  const censusShown = census.filter((t) => matched.has(t.id)).length;
 
   const visible = useMemo(
     () =>
@@ -67,8 +70,8 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
           <FilterSheet tools={tools} phases={phases} segments={segments} />
         </div>
         <p aria-live="polite" className="text-xs text-muted-foreground">
-          Showing <span className="font-mono tabular-nums">{matched.size}</span> of{" "}
-          <span className="font-mono tabular-nums">{tools.length}</span>
+          Showing <span className="font-mono tabular-nums">{censusShown}</span> of{" "}
+          <span className="font-mono tabular-nums">{census.length}</span>
         </p>
       </div>
 
