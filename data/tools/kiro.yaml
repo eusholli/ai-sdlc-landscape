@@ -1,0 +1,22 @@
+id: kiro
+name: Kiro
+company: Amazon Web Services
+url: https://kiro.dev
+primary_phase: plan
+phases: [plan, code, test]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide, cli]
+autonomy: agent
+summary: Turn prompts into executable specs, validate code correctness and build across large codebases with parallel agents.
+pricing_model: usage (credits)
+entry_price: Free tier (50 credits); Pro $20/month
+models: [Claude Sonnet 4.5, Qwen3 Coder Next, DeepSeek 3.2, MiniMax M2.1]
+relations:
+  - {type: ships_inside, to: aws, sources: [https://kiro.dev/pricing/]}
+  - {type: built_on_model, to: anthropic, sources: [https://kiro.dev/pricing/]}
+sources:
+  - {field: summary, url: https://kiro.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://kiro.dev/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://kiro.dev/pricing/, retrieved: 2026-10-21}
+  - {field: models, url: https://kiro.dev/pricing/, retrieved: 2026-10-21}

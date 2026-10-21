@@ -1,0 +1,31 @@
+id: roo-code
+name: Roomote (formerly Roo Code)
+company: Roo Code
+url: https://roocode.com
+primary_phase: code
+phases: [code, review]
+sub_kind: autonomous-agent
+target_buyer: [eng leader]
+interface: [web, pr-bot]
+autonomy: autonomous
+summary: Roomote, a cloud coding agent that ships reviewable PRs, hosted or self-hosted; the Roo Code VS Code extension shut down on 15 May 2026.
+pricing_model: subscription
+entry_price: $49/month
+deployment: [saas, self-hosted, single-tenant]
+models: [model-agnostic, BYOK]
+status: shut down (extension, 15 May 2026)
+relations:
+  - {type: integrates_with, to: github, sources: [https://roocode.com, https://roocode.com]}
+  - {type: integrates_with, to: gitlab, sources: [https://roocode.com, https://roocode.com]}
+  - {type: integrates_with, to: azure-devops, sources: [https://roocode.com, https://roocode.com]}
+  - {type: integrates_with, to: bitbucket, sources: [https://roocode.com, https://roocode.com]}
+sources:
+  - {field: summary, url: https://roocode.com, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.bodegaone.ai/blog/roo-code-shutdown-alternatives, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://roocode.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://roocode.com/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://roocode.com, retrieved: 2026-10-21}
+  - {field: deployment, url: https://roocode.com, retrieved: 2026-10-21}
+  - {field: relations, url: https://roocode.com, retrieved: 2026-10-21}
+  - {field: status, url: https://www.bodegaone.ai/blog/roo-code-shutdown-alternatives, retrieved: 2026-10-21}
+  - {field: status, url: https://wetheflywheel.com/en/comparisons/opencode-vs-roo-code-vs-cline/, retrieved: 2026-10-21}

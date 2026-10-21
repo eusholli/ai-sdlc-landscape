@@ -1,0 +1,28 @@
+id: faros
+name: Faros
+company: Faros AI
+url: https://www.faros.ai
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader, cto]
+interface: [web]
+summary: "The token engineering platform: token intelligence, optimisation and governance across all your AI coding tools, tied to outcomes."
+customers: [Vimeo, Riskified, Autodesk, Discord, Coursera, Ironclad]
+deployment: [saas, on-prem]
+compliance: [SOC 2 Type II, ISO 27001, GDPR]
+relations:
+  - {type: competes_with, to: dx, sources: [https://www.faros.ai/compare/faros-vs-dx, https://www.faros.ai]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.faros.ai/compare/faros-vs-dx, https://www.faros.ai]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.faros.ai/compare/faros-vs-dx, https://www.faros.ai]}
+  - {type: integrates_with, to: jira, sources: [https://www.faros.ai/compare/faros-vs-dx, https://www.faros.ai]}
+  - {type: integrates_with, to: github, sources: [https://www.faros.ai/compare/faros-vs-dx, https://www.faros.ai]}
+sources:
+  - {field: summary, url: https://www.faros.ai, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.faros.ai/platform, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.faros.ai/blog/customer-stories-vimeo, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.faros.ai/blog/customer-stories-riskified, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.faros.ai, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.faros.ai, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.faros.ai/compare/faros-vs-dx, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.faros.ai/compare/faros-vs-dx, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.faros.ai, retrieved: 2026-10-21}

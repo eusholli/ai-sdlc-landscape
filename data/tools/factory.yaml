@@ -1,0 +1,30 @@
+id: factory
+name: Factory (Droids)
+company: Factory
+url: https://factory.ai
+primary_phase: code
+phases: [code, review, test, deploy, operate, understand, maintain]
+sub_kind: autonomous-agent
+target_buyer: [eng leader, developer]
+interface: [cli, ide, web, slack]
+autonomy: autonomous
+summary: Factory Droids automate coding, testing and deployment for startups and enterprises; also ships code review and a living AutoWiki per repository.
+customers: [Blackstone, Groq]
+gtm_partners: [OpenAI marketplace]
+pricing_model: subscription plus usage
+entry_price: Pro $20/month
+deployment: [saas, on-prem]
+models: [GPT-5, Claude Opus, Claude Sonnet, Gemini, open-weight models]
+last_round: $200M at a $5B valuation; Khosla Ventures, Blackstone, Sequoia (2026)
+relations:
+  - {type: partners_with, to: openai, sources: [https://factory.ai/news, https://factory.ai/pricing]}
+sources:
+  - {field: gtm_partners, url: https://factory.ai/news, retrieved: 2026-10-21}
+  - {field: summary, url: https://factory.ai, retrieved: 2026-10-21}
+  - {field: customers, url: https://factory.ai/enterprise, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://factory.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://factory.ai/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://factory.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://factory.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://factory.ai/news, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techfundingnews.com/factory-jumps-to-5b-in-5-months-with-200m-for-its-ai-droids/, retrieved: 2026-10-15}

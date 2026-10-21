@@ -1,0 +1,14 @@
+id: baz
+name: Baz
+company: Baz
+url: https://baz.co
+primary_phase: review
+phases: [review]
+target_buyer: [eng leader]
+interface: [pr-bot]
+summary: AI code review platform that helps engineering teams ship better code faster.
+last_round: $9M extended seed (June 2026)
+sources:
+  - {field: summary, url: https://baz.co, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.finsmes.com/2026/06/baz-technologies-raises-9m-in-extended-seed-funding.html, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/cl8og4qtn, retrieved: 2026-10-21}

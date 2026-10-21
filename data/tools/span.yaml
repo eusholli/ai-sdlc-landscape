@@ -1,0 +1,27 @@
+id: span
+name: Span
+company: Span
+url: https://www.span.app
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader]
+interface: [web]
+summary: AI-native engineering intelligence that links agent traces to code and PRs, with AI impact reporting and the Src agent.
+pricing_model: per contributor
+deployment: [saas, single-tenant (your cloud)]
+compliance: [SOC 2 Type II, GDPR]
+relations:
+  - {type: competes_with, to: dx, sources: [https://www.span.app/compare/getdx, https://www.span.app/compare/faros]}
+  - {type: competes_with, to: faros, sources: [https://www.span.app/compare/getdx, https://www.span.app/compare/faros]}
+  - {type: competes_with, to: linearb, sources: [https://www.span.app/compare/getdx, https://www.span.app/compare/faros]}
+  - {type: competes_with, to: swarmia, sources: [https://www.span.app/compare/getdx, https://www.span.app/compare/faros]}
+sources:
+  - {field: summary, url: https://www.span.app/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.span.app/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.span.app/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.span.app/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.span.app/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.span.app/compare/getdx, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.span.app/compare/faros, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.span.app/compare/linearb, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.span.app/compare/swarmia, retrieved: 2026-10-21}

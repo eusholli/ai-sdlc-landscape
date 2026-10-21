@@ -1,0 +1,22 @@
+id: jellyfish
+name: Jellyfish
+company: Jellyfish
+url: https://jellyfish.co
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader, cto]
+interface: [web]
+summary: "The intelligence platform for AI-integrated engineering: helps R&D teams understand impact, adopt AI and align work to the business."
+customers: [Ada, Perk, Box]
+pricing_model: quote
+compliance: [SOC 1 Type II, SOC 2 Type II, GDPR, CCPA, CSA STAR]
+last_round: $71M Series C, led by Accel, Insight Partners and Tiger Global (2022)
+sources:
+  - {field: summary, url: https://jellyfish.co/, retrieved: 2026-10-21}
+  - {field: customers, url: https://jellyfish.co/case-studies/ada/, retrieved: 2026-10-21}
+  - {field: customers, url: https://jellyfish.co/case-studies/perk/, retrieved: 2026-10-21}
+  - {field: customers, url: https://jellyfish.co/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://jellyfish.co/pricing/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://jellyfish.co/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://jellyfish.co/newsroom/jellyfish-raises-71-million-series-c-funding-led-by-accel-insight-partners-and-tiger-global/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2022/02/01/jellyfish-aims-to-do-for-engineering-what-salesforce-did-for-sales/, retrieved: 2026-10-21}

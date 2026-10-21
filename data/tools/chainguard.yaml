@@ -1,0 +1,28 @@
+id: chainguard
+name: Chainguard
+company: Chainguard
+url: https://www.chainguard.dev
+primary_phase: security
+phases: [security, deploy]
+target_buyer: [platform team, ciso]
+summary: "Trusted open-source artifacts for every layer of the stack: hardened containers, language libraries and VMs with SLA-bound CVE patching."
+customers: [Cloudera, Appian, Snowflake, Shift5]
+traction: 500+ enterprises (company claim)
+pricing_model: by engineering org size
+entry_price: Free images; from $19K for a team of 10
+deployment: [saas, multi-cloud, on-prem]
+compliance: [FedRAMP (FIPS), PCI DSS, CMMC 2.0, SOC 2, SLSA L3]
+last_round: $356M Series D, led by Kleiner Perkins and IVP
+relations:
+  - {type: competes_with, to: socket, sources: [https://www.chainguard.dev/compare/chainguard-vs-socket]}
+sources:
+  - {field: summary, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.chainguard.dev/compare, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.chainguard.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.chainguard.dev/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.chainguard.dev/compare/chainguard-vs-socket, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.chainguard.dev/unchained/announcing-chainguards-series-d-building-the-safe-source-for-all-open-source, retrieved: 2026-10-21}

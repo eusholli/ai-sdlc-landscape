@@ -1,0 +1,16 @@
+id: datadog-bits
+name: Datadog (Bits AI)
+company: Datadog
+url: https://www.datadoghq.com
+primary_phase: operate
+phases: [operate, test, security]
+target_buyer: [sre team, platform team]
+interface: [web, slack]
+summary: Cloud monitoring and security platform; Bits AI runs incident tasks, writes postmortems and, as Bits AI Dev Agent, suggests tests for uncovered code.
+pricing_model: usage
+compliance: [PCI, HIPAA (logs)]
+sources:
+  - {field: summary, url: https://www.datadoghq.com/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.datadoghq.com/pricing/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.datadoghq.com/pricing/list/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.datadoghq.com/pricing/list/, retrieved: 2026-10-21}

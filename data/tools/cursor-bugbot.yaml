@@ -1,0 +1,21 @@
+id: cursor-bugbot
+name: Bugbot
+company: Cursor
+url: https://cursor.com/bugbot
+primary_phase: review
+phases: [review]
+target_buyer: [eng leader]
+interface: [pr-bot]
+summary: "AI code review built for production: detects the hardest logic bugs with a low false-positive rate."
+traction: 70%+ of flags resolved before merge (company claim)
+pricing_model: usage
+entry_price: Average review $1.00-$1.50 on Teams plans
+relations:
+  - {type: ships_inside, to: cursor, sources: [https://cursor.com/bugbot]}
+  - {type: integrates_with, to: github, sources: [https://cursor.com/bugbot]}
+sources:
+  - {field: summary, url: https://cursor.com/bugbot, retrieved: 2026-10-21}
+  - {field: traction, url: https://cursor.com/bugbot, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://cursor.com/bugbot, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://cursor.com/bugbot, retrieved: 2026-10-21}
+  - {field: relations, url: https://cursor.com/bugbot, retrieved: 2026-10-21}

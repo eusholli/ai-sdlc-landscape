@@ -1,0 +1,19 @@
+id: driver-ai
+name: Driver
+company: Driver AI
+url: https://www.driver.ai
+primary_phase: understand
+phases: [understand]
+target_buyer: [eng leader, platform team]
+interface: [mcp, web]
+summary: "Compiles codebase context ahead of time, like a compiler: symbol-complete, exhaustive and structured, served to agents over MCP."
+deployment: [saas, single-tenant, regulated]
+compliance: [SOC 2 Type II, FedRAMP (regulated tier)]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.driver.ai/pricing]}
+  - {type: integrates_with, to: cursor, sources: [https://www.driver.ai/pricing]}
+sources:
+  - {field: summary, url: https://www.driver.ai, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.driver.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.driver.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.driver.ai/pricing, retrieved: 2026-10-21}

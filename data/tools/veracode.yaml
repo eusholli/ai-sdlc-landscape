@@ -1,0 +1,17 @@
+id: veracode
+name: Veracode
+company: Veracode
+url: https://www.veracode.com
+primary_phase: security
+phases: [security]
+target_buyer: [ciso]
+interface: [web, ci]
+summary: Application risk management platform combining decades of security research and AI-driven analysis to find and fix flaws.
+customers: [SOC Prime, Keap, SchoolCNXT, OneLogin, Inter]
+sources:
+  - {field: summary, url: https://www.veracode.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.veracode.com/customers/soc-prime/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.veracode.com/customers/keap/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.veracode.com/customers/schoolcnxt/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.veracode.com/customers/onelogin/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.veracode.com/customers/inter/, retrieved: 2026-10-21}

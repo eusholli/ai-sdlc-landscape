@@ -1,0 +1,15 @@
+id: continue
+name: Continue
+company: Continue (Cursor)
+url: https://www.continue.dev
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+summary: Open-source AI code assistant for VS Code and JetBrains; the company has been acquired by Cursor.
+status: acquired
+relations:
+  - {type: acquired_by, to: cursor, sources: [https://www.continue.dev, https://www.continue.dev]}
+sources:
+  - {field: summary, url: https://www.continue.dev, retrieved: 2026-10-21}
+  - {field: status, url: https://www.continue.dev, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.continue.dev, retrieved: 2026-10-21}

@@ -1,0 +1,20 @@
+id: refact
+name: Refact.ai
+company: Refact.ai
+url: https://refact.ai
+primary_phase: code
+phases: [code, test]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide]
+summary: AI agent for coding that automates coding, debugging and testing with full context; open source and self-hostable.
+deployment: [saas, on-prem]
+models: [Qwen2.5-Coder (completion), choice of LLMs]
+open_source: true
+last_round: $2M (2024)
+sources:
+  - {field: summary, url: https://refact.ai, retrieved: 2026-10-21}
+  - {field: open_source, url: https://refact.ai, retrieved: 2026-10-21}
+  - {field: deployment, url: https://refact.ai, retrieved: 2026-10-21}
+  - {field: models, url: https://refact.ai, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2024/01/29/refact-launches-to-make-code-generating-ai-more-appealing-to-enterprises/, retrieved: 2026-10-21}

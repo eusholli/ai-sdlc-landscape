@@ -1,0 +1,26 @@
+id: keploy
+name: Keploy
+company: Keploy
+url: https://keploy.io
+primary_phase: test
+phases: [test]
+target_buyer: [developer]
+interface: [cli, web]
+summary: "AI code verification with production-traffic digital twins: real API traffic, mocks and dependencies replayed as tests."
+gtm_partners: [AWS Marketplace]
+pricing_model: seat plus usage
+entry_price: Free playground; $19/user/month
+deployment: [saas, private, air-gapped]
+compliance: [SOC 2, GDPR, HIPAA]
+relations:
+  - {type: competes_with, to: pact, sources: [https://keploy.io/pricing, https://keploy.io/compare/pact]}
+  - {type: competes_with, to: k6, sources: [https://keploy.io/pricing, https://keploy.io/compare/pact]}
+sources:
+  - {field: gtm_partners, url: https://keploy.io/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://keploy.io, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://keploy.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://keploy.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://keploy.io/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://keploy.io/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://keploy.io/compare/pact, retrieved: 2026-10-21}
+  - {field: relations, url: https://keploy.io/compare/k6, retrieved: 2026-10-21}

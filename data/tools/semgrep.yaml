@@ -1,0 +1,28 @@
+id: semgrep
+name: Semgrep
+company: Semgrep
+url: https://semgrep.dev
+primary_phase: security
+phases: [security, review]
+target_buyer: [appsec team, developer]
+interface: [cli, ci, pr-bot, web]
+summary: "AI-assisted SAST, SCA and secrets detection: learns your code context to cut false positives and prioritise reachable vulnerabilities."
+customers: [Lyft, Slack, GitLab, HashiCorp, Figma, Plaid, Trail of Bits, Squarespace, Vanta]
+traction: AppSec teams triage 80% fewer false positives (company claim)
+pricing_model: per contributor
+entry_price: Free
+open_source: true
+last_round: $100M Series D, led by Menlo Ventures (Feb 2025)
+relations:
+  - {type: competes_with, to: snyk, sources: [https://docs.semgrep.dev/faq/comparisons/snyk]}
+sources:
+  - {field: summary, url: https://semgrep.dev, retrieved: 2026-10-21}
+  - {field: customers, url: https://semgrep.dev, retrieved: 2026-10-21}
+  - {field: customers, url: https://semgrep.dev/case-studies, retrieved: 2026-10-21}
+  - {field: customers, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
+  - {field: traction, url: https://semgrep.dev, retrieved: 2026-10-21}
+  - {field: open_source, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.semgrep.dev/faq/comparisons/snyk, retrieved: 2026-10-21}
+  - {field: last_round, url: https://fintech.global/2025/02/06/semgrep-bags-100m-in-series-d-to-elevate-ai-driven-code-security-innovations/, retrieved: 2026-10-21}

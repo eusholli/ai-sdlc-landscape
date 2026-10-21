@@ -1,0 +1,25 @@
+id: cubic
+name: cubic
+company: cubic
+url: https://www.cubic.dev
+primary_phase: review
+phases: [review, understand]
+target_buyer: [eng leader]
+interface: [pr-bot]
+summary: AI code review designed to catch bugs in the most complex codebases; publishes Bug Bench comparisons of model bug rates.
+customers: [Daytona, Legora, Firecrawl, Tinfoil, n8n]
+pricing_model: seat
+entry_price: Free; Team $30/dev/month
+compliance: [SOC 2]
+relations:
+  - {type: integrates_with, to: jira, sources: [https://www.cubic.dev/pricing-plans]}
+  - {type: integrates_with, to: linear, sources: [https://www.cubic.dev/pricing-plans]}
+sources:
+  - {field: summary, url: https://www.cubic.dev/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.cubic.dev/bugbench/compare, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.cubic.dev/customers, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.cubic.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.cubic.dev/pricing-plans, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.cubic.dev/pricing-plans, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.cubic.dev/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.cubic.dev/pricing-plans, retrieved: 2026-10-21}

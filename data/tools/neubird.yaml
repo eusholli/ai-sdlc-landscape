@@ -1,0 +1,23 @@
+id: neubird
+name: NeuBird (Production Ops Agent)
+company: NeuBird AI
+url: https://neubird.ai
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team]
+interface: [slack, teams, mcp, web]
+autonomy: agent
+summary: "Production Ops Agent: does what an AI SRE does, then prevents downtime before the page and resolves what gets through."
+customers: [Bedrock Analytics, DeepHealth]
+pricing_model: usage (credits)
+models: [bring your own LLMs]
+compliance: [SOC 2 Type II]
+last_round: $19.3M
+sources:
+  - {field: summary, url: https://neubird.ai, retrieved: 2026-10-21}
+  - {field: customers, url: https://neubird.ai/resources/customer-story-how-bedrock-analytics-resolves-incidents-faster, retrieved: 2026-10-21}
+  - {field: customers, url: https://neubird.ai/resources/customer-story-how-deephealth-delivers-faster-innovation-with-neubird, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://neubird.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://neubird.ai, retrieved: 2026-10-21}
+  - {field: models, url: https://neubird.ai, retrieved: 2026-10-21}
+  - {field: last_round, url: https://pulse2.com/neubird-ai-19-3-million-raised-for-agentic-ai-platform-for-enterprise-production-operations/, retrieved: 2026-10-21}

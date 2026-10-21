@@ -1,0 +1,17 @@
+id: codemod
+name: Codemod
+company: Codemod
+url: https://codemod.com
+primary_phase: maintain
+phases: [maintain, security]
+target_buyer: [platform team]
+interface: [cli, web]
+autonomy: agent
+summary: Code intelligence and automation platform that gives agents compiler-aware context for framework upgrades, migrations and org-wide fixes.
+customers: [Zapier, Padoa]
+compliance: [SOC 2]
+sources:
+  - {field: summary, url: https://codemod.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://codemod.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://codemod.com/blog/padoa, retrieved: 2026-10-21}
+  - {field: compliance, url: https://codemod.com/blog/soc2, retrieved: 2026-10-21}

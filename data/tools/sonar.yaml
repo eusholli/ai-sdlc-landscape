@@ -1,0 +1,31 @@
+id: sonar
+name: SonarQube
+company: Sonar
+url: https://www.sonarsource.com
+primary_phase: review
+phases: [review, security, cicd]
+target_buyer: [eng leader, ciso]
+interface: [ide, pr-bot, cli, mcp]
+summary: "AI code review and verification: consistent quality gates on every PR and pipeline, from IDE to CI/CD, for human and agent-written code."
+traction: Trusted by 7M+ developers (company claim)
+gtm_partners: ["cloud, technology and channel partners"]
+pricing_model: by lines of code
+entry_price: Free tier; from $34/month (up to 100k LOC)
+deployment: [saas, self-hosted (SonarQube Server)]
+last_round: $412M at a $4.7B valuation, co-led by Advent International (2022)
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.sonarsource.com/partners/, https://www.sonarsource.com/plans-and-pricing/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.sonarsource.com/partners/, https://www.sonarsource.com/plans-and-pricing/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://www.sonarsource.com/partners/, https://www.sonarsource.com/plans-and-pricing/]}
+  - {type: integrates_with, to: windsurf, sources: [https://www.sonarsource.com/partners/, https://www.sonarsource.com/plans-and-pricing/]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://www.sonarsource.com/partners/, https://www.sonarsource.com/plans-and-pricing/]}
+sources:
+  - {field: gtm_partners, url: https://www.sonarsource.com/partners/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.sonarsource.com/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.sonarsource.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.sonarsource.com/plans-and-pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.sonarsource.com/plans-and-pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.sonarsource.com/plans-and-pricing/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.sonarsource.com/plans-and-pricing/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.sonarsource.com/company/press-releases/sonar-raises-412-million/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2022/04/26/sonarsource-raises-412m-to-scan-codebases-for-bugs-and-vulnerabilities/, retrieved: 2026-10-21}

@@ -1,0 +1,37 @@
+id: gitar
+name: Gitar
+company: Sonar
+url: https://gitar.ai
+primary_phase: cicd
+phases: [cicd, review]
+target_buyer: [eng leader]
+interface: [pr-bot]
+autonomy: agent
+summary: Diagnoses CI failures and applies autonomous fixes, with high-signal AI code review and proof the change works.
+pricing_model: seat
+entry_price: $20/user; free for open source
+deployment: [saas, self-hosted code hosting]
+models: [Anthropic (BYOK option)]
+compliance: [SOC 2, ISO 27001, GDPR]
+last_round: $9M, led by Venrock (Apr 2026), before acquisition
+status: acquired
+relations:
+  - {type: acquired_by, to: sonar, sources: [https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/]}
+  - {type: integrates_with, to: github, sources: [https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/]}
+sources:
+  - {field: summary, url: https://gitar.ai, retrieved: 2026-10-21}
+  - {field: status, url: https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, retrieved: 2026-10-21}
+  - {field: status, url: https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://gitar.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://gitar.ai, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://gitar.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://gitar.ai, retrieved: 2026-10-21}
+  - {field: models, url: https://gitar.ai, retrieved: 2026-10-21}
+  - {field: deployment, url: https://gitar.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.sonarsource.com/company/press-releases/sonar-acquires-gitar/, retrieved: 2026-10-21}
+  - {field: relations, url: https://siliconangle.com/2026/05/21/ai-code-quality-startup-sonar-buys-ai-code-review-startup-gitar/, retrieved: 2026-10-21}
+  - {field: relations, url: https://gitar.ai, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2026/04/15/gitar-a-startup-that-uses-agents-to-secure-code-emerges-from-stealth-with-9-million/, retrieved: 2026-10-21}

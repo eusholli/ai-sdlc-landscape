@@ -1,0 +1,22 @@
+id: atlassian-rovo-dev
+name: Rovo Dev
+company: Atlassian
+url: https://www.atlassian.com/software/rovo-dev
+primary_phase: code
+phases: [plan, code, review, cicd]
+sub_kind: cli-agent
+target_buyer: [eng leader]
+interface: [cli, ide, pr-bot, web]
+summary: "Atlassian's AI coding agent for software teams: plan, generate and review code from Jira, the CLI and Bitbucket; folding into Jira subscriptions."
+traction: "One customer quote: 'cut PR cycle times by 45%' (company claim)"
+status: standalone product reaching end of life; capabilities moving into Jira
+relations:
+  - {type: ships_inside, to: atlassian, sources: [https://www.atlassian.com/licensing/rovo-dev, https://www.atlassian.com/software/rovo-dev]}
+  - {type: integrates_with, to: jira, sources: [https://www.atlassian.com/licensing/rovo-dev, https://www.atlassian.com/software/rovo-dev]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.atlassian.com/licensing/rovo-dev, https://www.atlassian.com/software/rovo-dev]}
+sources:
+  - {field: summary, url: https://www.atlassian.com/software/rovo-dev, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.atlassian.com/software/rovo-dev, retrieved: 2026-10-21}
+  - {field: status, url: https://www.atlassian.com/licensing/rovo-dev, retrieved: 2026-10-21}
+  - {field: status, url: https://www.atlassian.com/software/rovo-dev, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.atlassian.com/software/rovo-dev, retrieved: 2026-10-21}

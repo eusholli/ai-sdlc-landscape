@@ -1,0 +1,21 @@
+id: google-antigravity
+name: Google Antigravity
+company: Google
+url: https://antigravity.google
+primary_phase: code
+phases: [code, test]
+sub_kind: ide-assistant
+target_buyer: [developer]
+interface: [ide, cli]
+autonomy: agent
+summary: "The next-generation agent platform: an agent-first IDE and CLI built on Gemini; replaced Gemini CLI for unpaid users on 18 June 2026."
+pricing_model: free tier plus Google AI plans and Google Cloud consumption
+entry_price: $0/month individual
+relations:
+  - {type: ships_inside, to: google-co, sources: []}
+  - {type: built_on_model, to: google, sources: []}
+sources:
+  - {field: summary, url: https://antigravity.google/, retrieved: 2026-10-21}
+  - {field: summary, url: https://github.com/google-gemini/gemini-cli, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://antigravity.google/docs/plans/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://antigravity.google/pricing/, retrieved: 2026-10-21}

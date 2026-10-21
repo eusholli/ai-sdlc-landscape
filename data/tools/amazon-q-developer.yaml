@@ -1,0 +1,18 @@
+id: amazon-q-developer
+name: Amazon Q Developer
+company: Amazon Web Services
+url: https://aws.amazon.com/q/developer
+primary_phase: code
+phases: [code, maintain, security]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide, cli]
+summary: AI coding assistant that writes, debugs and refactors code natively in your IDE and across AWS.
+pricing_model: free tier plus seat
+entry_price: Perpetual free tier (50 agentic chats/month)
+relations:
+  - {type: ships_inside, to: aws, sources: []}
+sources:
+  - {field: summary, url: https://aws.amazon.com/q/developer, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://aws.amazon.com/q/developer, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://aws.amazon.com/q/developer, retrieved: 2026-10-21}

@@ -1,0 +1,21 @@
+id: launchdarkly
+name: LaunchDarkly
+company: LaunchDarkly
+url: https://launchdarkly.com
+primary_phase: cicd
+phases: [cicd, operate]
+target_buyer: [eng leader, product team]
+interface: [web, mcp, sdk]
+summary: "Runtime control for AI-era software: feature flags and AI agent control, remediating failing code and misbehaving agents in production."
+traction: 5,500+ customers (company claim)
+pricing_model: usage
+entry_price: Free ($0/month, unlimited seats)
+deployment: [saas, edge, self-hosted]
+compliance: [SOC 2, ISO, HIPAA]
+sources:
+  - {field: summary, url: https://launchdarkly.com, retrieved: 2026-10-21}
+  - {field: traction, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://launchdarkly.com/compare/launchdarkly-vs-unleash/, retrieved: 2026-10-21}

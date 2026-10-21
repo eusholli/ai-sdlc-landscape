@@ -1,0 +1,28 @@
+id: port
+name: Port
+company: Port
+url: https://www.port.io
+primary_phase: platform
+phases: [platform, measure, operate]
+target_buyer: [platform team]
+interface: [web, mcp]
+autonomy: agent
+summary: The agentic SDLC platform for building your own AI software factory, with context, agent management and governance.
+gtm_partners: ["consulting partners, including global systems integrators"]
+pricing_model: seat
+entry_price: Free; Basic from $30/seat/month annual
+last_round: $100M Series C at an $800M valuation
+relations:
+  - {type: competes_with, to: opslevel, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
+  - {type: competes_with, to: cortex, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
+  - {type: competes_with, to: backstage, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
+sources:
+  - {field: gtm_partners, url: https://www.port.io/partners, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.port.io, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.port.io/pricing, retrieved: 2026-10-05}
+  - {field: entry_price, url: https://www.port.io/pricing, retrieved: 2026-10-05}
+  - {field: relations, url: https://www.port.io/compare/opslevel-vs-port, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.port.io/compare/cortex-vs-port, retrieved: 2026-10-05}
+  - {field: relations, url: https://www.port.io/compare/backstage-vs-port, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.port.io/blog/port-100m-series-c, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/r1oppgdzzg, retrieved: 2026-10-21}

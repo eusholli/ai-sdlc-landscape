@@ -1,0 +1,17 @@
+id: opslevel
+name: OpsLevel
+company: OpsLevel
+url: https://www.opslevel.com
+primary_phase: platform
+phases: [platform]
+target_buyer: [platform team]
+interface: [web]
+summary: Internal developer portal that gives teams and their agents the same picture of what exists, what it does and who owns it.
+pricing_model: quote
+deployment: [saas, self-hosted]
+compliance: [SOC 2 Type II]
+sources:
+  - {field: summary, url: https://www.opslevel.com, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}

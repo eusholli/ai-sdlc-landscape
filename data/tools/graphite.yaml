@@ -1,0 +1,24 @@
+id: graphite
+name: Graphite
+company: Cursor
+url: https://graphite.dev
+primary_phase: review
+phases: [review, cicd]
+target_buyer: [eng leader]
+interface: [web, cli, ide, pr-bot]
+summary: "Code review for the age of AI: stacked PRs, a stack-aware merge queue and AI review with suggested fixes before merge."
+founded: 2020
+last_round: $52M Series B, led by Accel, with Anthropic's Anthology Fund (Mar 2025)
+status: acquired
+relations:
+  - {type: acquired_by, to: cursor, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+  - {type: integrates_with, to: github, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+  - {type: integrates_with, to: vs-code, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+sources:
+  - {field: summary, url: https://graphite.dev, retrieved: 2026-10-21}
+  - {field: status, url: https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, retrieved: 2026-10-21}
+  - {field: relations, url: https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, retrieved: 2026-10-21}
+  - {field: relations, url: https://graphite.dev, retrieved: 2026-10-21}
+  - {field: founded, url: https://techcrunch.com/2025/03/18/anthropic-backed-ai-powered-code-review-platform-graphite-raises-cash/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2025/03/18/anthropic-backed-ai-powered-code-review-platform-graphite-raises-cash/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://graphite.com/blog/series-b-diamond-launch, retrieved: 2026-10-21}

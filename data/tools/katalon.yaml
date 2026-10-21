@@ -1,0 +1,22 @@
+id: katalon
+name: Katalon True Platform
+company: Katalon
+url: https://katalon.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web, desktop]
+summary: "End-to-end AI testing platform for QA teams: manage and run manual, automated and AI-generated tests in one place."
+customers: [Saga, Hive, Liberty Latin America, Angler]
+gtm_partners: [Capgemini]
+deployment: [saas, on-prem (Runtime Engine)]
+compliance: [SOC 2 Type II]
+sources:
+  - {field: gtm_partners, url: https://katalon.com/case-studies/lla, retrieved: 2026-10-21}
+  - {field: summary, url: https://katalon.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://katalon.com/case-studies/saga, retrieved: 2026-10-21}
+  - {field: customers, url: https://katalon.com/case-studies/hive, retrieved: 2026-10-21}
+  - {field: customers, url: https://katalon.com/case-studies/lla, retrieved: 2026-10-21}
+  - {field: customers, url: https://katalon.com/case-studies/angler, retrieved: 2026-10-21}
+  - {field: compliance, url: https://katalon.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://katalon.com/, retrieved: 2026-10-21}

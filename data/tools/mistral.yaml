@@ -1,0 +1,8 @@
+id: mistral
+name: Mistral AI
+company: Mistral AI
+url: https://mistral.ai
+layer: model
+summary: "Frontier open-weight models you own and control: customise with Forge, deploy with Studio, run on-prem or in your VPC."
+sources:
+  - {field: summary, url: https://mistral.ai, retrieved: 2026-10-21}

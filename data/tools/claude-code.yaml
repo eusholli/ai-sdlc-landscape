@@ -1,0 +1,23 @@
+id: claude-code
+name: Claude Code
+company: Anthropic
+url: https://www.claude.com/product/claude-code
+primary_phase: code
+phases: [code, understand, review, test]
+sub_kind: cli-agent
+target_buyer: [developer]
+interface: [cli, ide, web, slack]
+autonomy: agent
+summary: "Anthropic's agentic coding tool: understands your codebase, edits files, runs commands and turns issues into pull requests."
+pricing_model: subscription
+entry_price: Included in Claude Pro
+relations:
+  - {type: ships_inside, to: anthropic, sources: [https://www.claude.com/product/claude-code]}
+  - {type: built_on_model, to: anthropic, sources: [https://www.claude.com/product/claude-code]}
+  - {type: integrates_with, to: github, sources: [https://www.claude.com/product/claude-code]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.claude.com/product/claude-code]}
+sources:
+  - {field: summary, url: https://www.claude.com/product/claude-code, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.claude.com/product/claude-code, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.claude.com/product/claude-code, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.claude.com/product/claude-code, retrieved: 2026-10-21}

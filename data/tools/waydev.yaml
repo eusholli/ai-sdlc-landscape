@@ -1,0 +1,23 @@
+id: waydev
+name: Waydev
+company: Waydev
+url: https://waydev.co
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader]
+interface: [web]
+summary: AI-native engineering intelligence for AI ROI, DORA, SPACE and DX; AI measures, flags what matters and turns it into goals.
+customers: [Carrier, AON, BlueCross BlueShield, Sovos]
+traction: 300+ companies (company claim)
+deployment: [saas, self-hosted, on-prem]
+compliance: [SOC 2 Type II, SOC 3]
+relations:
+  - {type: competes_with, to: harness, sources: [https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/]}
+sources:
+  - {field: summary, url: https://waydev.co/, retrieved: 2026-10-21}
+  - {field: customers, url: https://waydev.co/, retrieved: 2026-10-21}
+  - {field: traction, url: https://waydev.co/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://waydev.co/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://waydev.co/pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/, retrieved: 2026-10-21}
+  - {field: relations, url: https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/, retrieved: 2026-10-21}

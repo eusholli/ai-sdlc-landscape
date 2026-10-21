@@ -1,0 +1,27 @@
+id: cognition-devin
+name: Devin
+company: Cognition
+url: https://cognition.ai
+primary_phase: code
+phases: [code, plan, review, test, maintain, understand]
+sub_kind: autonomous-agent
+target_buyer: [eng leader]
+interface: [web, ide, cli, slack]
+autonomy: autonomous
+summary: Devin, the first autonomous software engineer, plans, writes, tests and ships production code inside your existing workflows.
+customers: [Mercedes-Benz]
+traction: Crossed $1B annualized revenue run rate (company claim)
+gtm_partners: [Cognizant, Infosys, LTM]
+compliance: [FedRAMP High (in process)]
+founded: 2024
+last_round: $2B+ Series E at a $48B valuation, led by Andreessen Horowitz and Accel (Sept 2026)
+sources:
+  - {field: gtm_partners, url: https://cognition.ai/blog, retrieved: 2026-10-21}
+  - {field: summary, url: https://cognition.ai, retrieved: 2026-10-05}
+  - {field: customers, url: https://cognition.ai/blog, retrieved: 2026-10-21}
+  - {field: traction, url: https://cognition.ai, retrieved: 2026-10-05}
+  - {field: traction, url: https://cognition.ai/blog, retrieved: 2026-10-21}
+  - {field: compliance, url: https://cognition.ai/blog, retrieved: 2026-10-21}
+  - {field: founded, url: https://techcrunch.com/2026/09/08/cognition-hits-48b-valuation-signaling-investors-believe-ai-coding-is-far-from-a-winner-take-all-market/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://cognition.com/blog/series-e, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2026/09/08/cognition-hits-48b-valuation-signaling-investors-believe-ai-coding-is-far-from-a-winner-take-all-market/, retrieved: 2026-10-21}

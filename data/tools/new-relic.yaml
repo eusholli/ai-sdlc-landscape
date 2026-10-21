@@ -1,0 +1,19 @@
+id: new-relic
+name: New Relic
+company: New Relic
+url: https://newrelic.com
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team]
+interface: [web]
+summary: AI-powered observability platform that correlates telemetry across the stack, with an SRE Agent to isolate and resolve issues.
+customers: [Chegg, Verisk, Wix, Kogan, ITV, Turo, UniSA, Domino's, Atlassian, Verizon, Toyota]
+sources:
+  - {field: summary, url: https://newrelic.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/chegg, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/wix, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/kogan, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/itv, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/turo, retrieved: 2026-10-21}
+  - {field: customers, url: https://newrelic.com/customers/unisa, retrieved: 2026-10-21}

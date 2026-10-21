@@ -1,0 +1,35 @@
+id: cursor
+name: Cursor
+company: Anysphere (SpaceX)
+url: https://cursor.com
+primary_phase: code
+phases: [code, review]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide, cli, web]
+autonomy: agent
+summary: "AI coding agent for building ambitious software: agents turn ideas into code across desktop, CLI and cloud."
+customers: [Stripe]
+gtm_partners: ["none: sold direct only, no resellers (company claim)"]
+pricing_model: subscription plus usage
+models: [OpenAI, Anthropic, Gemini, SpaceXAI (Grok), Cursor's own models]
+founded: 2022
+last_round: $2.3B at a $29.3B post-money valuation (Nov 2025), before the SpaceX sale
+status: acquired (by SpaceX for $60B, closed 14 Aug 2026)
+relations:
+  - {type: acquired_by, to: spacex, sources: [https://cursor.com/pricing, https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html]}
+  - {type: built_on_model, to: openai, sources: [https://cursor.com/pricing, https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html]}
+  - {type: built_on_model, to: anthropic, sources: [https://cursor.com/pricing, https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html]}
+  - {type: built_on_model, to: google, sources: [https://cursor.com/pricing, https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html]}
+sources:
+  - {field: gtm_partners, url: https://cursor.com/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://cursor.com/, retrieved: 2026-10-05}
+  - {field: customers, url: https://cursor.com/customers, retrieved: 2026-10-05}
+  - {field: status, url: https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html, retrieved: 2026-10-21}
+  - {field: status, url: https://techcrunch.com/2026/09/08/cognition-hits-48b-valuation-signaling-investors-believe-ai-coding-is-far-from-a-winner-take-all-market/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://cursor.com/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://cursor.com/, retrieved: 2026-10-05}
+  - {field: relations, url: https://techcrunch.com/2026/09/08/cognition-hits-48b-valuation-signaling-investors-believe-ai-coding-is-far-from-a-winner-take-all-market/, retrieved: 2026-10-21}
+  - {field: relations, url: https://cursor.com/, retrieved: 2026-10-05}
+  - {field: founded, url: https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, retrieved: 2026-10-21}

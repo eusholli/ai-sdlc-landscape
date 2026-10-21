@@ -1,0 +1,21 @@
+id: dash0
+name: Dash0 (Agent0)
+company: Dash0
+url: https://www.dash0.com
+primary_phase: operate
+phases: [operate, measure]
+target_buyer: [sre team, platform team]
+interface: [web, mcp]
+autonomy: agent
+summary: "OpenTelemetry-native observability with AI agents: watches the agents writing your code and fixes problems in production."
+customers: [Digibee, Autonative, Understory, Bonhams]
+pricing_model: usage
+last_round: $110M Series B at a $1B valuation, led by Balderton Capital (Mar 2026)
+sources:
+  - {field: summary, url: https://www.dash0.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.dash0.com/customers/digibee-s-journey-from-10-to-100-apm-visibility-with-dash0, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.dash0.com/customers/how-autonative-exposed-hidden-nightly-failures-with-dash0, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.dash0.com/customers/how-understory-cut-debugging-time-by-80-with-dash0, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.dash0.com/customers/bonhams-case-study-switching-to-dash0-for-50-savings, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.dash0.com/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.dash0.com/blog/dash0-raises-usd110m-series-b, retrieved: 2026-10-21}

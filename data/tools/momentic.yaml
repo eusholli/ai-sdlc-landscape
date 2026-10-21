@@ -1,0 +1,27 @@
+id: momentic
+name: Momentic
+company: Momentic
+url: https://momentic.ai
+primary_phase: test
+phases: [test]
+target_buyer: [eng leader]
+interface: [web, cli]
+autonomy: agent
+summary: Mo is an AI QA engineer that bug-bashes your app, with plain-English tests and repro steps and evidence for every bug.
+traction: 117,010 bugs caught (company claim)
+pricing_model: usage (credits)
+entry_price: Free (2,000 credits/month)
+compliance: [SOC 2 Type 2]
+relations:
+  - {type: competes_with, to: mabl, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
+  - {type: competes_with, to: qa-wolf, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
+  - {type: competes_with, to: ranger, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
+sources:
+  - {field: summary, url: https://momentic.ai/, retrieved: 2026-10-21}
+  - {field: traction, url: https://momentic.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://momentic.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://momentic.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://momentic.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://momentic.ai/comparison/momentic-vs-mabl, retrieved: 2026-10-21}
+  - {field: relations, url: https://momentic.ai/comparison/momentic-vs-qa-wolf, retrieved: 2026-10-21}
+  - {field: relations, url: https://momentic.ai/comparison/momentic-vs-ranger, retrieved: 2026-10-21}

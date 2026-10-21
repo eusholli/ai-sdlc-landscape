@@ -1,0 +1,15 @@
+id: anything
+name: Anything
+company: Anything
+url: https://www.createanything.com
+primary_phase: code
+phases: [code]
+sub_kind: app-builder
+target_buyer: [non-developer]
+interface: [web]
+summary: "Your AI agent for turning ideas into apps: build sites, apps, tools and products by describing what you want."
+last_round: $11M Series A at a $100M valuation, led by Footwork
+sources:
+  - {field: summary, url: https://www.createanything.com, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.anything.com/blog/anything-series-a, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techfundingnews.com/anything-raises-11m-series-a-no-code-ai-app-development/, retrieved: 2026-10-21}

@@ -1,0 +1,23 @@
+id: augment-code
+name: Augment Code (Cosmos)
+company: Augment Code; Cosmos, Auggie and the Context Engine now owned by Harness
+url: https://www.augmentcode.com
+primary_phase: understand
+phases: [understand, code, review, test]
+target_buyer: [eng leader]
+interface: [ide, cli, web, mcp]
+autonomy: autonomous
+summary: "Agentic software development at organisational scale: Cosmos runs an always-on software factory on a code Context Engine."
+pricing_model: flat platform fee plus usage (40% fee on LLM usage)
+entry_price: $20/month flat, up to 50 seats
+compliance: [SOC 2 Type II, ISO 42001, CMEK]
+status: acquired (select assets, by Harness, 2026-10-08)
+relations:
+  - {type: acquired_by, to: harness, sources: [https://www.harness.io/press-and-news/harness-acquires-augment-code, https://www.harness.io/press-and-news/harness-acquires-augment-code]}
+sources:
+  - {field: summary, url: https://www.augmentcode.com, retrieved: 2026-09-04}
+  - {field: pricing_model, url: https://www.augmentcode.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.augmentcode.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.augmentcode.com/pricing, retrieved: 2026-10-21}
+  - {field: status, url: https://www.harness.io/press-and-news/harness-acquires-augment-code, retrieved: 2026-10-20}
+  - {field: relations, url: https://www.harness.io/press-and-news/harness-acquires-augment-code, retrieved: 2026-10-20}

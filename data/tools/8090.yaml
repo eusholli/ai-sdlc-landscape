@@ -1,0 +1,22 @@
+id: "8090"
+name: 8090 Software Factory
+company: "8090"
+url: https://8090.ai
+primary_phase: plan
+phases: [plan, design, code, review, test, deploy, understand]
+target_buyer: [business leader, eng leader]
+interface: [web]
+autonomy: agent
+summary: The AI-native software development platform that keeps business leaders in the driver's seat, from spec to deploy.
+customers: [BISSELL, Utopia Studio (Mentix), Red Oak Development, CMS ClaimsCore]
+founded: 2024
+last_round: $135M Series A, led by Salesforce Ventures (2026)
+sources:
+  - {field: summary, url: https://8090.ai, retrieved: 2026-10-05}
+  - {field: customers, url: https://8090.ai/customer-stories, retrieved: 2026-10-05}
+  - {field: customers, url: https://8090.ai/customer-stories/bissell, retrieved: 2026-09-04}
+  - {field: customers, url: https://8090.ai/customer-stories/red-oak, retrieved: 2026-09-04}
+  - {field: customers, url: https://8090.ai/customer-stories/cms-claimscore, retrieved: 2026-09-04}
+  - {field: founded, url: https://blog.pebblous.ai/blog/agent-built-enterprise-software-oversight/en/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://blog.pebblous.ai/blog/agent-built-enterprise-software-oversight/en/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.aol.com/articles/8090-raises-135m-series-accelerate-100000000.html, retrieved: 2026-10-21}

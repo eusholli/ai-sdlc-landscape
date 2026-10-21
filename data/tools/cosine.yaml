@@ -1,0 +1,26 @@
+id: cosine
+name: Cosine
+company: Cosine
+url: https://cosine.sh
+primary_phase: code
+phases: [code, maintain]
+sub_kind: autonomous-agent
+target_buyer: [eng leader, regulated enterprise]
+interface: [cli, web]
+autonomy: autonomous
+summary: "The sovereign AI lab: trains models and specialised coding agents for organisations that need frontier capability inside secure environments."
+gtm_partners: [partner programme (unnamed partners)]
+pricing_model: subscription
+entry_price: $19/month
+deployment: [saas, dedicated tenant, on-prem, air-gapped]
+founded: 2022
+last_round: $2.5M (2024)
+sources:
+  - {field: gtm_partners, url: https://cosine.sh/partner, retrieved: 2026-10-21}
+  - {field: summary, url: https://cosine.sh, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://cosine.sh/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://cosine.sh/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://cosine.sh/partner, retrieved: 2026-10-21}
+  - {field: deployment, url: https://cosine.sh, retrieved: 2026-10-21}
+  - {field: founded, url: https://www.finsmes.com/2024/08/cosine-raises-2-5m-in-funding.html, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.finsmes.com/2024/08/cosine-raises-2-5m-in-funding.html, retrieved: 2026-10-21}

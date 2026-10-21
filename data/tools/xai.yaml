@@ -1,0 +1,8 @@
+id: xai
+name: xAI (Grok)
+company: SpaceX (SpaceXSI)
+url: https://x.ai
+layer: model
+summary: Builds Grok frontier models for reasoning, voice and images, sold through the Grok API.
+sources:
+  - {field: summary, url: https://x.ai, retrieved: 2026-10-21}

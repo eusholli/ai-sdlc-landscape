@@ -1,0 +1,16 @@
+id: figma-make
+name: Figma Make
+company: Figma
+url: https://www.figma.com/make
+primary_phase: design
+phases: [design, code]
+sub_kind: app-builder
+target_buyer: [designer, product manager]
+interface: [web]
+summary: Turn ideas into working prototypes and apps with AI, starting from design context and a prompt, then editing on the canvas.
+customers: [Airbnb, Atlassian, Dropbox, Duolingo, GitHub, Microsoft, Netflix, Stripe, Zoom]
+relations:
+  - {type: ships_inside, to: figma, sources: []}
+sources:
+  - {field: summary, url: https://www.figma.com/make, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.figma.com/make, retrieved: 2026-10-21}

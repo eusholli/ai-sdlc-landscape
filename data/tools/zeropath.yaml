@@ -1,0 +1,24 @@
+id: zeropath
+name: ZeroPath
+company: ZeroPath
+url: https://zeropath.com
+primary_phase: security
+phases: [security, review]
+target_buyer: [appsec team, developer]
+interface: [pr-bot, web]
+summary: AI-native SAST and AppSec platform that finds broken authentication, logic bugs and outdated dependencies, then fixes them.
+traction: 750+ companies, 125,000+ code scans a month (company claim)
+pricing_model: seat
+entry_price: $60/dev
+deployment: [saas, on-prem, self-hosted, private cloud]
+models: [BYOK]
+compliance: [CIS, PCI-DSS, HIPAA, SOC 2, NIST, GDPR (checks)]
+sources:
+  - {field: summary, url: https://zeropath.com, retrieved: 2026-10-21}
+  - {field: summary, url: https://zeropath.com/compare, retrieved: 2026-10-21}
+  - {field: traction, url: https://zeropath.com/blog/product, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://zeropath.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://zeropath.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://zeropath.com/products/iac, retrieved: 2026-10-21}
+  - {field: deployment, url: https://zeropath.com/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://zeropath.com/pricing, retrieved: 2026-10-21}

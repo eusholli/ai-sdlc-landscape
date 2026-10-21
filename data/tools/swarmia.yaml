@@ -1,0 +1,20 @@
+id: swarmia
+name: Swarmia
+company: Swarmia
+url: https://www.swarmia.com
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader]
+interface: [web, slack]
+summary: "Engineering intelligence you can trust: shows why teams using the same AI tools get very different results."
+customers: [Matillion, Engine, TrueLayer, Miro, Smartly, Blinkist, Planning Center]
+gtm_partners: [GitHub Marketplace, Swarmia partner program]
+pricing_model: seat (free trial)
+last_round: $11M Series A
+sources:
+  - {field: gtm_partners, url: https://www.swarmia.com/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.swarmia.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.swarmia.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.swarmia.com/customers, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.swarmia.com/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.swarmia.com/blog/series-a-funding/, retrieved: 2026-10-21}

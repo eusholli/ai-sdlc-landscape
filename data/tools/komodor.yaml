@@ -1,0 +1,27 @@
+id: komodor
+name: Komodor
+company: Komodor
+url: https://komodor.com
+primary_phase: operate
+phases: [operate, deploy]
+target_buyer: [platform team, sre team]
+interface: [web, mcp]
+autonomy: agent
+summary: "Agentic operations platform for production Kubernetes: build, run, optimise and govern, with an AI SRE for root cause."
+customers: [Pru Life UK, Forter, Lacework, FISPAN]
+pricing_model: subscription
+entry_price: Free
+compliance: [SOC 2 Type II, GDPR]
+founded: 2020
+last_round: $42M Series B ($67M total)
+sources:
+  - {field: summary, url: https://komodor.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://komodor.com/customers/, retrieved: 2026-10-21}
+  - {field: customers, url: https://komodor.com/customers/forter-case-study/, retrieved: 2026-10-21}
+  - {field: customers, url: https://komodor.com/customers/how-komodor-helped-lacework-save-christmas/, retrieved: 2026-10-21}
+  - {field: customers, url: https://komodor.com/customers/how-fispan-sped-up-mttr-by-67-with-komodor/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://komodor.com/platform/pricing-and-plans/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://komodor.com/platform/pricing-and-plans/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://komodor.com/platform/pricing-and-plans/, retrieved: 2026-10-21}
+  - {field: founded, url: https://www.calcalistech.com/ctechnews/article/sy8yhkrqle, retrieved: 2026-10-21}
+  - {field: last_round, url: https://komodor.com/blog/we-just-raised-our-series-b/, retrieved: 2026-10-21}

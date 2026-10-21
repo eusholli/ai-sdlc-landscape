@@ -1,0 +1,36 @@
+id: linearb
+name: LinearB
+company: LinearB
+url: https://linearb.io
+primary_phase: measure
+phases: [measure, review]
+target_buyer: [eng leader]
+interface: [web, pr-bot]
+summary: Helps engineering leaders prove AI improves throughput without losing delivery confidence, with automations for agents, teams and managers.
+customers: [SurveyMonkey, Syngenta, INGKA, Expedia, Peloton, Equinix, Norwegian Cruise Line]
+traction: Cycle time down 19% on average in the first year (company claim)
+gtm_partners: [AWS Marketplace]
+pricing_model: quote (45-day free trial)
+deployment: [saas, on-prem agent]
+compliance: [SOC 1 Type II, SOC 2 Type II]
+last_round: $50M Series B
+relations:
+  - {type: competes_with, to: dx, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+  - {type: competes_with, to: waydev, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+  - {type: competes_with, to: harness, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+  - {type: integrates_with, to: github, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+  - {type: integrates_with, to: gitlab, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+  - {type: integrates_with, to: bitbucket, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
+sources:
+  - {field: gtm_partners, url: https://linearb.io/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: traction, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://linearb.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: relations, url: https://linearb.io/compare/dx-vs-linearb, retrieved: 2026-10-21}
+  - {field: relations, url: https://linearb.io/compare/waydev-vs-linearb, retrieved: 2026-10-21}
+  - {field: relations, url: https://linearb.io/compare/harness-vs-linearb, retrieved: 2026-10-21}
+  - {field: relations, url: https://linearb.io/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/skrsvntr9, retrieved: 2026-10-21}

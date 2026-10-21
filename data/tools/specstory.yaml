@@ -1,0 +1,17 @@
+id: specstory
+name: SpecStory (RunStory)
+company: SpecStory
+url: https://specstory.com
+primary_phase: plan
+phases: [plan, test, understand]
+target_buyer: [developer, eng leader]
+interface: [ide, cli]
+summary: Saves the conversations behind your code; its RunStory product tests software and sends defects back to the coding agent.
+pricing_model: usage
+relations:
+  - {type: competes_with, to: coderabbit, sources: [https://specstory.com/]}
+  - {type: competes_with, to: greptile, sources: [https://specstory.com/]}
+sources:
+  - {field: summary, url: https://specstory.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://specstory.com/runstory/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://specstory.com/, retrieved: 2026-10-21}

@@ -1,0 +1,26 @@
+id: kilo-code
+name: Kilo Code
+company: Kilo
+url: https://kilo.ai
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [developer]
+interface: [ide, cli, web]
+autonomy: agent
+summary: Open-source AI coding agent for VS Code, JetBrains, CLI and cloud, with 500+ models at zero markup, your own keys or local models.
+pricing_model: usage (zero-markup credits)
+models: [500+ models incl. Claude, GPT, open-source]
+open_source: true
+last_round: $8M seed, led by Cota Capital (2025)
+relations:
+  - {type: integrates_with, to: vs-code, sources: [https://kilo.ai/pricing, https://kilo.ai]}
+  - {type: integrates_with, to: jetbrains, sources: [https://kilo.ai/pricing, https://kilo.ai]}
+sources:
+  - {field: summary, url: https://kilo.ai, retrieved: 2026-10-21}
+  - {field: open_source, url: https://kilo.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://kilo.ai, retrieved: 2026-10-21}
+  - {field: models, url: https://kilo.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://kilo.ai, retrieved: 2026-10-21}
+  - {field: last_round, url: https://blog.kilo.ai/p/kilo-raised-8-million-seed-round, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.cnbc.com/2025/12/10/former-gitlab-ceo-raises-8-million-for-kilo-to-compete-in-vibe-coding.html, retrieved: 2026-10-21}

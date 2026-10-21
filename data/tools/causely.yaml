@@ -1,0 +1,20 @@
+id: causely
+name: Causely
+company: Causely
+url: https://www.causely.ai
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team]
+interface: [mcp, web]
+summary: Causal reasoning system that gives AI ops agents deterministic cause-and-effect context, so they stop guessing about production.
+traction: Ops agents diagnose 63% faster (company claim)
+pricing_model: subscription
+entry_price: $2,000/month
+last_round: $8.8M seed (2023)
+sources:
+  - {field: summary, url: https://www.causely.ai/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.causely.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.causely.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.causely.ai/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.causely.ai/blog/causely-raises-8-8m-in-seed-funding-to-deliver-it-industrys-first-causal-ai-platform, retrieved: 2026-10-21}
+  - {field: last_round, url: https://siliconangle.com/2023/06/29/causal-ai-company-causely-raises-8-6m-automate-operations/, retrieved: 2026-10-21}

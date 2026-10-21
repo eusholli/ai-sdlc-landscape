@@ -1,0 +1,24 @@
+id: vercel
+name: Vercel
+company: Vercel
+url: https://vercel.com
+primary_phase: deploy
+phases: [deploy, operate]
+target_buyer: [developer, platform team]
+interface: [web, cli]
+summary: "Agentic infrastructure: the autonomous stack for every app and agent, from the team behind v0 and Next.js."
+pricing_model: seat plus usage
+entry_price: Free (Hobby); $20/developer seat/month
+compliance: [SOC 2 Type 2, PCI DSS, ISO 27001, HIPAA BAA]
+last_round: $300M Series F at a $9.3B valuation
+relations:
+  - {type: integrates_with, to: v0, sources: [https://www.gic.com.sg/newsroom/all/vercel-closes-series-f-at-9-3b-valuation-to-scale-the-ai-cloud/]}
+sources:
+  - {field: summary, url: https://vercel.com/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.gic.com.sg/newsroom/all/vercel-closes-series-f-at-9-3b-valuation-to-scale-the-ai-cloud/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://vercel.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://vercel.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://vercel.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.gic.com.sg/newsroom/all/vercel-closes-series-f-at-9-3b-valuation-to-scale-the-ai-cloud/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://vercel.com/blog/series-f, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.gic.com.sg/newsroom/all/vercel-closes-series-f-at-9-3b-valuation-to-scale-the-ai-cloud/, retrieved: 2026-10-21}

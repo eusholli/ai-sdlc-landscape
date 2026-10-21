@@ -1,0 +1,18 @@
+id: uizard
+name: Uizard
+company: Uizard Technologies
+url: https://uizard.io
+primary_phase: design
+phases: [design]
+target_buyer: [product manager, designer]
+interface: [web]
+summary: UI design for apps, websites and desktop software in minutes, powered by AI; if you can use Google Slides, you can use Uizard.
+customers: [IBM, Tesla, Google, Pinterest, Atlassian, Adidas, Samsung]
+pricing_model: seat
+entry_price: Free; Pro $12/month annual
+sources:
+  - {field: summary, url: https://uizard.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://uizard.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://uizard.io/solutions/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://uizard.io/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://uizard.io/pricing/, retrieved: 2026-10-21}

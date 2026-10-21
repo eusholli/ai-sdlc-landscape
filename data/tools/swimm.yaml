@@ -1,0 +1,22 @@
+id: swimm
+name: Swimm
+company: Swimm
+url: https://swimm.io
+primary_phase: understand
+phases: [understand, maintain]
+target_buyer: [cio, architect]
+interface: [web, ide]
+summary: "Agentic modernization, delivered: static analysis and AI map legacy applications so modernization is accurate, complete and on time."
+customers: [RVO Health, Fulfilld, StackAdapt, Quadric]
+deployment: [saas, on-prem, air-gapped]
+models: [customer-managed LLMs]
+compliance: [SOC 2, ISO 27001]
+sources:
+  - {field: summary, url: https://swimm.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://swimm.io/case-studies/how-rvo-health-unified-documentation-with-swimm-and-backstage, retrieved: 2026-10-21}
+  - {field: customers, url: https://swimm.io/case-studies/how-devs-at-fulfilld-save-5-hours-weekly-with-swimm, retrieved: 2026-10-21}
+  - {field: customers, url: https://swimm.io/case-studies/stackadapt-reports-development-productivity-boost, retrieved: 2026-10-21}
+  - {field: customers, url: https://swimm.io/case-studies/how-quadric-saves-3-hours-weekly-per-dev-with-swimm, retrieved: 2026-10-21}
+  - {field: compliance, url: https://swimm.io/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://swimm.io/, retrieved: 2026-10-21}
+  - {field: models, url: https://swimm.io/, retrieved: 2026-10-21}

@@ -1,0 +1,34 @@
+id: vfunction
+name: vFunction
+company: vFunction
+url: https://vfunction.com
+primary_phase: maintain
+phases: [maintain, design, understand]
+target_buyer: [architect, cto]
+interface: [web, mcp]
+summary: "AI-driven modernization for large Java and .NET applications: gives AI coding tools the architectural context to refactor and rewrite."
+customers: [Intesa Sanpaolo, Trend Micro, Accadia, Correla, CDL]
+gtm_partners: [Azure Marketplace, AWS partner funding programs, Wipro]
+pricing_model: per application (size band)
+founded: 2017
+funding_total: $38.2M (seed and Series A)
+relations:
+  - {type: integrates_with, to: kiro, sources: [https://vfunction.com/, https://vfunction.com/pricing/]}
+  - {type: integrates_with, to: aws-transform, sources: [https://vfunction.com/, https://vfunction.com/pricing/]}
+  - {type: integrates_with, to: claude-code, sources: [https://vfunction.com/, https://vfunction.com/pricing/]}
+  - {type: partners_with, to: aws, sources: [https://vfunction.com/, https://vfunction.com/pricing/]}
+sources:
+  - {field: gtm_partners, url: https://vfunction.com/, retrieved: 2026-10-21}
+  - {field: gtm_partners, url: https://vfunction.com/pricing/, retrieved: 2026-10-21}
+  - {field: gtm_partners, url: https://vfunction.com/resources/case-study-correla/, retrieved: 2026-10-21}
+  - {field: summary, url: https://vfunction.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://vfunction.com/resources/case-study-intesa-sanpaolo/, retrieved: 2026-10-21}
+  - {field: customers, url: https://vfunction.com/resources/case-study-trend-micro/, retrieved: 2026-10-21}
+  - {field: customers, url: https://vfunction.com/resources/case-study-accadia/, retrieved: 2026-10-21}
+  - {field: customers, url: https://vfunction.com/resources/case-study-correla/, retrieved: 2026-10-21}
+  - {field: customers, url: https://vfunction.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://vfunction.com/pricing/, retrieved: 2026-10-21}
+  - {field: relations, url: https://vfunction.com/resources/case-study-accadia/, retrieved: 2026-10-21}
+  - {field: relations, url: https://vfunction.com/pricing/, retrieved: 2026-10-21}
+  - {field: founded, url: https://pulse2.com/vfunction-moti-rafalin-profile/, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://pulse2.com/vfunction-moti-rafalin-profile/, retrieved: 2026-10-21}

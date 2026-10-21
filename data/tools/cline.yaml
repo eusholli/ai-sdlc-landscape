@@ -1,0 +1,23 @@
+id: cline
+name: Cline
+company: Cline
+url: https://cline.bot
+primary_phase: code
+phases: [code, plan]
+sub_kind: ide-assistant
+target_buyer: [developer]
+interface: [ide, cli]
+autonomy: agent
+summary: Open-source AI coding agent with Plan/Act modes, MCP integration and terminal-first workflows, using any model or endpoint.
+traction: Trusted by 11M+ developers (company claim)
+models: [Claude, GPT, Gemini, Ollama, LM Studio, any OpenAI-compatible endpoint]
+open_source: true
+founded: 2024
+funding_total: $32M (seed and Series A)
+sources:
+  - {field: summary, url: https://cline.bot, retrieved: 2026-10-21}
+  - {field: traction, url: https://cline.bot, retrieved: 2026-10-21}
+  - {field: open_source, url: https://cline.bot, retrieved: 2026-10-21}
+  - {field: models, url: https://cline.bot, retrieved: 2026-10-21}
+  - {field: founded, url: https://startupintros.com/orgs/cline, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://cline.bot/blog/cline-raises-32m-series-a-and-seed-funding-building-the-open-source-ai-coding-agent-that-enterprises-trust, retrieved: 2026-10-21}

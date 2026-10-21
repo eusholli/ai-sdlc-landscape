@@ -1,0 +1,19 @@
+id: eraser
+name: Eraser
+company: Eraser
+url: https://www.eraser.io
+primary_phase: design
+phases: [design, understand]
+target_buyer: [architect, developer]
+interface: [web]
+summary: "AI for diagrams that matter: create technical diagrams with AI and deliver consistent, accurate designs faster."
+pricing_model: seat
+entry_price: Free; $15/member/month
+deployment: [saas, single-tenant, self-hosted]
+compliance: [SOC 2 Type II]
+sources:
+  - {field: summary, url: https://www.eraser.io, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.eraser.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.eraser.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.eraser.io, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.eraser.io, retrieved: 2026-10-21}

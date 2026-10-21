@@ -1,0 +1,22 @@
+id: resolve-ai
+name: Resolve AI
+company: Resolve AI
+url: https://resolve.ai
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team, eng leader]
+interface: [web, slack]
+autonomy: autonomous
+summary: AI SRE platform that goes on call on your behalf and autonomously resolves incidents.
+customers: [DoorDash, Coinbase, Salesforce, Zscaler, MSCI, Gametime]
+last_round: $125M Series A, led by Lightspeed, at a $1B valuation (Dec 2025)
+sources:
+  - {field: summary, url: https://resolve.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/customers, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/customers/doordash, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/customers/zscaler, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/customers/msci, retrieved: 2026-10-21}
+  - {field: customers, url: https://resolve.ai/customers/gametime, retrieved: 2026-10-21}
+  - {field: last_round, url: https://resolve.ai/blog/series-a-funding, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2025/12/19/ex-splunk-execs-startup-resolve-ai-hits-1-billion-valuation-with-series-a/, retrieved: 2026-10-21}

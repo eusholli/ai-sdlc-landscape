@@ -1,0 +1,23 @@
+id: browserstack
+name: BrowserStack
+company: BrowserStack
+url: https://www.browserstack.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web]
+summary: App and cross-browser testing on 3,500+ browsers and real devices, with 20+ AI agents from test planning onward.
+customers: [Google, Atlassian, Amazon, Tesla, Microsoft, Spotify, PayPal, Stripe]
+traction: More than 50,000 customers (company claim)
+pricing_model: seat
+entry_price: $19/month (Freelancer)
+compliance: [SOC 2 Type 2, GDPR, CCPA]
+last_round: $250M at a $4B valuation (2022)
+sources:
+  - {field: summary, url: https://www.browserstack.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.browserstack.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://sacra.com/c/browserstack/, retrieved: 2026-10-21}

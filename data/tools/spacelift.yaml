@@ -1,0 +1,28 @@
+id: spacelift
+name: Spacelift
+company: Spacelift
+url: https://spacelift.io
+primary_phase: deploy
+phases: [deploy, cicd]
+target_buyer: [platform team]
+interface: [web]
+summary: IaC orchestration platform that joins IaC and GitOps pipelines with an AI deployment model and an Infrastructure Assistant.
+customers: [TrueCar, Duolingo, Handshake, Ping Identity, Redfin, Figma, Notion, Dojo, Kin]
+gtm_partners: [Azure Marketplace]
+pricing_model: subscription
+entry_price: Free
+deployment: [saas, self-hosted, on-prem, air-gapped]
+compliance: [FedRAMP (authorized SaaS)]
+last_round: $51M Series C (2025)
+sources:
+  - {field: gtm_partners, url: https://spacelift.io/pricing_b, retrieved: 2026-10-21}
+  - {field: summary, url: https://spacelift.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://spacelift.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://spacelift.io/customers/dojo, retrieved: 2026-10-21}
+  - {field: customers, url: https://spacelift.io/customers/kin, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://spacelift.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://spacelift.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://spacelift.io, retrieved: 2026-10-21}
+  - {field: deployment, url: https://spacelift.io, retrieved: 2026-10-21}
+  - {field: deployment, url: https://spacelift.io/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.fiveelms.com/spacelift-raises-51m-series-c-to-redefine-enterprise-infrastructure-automation/, retrieved: 2026-10-21}

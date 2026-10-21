@@ -1,0 +1,19 @@
+id: tricentis
+name: Tricentis (Tosca, Testim, agents)
+company: Tricentis
+url: https://www.tricentis.com
+primary_phase: test
+phases: [test, code]
+target_buyer: [qa team, cio]
+interface: [web]
+autonomy: agent
+summary: "AI-powered automated testing: quality and testing agents for large enterprises, run through a central control plane; owns Testim and Tabnine."
+deployment: [saas, on-prem]
+last_round: $1.33B at a $4.5B valuation, led by GTCR (Nov 2024)
+relations:
+  - {type: integrates_with, to: sap, sources: [https://www.tricentis.com/sap/pricing]}
+sources:
+  - {field: summary, url: https://www.tricentis.com, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.tricentis.com/sap/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.tricentis.com/sap/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://siliconangle.com/2024/11/26/software-testing-provider-tricentis-raises-1-33b-4-5b-valuation/, retrieved: 2026-10-21}

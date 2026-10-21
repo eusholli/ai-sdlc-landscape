@@ -1,0 +1,12 @@
+id: context-engine
+name: Context Engine
+company: Context Engine
+url: https://context-engine.app
+layer: agent-infra
+primary_phase: understand
+phases: [understand, code]
+target_buyer: [developer]
+interface: [mcp, cli]
+summary: "A headless IDE for coding agents: resolved types, real references and dependency APIs from the exact versions in use."
+sources:
+  - {field: summary, url: https://context-engine.app, retrieved: 2026-09-12}

@@ -1,0 +1,26 @@
+id: ellipsis
+name: Ellipsis
+company: Ellipsis
+url: https://www.ellipsis.dev
+primary_phase: code
+phases: [code, review, maintain]
+sub_kind: autonomous-agent
+target_buyer: [platform team]
+interface: [pr-bot, slack]
+autonomy: autonomous
+summary: "Managed Claude Code agents in the cloud: define agents as config files in your repo and Ellipsis runs them to build features, fix bugs and investigate."
+pricing_model: usage (tokens at cost plus 10%)
+entry_price: $0 per seat
+deployment: [saas, vpc (AWS)]
+compliance: [SOC 2]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.ellipsis.dev/platform]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.ellipsis.dev/platform]}
+sources:
+  - {field: summary, url: https://www.ellipsis.dev, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.ellipsis.dev/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.ellipsis.dev/docs/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.ellipsis.dev/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.ellipsis.dev/platform, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.ellipsis.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.ellipsis.dev/platform, retrieved: 2026-10-21}

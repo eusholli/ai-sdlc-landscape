@@ -1,0 +1,25 @@
+id: incident-io
+name: incident.io
+company: incident.io
+url: https://incident.io
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team, eng leader]
+interface: [slack, web]
+autonomy: agent
+summary: AI software reliability platform unifying on-call, agentic root cause analysis, incident response and status pages.
+customers: [Netflix, Etsy, Skyscanner, Vanta, Zendesk]
+pricing_model: seat
+entry_price: Free (Basic); Team $15/user/month annual
+compliance: [SOC 2, HIPAA]
+relations:
+  - {type: competes_with, to: rootly, sources: [https://incident.io/alternatives/rootly, https://incident.io/pricing]}
+  - {type: integrates_with, to: slack, sources: [https://incident.io/alternatives/rootly, https://incident.io/pricing]}
+sources:
+  - {field: summary, url: https://incident.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://incident.io/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://incident.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://incident.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://incident.io/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://incident.io/alternatives/rootly, retrieved: 2026-10-21}
+  - {field: relations, url: https://incident.io/pricing, retrieved: 2026-10-21}

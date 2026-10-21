@@ -1,0 +1,22 @@
+id: diffblue
+name: Diffblue Testing Agent
+company: Diffblue
+url: https://www.diffblue.com
+primary_phase: test
+phases: [test, maintain]
+target_buyer: [eng leader, regulated enterprise]
+interface: [cli, ide, ci]
+autonomy: autonomous
+summary: AI testing agent that generates, verifies and fixes unit tests autonomously across enterprise Java codebases, legacy versions included.
+traction: Test coverage up 180% across 25 Java applications in two months (case study, company claim)
+deployment: [on-prem, air-gapped]
+funding_total: $32M+ venture funding
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.diffblue.com/]}
+sources:
+  - {field: summary, url: https://www.diffblue.com/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.diffblue.com/case-studies/transforming-sdlc-with-ai-diffblue-covers-impact-on-unit-test-automation/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.diffblue.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.diffblue.com/case-studies/autonomous-high-quality-refactoring-with-diffblue-cover/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.diffblue.com/, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://www.diffblue.com/resources/diffblue-closes-investment-round-to-take-total-venture-funding-to-32-million/, retrieved: 2026-10-21}

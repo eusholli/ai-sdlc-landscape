@@ -1,0 +1,24 @@
+id: lovable
+name: Lovable
+company: Lovable
+url: https://lovable.dev
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [non-developer, product team]
+interface: [web]
+autonomy: agent
+summary: Build apps and websites by chatting with AI; plans run on build credits plus Cloud credits for the app's backend.
+gtm_partners: [Lovable Partner program for agencies]
+pricing_model: subscription plus usage (credits)
+entry_price: Free
+founded: 2023
+last_round: $400M Series C at a $13.3B valuation, led by Menlo Ventures
+sources:
+  - {field: gtm_partners, url: https://lovable.dev/partners, retrieved: 2026-10-21}
+  - {field: summary, url: https://lovable.dev/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://lovable.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://lovable.dev/pricing, retrieved: 2026-10-21}
+  - {field: founded, url: https://www.vestbee.com/insights/articles/lovable-secures-400-m, retrieved: 2026-10-21}
+  - {field: last_round, url: https://lovable.dev/blog/series-c, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.vestbee.com/insights/articles/lovable-secures-400-m, retrieved: 2026-10-21}

@@ -1,0 +1,20 @@
+id: opencode
+name: OpenCode
+company: Anomaly (SST)
+url: https://opencode.ai
+primary_phase: code
+phases: [code]
+sub_kind: cli-agent
+target_buyer: [developer]
+interface: [cli, ide, desktop]
+summary: "The open-source AI coding agent, free to use with any provider: OpenAI, Anthropic, xAI or local models."
+traction: 215K GitHub stars; over 16M developers a month (company claim)
+pricing_model: free (open source), optional Zen model gateway
+open_source: true
+sources:
+  - {field: summary, url: https://opencode.ai/, retrieved: 2026-10-21}
+  - {field: summary, url: https://opencode.ai/docs/ecosystem/, retrieved: 2026-10-21}
+  - {field: traction, url: https://opencode.ai/, retrieved: 2026-10-21}
+  - {field: open_source, url: https://opencode.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://opencode.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://opencode.ai/docs/ecosystem/, retrieved: 2026-10-21}

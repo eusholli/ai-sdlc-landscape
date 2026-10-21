@@ -1,0 +1,31 @@
+id: qodo
+name: Qodo
+company: Qodo
+url: https://www.qodo.ai
+primary_phase: review
+phases: [review, test, understand]
+target_buyer: [eng leader]
+interface: [pr-bot, ide, cli]
+autonomy: agent
+summary: "AI code review with deep codebase context: high-precision review on every change and enforceable standards, with 15+ agentic workflows."
+customers: [NVIDIA]
+traction: About 1 hour saved per PR; 90% of initial review handled before a human (company claim)
+pricing_model: seat plus credits
+entry_price: $30/user/month (no permanent free tier)
+deployment: [saas, single-tenant, on-prem]
+models: [{BYOK: OpenAI}, Anthropic, Azure OpenAI, self-hosted]
+compliance: [SOC 2 Type II]
+hq: New York
+last_round: $70M Series B, led by Qumra Capital (Mar 2026)
+sources:
+  - {field: summary, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.qodo.ai/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.qodo.ai/pricing/, retrieved: 2026-10-21}
+  - {field: models, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.qodo.ai/, retrieved: 2026-10-21}
+  - {field: hq, url: https://techcrunch.com/2026/03/30/qodo-bets-on-code-verification-as-ai-coding-scales-raises-70m/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2026/03/30/qodo-bets-on-code-verification-as-ai-coding-scales-raises-70m/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/r1qdnboswx, retrieved: 2026-10-21}

@@ -1,0 +1,20 @@
+id: bolt
+name: Bolt
+company: StackBlitz
+url: https://bolt.new
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [non-developer, developer]
+interface: [web]
+summary: "AI builder for websites, apps and prototypes: build and scale using your words."
+customers: [Accenture, Shopify, Google, Cloudflare]
+pricing_model: subscription
+entry_price: Free; Pro from $216/year
+compliance: [SOC 2, GDPR, ISO 27001 (enterprise)]
+sources:
+  - {field: summary, url: https://bolt.new/, retrieved: 2026-10-21}
+  - {field: customers, url: https://bolt.new/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://bolt.new/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://bolt.new/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://bolt.new/pricing, retrieved: 2026-10-21}

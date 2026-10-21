@@ -1,0 +1,23 @@
+id: functionize
+name: Functionize
+company: Functionize
+url: https://www.functionize.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web]
+autonomy: agent
+summary: "The quality layer for AI-written code: builds, runs and maintains tests against your live application."
+customers: [Honeywell, GE Healthcare]
+pricing_model: usage (credits)
+entry_price: Free plan (400,000 credits)
+compliance: [SOC 2]
+last_round: $41M Series B (Aug 2025)
+sources:
+  - {field: summary, url: https://www.functionize.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.functionize.com/services, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.functionize.com/blog/production-testing-what-why-and-how, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.functionize.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.functionize.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.functionize.com/product, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.functionize.com/blog/functionize-raises-41m-series-b-to-accelerate-the-future-of-autonomous-quality-assurance, retrieved: 2026-10-21}

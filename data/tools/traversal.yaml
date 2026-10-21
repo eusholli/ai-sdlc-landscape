@@ -1,0 +1,26 @@
+id: traversal
+name: Traversal
+company: Traversal
+url: https://www.traversal.com
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team, eng leader]
+interface: [web, slack]
+autonomy: agent
+summary: "The AI SRE for complex systems: triages alerts, finds root cause and resolves incidents at petabyte scale."
+customers: [Cloudways, PepsiCo]
+compliance: [SOC 2]
+last_round: $48M seed and Series A, from Sequoia and Kleiner Perkins (June 2025)
+relations:
+  - {type: competes_with, to: datadog-bits, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
+  - {type: competes_with, to: resolve-ai, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
+  - {type: competes_with, to: rootly, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
+sources:
+  - {field: summary, url: https://www.traversal.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.traversal.com/customer-stories/cloudways, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.traversal.com/customer-stories/pepsico, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.traversal.com, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-datadog, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-resolve-ai, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-rootly, retrieved: 2026-10-21}
+  - {field: last_round, url: https://fortune.com/2025/06/18/traversal-emerges-from-stealth-with-48-million-from-sequoia-and-kleiner-perkins-to-reimagine-site-reliability-in-the-ai-era/, retrieved: 2026-10-21}

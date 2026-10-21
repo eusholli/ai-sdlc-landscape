@@ -1,0 +1,15 @@
+id: rinkata
+name: Rinkata Hub
+company: Rinkata
+url: https://rinkata.dev
+primary_phase: plan
+phases: [plan, understand]
+target_buyer: [eng leader]
+interface: [web, mcp]
+summary: "Where your team and your AI agents share one source of truth: goals, specs and decisions, so agents stay on track."
+pricing_model: seat
+entry_price: Free up to 10 seats
+sources:
+  - {field: summary, url: https://rinkata.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://rinkata.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://rinkata.dev/pricing, retrieved: 2026-10-21}

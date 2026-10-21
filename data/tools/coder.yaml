@@ -1,0 +1,22 @@
+id: coder
+name: Coder
+company: Coder
+url: https://coder.com
+layer: agent-infra
+phases: [code, platform]
+target_buyer: [platform team]
+interface: [ide, web, cli]
+summary: Self-hosted enterprise infrastructure that gives developers a secure, governed environment to run AI coding agents at scale.
+customers: [Square, Dropbox, Palantir, Mercedes, KKR, J.B. Hunt, Discord, UiA, EnBW]
+deployment: [self-hosted]
+relations:
+  - {type: competes_with, to: ona, sources: [https://coder.com/solutions/workspaces/compare, https://coder.com/solutions/agents/compare-cursor]}
+  - {type: competes_with, to: cursor, sources: [https://coder.com/solutions/workspaces/compare, https://coder.com/solutions/agents/compare-cursor]}
+sources:
+  - {field: summary, url: https://coder.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://coder.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://coder.com/success-stories/uia, retrieved: 2026-10-21}
+  - {field: customers, url: https://coder.com/success-stories/enbw, retrieved: 2026-10-21}
+  - {field: deployment, url: https://coder.com/, retrieved: 2026-10-21}
+  - {field: relations, url: https://coder.com/solutions/workspaces/compare, retrieved: 2026-10-21}
+  - {field: relations, url: https://coder.com/solutions/agents/compare-cursor, retrieved: 2026-10-21}

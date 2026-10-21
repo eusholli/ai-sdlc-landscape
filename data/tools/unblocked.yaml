@@ -1,0 +1,27 @@
+id: unblocked
+name: Unblocked
+company: Unblocked
+url: https://getunblocked.com
+primary_phase: understand
+phases: [understand, review]
+target_buyer: [eng leader]
+interface: [slack, ide, web, mcp]
+summary: "Context for agentic software development: trusted context across code, conversations, issues, docs and production systems."
+customers: [Codat, Compare the Market, Cribl]
+pricing_model: seat
+entry_price: $29/user/month annual
+deployment: [saas, on-prem]
+compliance: [SOC 2 Type II]
+relations:
+  - {type: competes_with, to: glean, sources: [https://getunblocked.com/compare/unblocked-vs-glean/]}
+sources:
+  - {field: summary, url: https://getunblocked.com/, retrieved: 2026-10-05}
+  - {field: customers, url: https://getunblocked.com/customers/, retrieved: 2026-10-21}
+  - {field: customers, url: https://getunblocked.com/customers/codat/, retrieved: 2026-09-04}
+  - {field: customers, url: https://getunblocked.com/customers/compare-the-market/, retrieved: 2026-09-04}
+  - {field: customers, url: https://getunblocked.com/customers/cribl/, retrieved: 2026-09-04}
+  - {field: pricing_model, url: https://getunblocked.com/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://getunblocked.com/pricing/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://getunblocked.com/, retrieved: 2026-10-05}
+  - {field: deployment, url: https://getunblocked.com/pricing/, retrieved: 2026-10-21}
+  - {field: relations, url: https://getunblocked.com/compare/unblocked-vs-glean/, retrieved: 2026-09-04}

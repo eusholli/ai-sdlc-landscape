@@ -1,0 +1,20 @@
+id: codegen
+name: Codegen
+company: ClickUp
+url: https://codegen.com
+primary_phase: code
+phases: [code]
+sub_kind: autonomous-agent
+summary: Autonomous code agents that ClickUp acquired to power its Super Agents; codegen.com is now a directory of AI coding tools.
+founded: 2022
+funding_total: $16.2M (2023)
+status: acquired
+relations:
+  - {type: acquired_by, to: clickup, sources: [https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/]}
+sources:
+  - {field: summary, url: https://codegen.com/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, retrieved: 2026-10-21}
+  - {field: status, url: https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, retrieved: 2026-10-21}
+  - {field: founded, url: https://startupintros.com/orgs/codegen, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, retrieved: 2026-10-21}

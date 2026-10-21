@@ -1,0 +1,26 @@
+id: mabl
+name: mabl
+company: mabl
+url: https://www.mabl.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team, eng leader]
+interface: [web, cli, mcp]
+summary: Agentic testing platform that helps software teams accelerate releases and ensure quality.
+customers: [Lowe's, JetBlue, LendingClub, Panasonic, Tokio Marine, 24G]
+pricing_model: usage (cloud run credits)
+last_round: $40M Series C, led by Vista Equity Partners
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.mabl.com]}
+  - {type: integrates_with, to: cursor, sources: [https://www.mabl.com]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.mabl.com]}
+  - {type: integrates_with, to: slack, sources: [https://www.mabl.com]}
+  - {type: partners_with, to: google, sources: [https://www.mabl.com]}
+sources:
+  - {field: summary, url: https://www.mabl.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mabl.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mabl.com/customer-stories/24g-case-study, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mabl.com/customer-stories, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.mabl.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.mabl.com, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.mabl.com/awards-and-press/mabl-raises-40m-series-c, retrieved: 2026-10-21}

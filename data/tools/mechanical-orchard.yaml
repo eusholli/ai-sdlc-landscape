@@ -1,0 +1,16 @@
+id: mechanical-orchard
+name: Mechanical Orchard (Imogen)
+company: Mechanical Orchard
+url: https://www.mechanical-orchard.com
+primary_phase: maintain
+phases: [maintain, test]
+target_buyer: [cio]
+interface: [web]
+autonomy: agent
+summary: Imogen rewrites legacy mainframe systems into modern, cloud-ready code and verifies that outputs match, without breaking what runs today.
+customers: [SulAmerica]
+last_round: $50M Series B, led by GV
+sources:
+  - {field: summary, url: https://www.mechanical-orchard.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mechanical-orchard.com/insights/customer-presentation-at-google-cloud-next-2026-sulamerica, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.mechanical-orchard.com/insights/mechanical-orchard-secures-50-million-to-safely-transition-large-organizations-off-risky-legacy-software, retrieved: 2026-10-21}

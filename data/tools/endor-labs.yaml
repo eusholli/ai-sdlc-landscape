@@ -1,0 +1,22 @@
+id: endor-labs
+name: Endor Labs (AURI)
+company: Endor Labs
+url: https://www.endorlabs.com
+primary_phase: security
+phases: [security]
+target_buyer: [appsec team]
+interface: [ide, ci, web]
+summary: "Agentic application security platform for AI-generated and human-written code: prioritises and fixes what is reachable."
+customers: [Egnyte, AppLovin, Peloton, Five9, Netskope, Atlassian, Cursor, Zapier]
+gtm_partners: [AWS Marketplace, Azure Marketplace, Google Cloud Marketplace]
+pricing_model: subscription
+entry_price: Free tier for individual developers (AURI)
+deployment: [saas, on-prem (Outpost)]
+sources:
+  - {field: gtm_partners, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.endorlabs.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.endorlabs.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.endorlabs.com/customers, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}

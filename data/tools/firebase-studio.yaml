@@ -1,0 +1,22 @@
+id: firebase-studio
+name: Firebase Studio
+company: Google
+url: https://firebase.studio
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [developer]
+interface: [web]
+summary: "Web-based workspace for full-stack development with AI agents and Gemini: build backends, front ends and mobile apps in one place."
+pricing_model: free during preview
+models: [Gemini]
+status: preview
+relations:
+  - {type: ships_inside, to: google-co, sources: [https://firebase.studio, https://firebase.studio]}
+  - {type: built_on_model, to: google, sources: [https://firebase.studio, https://firebase.studio]}
+sources:
+  - {field: summary, url: https://firebase.studio, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://firebase.studio, retrieved: 2026-10-21}
+  - {field: status, url: https://firebase.studio, retrieved: 2026-10-21}
+  - {field: models, url: https://firebase.studio, retrieved: 2026-10-21}
+  - {field: relations, url: https://firebase.studio, retrieved: 2026-10-21}

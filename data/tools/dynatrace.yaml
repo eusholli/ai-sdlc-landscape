@@ -1,0 +1,14 @@
+id: dynatrace
+name: Dynatrace
+company: Dynatrace
+url: https://www.dynatrace.com
+primary_phase: operate
+phases: [operate, security]
+target_buyer: [cio, sre team]
+interface: [web]
+autonomy: agent
+summary: "Observability built for the age of AI: deterministic AI and AI agents that prevent problems and coordinate action across clouds."
+gtm_partners: [Accenture (Premier Sales Partner), Carahsoft]
+sources:
+  - {field: gtm_partners, url: https://www.dynatrace.com/hub/partners/?filter=all-partners, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.dynatrace.com, retrieved: 2026-10-21}

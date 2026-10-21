@@ -1,0 +1,16 @@
+id: ibm-wca
+name: IBM Bob (formerly watsonx Code Assistant)
+company: IBM
+url: https://www.ibm.com/products/watsonx-code-assistant
+primary_phase: maintain
+phases: [maintain, code, plan, test]
+target_buyer: [cio, eng leader]
+interface: [ide]
+autonomy: agent
+summary: IBM Bob, an AI coding agent that accelerates delivery and application modernization across complex enterprise codebases.
+traction: Reduces AI compute spend by about 40% by routing each task to the right model (company claim)
+deployment: [saas, on-prem]
+sources:
+  - {field: summary, url: https://www.ibm.com/products/watsonx-code-assistant, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.ibm.com/products/watsonx-code-assistant, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.ibm.com/products/watsonx-code-assistant, retrieved: 2026-10-21}

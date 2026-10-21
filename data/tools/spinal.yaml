@@ -1,0 +1,13 @@
+id: spinal
+name: Spinal
+company: Spinal
+url: https://spinal.sh
+primary_phase: understand
+phases: [understand]
+target_buyer: [developer]
+interface: [web]
+summary: "Makes sense of any codebase: anticipates what you will reach for next and surfaces the signals that deserve your attention."
+traction: First search results in under 20 ms on the Linux kernel's 1.48M commits (company claim)
+sources:
+  - {field: summary, url: https://spinal.sh, retrieved: 2026-10-21}
+  - {field: traction, url: https://spinal.sh, retrieved: 2026-10-21}

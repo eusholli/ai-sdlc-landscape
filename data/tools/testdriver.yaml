@@ -1,0 +1,23 @@
+id: testdriver
+name: TestDriver
+company: TestDriver
+url: https://testdriver.ai
+primary_phase: test
+phases: [test, review]
+target_buyer: [developer]
+interface: [pr-bot]
+autonomy: agent
+summary: Tag @testdriverai in any GitHub repo and it writes UI tests and catches regressions before they merge.
+pricing_model: subscription plus usage
+entry_price: $20/month
+deployment: [saas, self-hosted (enterprise)]
+relations:
+  - {type: integrates_with, to: github, sources: [https://testdriver.ai/, https://testdriver.ai/alternatives/testsprite/]}
+  - {type: competes_with, to: testsprite, sources: [https://testdriver.ai/, https://testdriver.ai/alternatives/testsprite/]}
+sources:
+  - {field: summary, url: https://testdriver.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://testdriver.ai/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://testdriver.ai/pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://testdriver.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://testdriver.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://testdriver.ai/alternatives/testsprite/, retrieved: 2026-10-21}

@@ -1,0 +1,24 @@
+id: zed
+name: Zed
+company: Zed Industries
+url: https://zed.dev
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [developer]
+interface: [ide]
+summary: A high-performance, multiplayer code editor from the creators of Atom and Tree-sitter, with hosted AI and external agents.
+pricing_model: subscription plus usage
+entry_price: Free; Pro $10/month
+open_source: true
+last_round: $32M Series B, led by Sequoia
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://zed.dev/pricing]}
+  - {type: integrates_with, to: openai-codex, sources: [https://zed.dev/pricing]}
+sources:
+  - {field: summary, url: https://zed.dev, retrieved: 2026-10-21}
+  - {field: open_source, url: https://zed.dev/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://zed.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://zed.dev/blog/pricing-change-llm-usage-is-now-token-based, retrieved: 2026-10-21}
+  - {field: relations, url: https://zed.dev/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://via.tt.se/pressmeddelande/4014269/zed-raises-dollar32m-series-b-led-by-sequoia-to-scale-collaborative-ai-coding-vision?publisherId=259167&lang=en, retrieved: 2026-10-21}

@@ -1,0 +1,26 @@
+id: coderabbit
+name: CodeRabbit
+company: CodeRabbit
+url: https://www.coderabbit.ai
+primary_phase: review
+phases: [review, security, understand]
+target_buyer: [eng leader]
+interface: [pr-bot, ide, cli]
+autonomy: agent
+summary: "Governance and control for agentic development: independent AI code review, PR triage, change explanations and continuous checks."
+customers: [Adyen, Indeed, NVIDIA, BMW, Life360, Trivago, Swiggy, Gilead, Dialpad, JFrog, Zocdoc]
+traction: 17K customers, 6M repositories (company claim)
+pricing_model: seat
+entry_price: $24/developer/month annual ($30 monthly)
+deployment: [saas, self-hosted (enterprise)]
+founded: 2023
+last_round: $60M Series B at a $550M valuation, led by Scale Venture Partners (Sept 2025)
+sources:
+  - {field: summary, url: https://www.coderabbit.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.coderabbit.ai/customers, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.coderabbit.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.coderabbit.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.coderabbit.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.coderabbit.ai/pricing, retrieved: 2026-10-21}
+  - {field: founded, url: https://sacra.com/c/coderabbit/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2025/09/16/coderabbit-raises-60m-valuing-the-2-year-old-ai-code-review-startup-at-550m/, retrieved: 2026-10-21}

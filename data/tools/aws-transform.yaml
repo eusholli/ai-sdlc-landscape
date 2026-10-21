@@ -1,0 +1,16 @@
+id: aws-transform
+name: AWS Transform
+company: Amazon Web Services
+url: https://aws.amazon.com/transform
+primary_phase: maintain
+phases: [maintain, deploy]
+target_buyer: [cio, eng leader]
+interface: [web, ide]
+autonomy: agent
+summary: The first agentic AI service to accelerate transformation of Windows, mainframe, VMware and custom code, up to 5x faster (company claim).
+relations:
+  - {type: ships_inside, to: aws, sources: [https://aws.amazon.com/transform]}
+  - {type: integrates_with, to: kiro, sources: [https://aws.amazon.com/transform]}
+sources:
+  - {field: summary, url: https://aws.amazon.com/transform, retrieved: 2026-10-21}
+  - {field: relations, url: https://aws.amazon.com/transform, retrieved: 2026-10-21}

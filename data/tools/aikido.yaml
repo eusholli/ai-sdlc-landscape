@@ -1,0 +1,28 @@
+id: aikido
+name: Aikido Security
+company: Aikido Security
+url: https://www.aikido.dev
+primary_phase: security
+phases: [security, operate]
+target_buyer: [developer, cto]
+interface: [web, ide, ci]
+autonomy: agent
+summary: "Continuous, autonomous security for what developers build, ship and run: code, dependencies, containers, cloud and AI pentests."
+customers: [Revolut, Pendo, SoundCloud, Niantic]
+traction: 150k+ organisations, 300k+ developers (company claim)
+compliance: [SOC 2, ISO 27001 (reports)]
+last_round: $60M Series B at a $1B valuation (Jan 2026)
+relations:
+  - {type: competes_with, to: semgrep, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
+  - {type: competes_with, to: checkmarx, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
+  - {type: competes_with, to: endor-labs, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
+sources:
+  - {field: summary, url: https://www.aikido.dev, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.aikido.dev/blog/aikido-funding-series-b, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.aikido.dev/comparison/semgrep, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.aikido.dev, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.aikido.dev, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.aikido.dev/comparison/semgrep, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.aikido.dev/comparison/checkmarx, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.aikido.dev/comparison/endor-labs, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.aikido.dev/blog/aikido-funding-series-b, retrieved: 2026-10-21}

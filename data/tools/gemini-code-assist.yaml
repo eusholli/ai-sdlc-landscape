@@ -1,0 +1,23 @@
+id: gemini-code-assist
+name: Gemini Code Assist
+company: Google Cloud
+url: https://codeassist.google
+primary_phase: code
+phases: [code, review]
+sub_kind: ide-assistant
+target_buyer: [eng leader]
+interface: [ide]
+summary: AI coding help for teams and businesses from Google, with VPC Service Controls and IAM for enterprise adoption.
+customers: [Renault, Quantiphi]
+pricing_model: seat
+entry_price: $19/user/month (Standard, annual)
+deployment: [saas]
+relations:
+  - {type: built_on_model, to: google, sources: []}
+  - {type: ships_inside, to: google-co, sources: []}
+sources:
+  - {field: summary, url: https://codeassist.google, retrieved: 2026-10-21}
+  - {field: customers, url: https://codeassist.google, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://codeassist.google, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://codeassist.google, retrieved: 2026-10-21}
+  - {field: deployment, url: https://codeassist.google, retrieved: 2026-10-21}

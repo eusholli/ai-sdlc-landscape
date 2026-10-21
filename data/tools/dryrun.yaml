@@ -1,0 +1,14 @@
+id: dryrun
+name: DryRun Security
+company: DryRun Security
+url: https://www.dryrun.security
+primary_phase: security
+phases: [security, review]
+target_buyer: [appsec team]
+interface: [pr-bot]
+autonomy: agent
+summary: "AI-native SAST agents: an independent security check on human and AI-generated code, with no rules and fast PR feedback."
+last_round: $8.7M seed, led by LiveOak Ventures
+sources:
+  - {field: summary, url: https://www.dryrun.security, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techfundingnews.com/ai-powered-appsec-dryrun-security-secures-8-7m-to-tackle-growing-code-risks/, retrieved: 2026-10-21}

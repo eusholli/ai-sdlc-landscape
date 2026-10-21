@@ -1,0 +1,23 @@
+id: mintlify
+name: Mintlify
+company: Mintlify
+url: https://www.mintlify.com
+primary_phase: understand
+phases: [understand]
+target_buyer: [developer, product team]
+interface: [web, mcp]
+summary: "The documentation platform for agents: self-updating documentation for startups, enterprises and agents."
+customers: [Coinbase, X, Harvey, AT&T, Dub]
+pricing_model: subscription plus credits
+entry_price: Free (Starter); Pro $450/month annual
+compliance: [SOC 2 Type II, GDPR]
+sources:
+  - {field: summary, url: https://www.mintlify.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mintlify.com/customers, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mintlify.com/customers/x, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mintlify.com/customers/harvey, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mintlify.com/customers/att, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.mintlify.com/customers/dub, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}

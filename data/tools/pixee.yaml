@@ -1,0 +1,27 @@
+id: pixee
+name: Pixee
+company: Pixee
+url: https://www.pixee.ai
+primary_phase: security
+phases: [security, maintain]
+target_buyer: [appsec team]
+interface: [pr-bot]
+autonomy: agent
+summary: "Automates vulnerability triage and remediation across your scanners: clears up to 95% of false positives and fixes the rest as merge-ready PRs."
+customers: [NTT Data, Nippon Steel, HCL Technologies, Oracle, Olympus, MoneyGram, DeltaStream]
+pricing_model: per resolution
+deployment: [saas, self-hosted, air-gapped]
+relations:
+  - {type: integrates_with, to: sonar, sources: [https://www.pixee.ai/compare/pixee-vs-sonarqube, https://www.pixee.ai/compare/pixee-vs-snyk]}
+  - {type: integrates_with, to: snyk, sources: [https://www.pixee.ai/compare/pixee-vs-sonarqube, https://www.pixee.ai/compare/pixee-vs-snyk]}
+  - {type: integrates_with, to: checkmarx, sources: [https://www.pixee.ai/compare/pixee-vs-sonarqube, https://www.pixee.ai/compare/pixee-vs-snyk]}
+  - {type: integrates_with, to: veracode, sources: [https://www.pixee.ai/compare/pixee-vs-sonarqube, https://www.pixee.ai/compare/pixee-vs-snyk]}
+sources:
+  - {field: summary, url: https://www.pixee.ai, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.pixee.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.pixee.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.pixee.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.pixee.ai/compare/pixee-vs-sonarqube, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.pixee.ai/compare/pixee-vs-snyk, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.pixee.ai/compare/pixee-vs-checkmarx, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.pixee.ai/compare/pixee-vs-veracode, retrieved: 2026-10-21}

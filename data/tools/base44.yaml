@@ -1,0 +1,23 @@
+id: base44
+name: Base44
+company: Wix
+url: https://base44.com
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [non-developer]
+interface: [web]
+summary: No-code AI development platform that turns ideas into fully functional apps and websites.
+traction: Trusted by 10M+ builders (company claim)
+pricing_model: subscription (credits)
+entry_price: Free; paid from $16/month
+status: acquired
+relations:
+  - {type: acquired_by, to: wix, sources: [https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267]}
+sources:
+  - {field: summary, url: https://base44.com/, retrieved: 2026-10-21}
+  - {field: traction, url: https://base44.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://base44.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://base44.com/pricing, retrieved: 2026-10-21}
+  - {field: status, url: https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, retrieved: 2026-10-21}
+  - {field: relations, url: https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, retrieved: 2026-10-21}

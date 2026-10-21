@@ -1,0 +1,15 @@
+id: appsecai
+name: AppSecAI
+company: AppSecAI
+url: https://www.appsecai.io
+primary_phase: security
+phases: [security]
+target_buyer: [appsec team, mssp]
+interface: [web]
+summary: Turns findings from any code scanner into validated, tested code fixes your security team delivers; nothing fixed, nothing owed.
+traction: 97% accurate triage (company claim)
+pricing_model: per fix
+sources:
+  - {field: summary, url: https://www.appsecai.io, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.appsecai.io, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.appsecai.io/pricing, retrieved: 2026-10-21}

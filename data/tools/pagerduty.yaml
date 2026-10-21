@@ -1,0 +1,23 @@
+id: pagerduty
+name: PagerDuty
+company: PagerDuty
+url: https://www.pagerduty.com
+primary_phase: operate
+phases: [operate]
+target_buyer: [sre team, cio]
+interface: [web, slack]
+autonomy: agent
+summary: "AI-first operations platform: AI agents automate incident toil so teams resolve faster and learn from each incident."
+customers: [SAP, IG, ITV, FOX]
+traction: 70% of the Fortune 100 (company claim)
+pricing_model: platform fee plus seats
+entry_price: $2,800/year (10 seats)
+sources:
+  - {field: summary, url: https://www.pagerduty.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.pagerduty.com/customer/sap/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.pagerduty.com/customer/ig/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.pagerduty.com/customer/itv/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.pagerduty.com/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.pagerduty.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.pagerduty.com/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.pagerduty.com/pricing/, retrieved: 2026-10-21}

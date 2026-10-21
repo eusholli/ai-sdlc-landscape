@@ -1,0 +1,20 @@
+id: v0
+name: v0
+company: Vercel
+url: https://v0.app
+primary_phase: code
+phases: [design, code, deploy]
+sub_kind: app-builder
+target_buyer: [developer, product team]
+interface: [web, api]
+summary: Collaborative AI assistant to design, iterate and scale full-stack web applications, deployed to Vercel in one click.
+pricing_model: subscription plus usage (tokens)
+entry_price: Free ($0/month)
+relations:
+  - {type: ships_inside, to: vercel, sources: [https://v0.app]}
+sources:
+  - {field: summary, url: https://v0.app, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://v0.app/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://v0.app/docs/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://v0.app/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://v0.app, retrieved: 2026-10-21}

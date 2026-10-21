@@ -1,0 +1,32 @@
+id: mobb
+name: Mobb
+company: Mobb
+url: https://mobb.ai
+primary_phase: security
+phases: [security]
+target_buyer: [appsec team, developer]
+interface: [ide, pr-bot, cli]
+summary: Automatically fixes code vulnerabilities found by your scanners and secures AI-generated code at the source.
+traction: 80% reduction in mean time to remediation (case study, company claim)
+gtm_partners: [GitHub Marketplace, Azure Marketplace, AWS Marketplace, channel partners and resellers]
+pricing_model: seat
+entry_price: Free for public repos
+deployment: [saas, private cloud, on-prem]
+founded: 2021
+last_round: $5.4M seed (2023)
+relations:
+  - {type: integrates_with, to: github, sources: [https://mobb.ai/pricing, https://mobb.ai/partners]}
+  - {type: integrates_with, to: gitlab, sources: [https://mobb.ai/pricing, https://mobb.ai/partners]}
+  - {type: integrates_with, to: azure-devops, sources: [https://mobb.ai/pricing, https://mobb.ai/partners]}
+  - {type: integrates_with, to: bitbucket, sources: [https://mobb.ai/pricing, https://mobb.ai/partners]}
+sources:
+  - {field: gtm_partners, url: https://mobb.ai/pricing, retrieved: 2026-10-21}
+  - {field: gtm_partners, url: https://mobb.ai/partners, retrieved: 2026-10-21}
+  - {field: summary, url: https://mobb.ai, retrieved: 2026-10-21}
+  - {field: traction, url: https://mobb.ai/blog/case-study-ai-code-fixes, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://mobb.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://mobb.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://mobb.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://mobb.ai/pricing, retrieved: 2026-10-21}
+  - {field: founded, url: https://mobb.ai/about-us, retrieved: 2026-10-21}
+  - {field: last_round, url: https://fintech.global/2023/04/21/us-leads-the-way-in-this-weeks-39-fintech-deals/, retrieved: 2026-10-21}

@@ -1,0 +1,8 @@
+id: anthropic
+name: Anthropic (Claude)
+company: Anthropic
+url: https://www.anthropic.com
+layer: model
+summary: Builds Claude; Claude Opus 5.5 leads in agentic coding and knowledge work (company claim).
+sources:
+  - {field: summary, url: https://www.anthropic.com, retrieved: 2026-10-21}

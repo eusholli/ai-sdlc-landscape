@@ -1,0 +1,15 @@
+id: morph
+name: Morph
+company: Morph
+url: https://www.morphllm.com
+layer: agent-infra
+phases: [code]
+target_buyer: [developer]
+interface: [api]
+summary: "Inference built for coding agents: long-context models on tuned kernels, fast apply, and classifiers that catch failures traces miss."
+customers: [Binance, Zo Computer]
+traction: 100+ production agents (company claim)
+sources:
+  - {field: summary, url: https://www.morphllm.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.morphllm.com, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.morphllm.com, retrieved: 2026-10-21}

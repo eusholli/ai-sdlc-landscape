@@ -1,0 +1,19 @@
+id: runloop
+name: Runloop
+company: Runloop
+url: https://runloop.ai
+layer: agent-infra
+phases: [code, test]
+target_buyer: [platform team]
+interface: [api]
+summary: Launch AI agents on secure code sandboxes, refine them with evaluations and run them on infrastructure built for enterprise scale.
+pricing_model: usage plus plan
+entry_price: $50 in starting credits; Basic plan free with usage billing
+deployment: [saas, vpc]
+compliance: [SOC 2 Type II]
+sources:
+  - {field: summary, url: https://runloop.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://runloop.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://runloop.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://runloop.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://runloop.ai, retrieved: 2026-10-21}

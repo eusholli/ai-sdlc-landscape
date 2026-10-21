@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
+// The lock binds v0 only. People edit data/tools/ and scripts/ by hand as normal work; v0 must not.
 export const LOCKED = [
   "data/",
   "lib/data.ts",

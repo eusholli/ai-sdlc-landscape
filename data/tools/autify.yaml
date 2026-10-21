@@ -1,0 +1,26 @@
+id: autify
+name: Autify (Aximo)
+company: Autify
+url: https://autify.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web]
+summary: "AI platform for software testing: AI-powered quality engineering for web and mobile apps."
+customers: [GA technologies, Fernish, Coconala, GOBankingRates, Demaecan]
+pricing_model: subscription
+entry_price: Free plan
+deployment: [saas, on-prem (enterprise)]
+last_round: $13M Series B
+sources:
+  - {field: summary, url: https://autify.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://autify.com/case-studies/ga-technologies, retrieved: 2026-10-21}
+  - {field: customers, url: https://autify.com/case-studies/fernish, retrieved: 2026-10-21}
+  - {field: customers, url: https://autify.com/case-studies/coconala, retrieved: 2026-10-21}
+  - {field: customers, url: https://autify.com/case-studies/gobankingrates, retrieved: 2026-10-21}
+  - {field: customers, url: https://autify.com/case-studies/demaecan, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://autify.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://autify.com/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://autify.com/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://autify.com/blog/autify-raises-13-million-in-series-b-funding-and-launches-autify-genesis-an-autonomous-ai-agent-for-software-quality-assurance, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.prnewswire.com/news-releases/autify-raises-13-million-in-series-b-funding-and-launches-zenes-an-autonomous-ai-agent-for-software-quality-assurance-302174001.html, retrieved: 2026-10-21}

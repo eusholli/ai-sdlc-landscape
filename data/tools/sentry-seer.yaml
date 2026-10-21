@@ -1,0 +1,23 @@
+id: sentry-seer
+name: Sentry (Seer)
+company: Sentry
+url: https://sentry.io
+primary_phase: operate
+phases: [operate, review, maintain]
+target_buyer: [developer]
+interface: [web, mcp, ide]
+summary: Error monitoring and tracing for developers; the Seer AI debugging agent uses logs, commits, traces and stack traces to fix issues.
+customers: [Duolingo, Factory, Cursor, Atlassian, Bolt, Delivery Hero, Supabase, Anthropic, Instacart, Disney Streaming]
+traction: 4M developers at over 200K organisations (company claim)
+pricing_model: subscription plus usage; Seer add-on
+entry_price: Free; Team $26/month
+compliance: [SOC 2, ISO 27001, HIPAA (BAA)]
+sources:
+  - {field: summary, url: https://sentry.io, retrieved: 2026-10-21}
+  - {field: summary, url: https://sentry.io/pricing, retrieved: 2026-10-21}
+  - {field: customers, url: https://sentry.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://sentry.io/customers, retrieved: 2026-10-21}
+  - {field: traction, url: https://sentry.io/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://sentry.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://sentry.io/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://sentry.io/pricing, retrieved: 2026-10-21}

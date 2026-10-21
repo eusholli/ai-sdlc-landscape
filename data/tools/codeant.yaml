@@ -1,0 +1,23 @@
+id: codeant
+name: CodeAnt AI
+company: CodeAnt AI
+url: https://www.codeant.ai
+primary_phase: security
+phases: [security, review]
+target_buyer: [ciso, eng leader]
+interface: [pr-bot, web]
+autonomy: agent
+summary: "Exploit-based agentic security platform: AI agents reason across code, infrastructure and runtime to prove what is exploitable and fix it; also AI code review."
+deployment: [saas, self-hosted, vpc]
+compliance: [SOC 2 Type II, HIPAA]
+relations:
+  - {type: competes_with, to: qodo, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
+  - {type: competes_with, to: snyk, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
+  - {type: competes_with, to: aikido, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
+sources:
+  - {field: summary, url: https://codeant.ai/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://codeant.ai/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://codeant.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://codeant.ai/comparison/qodo, retrieved: 2026-10-21}
+  - {field: relations, url: https://codeant.ai/comparison/snyk, retrieved: 2026-10-21}
+  - {field: relations, url: https://codeant.ai/comparison/aikido, retrieved: 2026-10-21}

@@ -1,0 +1,22 @@
+id: roadie
+name: Roadie
+company: Roadie
+url: https://roadie.io
+primary_phase: platform
+phases: [platform, understand]
+target_buyer: [platform team]
+interface: [web, mcp, cli]
+summary: "Engineering context for AI agents: unifies services, docs and tribal knowledge into a Context Graph on a hosted Backstage portal."
+deployment: [saas]
+compliance: [SOC 2 Type II]
+relations:
+  - {type: ships_inside, to: backstage, sources: [https://roadie.io/pricing]}
+  - {type: integrates_with, to: github, sources: [https://roadie.io/pricing]}
+  - {type: integrates_with, to: gitlab, sources: [https://roadie.io/pricing]}
+  - {type: integrates_with, to: bitbucket, sources: [https://roadie.io/pricing]}
+  - {type: integrates_with, to: azure-devops, sources: [https://roadie.io/pricing]}
+sources:
+  - {field: summary, url: https://roadie.io, retrieved: 2026-10-21}
+  - {field: compliance, url: https://roadie.io/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://roadie.io/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://roadie.io/pricing, retrieved: 2026-10-21}

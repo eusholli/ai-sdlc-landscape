@@ -1,0 +1,26 @@
+id: deepsource
+name: DeepSource
+company: DeepSource
+url: https://deepsource.com
+primary_phase: review
+phases: [review, security]
+target_buyer: [eng leader]
+interface: [pr-bot, web]
+summary: "The AI code review platform: automates code reviews, catching security issues and improving code health before production."
+customers: [Babbel, Dgraph, DVC, NASA (PO.DAAC open-source library)]
+gtm_partners: [Google Cloud Marketplace]
+pricing_model: seat plus AI credits
+entry_price: Team $24/user/month annual
+deployment: [saas, self-hosted]
+models: [{BYOK: Anthropic}, OpenAI, Google]
+sources:
+  - {field: gtm_partners, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
+  - {field: summary, url: https://deepsource.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://deepsource.com/customers/babbel, retrieved: 2026-10-21}
+  - {field: customers, url: https://deepsource.com/customers/dgraph, retrieved: 2026-10-21}
+  - {field: customers, url: https://deepsource.com/customers/dvc, retrieved: 2026-10-21}
+  - {field: customers, url: https://deepsource.com/customers/nasa, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://deepsource.com/pricing, retrieved: 2026-10-21}

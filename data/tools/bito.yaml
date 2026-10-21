@@ -1,0 +1,28 @@
+id: bito
+name: Bito
+company: Bito
+url: https://bito.ai
+primary_phase: review
+phases: [review, understand, platform]
+target_buyer: [eng leader, platform team]
+interface: [pr-bot, mcp, ide]
+summary: "AI model router for Claude Code, Cursor and Codex: Governor grounds each request in your code and routes it to the best model, cutting agent cost; also AI code review."
+traction: Agent bill down about 48% at held quality (customer quote, company claim)
+deployment: [saas, on-prem, self-hosted]
+compliance: [SOC 2 Type II]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: cursor, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: github, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: gitlab, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://bito.ai/, https://bito.ai/compare/bito-vs-kiro/]}
+sources:
+  - {field: summary, url: https://bito.ai/, retrieved: 2026-10-21}
+  - {field: traction, url: https://bito.ai/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://bito.ai/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://bito.ai/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://bito.ai/pricing/, retrieved: 2026-10-21}
+  - {field: relations, url: https://bito.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://bito.ai/compare/bito-vs-kiro/, retrieved: 2026-10-21}

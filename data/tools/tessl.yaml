@@ -1,0 +1,27 @@
+id: tessl
+name: Tessl
+company: Tessl
+url: https://tessl.io
+primary_phase: plan
+phases: [plan, code, understand]
+target_buyer: [platform team, eng leader]
+interface: [cli, web]
+summary: "Agent enablement platform: gives coding agents structured, versioned context, with a registry of skills and evals of model and agent harness combinations."
+pricing_model: usage (credits)
+entry_price: Free (1,000 credits/month); paid from $100/month
+deployment: [saas, single-tenant, self-hosted]
+models: [bring your own model]
+funding_total: $125M (seed plus Series A)
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://tessl.io, https://tessl.io]}
+  - {type: integrates_with, to: cursor, sources: [https://tessl.io, https://tessl.io]}
+  - {type: integrates_with, to: github-copilot, sources: [https://tessl.io, https://tessl.io]}
+sources:
+  - {field: summary, url: https://tessl.io, retrieved: 2026-10-05}
+  - {field: pricing_model, url: https://tessl.io/pricing, retrieved: 2026-10-05}
+  - {field: entry_price, url: https://tessl.io/pricing, retrieved: 2026-10-05}
+  - {field: deployment, url: https://tessl.io/pricing, retrieved: 2026-10-05}
+  - {field: models, url: https://tessl.io, retrieved: 2026-10-05}
+  - {field: relations, url: https://tessl.io, retrieved: 2026-10-05}
+  - {field: funding_total, url: https://tessl.io/blog/announcing-our-series-a-for-ai-native-software-development, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://fortune.com/2024/11/14/tessl-funding-ai-software-development-platform/, retrieved: 2026-10-21}

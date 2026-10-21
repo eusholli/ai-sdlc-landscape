@@ -1,0 +1,22 @@
+id: tabnine
+name: Tabnine
+company: Tricentis
+url: https://www.tabnine.com
+primary_phase: code
+phases: [code, test]
+sub_kind: ide-assistant
+summary: One of the earliest AI coding assistants, now part of Tricentis's Agentic Quality Engineering Platform.
+founded: 2013
+funding_total: $55M before acquisition
+status: acquired
+relations:
+  - {type: acquired_by, to: tricentis, sources: [https://www.tricentis.com, https://www.calcalistech.com/ctechnews/article/1o1nf7vd3]}
+sources:
+  - {field: summary, url: https://www.tabnine.com, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.calcalistech.com/ctechnews/article/1o1nf7vd3, retrieved: 2026-10-21}
+  - {field: status, url: https://www.tricentis.com, retrieved: 2026-10-21}
+  - {field: status, url: https://www.calcalistech.com/ctechnews/article/1o1nf7vd3, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.tricentis.com, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.calcalistech.com/ctechnews/article/1o1nf7vd3, retrieved: 2026-10-21}
+  - {field: founded, url: https://www.calcalistech.com/ctechnews/article/1o1nf7vd3, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://www.calcalistech.com/ctechnews/article/1o1nf7vd3, retrieved: 2026-10-21}

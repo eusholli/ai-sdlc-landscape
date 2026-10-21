@@ -1,0 +1,15 @@
+id: hypercubic
+name: Hypercubic
+company: Hypercubic
+url: https://www.hypercubic.ai
+primary_phase: maintain
+phases: [maintain, understand]
+target_buyer: [cio]
+interface: [web]
+autonomy: agent
+summary: "Agentic AI for mainframe and COBOL modernization: turns COBOL into living documentation, captures tribal knowledge and transforms code."
+deployment: [vpc, on-prem]
+sources:
+  - {field: summary, url: https://www.hypercubic.ai/, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.hypercubic.ai/platform, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.hypercubic.ai/, retrieved: 2026-10-21}

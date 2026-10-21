@@ -1,0 +1,29 @@
+id: amp
+name: Amp
+company: Amp
+url: https://ampcode.com
+primary_phase: code
+phases: [code]
+sub_kind: cli-agent
+target_buyer: [developer]
+interface: [cli, ide, web]
+autonomy: agent
+summary: A coding agent and development environment built for the frontier, running agents in cloud 'orbs' with several models.
+pricing_model: usage
+entry_price: Hobby free; orbs pay as you go
+deployment: [saas, self-hosted runners]
+models: [GPT-5.6, Claude Fable 5.1, fast models]
+relations:
+  - {type: integrates_with, to: github, sources: [https://ampcode.com/docs, https://ampcode.com/docs/integrations]}
+  - {type: integrates_with, to: linear, sources: [https://ampcode.com/docs, https://ampcode.com/docs/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://ampcode.com/docs, https://ampcode.com/docs/integrations]}
+  - {type: built_on_model, to: openai, sources: [https://ampcode.com/docs, https://ampcode.com/docs/integrations]}
+  - {type: built_on_model, to: anthropic, sources: [https://ampcode.com/docs, https://ampcode.com/docs/integrations]}
+sources:
+  - {field: summary, url: https://ampcode.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://ampcode.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://ampcode.com/pricing, retrieved: 2026-10-21}
+  - {field: models, url: https://ampcode.com/docs, retrieved: 2026-10-21}
+  - {field: deployment, url: https://ampcode.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://ampcode.com/docs/integrations, retrieved: 2026-10-21}
+  - {field: relations, url: https://ampcode.com/docs, retrieved: 2026-10-21}

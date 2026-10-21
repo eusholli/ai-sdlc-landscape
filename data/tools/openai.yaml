@@ -1,0 +1,8 @@
+id: openai
+name: OpenAI (GPT, Codex)
+company: OpenAI
+url: https://openai.com
+layer: model
+summary: Model and platform provider; its developer platform offers the API and Codex for automating engineering tasks.
+sources:
+  - {field: summary, url: https://developers.openai.com, retrieved: 2026-10-21}

@@ -1,0 +1,19 @@
+id: snyk
+name: Snyk AI Security Platform
+company: Snyk
+url: https://snyk.io
+primary_phase: security
+phases: [security]
+target_buyer: [ciso, developer]
+interface: [ide, cli, ci, web]
+summary: "Secures the code AI writes, the agents that write it and the AI apps teams build: SCA, SAST, IaC and container scanning."
+customers: [Okta, Twilio, Snowflake, Spotify, Manulife, Seismic, Labelbox, Yalo]
+pricing_model: seat
+entry_price: Free
+last_round: $196.5M Series G at a $7.4B valuation (Dec 2022)
+sources:
+  - {field: summary, url: https://snyk.io/, retrieved: 2026-10-21}
+  - {field: customers, url: https://snyk.io/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://snyk.io/plans/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://snyk.io/plans/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://snyk.io/news/snyk-closes-196-5-million-series-g-funding-at-7-4-billion-valuation/, retrieved: 2026-10-21}

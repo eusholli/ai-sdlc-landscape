@@ -1,0 +1,26 @@
+id: arize
+name: Arize (AX, Phoenix)
+company: Dynatrace
+url: https://arize.com
+layer: agent-infra
+phases: [test, operate]
+target_buyer: [ai engineer]
+interface: [web, api]
+summary: Agent observability, evaluation and improvement platform; Phoenix is its open-source tracing and evaluation project.
+customers: [Wayfair, PagerDuty, TripAdvisor]
+pricing_model: subscription
+entry_price: Free (AX Free)
+open_source: true
+status: acquired (by Dynatrace for $915M, closed 1 Oct 2026)
+relations:
+  - {type: acquired_by, to: dynatrace, sources: [https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, https://www.dynatrace.com/news/press-release/dynatrace-to-acquire-arize/]}
+sources:
+  - {field: summary, url: https://arize.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://arize.com/, retrieved: 2026-10-21}
+  - {field: open_source, url: https://arize.com/, retrieved: 2026-10-21}
+  - {field: open_source, url: https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://arize.com/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://arize.com/pricing/, retrieved: 2026-10-21}
+  - {field: status, url: https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, retrieved: 2026-10-21}
+  - {field: status, url: https://www.dynatrace.com/news/press-release/dynatrace-to-acquire-arize/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, retrieved: 2026-10-21}

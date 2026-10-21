@@ -1,0 +1,21 @@
+id: cleric
+name: Cleric
+company: Cleric
+url: https://cleric.ai
+primary_phase: operate
+phases: [operate, deploy]
+target_buyer: [sre team]
+interface: [slack, web]
+autonomy: agent
+summary: Follows every change after merge, verifies its effect under real production traffic and investigates before it becomes an incident.
+pricing_model: usage (credits, $0.50 each)
+compliance: [SOC 2 Type II]
+funding_total: $9.8M seed, led by Vertex Ventures US
+relations:
+  - {type: competes_with, to: datadog-bits, sources: [https://cleric.ai/compare/datadog]}
+sources:
+  - {field: summary, url: https://cleric.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://cleric.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://cleric.ai, retrieved: 2026-10-21}
+  - {field: relations, url: https://cleric.ai/compare/datadog, retrieved: 2026-10-21}
+  - {field: funding_total, url: https://www.apmdigest.com/cleric-launches-self-learning-ai-sre, retrieved: 2026-10-21}

@@ -1,0 +1,24 @@
+id: locofy
+name: Locofy.ai
+company: Locofy.ai
+url: https://www.locofy.ai
+primary_phase: design
+phases: [design, code]
+target_buyer: [developer]
+interface: [figma plugin, ide]
+summary: Converts Figma and Penpot designs into developer-friendly code for React, React Native, Flutter, Vue, Angular, Next.js and more.
+customers: [SpringCT, CosmicWeb]
+founded: 2021
+last_round: $4.25M (2023)
+relations:
+  - {type: integrates_with, to: figma, sources: [https://www.locofy.ai/, https://www.locofy.ai/products/vs-code]}
+  - {type: integrates_with, to: github, sources: [https://www.locofy.ai/, https://www.locofy.ai/products/vs-code]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.locofy.ai/, https://www.locofy.ai/products/vs-code]}
+sources:
+  - {field: summary, url: https://www.locofy.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.locofy.ai/case-studies/springct-utilized-locofy-to-develop-fmc-platform, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.locofy.ai/case-studies/cosmicweb-saves-development-time-with-locofyai, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.locofy.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.locofy.ai/products/vs-code, retrieved: 2026-10-21}
+  - {field: founded, url: https://e27.co/locofy-the-low-code-platform-that-helps-users-convert-design-to-code-raises-us3m-in-pre-seed-funding-20220322/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.finsmes.com/2023/05/locofy-ai-raises-4-25m-in-funding.html, retrieved: 2026-10-21}

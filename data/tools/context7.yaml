@@ -1,0 +1,23 @@
+id: context7
+name: Context7
+company: Upstash
+url: https://context7.com
+layer: agent-infra
+primary_phase: understand
+phases: [understand, code]
+target_buyer: [developer]
+interface: [mcp, api]
+summary: Up-to-date, version-specific library docs and code examples served into Claude, Codex, Cursor and other agents.
+pricing_model: usage (API calls) plus seat
+entry_price: Free (1,000 calls/month)
+deployment: [saas, self-hosted (enterprise)]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://context7.com]}
+  - {type: integrates_with, to: openai-codex, sources: [https://context7.com]}
+  - {type: integrates_with, to: cursor, sources: [https://context7.com]}
+sources:
+  - {field: summary, url: https://context7.com, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://context7.com/plans, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://context7.com/plans, retrieved: 2026-10-21}
+  - {field: deployment, url: https://context7.com/plans, retrieved: 2026-10-21}
+  - {field: relations, url: https://context7.com, retrieved: 2026-10-21}

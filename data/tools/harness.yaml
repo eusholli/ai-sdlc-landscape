@@ -1,0 +1,25 @@
+id: harness
+name: Harness
+company: Harness
+url: https://www.harness.io
+primary_phase: cicd
+phases: [cicd, deploy, test, security, operate, understand]
+target_buyer: [platform team, eng leader]
+interface: [web]
+autonomy: agent
+summary: "The Autonomous SDLC Platform: agents for your software factory across CI, CD, testing, security and runtime protection."
+customers: [United Airlines, Citi, Morningstar, Workday, Experian, ADP]
+gtm_partners: [solution partners (partner program)]
+pricing_model: free tier, bundle or modular
+entry_price: Free plan
+deployment: [saas, self-hosted]
+last_round: $240M (AI software delivery platform)
+sources:
+  - {field: gtm_partners, url: https://www.harness.io/partners, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.harness.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.harness.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.harness.io/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.harness.io/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.harness.io/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.harness.io/comparison-guide/argocd-vs-harness, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.harness.io/blog/240m-financing-to-bring-ai-to-everything-after-code, retrieved: 2026-10-21}

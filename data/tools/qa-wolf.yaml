@@ -1,0 +1,21 @@
+id: qa-wolf
+name: QA Wolf
+company: QA Wolf
+url: https://www.qawolf.com
+primary_phase: test
+phases: [test]
+target_buyer: [eng leader]
+interface: [web]
+autonomy: autonomous
+summary: AI testing platform that autonomously maps, writes and runs flake-free end-to-end tests for web and mobile.
+customers: [Drata, Vesta, Regal, Xima]
+pricing_model: per test run
+last_round: $36M Series B, led by Scale Venture Partners
+sources:
+  - {field: summary, url: https://www.qawolf.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.qawolf.com/customers/drata, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.qawolf.com/customers/vesta, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.qawolf.com/customers/regal, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.qawolf.com/customers/xima, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.qawolf.com/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://sacra.com/c/qa-wolf/, retrieved: 2026-10-21}

@@ -1,0 +1,17 @@
+id: sourcebot
+name: Sourcebot
+company: Sourcebot
+url: https://www.sourcebot.dev
+primary_phase: understand
+phases: [understand, review]
+target_buyer: [platform team]
+interface: [web, api, mcp]
+summary: Self-hosted tool that helps humans and agents search, navigate and understand complex enterprise codebases.
+pricing_model: free self-hosted; Pro plan
+entry_price: Free (up to 5 users)
+deployment: [self-hosted]
+sources:
+  - {field: summary, url: https://www.sourcebot.dev, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.sourcebot.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.sourcebot.dev/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.sourcebot.dev/pricing, retrieved: 2026-10-21}

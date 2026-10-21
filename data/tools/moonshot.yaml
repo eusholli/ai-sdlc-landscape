@@ -1,0 +1,8 @@
+id: moonshot
+name: Moonshot AI (Kimi)
+company: Moonshot AI
+url: https://www.moonshot.ai
+layer: model
+summary: Builds the open Kimi models; Kimi K3 has 2.8T parameters (company claim).
+sources:
+  - {field: summary, url: https://www.moonshot.ai, retrieved: 2026-10-21}

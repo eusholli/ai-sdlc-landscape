@@ -1,0 +1,33 @@
+id: greptile
+name: Greptile
+company: Greptile
+url: https://www.greptile.com
+primary_phase: review
+phases: [review, understand]
+target_buyer: [eng leader]
+interface: [pr-bot, mcp]
+autonomy: agent
+summary: "AI code reviews that understand your entire codebase: automate PR reviews and catch bugs faster."
+customers: [Brex, Scale, WorkOS, Browserbase, Mintlify]
+pricing_model: seat plus credits
+entry_price: Free (1 developer); Pro $30/seat/month
+deployment: [saas, self-hosted, air-gapped]
+compliance: [SOC 2]
+last_round: $25M Series A from Benchmark (2025)
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.greptile.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.greptile.com/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.greptile.com/]}
+  - {type: integrates_with, to: cognition-devin, sources: [https://www.greptile.com/]}
+sources:
+  - {field: summary, url: https://www.greptile.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.greptile.com/customers/brex, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.greptile.com/customers/scale, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.greptile.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.greptile.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.greptile.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.greptile.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.greptile.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.greptile.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.greptile.com/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.gatech.edu/news/2026/01/05/y-combinator-backing-and-30m-investment-take-startup-greptile-next-level, retrieved: 2026-10-21}

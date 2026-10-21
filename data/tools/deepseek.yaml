@@ -1,0 +1,8 @@
+id: deepseek
+name: DeepSeek
+company: DeepSeek
+url: https://www.deepseek.com
+layer: model
+summary: Open-source foundation models (DeepSeek-V4, R1) with a chat app and API.
+sources:
+  - {field: summary, url: https://www.deepseek.com, retrieved: 2026-10-21}

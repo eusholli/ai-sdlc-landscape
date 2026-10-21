@@ -1,0 +1,27 @@
+id: tembo
+name: Tembo
+company: Tembo
+url: https://www.tembo.io
+primary_phase: code
+phases: [code, maintain, measure]
+sub_kind: autonomous-agent
+target_buyer: [eng leader]
+interface: [web, slack]
+autonomy: autonomous
+summary: "Run any coding agent in the cloud: give every change its own computer, follow agent work, review results and see what merges."
+customers: [Tilt, Integral]
+pricing_model: subscription plus usage
+deployment: [saas, self-hosted (VPC)]
+relations:
+  - {type: integrates_with, to: jira, sources: [https://www.tembo.io/integrations, https://www.tembo.io/pricing]}
+  - {type: integrates_with, to: linear, sources: [https://www.tembo.io/integrations, https://www.tembo.io/pricing]}
+  - {type: integrates_with, to: github, sources: [https://www.tembo.io/integrations, https://www.tembo.io/pricing]}
+  - {type: integrates_with, to: slack, sources: [https://www.tembo.io/integrations, https://www.tembo.io/pricing]}
+sources:
+  - {field: summary, url: https://www.tembo.io, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.tembo.io/customers/tilt, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.tembo.io/customers/integral, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.tembo.io/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.tembo.io/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.tembo.io/integrations, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.tembo.io/pricing, retrieved: 2026-10-21}

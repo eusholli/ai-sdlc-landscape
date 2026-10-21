@@ -1,0 +1,24 @@
+id: testsprite
+name: TestSprite
+company: TestSprite
+url: https://www.testsprite.com
+primary_phase: test
+phases: [test]
+target_buyer: [developer]
+interface: [mcp, web]
+autonomy: agent
+summary: Agentic testing tool that writes end-to-end tests and checks whether a code change broke what worked.
+traction: 100,000+ developers and 50,000+ teams (company claim)
+pricing_model: subscription (credits)
+entry_price: Free; $19/month
+deployment: [saas, single-tenant]
+hq: Seattle
+last_round: $6.7M seed, led by Trilogy Equity Partners
+sources:
+  - {field: summary, url: https://www.testsprite.com/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
+  - {field: hq, url: https://www.geekwire.com/2024/seattle-startup-testsprite-which-automates-testing-of-apis-and-web-apps-raises-1-5m/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techfundingnews.com/testsprite-raises-6-7m-seed-autonomous-ai-testing-platform/, retrieved: 2026-10-21}

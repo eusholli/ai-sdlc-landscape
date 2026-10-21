@@ -1,0 +1,16 @@
+id: trae
+name: TRAE
+company: TRAE
+url: https://trae.ai
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [developer]
+interface: [ide]
+summary: TraeCode, 'your 10x AI coding engineer', integrates into your workflow and collaborates to raise performance.
+pricing_model: subscription
+entry_price: Free
+sources:
+  - {field: summary, url: https://trae.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://trae.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://trae.ai/pricing, retrieved: 2026-10-21}

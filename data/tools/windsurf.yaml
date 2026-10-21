@@ -1,0 +1,20 @@
+id: windsurf
+name: Windsurf
+company: Cognition
+url: https://windsurf.com
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide]
+summary: The first AI-native IDE that keeps developers in flow; now the base of Cognition's Devin Desktop.
+status: acquired
+relations:
+  - {type: acquired_by, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
+  - {type: ships_inside, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
+sources:
+  - {field: summary, url: https://windsurf.com/pricing/(organization-plan-setup)/teams, retrieved: 2026-10-21}
+  - {field: summary, url: https://cognition.ai/blog, retrieved: 2026-10-21}
+  - {field: status, url: https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, retrieved: 2026-10-21}
+  - {field: relations, url: https://cognition.ai/blog, retrieved: 2026-10-21}

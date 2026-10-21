@@ -1,0 +1,19 @@
+id: modal
+name: Modal
+company: Modal Labs
+url: https://modal.com
+layer: agent-infra
+phases: [deploy]
+target_buyer: [developer, ml team]
+interface: [api, cli]
+summary: Cloud infrastructure for teams that develop, train and serve AI applications at scale, including sandboxes for agent code.
+customers: [Runway]
+pricing_model: usage plus plan
+entry_price: $30/month free compute
+compliance: [SOC 2, HIPAA]
+sources:
+  - {field: summary, url: https://modal.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://modal.com/customers, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://modal.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://modal.com/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://modal.com/, retrieved: 2026-10-21}

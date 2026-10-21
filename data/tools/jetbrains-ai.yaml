@@ -1,0 +1,16 @@
+id: jetbrains-ai
+name: JetBrains Air
+company: JetBrains
+url: https://www.jetbrains.com/ai
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide]
+summary: One system for building software with agents; works with the agents you already use and any ACP-compatible agent.
+models: [Amazon Bedrock, OpenAI, Anthropic, any provider (BYOK)]
+relations:
+  - {type: ships_inside, to: jetbrains, sources: [https://www.jetbrains.com/ai]}
+sources:
+  - {field: summary, url: https://www.jetbrains.com/ai, retrieved: 2026-10-21}
+  - {field: models, url: https://www.jetbrains.com/ai, retrieved: 2026-10-21}

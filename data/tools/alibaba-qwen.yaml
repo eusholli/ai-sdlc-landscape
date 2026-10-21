@@ -1,0 +1,8 @@
+id: alibaba-qwen
+name: Qwen
+company: Alibaba
+url: https://qwen.ai
+layer: model
+summary: Qwen model family spanning chat, image and video understanding, document processing and tool use.
+sources:
+  - {field: summary, url: https://qwen.ai, retrieved: 2026-10-21}

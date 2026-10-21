@@ -1,0 +1,19 @@
+id: checkmarx
+name: Checkmarx One
+company: Checkmarx
+url: https://checkmarx.com
+primary_phase: security
+phases: [security]
+target_buyer: [ciso, appsec team]
+interface: [ide, mcp, pr-bot, web]
+autonomy: agent
+summary: "Agentic application security platform: hybrid scanning plus AI agents that deliver merge-ready fixes at the point of code creation."
+customers: [Best Buy, PatientPoint, Cebu Pacific, Merito]
+gtm_partners: ["resellers, systems integrators and MSPs (partner program)"]
+deployment: [saas, on-prem]
+sources:
+  - {field: gtm_partners, url: https://checkmarx.com/partners/, retrieved: 2026-10-21}
+  - {field: summary, url: https://checkmarx.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://checkmarx.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://checkmarx.com/why-checkmarx/customer-stories/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://checkmarx.com/why-checkmarx/customer-stories/, retrieved: 2026-10-21}

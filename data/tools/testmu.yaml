@@ -1,0 +1,23 @@
+id: testmu
+name: TestMu AI (formerly LambdaTest)
+company: TestMu AI
+url: https://www.testmu.ai
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web, ide]
+summary: Agentic QA for web, mobile, chat, voice, IVR and AI agents, with a real-device cloud.
+customers: [Bajaj Finserv, Trepp, Boomi]
+traction: 3M+ users (company claim)
+pricing_model: subscription (credits)
+entry_price: $19/month
+deployment: [saas, dedicated, on-prem device cloud]
+sources:
+  - {field: summary, url: https://www.testmu.ai/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.testmu.ai/customers/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.testmu.ai/customers/trepp/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.testmu.ai/customers/boomi/, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.testmu.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.testmu.ai/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.testmu.ai/pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.testmu.ai/, retrieved: 2026-10-21}

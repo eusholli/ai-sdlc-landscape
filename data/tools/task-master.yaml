@@ -1,0 +1,13 @@
+id: task-master
+name: Taskmaster AI
+company: Hamster
+url: https://www.task-master.dev
+primary_phase: plan
+phases: [plan]
+target_buyer: [developer]
+interface: [cli]
+summary: "Open-source, CLI-first tool that structures AI agent work: parse PRDs into tasks and subtasks with dependencies and acceptance criteria."
+open_source: true
+sources:
+  - {field: summary, url: https://www.task-master.dev, retrieved: 2026-10-21}
+  - {field: open_source, url: https://www.task-master.dev, retrieved: 2026-10-21}

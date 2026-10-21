@@ -1,0 +1,18 @@
+id: jules
+name: Jules
+company: Google
+url: https://jules.google
+primary_phase: code
+phases: [code]
+sub_kind: autonomous-agent
+target_buyer: [developer]
+interface: [web]
+autonomy: autonomous
+summary: An autonomous coding agent that clones your repository to a cloud VM, plans with Gemini and does the tasks you would rather not.
+relations:
+  - {type: built_on_model, to: google, sources: [https://jules.google]}
+  - {type: ships_inside, to: google-co, sources: [https://jules.google]}
+  - {type: integrates_with, to: github, sources: [https://jules.google]}
+sources:
+  - {field: summary, url: https://jules.google, retrieved: 2026-10-21}
+  - {field: relations, url: https://jules.google, retrieved: 2026-10-21}

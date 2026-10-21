@@ -1,0 +1,13 @@
+id: g5-labs
+name: G5
+company: G5 Labs
+url: https://g5labs.ai
+primary_phase: understand
+phases: [understand, maintain, plan]
+target_buyer: [cto, regulated enterprise]
+interface: [web]
+summary: "The semantic abstraction layer for AI-native development: natural-language intent becomes the source code."
+last_round: $14M seed (Sept 2026); MIT CSAIL spinout
+sources:
+  - {field: summary, url: https://g5labs.ai/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://g5labs.ai/press/seed-round, retrieved: 2026-10-21}

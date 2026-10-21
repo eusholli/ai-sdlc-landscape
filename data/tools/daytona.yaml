@@ -1,0 +1,17 @@
+id: daytona
+name: Daytona
+company: Daytona
+url: https://www.daytona.io
+layer: agent-infra
+phases: [code]
+target_buyer: [developer, platform team]
+interface: [api]
+summary: Secure, stateful infrastructure for running AI-generated code, with sandbox creation in under 90 ms (company claim).
+pricing_model: usage (per vCPU and memory hour)
+deployment: [saas, byoc]
+compliance: [SOC 2, HIPAA, GDPR]
+sources:
+  - {field: summary, url: https://www.daytona.io, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.daytona.io, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.daytona.io, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.daytona.io, retrieved: 2026-10-21}

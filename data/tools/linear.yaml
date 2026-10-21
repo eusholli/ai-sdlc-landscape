@@ -1,0 +1,28 @@
+id: linear
+name: Linear
+company: Linear
+url: https://linear.app
+primary_phase: plan
+phases: [plan]
+target_buyer: [eng leader, product manager]
+interface: [web, ide, mcp]
+summary: The system for product development, purpose-built for planning and building products with AI agents.
+customers: [Brex, Automattic, Opendoor, Salesforce, Mercury, Vercel, Perplexity, Lovable, Monzo]
+traction: More than 40,000 companies (company claim)
+pricing_model: seat
+entry_price: Free; Basic $10/user/month
+compliance: [HIPAA]
+hq: Helsinki
+last_round: $82M Series C at a $1.25B valuation (2025)
+sources:
+  - {field: summary, url: https://linear.app/, retrieved: 2026-10-21}
+  - {field: customers, url: https://linear.app/customers/brex, retrieved: 2026-10-21}
+  - {field: customers, url: https://linear.app/pricing, retrieved: 2026-10-21}
+  - {field: customers, url: https://linear.app/customers, retrieved: 2026-10-21}
+  - {field: traction, url: https://linear.app/pricing, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://linear.app/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://linear.app/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://linear.app/pricing, retrieved: 2026-10-21}
+  - {field: hq, url: https://arcticstartup.com/linear-raises-82m-series-c/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.builtinsf.com/articles/linear-raises-82m-series-c-1b-valuation-20250611, retrieved: 2026-10-21}
+  - {field: last_round, url: https://arcticstartup.com/linear-raises-82m-series-c/, retrieved: 2026-10-21}

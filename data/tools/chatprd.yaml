@@ -1,0 +1,28 @@
+id: chatprd
+name: ChatPRD
+company: ChatPRD
+url: https://www.chatprd.ai
+primary_phase: plan
+phases: [plan]
+target_buyer: [product manager]
+interface: [web, mcp]
+summary: "The AI product manager for your entire team: writes product docs, coaches PMs and hands specs to coding agents."
+customers: [Autodesk, LaunchDarkly, CallRail]
+traction: 250,000+ product managers (company claim)
+pricing_model: seat
+entry_price: Free; Pro $179/year
+compliance: [SOC 2 Type II]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.chatprd.ai/pricing]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.chatprd.ai/pricing]}
+  - {type: integrates_with, to: atlassian, sources: [https://www.chatprd.ai/pricing]}
+sources:
+  - {field: summary, url: https://www.chatprd.ai, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.chatprd.ai/customers/autodesk, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.chatprd.ai/customers/launchdarkly, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.chatprd.ai/customers/callrail, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.chatprd.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.chatprd.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.chatprd.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.chatprd.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.chatprd.ai/pricing, retrieved: 2026-10-21}

@@ -1,0 +1,23 @@
+id: gitlab-duo
+name: GitLab Duo Agent Platform
+company: GitLab
+url: https://about.gitlab.com/gitlab-duo
+primary_phase: cicd
+phases: [plan, code, review, security, cicd, deploy]
+target_buyer: [eng leader, platform team]
+interface: [web, ide]
+autonomy: agent
+summary: "Custom AI workflow automation across the software lifecycle: specialised agents for planning, coding, security and deployment."
+gtm_partners: ["channel and resale partners: integrators, resellers, distributors, MSPs"]
+pricing_model: add-on to Premium and Ultimate plans
+deployment: [saas, self-managed, self-hosted models]
+relations:
+  - {type: ships_inside, to: gitlab, sources: [https://about.gitlab.com/partners/, https://about.gitlab.com/gitlab-duo]}
+  - {type: integrates_with, to: claude-code, sources: [https://about.gitlab.com/partners/, https://about.gitlab.com/gitlab-duo]}
+  - {type: integrates_with, to: openai-codex, sources: [https://about.gitlab.com/partners/, https://about.gitlab.com/gitlab-duo]}
+sources:
+  - {field: gtm_partners, url: https://about.gitlab.com/partners/, retrieved: 2026-10-21}
+  - {field: summary, url: https://about.gitlab.com/gitlab-duo, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://about.gitlab.com/gitlab-duo, retrieved: 2026-10-21}
+  - {field: deployment, url: https://about.gitlab.com/gitlab-duo, retrieved: 2026-10-21}
+  - {field: relations, url: https://about.gitlab.com/gitlab-duo, retrieved: 2026-10-21}

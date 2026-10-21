@@ -1,0 +1,27 @@
+id: github-copilot
+name: GitHub Copilot
+company: GitHub (Microsoft)
+url: https://github.com/features/copilot
+primary_phase: code
+phases: [code, review, plan, test, security]
+sub_kind: ide-assistant
+target_buyer: [developer, eng leader]
+interface: [ide, cli, web, pr-bot]
+autonomy: agent
+summary: Your AI coding agent, every step of the way from an open issue to reviewing and merging a pull request, in the editor, terminal or github.com.
+customers: [Grupo Boticário]
+pricing_model: seat
+entry_price: Free; Pro $10/user/month
+relations:
+  - {type: ships_inside, to: github, sources: [https://github.com/features/copilot]}
+  - {type: ships_inside, to: microsoft, sources: [https://github.com/features/copilot]}
+  - {type: integrates_with, to: vs-code, sources: [https://github.com/features/copilot]}
+  - {type: integrates_with, to: jetbrains, sources: [https://github.com/features/copilot]}
+  - {type: integrates_with, to: claude-code, sources: [https://github.com/features/copilot]}
+  - {type: integrates_with, to: openai-codex, sources: [https://github.com/features/copilot]}
+sources:
+  - {field: summary, url: https://github.com/features/copilot, retrieved: 2026-10-21}
+  - {field: customers, url: https://github.com/features/copilot, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://github.com/features/copilot, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://github.com/features/copilot, retrieved: 2026-10-21}
+  - {field: relations, url: https://github.com/features/copilot, retrieved: 2026-10-21}

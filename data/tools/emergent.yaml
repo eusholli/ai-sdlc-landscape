@@ -1,0 +1,21 @@
+id: emergent
+name: Emergent
+company: Emergent
+url: https://emergent.sh
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [non-developer, business]
+interface: [web]
+autonomy: agent
+summary: Vibe-code production-ready web and mobile apps in minutes with AI agents.
+pricing_model: subscription
+entry_price: Free; Standard $20/month
+deployment: [saas, vpc (enterprise)]
+last_round: $130M Series C at a $1.5B valuation
+sources:
+  - {field: summary, url: https://emergent.sh, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.saasrise.com/deals/indian-ai-coding-startup-emergent-becomes-a-unicorn-with-130m-series-c-a35c7b87-3271-4587-8d53-bf9a593e6e14, retrieved: 2026-10-21}

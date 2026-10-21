@@ -1,0 +1,18 @@
+id: ranger
+name: Ranger
+company: Ranger
+url: https://www.ranger.net
+primary_phase: test
+phases: [test, review]
+target_buyer: [eng leader]
+interface: [web, pr-bot]
+summary: "QA for AI-generated code: a seamless testing experience so teams keep shipping without testing roadblocks."
+pricing_model: seat
+entry_price: Free (5 reviews); Growth $50/month/user
+last_round: $8.9M, led by General Catalyst and XYZ
+sources:
+  - {field: summary, url: https://www.ranger.net, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.ranger.net/post/why-qa-matters-for-ai-generated-code, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.ranger.net/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.ranger.net/pricing, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.ranger.net/love, retrieved: 2026-10-21}

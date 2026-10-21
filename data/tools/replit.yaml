@@ -1,0 +1,29 @@
+id: replit
+name: Replit Agent
+company: Replit
+url: https://replit.com
+primary_phase: code
+phases: [code, deploy]
+sub_kind: app-builder
+target_buyer: [non-developer, product team]
+interface: [web]
+autonomy: autonomous
+summary: "AI app and website builder: describe what you want and Replit builds it, a working app or website in minutes, no coding required."
+customers: [Zillow, SMFL Digital Lab]
+pricing_model: subscription plus usage
+entry_price: Free; Core $20/month ($18 annual)
+deployment: [saas, single-tenant]
+compliance: [SOC 2]
+last_round: $400M Series D at a $9B valuation (Mar 2026)
+relations:
+  - {type: integrates_with, to: databricks, sources: [https://replit.com/]}
+  - {type: integrates_with, to: stripe, sources: [https://replit.com/]}
+sources:
+  - {field: summary, url: https://replit.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://replit.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://replit.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://replit.com/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://replit.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://replit.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://replit.com/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://replit.com/blog/replit-raises-400-million-dollars, retrieved: 2026-10-21}

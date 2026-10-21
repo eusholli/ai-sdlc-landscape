@@ -1,0 +1,23 @@
+id: mistral-code
+name: Mistral Vibe
+company: Mistral AI
+url: https://mistral.ai/products/mistral-code
+primary_phase: code
+phases: [code, test, maintain]
+sub_kind: cli-agent
+target_buyer: [eng leader]
+interface: [cli, ide]
+summary: "Agentic coding that understands your entire codebase: build, test and modernize autonomously from terminal or IDE."
+deployment: [saas, self-hosted, cloud providers]
+models: [Devstral 2, Codestral, Mistral Medium 3]
+relations:
+  - {type: built_on_model, to: mistral, sources: [https://mistral.ai/products/mistral-code, https://mistral.ai/products/mistral-code]}
+  - {type: ships_inside, to: mistral, sources: [https://mistral.ai/products/mistral-code, https://mistral.ai/products/mistral-code]}
+  - {type: integrates_with, to: github, sources: [https://mistral.ai/products/mistral-code, https://mistral.ai/products/mistral-code]}
+  - {type: integrates_with, to: gitlab, sources: [https://mistral.ai/products/mistral-code, https://mistral.ai/products/mistral-code]}
+  - {type: integrates_with, to: jira, sources: [https://mistral.ai/products/mistral-code, https://mistral.ai/products/mistral-code]}
+sources:
+  - {field: summary, url: https://mistral.ai/products/mistral-code, retrieved: 2026-10-21}
+  - {field: deployment, url: https://mistral.ai/products/mistral-code, retrieved: 2026-10-21}
+  - {field: models, url: https://mistral.ai/products/mistral-code, retrieved: 2026-10-21}
+  - {field: relations, url: https://mistral.ai/products/mistral-code, retrieved: 2026-10-21}

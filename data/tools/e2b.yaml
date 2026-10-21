@@ -1,0 +1,27 @@
+id: e2b
+name: E2B
+company: E2B
+url: https://e2b.dev
+layer: agent-infra
+phases: [code, test]
+target_buyer: [developer, platform team]
+interface: [api]
+summary: "The enterprise AI agent cloud: an isolated machine for every agent to run code, browse and use tools, in E2B's cloud or yours."
+customers: [ClickUp, Arena, Rogo, StackAI]
+traction: Over 2B sandboxes run (company claim)
+pricing_model: usage (per second) plus plan
+entry_price: Free (Hobby)
+deployment: [saas, "byoc (AWS, GCP, Azure)"]
+compliance: [SOC 2 Type II, HIPAA]
+sources:
+  - {field: summary, url: https://e2b.dev/, retrieved: 2026-10-21}
+  - {field: customers, url: https://e2b.dev/customers, retrieved: 2026-10-21}
+  - {field: customers, url: https://e2b.dev/customers/clickup, retrieved: 2026-10-21}
+  - {field: customers, url: https://e2b.dev/customers/arena, retrieved: 2026-10-21}
+  - {field: customers, url: https://e2b.dev/customers/rogo, retrieved: 2026-10-21}
+  - {field: customers, url: https://e2b.dev/customers/stackai, retrieved: 2026-10-21}
+  - {field: traction, url: https://e2b.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://e2b.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://e2b.dev/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://e2b.dev/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://e2b.dev/, retrieved: 2026-10-21}

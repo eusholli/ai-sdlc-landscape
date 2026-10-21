@@ -1,0 +1,26 @@
+id: legit
+name: Legit Security
+company: Legit Security
+url: https://www.legitsecurity.com
+primary_phase: security
+phases: [security, cicd]
+target_buyer: [ciso, appsec team]
+interface: [web]
+summary: AI-native ASPM platform to detect, fix and prevent AppSec risk from AI-generated code, across the software factory.
+customers: [Firebolt, ACV Auctions, Noname Security, Freddie Mac, Rocket Money, Lam Research]
+last_round: $40M Series B, led by CRV
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.legitsecurity.com]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.legitsecurity.com]}
+  - {type: integrates_with, to: jira, sources: [https://www.legitsecurity.com]}
+  - {type: integrates_with, to: snyk, sources: [https://www.legitsecurity.com]}
+  - {type: integrates_with, to: checkmarx, sources: [https://www.legitsecurity.com]}
+sources:
+  - {field: summary, url: https://www.legitsecurity.com, retrieved: 2026-10-21}
+  - {field: summary, url: https://www.legitsecurity.com/platform/aspm, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.legitsecurity.com/customers, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.legitsecurity.com/customers/case-study-acv-auctions, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.legitsecurity.com/customers/case-study-noname-security, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.legitsecurity.com, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.legitsecurity.com, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.prnewswire.com/news-releases/legit-security-secures-40-million-series-b-investment-led-by-crv-301932852.html, retrieved: 2026-10-21}

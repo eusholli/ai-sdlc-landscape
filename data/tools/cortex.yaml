@@ -1,0 +1,25 @@
+id: cortex
+name: Cortex
+company: Cortex
+url: https://www.cortex.io
+primary_phase: platform
+phases: [platform, measure]
+target_buyer: [platform team, eng leader]
+interface: [web]
+summary: "Mission control for the AI software factory: visibility, governance and golden paths for engineering teams."
+customers: [Xero, Skyscanner, Canva, Earnin]
+traction: Predicts repository ownership with over 90% accuracy (company claim)
+last_round: $60M Series C, led by Scale Venture Partners
+relations:
+  - {type: competes_with, to: port, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
+  - {type: competes_with, to: opslevel, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
+  - {type: competes_with, to: backstage, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
+sources:
+  - {field: summary, url: https://www.cortex.io, retrieved: 2026-10-05}
+  - {field: customers, url: https://www.cortex.io, retrieved: 2026-10-05}
+  - {field: customers, url: https://www.cortex.io/compare/cortex-vs-port, retrieved: 2026-09-16}
+  - {field: traction, url: https://www.cortex.io, retrieved: 2026-10-05}
+  - {field: relations, url: https://www.cortex.io/compare/cortex-vs-port, retrieved: 2026-09-16}
+  - {field: relations, url: https://www.cortex.io/compare/cortex-vs-opslevel, retrieved: 2026-09-16}
+  - {field: relations, url: https://www.cortex.io/compare/spotify-backstage-break-up, retrieved: 2026-09-04}
+  - {field: last_round, url: https://www.cortex.io/post/announcing-series-c, retrieved: 2026-10-21}

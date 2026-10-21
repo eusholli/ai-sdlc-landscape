@@ -1,0 +1,8 @@
+id: google
+name: Google (Gemini)
+company: Google DeepMind
+url: https://deepmind.google
+layer: model
+summary: Researches and builds the Gemini family of models, including open models.
+sources:
+  - {field: summary, url: https://deepmind.google, retrieved: 2026-10-21}

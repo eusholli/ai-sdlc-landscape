@@ -1,0 +1,26 @@
+id: circleci
+name: CircleCI
+company: CircleCI
+url: https://circleci.com
+primary_phase: cicd
+phases: [cicd, test]
+target_buyer: [platform team]
+interface: [web, cli, mcp]
+summary: "Autonomous validation for the AI era: validate, test and ship every change at AI speed, including prompts, models and agents."
+pricing_model: usage (credits)
+entry_price: Free (30,000 credits/month)
+deployment: [saas, self-hosted runners, server (air-gapped)]
+compliance: [SOC 2 Type II]
+last_round: $100M Series F at a $1.7B valuation (2021)
+relations:
+  - {type: integrates_with, to: cursor, sources: [https://circleci.com/]}
+  - {type: integrates_with, to: claude-code, sources: [https://circleci.com/]}
+sources:
+  - {field: summary, url: https://circleci.com/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://circleci.com/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://circleci.com/pricing/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://circleci.com/compare/bitrise-vs-circleci/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://circleci.com/pricing/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://circleci.com/pricing/server/, retrieved: 2026-10-21}
+  - {field: relations, url: https://circleci.com/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.builtinsf.com/articles/circle-ci-raises-100m-series-f-vamp-acquisition, retrieved: 2026-10-21}

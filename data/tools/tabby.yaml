@@ -1,0 +1,17 @@
+id: tabby
+name: Tabby
+company: TabbyML
+url: https://www.tabbyml.com
+primary_phase: code
+phases: [code]
+sub_kind: ide-assistant
+target_buyer: [eng leader, platform team]
+interface: [ide, cli]
+summary: Open-source, self-hosted AI coding assistant, including air-gapped deployment.
+deployment: [self-hosted, air-gapped]
+open_source: true
+sources:
+  - {field: summary, url: https://www.tabbyml.com, retrieved: 2026-10-21}
+  - {field: open_source, url: https://www.tabbyml.com, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.tabbyml.com, retrieved: 2026-10-21}
+  - {field: deployment, url: https://www.tabbyml.com/blog/deploy-tabby-in-air-gapped-environment-with-docker, retrieved: 2026-10-21}

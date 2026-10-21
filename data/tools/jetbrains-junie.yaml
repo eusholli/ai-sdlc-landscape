@@ -1,0 +1,19 @@
+id: jetbrains-junie
+name: Junie
+company: JetBrains
+url: https://www.jetbrains.com/junie
+primary_phase: code
+phases: [code, test]
+sub_kind: cli-agent
+target_buyer: [developer]
+interface: [ide, cli]
+autonomy: agent
+summary: JetBrains' AI coding agent, run from the IDE or the terminal with any model you choose.
+models: [bring your own key]
+compliance: [SOC 2]
+relations:
+  - {type: ships_inside, to: jetbrains, sources: [https://www.jetbrains.com/junie]}
+sources:
+  - {field: summary, url: https://www.jetbrains.com/junie, retrieved: 2026-10-21}
+  - {field: compliance, url: https://www.jetbrains.com/junie, retrieved: 2026-10-21}
+  - {field: models, url: https://www.jetbrains.com/junie, retrieved: 2026-10-21}

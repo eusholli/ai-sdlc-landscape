@@ -1,0 +1,15 @@
+id: amika
+name: Amika
+company: Amika
+url: https://www.amika.dev
+layer: agent-infra
+phases: [code]
+target_buyer: [platform team]
+interface: [cli, web]
+summary: "Cloud devboxes for coding agents on computers you already own: isolated VMs sliced from your own machines."
+pricing_model: per active user plus hosted compute
+entry_price: Free for up to 3 people on your own machines
+sources:
+  - {field: summary, url: https://www.amika.dev, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.amika.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.amika.dev/pricing, retrieved: 2026-10-21}

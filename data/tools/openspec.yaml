@@ -1,0 +1,18 @@
+id: openspec
+name: OpenSpec
+company: Fission AI
+url: https://github.com/Fission-AI/OpenSpec
+primary_phase: plan
+phases: [plan]
+target_buyer: [developer]
+interface: [cli]
+summary: Spec-driven development for AI coding assistants, working with the 30+ tools a team already uses rather than one IDE.
+pricing_model: free (open source)
+open_source: true
+relations:
+  - {type: competes_with, to: kiro, sources: [https://github.com/Fission-AI/OpenSpec]}
+sources:
+  - {field: summary, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
+  - {field: open_source, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
+  - {field: relations, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}

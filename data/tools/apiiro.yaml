@@ -1,0 +1,14 @@
+id: apiiro
+name: Apiiro
+company: Apiiro
+url: https://apiiro.com
+primary_phase: security
+phases: [security, understand]
+target_buyer: [ciso]
+interface: [web, ide]
+autonomy: agent
+summary: "Secures everything coding agents build, use and ship: a Guardian Agent on an AppSec data fabric that prevents risk before code exists."
+last_round: $100M Series B (Nov 2022)
+sources:
+  - {field: summary, url: https://apiiro.com, retrieved: 2026-10-21}
+  - {field: last_round, url: https://siliconangle.com/2022/11/03/cloud-native-application-security-firm-apiiro-raises-100m-round/, retrieved: 2026-10-21}

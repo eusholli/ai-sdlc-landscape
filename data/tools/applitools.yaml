@@ -1,0 +1,26 @@
+id: applitools
+name: Applitools
+company: Applitools
+url: https://applitools.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web, sdk]
+summary: AI-powered end-to-end testing platform combining Visual AI with GenAI and no-code test authoring.
+customers: [Okta, Gannett, Medtronic, Peloton, Aetna, Medallia]
+deployment: [saas, dedicated cloud, on-prem]
+compliance: [ISO 27001, SOC 2 Type II]
+last_round: $31M Series C, led by OpenView
+relations:
+  - {type: competes_with, to: browserstack, sources: [https://applitools.com/compare/browserstack/, https://applitools.com/compare/testmu/]}
+  - {type: competes_with, to: testmu, sources: [https://applitools.com/compare/browserstack/, https://applitools.com/compare/testmu/]}
+sources:
+  - {field: summary, url: https://applitools.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://applitools.com/case-studies/, retrieved: 2026-10-21}
+  - {field: customers, url: https://applitools.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://applitools.com/compare/browserstack/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://applitools.com/, retrieved: 2026-10-21}
+  - {field: deployment, url: https://applitools.com/compare/general/, retrieved: 2026-10-21}
+  - {field: relations, url: https://applitools.com/compare/browserstack/, retrieved: 2026-10-21}
+  - {field: relations, url: https://applitools.com/compare/testmu/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://applitools.com/blog/press-release-applitools-raises-31m/, retrieved: 2026-10-21}

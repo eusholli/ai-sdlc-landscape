@@ -1,0 +1,14 @@
+id: google-stitch
+name: Stitch
+company: Google
+url: https://stitch.withgoogle.com
+primary_phase: design
+phases: [design]
+target_buyer: [designer, developer]
+interface: [web]
+summary: Generates UIs for mobile and web applications, making design ideation fast and easy.
+relations:
+  - {type: ships_inside, to: google-co, sources: []}
+  - {type: built_on_model, to: google, sources: []}
+sources:
+  - {field: summary, url: https://stitch.withgoogle.com/, retrieved: 2026-10-21}

@@ -1,0 +1,22 @@
+id: charlie-labs
+name: Charlie (Daemons)
+company: Charlie Labs
+url: https://charlielabs.ai
+primary_phase: code
+phases: [code, review, maintain]
+sub_kind: autonomous-agent
+target_buyer: [eng leader]
+interface: [slack, pr-bot]
+autonomy: autonomous
+summary: "Daemons: always-on AI processes, defined in Markdown, that work proactively across Slack, Linear and GitHub with no prompts."
+pricing_model: subscription
+entry_price: Free; $50/month
+relations:
+  - {type: integrates_with, to: slack, sources: [https://charlielabs.ai/]}
+  - {type: integrates_with, to: linear, sources: [https://charlielabs.ai/]}
+  - {type: integrates_with, to: github, sources: [https://charlielabs.ai/]}
+sources:
+  - {field: summary, url: https://charlielabs.ai/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://charlielabs.ai/pricing/, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://charlielabs.ai/pricing/, retrieved: 2026-10-21}
+  - {field: relations, url: https://charlielabs.ai/, retrieved: 2026-10-21}

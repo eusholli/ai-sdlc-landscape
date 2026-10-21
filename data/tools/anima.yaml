@@ -1,0 +1,29 @@
+id: anima
+name: Anima
+company: Anima
+url: https://www.animaapp.com
+primary_phase: design
+phases: [design, code]
+sub_kind: app-builder
+target_buyer: [designer, developer]
+interface: [web, figma plugin, api]
+summary: "The design-aware AI agent: from Figma files, URLs or prompts it generates production-ready apps."
+customers: [Apple, Netflix, Walmart, Disney, Deloitte, Amazon]
+traction: Used by more than 1.8 million builders (company claim)
+pricing_model: seat
+entry_price: Enterprise from $500/month annual
+founded: 2017
+last_round: $10M Series A, led by MizMaa Ventures (2021)
+relations:
+  - {type: ships_inside, to: bolt, sources: [https://www.animaapp.com/]}
+  - {type: ships_inside, to: replit, sources: [https://www.animaapp.com/]}
+  - {type: integrates_with, to: figma, sources: [https://www.animaapp.com/]}
+sources:
+  - {field: summary, url: https://www.animaapp.com/, retrieved: 2026-10-21}
+  - {field: customers, url: https://www.animaapp.com/about, retrieved: 2026-10-21}
+  - {field: traction, url: https://www.animaapp.com/about, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://www.animaapp.com/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://www.animaapp.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.animaapp.com/, retrieved: 2026-10-21}
+  - {field: founded, url: https://www.calcalistech.com/ctechnews/article/hkm511mmdbe, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/hkm511mmdbe, retrieved: 2026-10-21}

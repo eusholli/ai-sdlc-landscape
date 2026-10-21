@@ -1,0 +1,14 @@
+id: catio
+name: Catio
+company: Catio
+url: https://www.catio.tech
+primary_phase: design
+phases: [design, understand, platform]
+target_buyer: [architect, cto]
+interface: [web]
+summary: "The Architecture IDE: the reasoning, decision, design and governance layer for modern tech stacks."
+last_round: $3M (2025)
+sources:
+  - {field: summary, url: https://www.catio.tech, retrieved: 2026-10-21}
+  - {field: last_round, url: https://www.catio.tech/blog, retrieved: 2026-10-21}
+  - {field: last_round, url: https://theaiinsider.tech/2025/03/26/catio-secures-3m-to-revolutionize-tech-decision-making-with-ai-powered-intelligence/, retrieved: 2026-10-21}

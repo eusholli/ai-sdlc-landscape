@@ -1,0 +1,20 @@
+id: dx
+name: DX
+company: Atlassian
+url: https://getdx.com
+primary_phase: measure
+phases: [measure]
+target_buyer: [eng leader, cto]
+interface: [web]
+summary: Developer intelligence platform designed by researchers to measure productivity, improve with data and navigate the shift to AI.
+customers: [Vanguard, DroneDeploy, Amplitude, Pinterest, Dropbox]
+status: acquired (by Atlassian, Sept 2025)
+relations:
+  - {type: acquired_by, to: atlassian, sources: [https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, https://siliconangle.com/2025/09/18/atlassian-acquires-developer-productivity-startup-dx-1b/]}
+sources:
+  - {field: summary, url: https://getdx.com, retrieved: 2026-10-21}
+  - {field: customers, url: https://getdx.com/customers/, retrieved: 2026-10-21}
+  - {field: customers, url: https://getdx.com/compare-dx/, retrieved: 2026-10-21}
+  - {field: status, url: https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, retrieved: 2026-10-21}
+  - {field: status, url: https://siliconangle.com/2025/09/18/atlassian-acquires-developer-productivity-startup-dx-1b/, retrieved: 2026-10-21}
+  - {field: relations, url: https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, retrieved: 2026-10-21}

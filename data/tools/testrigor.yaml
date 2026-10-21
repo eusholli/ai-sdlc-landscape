@@ -1,0 +1,20 @@
+id: testrigor
+name: testRigor
+company: testRigor
+url: https://testrigor.com
+primary_phase: test
+phases: [test]
+target_buyer: [qa team]
+interface: [web]
+summary: "AI-based test automation: end-to-end tests written in plain English, with 99.5% less test maintenance (company claim)."
+compliance: [ISO/IEC 27001:2022, SOC 2, HIPAA, GDPR]
+last_round: $4.1M seed (2021)
+relations:
+  - {type: competes_with, to: mabl, sources: [https://testrigor.com/alternative/mabl/, https://testrigor.com/alternative/qawolf/]}
+  - {type: competes_with, to: qa-wolf, sources: [https://testrigor.com/alternative/mabl/, https://testrigor.com/alternative/qawolf/]}
+sources:
+  - {field: summary, url: https://testrigor.com/, retrieved: 2026-10-21}
+  - {field: compliance, url: https://testrigor.com/, retrieved: 2026-10-21}
+  - {field: relations, url: https://testrigor.com/alternative/mabl/, retrieved: 2026-10-21}
+  - {field: relations, url: https://testrigor.com/alternative/qawolf/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://techcrunch.com/2021/08/24/testrigor-scores-4m-seed-to-turn-a-list-of-actions-into-a-qa-testing-script/, retrieved: 2026-10-21}

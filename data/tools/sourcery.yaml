@@ -1,0 +1,23 @@
+id: sourcery
+name: Sourcery
+company: Sourcery
+url: https://sourcery.ai
+primary_phase: review
+phases: [review]
+target_buyer: [developer, eng leader]
+interface: [pr-bot, ide]
+summary: Perfectionist AI code review that finds more issues than any other AI reviewer; demand perfection from your coding agents.
+pricing_model: seat
+entry_price: Free for open source; Pro $12/seat/month annual
+deployment: [saas, self-hosted (enterprise)]
+compliance: [SOC 2 Type II]
+relations:
+  - {type: integrates_with, to: github, sources: [https://sourcery.ai/pricing]}
+  - {type: integrates_with, to: gitlab, sources: [https://sourcery.ai/pricing]}
+sources:
+  - {field: summary, url: https://sourcery.ai, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://sourcery.ai/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://sourcery.ai/pricing, retrieved: 2026-10-21}
+  - {field: compliance, url: https://sourcery.ai/pricing, retrieved: 2026-10-21}
+  - {field: deployment, url: https://sourcery.ai/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://sourcery.ai/pricing, retrieved: 2026-10-21}

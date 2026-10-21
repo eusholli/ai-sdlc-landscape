@@ -1,0 +1,29 @@
+id: socket
+name: Socket
+company: Socket
+url: https://socket.dev
+primary_phase: security
+phases: [security]
+target_buyer: [appsec team, developer]
+interface: [pr-bot, cli, web]
+summary: Blocks zero-day software supply chain attacks before they reach a developer's machine, CI or production.
+traction: Millions of developers (company claim)
+pricing_model: seat
+entry_price: Free; Team $25/dev/month
+founded: 2020
+last_round: $60M Series C at a $1B valuation, led by Thrive Capital (May 2026)
+relations:
+  - {type: competes_with, to: snyk, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
+  - {type: competes_with, to: endor-labs, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
+  - {type: competes_with, to: semgrep, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
+sources:
+  - {field: summary, url: https://socket.dev/, retrieved: 2026-10-21}
+  - {field: traction, url: https://socket.dev/, retrieved: 2026-10-21}
+  - {field: pricing_model, url: https://socket.dev/pricing, retrieved: 2026-10-21}
+  - {field: entry_price, url: https://socket.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://socket.dev/compare/socket-vs-snyk, retrieved: 2026-10-21}
+  - {field: relations, url: https://socket.dev/compare/socket-vs-endor-labs, retrieved: 2026-10-21}
+  - {field: relations, url: https://socket.dev/compare/socket-vs-semgrep, retrieved: 2026-10-21}
+  - {field: founded, url: https://fintech.global/2026/05/21/open-source-security-gap-drives-sockets-60m-raise/, retrieved: 2026-10-21}
+  - {field: last_round, url: https://socket.dev/blog/series-c, retrieved: 2026-10-21}
+  - {field: last_round, url: https://fintech.global/2026/05/21/open-source-security-gap-drives-sockets-60m-raise/, retrieved: 2026-10-21}
