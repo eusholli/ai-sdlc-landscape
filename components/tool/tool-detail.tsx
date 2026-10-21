@@ -74,7 +74,7 @@ export function ToolDetail({
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <CompareButton id={tool.id} />
+          <CompareButton id={tool.id} name={tool.name} />
           {!isPage && (
             <Button asChild variant="outline" size="sm">
               <Link href={`/tools/${tool.id}`}>

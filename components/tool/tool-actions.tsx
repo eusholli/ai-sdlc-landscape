@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { Suspense, type MouseEvent, type ReactNode } from "react";
+import { useCompare } from "@/components/compare/use-compare";
 import { Button } from "@/components/ui/button";
 import { filterParsers } from "@/lib/filters";
 
@@ -52,9 +53,9 @@ export function ToolLink(props: ToolLinkProps) {
   );
 }
 
-function CompareButtonInner({ id }: { id: string }) {
-  const [{ compare }, setQuery] = useQueryStates(filterParsers);
-  const inSet = compare.includes(id);
+function CompareButtonInner({ id, name }: { id: string; name?: string }) {
+  const { has, add, remove } = useCompare();
+  const inSet = has(id);
 
   return (
     <Button
@@ -62,7 +63,7 @@ function CompareButtonInner({ id }: { id: string }) {
       variant="outline"
       size="sm"
       aria-pressed={inSet}
-      onClick={() => void setQuery({ compare: inSet ? compare.filter((x) => x !== id) : [...compare, id] })}
+      onClick={() => (inSet ? remove(id) : add(id, name))}
     >
       {inSet ? <Minus aria-hidden /> : <Plus aria-hidden />}
       {inSet ? "Remove from compare" : "Add to compare"}
@@ -70,7 +71,7 @@ function CompareButtonInner({ id }: { id: string }) {
   );
 }
 
-export function CompareButton({ id }: { id: string }) {
+export function CompareButton({ id, name }: { id: string; name?: string }) {
   return (
     <Suspense
       fallback={
@@ -80,7 +81,7 @@ export function CompareButton({ id }: { id: string }) {
         </Button>
       }
     >
-      <CompareButtonInner id={id} />
+      <CompareButtonInner id={id} name={name} />
     </Suspense>
   );
 }

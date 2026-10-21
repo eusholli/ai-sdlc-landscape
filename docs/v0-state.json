@@ -1,5 +1,5 @@
 {
-  "lastStep": 6,
+  "lastStep": 7,
   "chatId": "EKXETuWnLzG",
   "webUrl": "https://v0.app/chat/EKXETuWnLzG",
   "files": [
@@ -32,7 +32,6 @@
     "components/ui/toggle.tsx",
     "components/ui/tooltip.tsx",
     "data/landscape.json",
-    "lib/ui-events.ts",
     "components/site-name.tsx",
     "components/view-switcher.tsx",
     "components/theme-toggle.tsx",
@@ -45,7 +44,6 @@
     "lib/utils.ts",
     "components/map/map-layout.ts",
     "components/map/use-pan-zoom.ts",
-    "components/map/tool-tile.tsx",
     "components/map/platform-bars.tsx",
     "components/map/phase-columns.tsx",
     "components/map/layer-bands.tsx",
@@ -61,12 +59,9 @@
     "components/tool/facts.ts",
     "components/tool/section-heading.tsx",
     "components/tool/tool-logo.tsx",
-    "components/tool/tool-actions.tsx",
-    "components/tool/phase-coverage.tsx",
     "components/tool/facts-grid.tsx",
     "components/tool/relation-groups.tsx",
     "components/tool/source-list.tsx",
-    "components/tool/tool-detail.tsx",
     "components/tool/tool-detail-skeleton.tsx",
     "components/tool/tool-drawer.tsx",
     "app/(site)/tools/[id]/page.tsx",
@@ -86,6 +81,16 @@
     "components/network/network-view.tsx",
     "components/map/landscape-map.tsx",
     "app/(site)/page.tsx",
-    "components/network/network-canvas.tsx"
+    "components/network/network-canvas.tsx",
+    "lib/compare.ts",
+    "lib/ui-events.ts",
+    "components/compare/use-compare.ts",
+    "components/notices.tsx",
+    "components/map/tile-compare-button.tsx",
+    "components/map/tool-tile.tsx",
+    "components/tool/tool-actions.tsx",
+    "components/tool/tool-detail.tsx",
+    "components/tool/phase-coverage.tsx",
+    "components/compare/compare-rows.ts"
   ]
 }

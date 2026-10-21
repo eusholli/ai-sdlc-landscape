@@ -50,3 +50,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_Ta29a8aWii6, demo https://demo-kzml8kvbkj6vnzizfcqe.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..nMEHjuGWIZvSmSxx.76VTJpFR0buwpOE-DkvY7R9aNyCfQasEQU6O3BTsLW0D-ZQ9DG-Jb8WUY2Urrty_5Rl0aBlMHTBq7uDWFodgI_eAUPAaGjZecdPLMwLs0CndbRHNZb3Fgo61IWEMs_J6mXdJ6pCmzJEyFeN0MRjBUqxuLTcpX-7qmd33zNAx7oEJV525ALQ2W9-SFVYCJf8uJ-pbfKbBmNrJ2gQ9khU5faU5SyNOJRoJnzMVJ8OJRqx814mSGPMQR7Hg073K2g0r1MX9z0l-QADtUmcGmAG3o1nQLON_4C1o.gNCmFoxzGggJCdDhZ71DRA&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
 - credits before: 24.2334127 of 20, after: 23.0795853 of 20
 - files written: 7; fix rounds: 1; gate: passed
+
+## Step 7: Compare
+
+- 2026-10-21T21:40:33.330Z
+- chat: https://v0.app/chat/EKXETuWnLzG
+- version: b_XfK2ypzLMzW, demo https://demo-kzmluk8qylr0c6jx5v87.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..P-P3w92EEK8Gl2Ac.N_1k9Fx6TnZ_zWqsENH2dOWWs-o2-6-L1U_IDMRk-xrn2uV8D2qXDXb9g4sk-Iud0TPaBFg3K3dYNjelW_H_E56NHHf3E0R0qVIYQdV4OA528LA5_5SALCDCAcYDIEDM7XkqCpqWY-RwP74WGmM6CkmXJH_WJs3kSfBIDFp4kxLwB4JQQgXuAZpZH6TSfjhC39ik2c_nBTcdqH2B1YSt3-rcLj3FMDBiHS2jAV0d1l5k7hun8CtwakKKF-z0lrrciOKLeqBO64IaDR96YRM0Y3iRUWB30RR3.77pm-5ol9qQIuwD21G9fXA&__v0_vercel_project_id=prj_AbmSybK5fOkVFO4W0HKCPmB2YoO6
+- credits before: 23.0795853 of 20, after: 22.4083644 of 20
+- files written: 10; fix rounds: 0; gate: passed
