@@ -149,21 +149,47 @@ async function balance(client: Client): Promise<string> {
   }
 }
 
-async function waitForVersion(client: Client, chatId: string, after?: string) {
+/** A fingerprint of everything v0 might still be changing: latest version and latest message. */
+async function snapshot(client: Client, chatId: string) {
+  const chat = await client.chats.getById({ chatId });
+  const msgs = (await client.chats.findMessages({ chatId, limit: 1 })) as {
+    data: { id: string; role: string; content: string; updatedAt?: string }[];
+  };
+  const m = msgs.data[0];
+  const v = chat.latestVersion;
+  return {
+    chat,
+    version: v,
+    key: [v?.id, v?.status, v?.updatedAt, v?.files.length, m?.id, m?.role, m?.content.length, m?.updatedAt].join("|"),
+    idle: !!v && v.status !== "pending" && m?.role === "assistant",
+  };
+}
+
+/**
+ * Wait until the chat has been idle and unchanged for SETTLE_POLLS polls in a row. v0 marks
+ * versions completed several times within one turn, so a single completed version is not the
+ * end of a turn, and sending the next prompt before the turn ends cuts it short.
+ */
+async function settle(client: Client, chatId: string, after?: string) {
+  const SETTLE_POLLS = 6;
   const polls = Number(process.env.V0_WAIT_MINUTES ?? 30) * 6;
+  let last = "";
+  let stable = 0;
   for (let i = 0; i < polls; i++) {
-    const chat = await client.chats.getById({ chatId });
-    const v = chat.latestVersion;
-    if (v && v.id !== after && v.status !== "pending") return { chat, version: v };
+    const s = await snapshot(client, chatId);
+    const fresh = after === undefined || s.version?.id !== after;
+    stable = s.idle && fresh && s.key === last ? stable + 1 : 0;
+    last = s.key;
+    if (stable >= SETTLE_POLLS) return { chat: s.chat, version: s.version! };
     await new Promise((r) => setTimeout(r, 10_000));
   }
-  throw new Error("v0 produced no new version in time (it may have answered in text; check the chat)");
+  throw new Error("v0 did not settle in time (it may have answered in text; check the chat)");
 }
 
 async function send(client: Client, chatId: string, message: string) {
-  const before = (await client.chats.getById({ chatId })).latestVersion?.id;
+  const before = (await settle(client, chatId)).version.id;
   await client.chats.sendMessage({ chatId, message, system: SYSTEM, responseMode: "async" });
-  const { chat, version } = await waitForVersion(client, chatId, before);
+  const { chat, version } = await settle(client, chatId, before);
   if (version.status === "failed") throw new Error(`v0 version ${version.id} failed`);
   const full = await client.chats.getVersion({ chatId, versionId: version.id });
   return { chat, version: full };
@@ -230,7 +256,7 @@ async function main() {
   if (flag("--pull")) {
     // Re-pull the chat's latest version and gate it, spending nothing. For recovering a step.
     const client = v0();
-    const chat = await client.chats.getById({ chatId: state.chatId! });
+    const { chat } = await settle(client, state.chatId!);
     const version = await client.chats.getVersion({ chatId: chat.id, versionId: chat.latestVersion!.id });
     const changed = pull(version.files, state.files ?? []);
     state.files = version.files.map((f) => clean(f.name));
