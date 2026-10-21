@@ -63,7 +63,7 @@ function MapCanvas({ tools, phases, layers, fullLifecycleIds }: LandscapeMapProp
   const onSelect = useCallback((id: string) => void setQuery({ tool: id }), [setQuery]);
 
   return (
-    <div className="relative h-[calc(100dvh-7rem)] min-h-[32rem] overflow-hidden border-b bg-muted/30">
+    <div className="relative h-[calc(100dvh-10.5rem)] min-h-[32rem] overflow-hidden border-b bg-muted/30">
       <div
         ref={viewportRef}
         role="group"

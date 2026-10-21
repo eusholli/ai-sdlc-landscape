@@ -1,5 +1,5 @@
 {
-  "lastStep": 4,
+  "lastStep": 5,
   "chatId": "EKXETuWnLzG",
   "webUrl": "https://v0.app/chat/EKXETuWnLzG",
   "files": [
@@ -21,11 +21,8 @@
     "components/ui/button.tsx",
     "components/ui/card.tsx",
     "components/ui/checkbox.tsx",
-    "components/ui/command.tsx",
-    "components/ui/dialog.tsx",
     "components/ui/input-group.tsx",
     "components/ui/input.tsx",
-    "components/ui/popover.tsx",
     "components/ui/scroll-area.tsx",
     "components/ui/separator.tsx",
     "components/ui/sheet.tsx",
@@ -53,8 +50,6 @@
     "components/map/phase-columns.tsx",
     "components/map/layer-bands.tsx",
     "components/map/map-controls.tsx",
-    "components/map/landscape-map.tsx",
-    "app/(site)/page.tsx",
     "components/map/zoom-level.ts",
     "components/map/relation-style.ts",
     "components/map/relation-index.ts",
@@ -75,7 +70,17 @@
     "components/tool/tool-detail-skeleton.tsx",
     "components/tool/tool-drawer.tsx",
     "app/(site)/tools/[id]/page.tsx",
+    "components/ui/skeleton.tsx",
+    "components/ui/dialog.tsx",
+    "components/ui/command.tsx",
+    "components/ui/popover.tsx",
+    "components/filters/facets.ts",
+    "components/filters/facet-popover.tsx",
+    "components/filters/filter-bar.tsx",
+    "components/filters/search-palette.tsx",
+    "components/filters/filter-chrome.tsx",
     "app/(site)/layout.tsx",
-    "components/ui/skeleton.tsx"
+    "components/map/landscape-map.tsx",
+    "app/(site)/page.tsx"
   ]
 }

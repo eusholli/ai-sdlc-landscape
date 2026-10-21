@@ -1,9 +1,11 @@
 import { Suspense } from "react";
+import { FilterChrome } from "@/components/filters/filter-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
 import { StatsStrip } from "@/components/stats-strip";
 import { ToolDrawer } from "@/components/tool/tool-drawer";
+import { phases, segments, toolsLite } from "@/lib/data";
 import { toolDetailRefs } from "@/lib/tool-refs";
 
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -27,6 +29,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
         </Suspense>
       </header>
       <StatsStrip />
+      <FilterChrome tools={toolsLite()} phases={phases()} segments={segments()} />
       <div className="flex-1">{children}</div>
       <SiteFooter />
       <Suspense fallback={null}>

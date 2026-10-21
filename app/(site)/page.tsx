@@ -5,7 +5,7 @@ import { fullLifecycle, layers, phases, relationsLite, toolsLite } from "@/lib/d
 export default function Home() {
   return (
     <main id="main">
-      <Suspense fallback={<div aria-hidden className="h-[calc(100dvh-7rem)] min-h-[32rem] border-b bg-muted/30" />}>
+      <Suspense fallback={<div aria-hidden className="h-[calc(100dvh-10.5rem)] min-h-[32rem] border-b bg-muted/30" />}>
         <LandscapeMap
           tools={toolsLite()}
           relations={relationsLite()}
