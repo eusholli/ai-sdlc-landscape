@@ -4,12 +4,14 @@
 //   npx tsx scripts/v0-run.ts --step 1           run one step
 //   npx tsx scripts/v0-run.ts --from 3           run steps 3..9 (no pause)
 //   npx tsx scripts/v0-run.ts                    run from the next step, pausing after step 2
+//   npx tsx scripts/v0-run.ts --whoami          check the key and the credit balance, spend nothing
 //   flags: --no-push (commit only), --new-chat (forget the saved chat)
+//   V0_WAIT_MINUTES caps the wait for each version (default 30)
 //
 // Needs V0_API_KEY in .env.local. State (the chat id and the last finished step) is kept in
 // docs/v0-state.json, and every step is logged to docs/v0-log.md.
 import { execFileSync, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, appendFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, appendFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { config } from "dotenv";
 import { createClient } from "v0-sdk";
@@ -114,7 +116,7 @@ const tail = (s: string, lines = 80) => s.trim().split("\n").slice(-lines).join(
 function gate(): { ok: boolean; report: string } {
   const problems = guard("HEAD");
   if (problems.length) return { ok: false, report: problems.join("\n") };
-  const install = run("pnpm", ["install"]);
+  const install = run("pnpm", ["install", "--no-frozen-lockfile"]);
   if (!install.ok) return { ok: false, report: tail(install.out) };
   const build = run("pnpm", ["build"]);
   if (!build.ok) return { ok: false, report: tail(build.out) };
@@ -125,7 +127,8 @@ function gate(): { ok: boolean; report: string } {
 
 // ---------- v0 ----------
 
-type State = { chatId?: string; webUrl?: string; lastStep: number };
+/** `files` is every path in v0's latest version, so a file v0 drops can be deleted here too. */
+type State = { chatId?: string; webUrl?: string; lastStep: number; files?: string[] };
 const loadState = (): State => (existsSync(STATE) ? JSON.parse(readFileSync(STATE, "utf8")) : { lastStep: 0 });
 const saveState = (s: State) => writeFileSync(STATE, JSON.stringify(s, null, 2) + "\n");
 
@@ -146,13 +149,14 @@ async function balance(client: Client): Promise<string> {
 }
 
 async function waitForVersion(client: Client, chatId: string, after?: string) {
-  for (let i = 0; i < 180; i++) {
+  const polls = Number(process.env.V0_WAIT_MINUTES ?? 30) * 6;
+  for (let i = 0; i < polls; i++) {
     const chat = await client.chats.getById({ chatId });
     const v = chat.latestVersion;
     if (v && v.id !== after && v.status !== "pending") return { chat, version: v };
     await new Promise((r) => setTimeout(r, 10_000));
   }
-  throw new Error("v0 did not finish a version within 30 minutes");
+  throw new Error("v0 produced no new version in time (it may have answered in text; check the chat)");
 }
 
 async function send(client: Client, chatId: string, message: string) {
@@ -164,18 +168,30 @@ async function send(client: Client, chatId: string, message: string) {
   return { chat, version: full };
 }
 
-/** Write v0's files into the tree, skipping locked paths. Returns the paths written. */
-function pull(files: { name: string; content: string }[]): string[] {
-  const written: string[] = [];
+const clean = (name: string) => name.replace(/^\/+/, "");
+
+/**
+ * Write v0's files into the tree, skipping locked paths, and delete files v0 dropped since its
+ * previous version (`previous`). Deletion only touches paths v0 has held, never locked ones.
+ * Returns the paths written or deleted.
+ */
+export function pull(files: { name: string; content: string }[], previous: string[]): string[] {
+  const changed: string[] = [];
+  const current = new Set(files.map((f) => clean(f.name)));
   for (const f of files) {
-    const name = f.name.replace(/^\/+/, "");
+    const name = clean(f.name);
     if (isLocked(name) || name.includes("..")) continue;
     if (existsSync(name) && readFileSync(name, "utf8") === f.content) continue;
     mkdirSync(dirname(name) || ".", { recursive: true });
     writeFileSync(name, f.content);
-    written.push(name);
+    changed.push(name);
   }
-  return written;
+  for (const name of previous) {
+    if (current.has(name) || isLocked(name) || name.includes("..") || !existsSync(name)) continue;
+    rmSync(name);
+    changed.push(`-${name}`);
+  }
+  return changed;
 }
 
 function log(entry: string) {
@@ -204,12 +220,16 @@ async function main() {
     return;
   }
 
+  if (flag("--whoami")) {
+    console.log(`credits: ${await balance(v0())}`);
+    return;
+  }
   if (sh("git", ["status", "--porcelain"])) throw new Error("working tree is not clean; commit or stash first");
   const client = v0();
 
   if (!state.chatId) {
     const chat = await client.chats.init({ type: "files", files: seedFiles(), name: "AI SDLC Landscape", chatPrivacy: "private" });
-    Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl });
+    Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl, files: seedFiles().map((f) => f.name) });
     saveState(state);
     console.log(`v0 chat: ${chat.webUrl}`);
   }
@@ -219,7 +239,8 @@ async function main() {
     console.log(`\n== step ${step.n}: ${step.title}`);
     const credits = await balance(client);
     let { version } = await send(client, chatId, step.body);
-    let written = pull(version.files);
+    let written = pull(version.files, state.files ?? []);
+    state.files = version.files.map((f) => clean(f.name));
     let result = gate();
     let rounds = 0;
     while (!result.ok && rounds < MAX_FIX_ROUNDS) {
@@ -227,7 +248,8 @@ async function main() {
       console.log(`gate failed, sending the error back (round ${rounds})`);
       ({ version } = await send(client, chatId,
         `The build gate failed after your last change. Fix only what is needed, keep the locked files as they are.\n\n\`\`\`\n${result.report}\n\`\`\``));
-      written = [...new Set([...written, ...pull(version.files)])];
+      written = [...new Set([...written, ...pull(version.files, state.files)])];
+      state.files = version.files.map((f) => clean(f.name));
       result = gate();
     }
 
@@ -251,7 +273,10 @@ async function main() {
     saveState(state);
     sh("git", ["add", "-A"]);
     sh("git", ["commit", "-m", `v0: step ${step.n} ${step.title.toLowerCase()}`]);
-    if (PUSH) run("git", ["push"]);
+    if (PUSH) {
+      const push = run("git", ["push", "-u", "origin", "HEAD"]);
+      if (!push.ok) throw new Error(`push failed:\n${tail(push.out, 20)}`);
+    }
     console.log(`step ${step.n} committed${PUSH ? " and pushed" : ""}`);
 
     if (pause && step.n === PAUSE_AFTER) {
@@ -261,7 +286,7 @@ async function main() {
   }
 }
 
-main().catch((e) => {
+if (process.argv[1]?.endsWith("v0-run.ts")) main().catch((e) => {
   console.error(e instanceof Error ? e.message : e);
   process.exit(1);
 });
