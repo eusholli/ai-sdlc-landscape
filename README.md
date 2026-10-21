@@ -68,5 +68,6 @@ a link to a public page that states the right one.
 
 ## Licence and logos
 
-Code is MIT. The dataset is published under CC BY 4.0. Logos and product names belong to their
-owners and are shown only to identify each product.
+Code is MIT ([LICENSE](LICENSE)). The dataset is published under CC BY 4.0
+([LICENSE-DATA](LICENSE-DATA)). Logos and product names belong to their owners and are shown only to
+identify each product.

@@ -1,0 +1,18 @@
+AI SDLC Landscape dataset
+Copyright (c) 2026 Geoff Hollingworth
+
+The dataset in data/ (landscape.json and the per-tool JSON served under
+/data/tools/ and /landscape.json) is licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+You may share and adapt it for any purpose, including commercially, provided
+you give appropriate credit, link to the licence, and indicate if changes were
+made. Suggested credit: "AI SDLC Landscape (https://ai-sdlc-landscape.vercel.app),
+CC BY 4.0".
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Each fact in the dataset cites a public source. Those sources remain the
+property of their publishers, and quoted product claims belong to the vendors
+who made them. Logos in public/logos/ are not covered by this licence; they
+belong to their owners and are shown only to identify each product.

@@ -93,7 +93,17 @@ export default function AboutPage() {
         <Section id="data" title="The data">
           <p>
             The data is as of <time dateTime={date}>{formatDate(date)}</time>. The full dataset, including sources, is
-            one JSON file you can download and reuse.
+            one JSON file you can download and reuse under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className={linkClass}
+            >
+              CC BY 4.0
+            </a>
+            : credit the AI SDLC Landscape and link back. The code is MIT. Logos belong to their owners and are not
+            covered.
           </p>
           <div>
             <Button asChild variant="outline">
