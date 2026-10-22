@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "pnpm data && vitest run",
-    "check": "pnpm data && tsc --noEmit && vitest run",
+    "check": "pnpm data && tsc --noEmit && eslint && vitest run",
     "data": "tsx scripts/build-data.ts",
     "data:check": "tsx scripts/build-data.ts --check",
     "data:links": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/check-links.ts",

@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import { cn } from "@/lib/utils";
+import { allTools } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "AI SDLC Landscape", template: "%s | AI SDLC Landscape" },
   description:
-    "179 AI tools across the software development lifecycle, by phase, with customers, partners, pricing and how they connect. Every fact links to its source.",
+    `${allTools().filter((t) => t.kind === "tool").length} AI tools across the software development lifecycle, by phase, with customers, partners, pricing and how they connect. Every fact links to its source.`,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

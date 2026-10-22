@@ -1,8 +1,8 @@
 # AI SDLC Landscape
 
-An interactive map of the AI tools that work across the software development lifecycle: 179
-tools across 13 phases, two cross-cutting layers (agent infrastructure and model providers) and
-268 typed relations between them. Every fact on a tool links to the public page it came from.
+An interactive map of the AI tools that work across the software development lifecycle: the tools
+in each of 13 phases, two cross-cutting layers (agent infrastructure and model providers) and the
+typed relations between them. Every fact on a tool links to the public page it came from.
 Where a vendor does not publish a fact, the site says "Not published".
 
 The site is static Next.js on Vercel. The data is one YAML record per tool in `data/tools/`. The

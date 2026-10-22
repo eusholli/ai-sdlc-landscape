@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import raw from "@/data/landscape.json";
 import {
@@ -14,7 +15,7 @@ const empty: Filters = {
 describe("data contract", () => {
   it("keeps every node", () => {
     expect(allTools().length).toBe(raw.nodes.length);
-    expect(allTools().filter((t) => t.kind === "tool").length).toBe(179);
+    expect(allTools().length).toBe(readdirSync("data/tools").filter((f) => f.endsWith(".yaml")).length);
   });
 
   it("resolves every relation endpoint to a tool, model or external", () => {
@@ -76,9 +77,10 @@ describe("selectors", () => {
   });
 
   it("builds a coverage matrix and a completeness panel", () => {
-    expect(coverageMatrix().reduce((a, c) => a + c.count, 0)).toBeGreaterThan(179);
+    const tools = allTools().filter((t) => t.kind === "tool").length;
+    expect(coverageMatrix().reduce((a, c) => a + c.count, 0)).toBeGreaterThan(tools);
     const gtm = fieldCompleteness().find((f) => f.field === "gtmPartners")!;
-    expect(gtm.total).toBe(179);
+    expect(gtm.total).toBe(tools);
     expect(gtm.known).toBeLessThan(gtm.total);
   });
 });

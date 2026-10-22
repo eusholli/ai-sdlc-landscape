@@ -1,7 +1,7 @@
 # Design brief
 
 The AI SDLC Landscape is a neutral, public map of the AI tools that work across the software
-development lifecycle. 179 tools, 13 phases, two cross-cutting layers, 268 typed relations. Every
+development lifecycle: the tools in 13 phases, two cross-cutting layers and the typed relations between them. Every
 fact on a tool links to the page it came from. Nobody is selling anything on this site.
 
 ## Who it is for

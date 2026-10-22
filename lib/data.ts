@@ -85,7 +85,7 @@ export const getLandscape = (): Landscape => landscape;
 export const phases = (): Phase[] => landscape.phases;
 export const layers = (): Layer[] => landscape.layers;
 export const segments = (): Segment[] => landscape.segments;
-/** Every node: 179 tools plus 8 model providers. */
+/** Every node: the tools plus the model providers. */
 export const allTools = (): Tool[] => landscape.tools;
 export const externals = (): External[] => landscape.externals;
 export const relations = (): Relation[] => landscape.relations;
@@ -204,7 +204,7 @@ export function coverageMatrix(): { phase: PhaseId; segment: SegmentId | "layer"
   });
 }
 
-/** For each field, how many of the 179 tools have it published. Drives the honesty panel. */
+/** For each field, how many of the tools have it published. Drives the honesty panel. */
 export function fieldCompleteness(): { field: keyof Tool; label: string; known: number; total: number }[] {
   const tools = landscape.tools.filter((t) => t.kind === "tool");
   const fields: [keyof Tool, string][] = [
