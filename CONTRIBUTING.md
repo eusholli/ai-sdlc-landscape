@@ -42,7 +42,7 @@ end of each scan for another look, for a tool in early access or a site that ref
 Open an issue in plain words: [request a change](../../issues/new?template=request.yml). People
 and agents ask the same way. An agent can file plain text with
 `gh issue create --repo eusholli/ai-sdlc-landscape --title "<tool>: <what changes>" --body "..."`;
-no template or label is needed. The site's [/llms.txt](https://ai-sdlc-landscape.vercel.app/llms.txt)
+no template or label is needed. The site's [/llms.txt](https://aisdlclandscape.org/llms.txt)
 says the same for agents.
 
 Write it in your own words. A good request says:

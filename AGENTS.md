@@ -7,7 +7,7 @@ belongs in the documents it points to.
 ## What this repo is
 
 The AI SDLC Landscape: a neutral, public map of the AI tools that work across the software
-development lifecycle, live at https://ai-sdlc-landscape.vercel.app. Two things live here, and
+development lifecycle, live at https://aisdlclandscape.org. Two things live here, and
 both are public:
 
 - **The dataset.** One YAML record per tool in `data/tools/<id>.yaml`, plus `data/phases.json`

@@ -1,8 +1,11 @@
+/** The production domain. */
+export const SITE_DOMAIN = "aisdlclandscape.org";
+
 // Canonical origin. NEXT_PUBLIC_SITE_URL wins; on Vercel the production domain is the fallback,
 // so previews still emit production URLs in the sitemap and share tags.
-const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? (vercel ? `https://${vercel}` : "http://localhost:3000")
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL ? `https://${SITE_DOMAIN}` : "http://localhost:3000")
 ).replace(/\/$/, "");
 
 /** The public repo: code, data and the issue tracker where every request for change goes. */
