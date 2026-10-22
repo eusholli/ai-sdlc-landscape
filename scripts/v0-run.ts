@@ -96,6 +96,12 @@ function listFiles(dir: string): string[] {
     e.isDirectory() ? listFiles(join(dir, e.name)) : [join(dir, e.name)]);
 }
 
+/** v0 refuses an upload of more files than this (HTTP 422). */
+export const UPLOAD_MAX = 100;
+
+export const batches = <T>(items: T[], size: number): T[][] =>
+  Array.from({ length: Math.max(1, Math.ceil(items.length / size)) }, (_, i) => items.slice(i * size, (i + 1) * size));
+
 function seedFiles() {
   const paths = [
     "package.json", "tsconfig.json", "next.config.ts", "components.json", "postcss.config.mjs",
@@ -291,8 +297,21 @@ async function main() {
         "run with --new-chat to seed a chat from the current tree");
     }
   } else {
-    const chat = await client.chats.init({ type: "files", files: seedFiles(), name: "AI SDLC Landscape", chatPrivacy: "private" });
-    Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl, files: seedFiles().map((f) => f.name) });
+    // v0 takes at most UPLOAD_MAX files per upload: the chat starts with the first batch and each
+    // later batch is added to its first version, which is then checked to hold every seed file.
+    const seed = seedFiles();
+    const [first, ...rest] = batches(seed, UPLOAD_MAX);
+    const chat = await client.chats.init({ type: "files", files: first, name: "AI SDLC Landscape", chatPrivacy: "private" });
+    for (const files of rest) {
+      await client.chats.updateVersion({ chatId: chat.id, versionId: chat.latestVersion!.id, files });
+    }
+    if (rest.length) {
+      const held = new Set((await client.chats.getVersion({ chatId: chat.id, versionId: chat.latestVersion!.id }))
+        .files.map((f) => clean(f.name)));
+      const missing = seed.map((f) => f.name).filter((n) => !held.has(n));
+      if (missing.length) throw new Error(`v0 chat ${chat.webUrl} is missing seed files:\n${missing.join("\n")}`);
+    }
+    Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl, files: seed.map((f) => f.name) });
     saveState(state);
     console.log(`v0 chat: ${chat.webUrl}`);
   }

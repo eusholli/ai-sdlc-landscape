@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { drift, pull } from "../scripts/v0-run";
+import { batches, drift, pull, UPLOAD_MAX } from "../scripts/v0-run";
 
 describe("v0 runner pull", () => {
   const home = process.cwd();
@@ -40,5 +40,15 @@ describe("v0 runner pull", () => {
       { name: "components/gone.tsx", content: "v0 only" },
     ]).sort()).toEqual(["app/page.tsx", "components/gone.tsx"]);
     expect(drift([{ name: "app/page.tsx", content: "edited by hand" }])).toEqual([]);
+  });
+});
+
+describe("seed upload", () => {
+  it("splits files into batches v0 accepts, keeping order and every file", () => {
+    const files = Array.from({ length: UPLOAD_MAX * 2 + 3 }, (_, i) => i);
+    const out = batches(files, UPLOAD_MAX);
+    expect(out.map((b) => b.length)).toEqual([UPLOAD_MAX, UPLOAD_MAX, 3]);
+    expect(out.flat()).toEqual(files);
+    expect(batches([], UPLOAD_MAX)).toEqual([[]]);
   });
 });
