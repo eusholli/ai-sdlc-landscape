@@ -297,19 +297,27 @@ async function main() {
         "run with --new-chat to seed a chat from the current tree");
     }
   } else {
-    // v0 takes at most UPLOAD_MAX files per upload: the chat starts with the first batch and each
-    // later batch is added to its first version, which is then checked to hold every seed file.
+    // v0 takes at most UPLOAD_MAX files per upload, so the chat starts with the first batch and each
+    // later batch is added to its first version. v0 can also drop a file from an upload without
+    // saying so, so the version is checked for every seed file and the missing ones sent once more.
     const seed = seedFiles();
     const [first, ...rest] = batches(seed, UPLOAD_MAX);
     const chat = await client.chats.init({ type: "files", files: first, name: "AI SDLC Landscape", chatPrivacy: "private" });
-    for (const files of rest) {
-      await client.chats.updateVersion({ chatId: chat.id, versionId: chat.latestVersion!.id, files });
+    const versionId = chat.latestVersion!.id;
+    for (const files of rest) await client.chats.updateVersion({ chatId: chat.id, versionId, files });
+    const missing = async () => {
+      const v = await client.chats.getVersion({ chatId: chat.id, versionId, includeDefaultFiles: true });
+      const held = new Set(v.files.map((f) => clean(f.name)));
+      return seed.filter((f) => !held.has(f.name));
+    };
+    const dropped = await missing();
+    for (const files of batches(dropped, UPLOAD_MAX)) {
+      if (files.length) await client.chats.updateVersion({ chatId: chat.id, versionId, files });
     }
-    if (rest.length) {
-      const held = new Set((await client.chats.getVersion({ chatId: chat.id, versionId: chat.latestVersion!.id }))
-        .files.map((f) => clean(f.name)));
-      const missing = seed.map((f) => f.name).filter((n) => !held.has(n));
-      if (missing.length) throw new Error(`v0 chat ${chat.webUrl} is missing seed files:\n${missing.join("\n")}`);
+    if (dropped.length) {
+      console.log(`v0 dropped ${dropped.length} seed files; sent again: ${dropped.map((f) => f.name).join(", ")}`);
+      const still = await missing();
+      if (still.length) throw new Error(`v0 chat ${chat.webUrl} is missing seed files:\n${still.map((f) => f.name).join("\n")}`);
     }
     Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl, files: seed.map((f) => f.name) });
     saveState(state);
