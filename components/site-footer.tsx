@@ -22,6 +22,9 @@ export function SiteFooter() {
           <Link href="/about" className={linkClass}>
             About
           </Link>
+          <Link href="/contribute" className={linkClass}>
+            Request a change
+          </Link>
           <a href="/landscape.json" download className={linkClass}>
             Download JSON
           </a>

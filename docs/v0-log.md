@@ -84,3 +84,11 @@ One entry per step, written by `scripts/v0-run.ts`.
   runner, which now waits for the chat to settle.
 - by hand: added the shadcn `table` component v0 assumed; widened one facet check's type
 - gate: passed (build 574 pages, 14 tests, lint clean)
+
+## Step 10: Title, requests for change and the contribute page
+
+- 2026-10-22T17:52:18.455Z
+- chat: https://v0.app/chat/l8TsPOOQhTb
+- version: b_XRMq01CguZg, demo https://demo-kzmlu4vbapcne5ib2xrb.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..WrOLEBL54oK_vyL0.5NMpOSVWDEmrIWs-5TDzgLmHLEvfVC7dKDjKpfCVRyRtlALUlOlZyGgrHiYLjw4dcpl7gBoOH3juHFd_Wtr2f6x5rzZvdmFC2R-6OQP4LG-XZMYrEWzCXwIRPO5CuPDMjxRjG7T7u5jbEsnCQEaHjYESbFghJ958RxTarw4cwcg4el0JGMngXH_FA5wmH19Xb4pw-d2dhq2bLFhs1NgYLIrq0GrXf08Uu8svUiV5RiQ_0YdGCUuGOEsxeygAGxNn8y_mvjJK8SjgNU-7_-lxS2u_ZCgAlSAt.mvzLhK1Yp89WJLM3icqQ2w&__v0_vercel_project_id=prj_7QGLvECI65HJ73QPgypF34C0tM7m
+- credits before: 21.3151501 of 20, after: 20.3880323 of 20
+- files written: 10; fix rounds: 0; gate: passed

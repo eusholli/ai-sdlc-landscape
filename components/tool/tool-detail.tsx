@@ -139,6 +139,28 @@ export function ToolDetail({
                 </>
               )}
               .{" "}
+              {tool.history.requestedBy.length > 0 && (
+                <>
+                  Requested by{" "}
+                  {tool.history.requestedBy.map((credit, i) => (
+                    <span key={`${credit.issue}-${credit.name}`}>
+                      {i > 0 && ", "}
+                      {credit.name} (
+                      <a
+                        href={`${REPO_URL}/issues/${credit.issue}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Issue ${credit.issue} by ${credit.name}, opens in a new tab`}
+                        className={cn(LINK, "tabular-nums")}
+                      >
+                        #{credit.issue}
+                      </a>
+                      )
+                    </span>
+                  ))}
+                  .{" "}
+                </>
+              )}
               <a
                 href={`${REPO_URL}/commits/main/data/tools/${tool.id}.yaml`}
                 target="_blank"

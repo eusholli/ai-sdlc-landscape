@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, ArrowLeftRight, BarChart3, Info, Search } from "lucide-react";
+import { Activity, ArrowLeftRight, BarChart3, Info, MessageSquarePlus, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQueryStates } from "nuqs";
@@ -16,9 +16,11 @@ import { filterParsers } from "@/lib/filters";
 import { OPEN_SEARCH_EVENT, emit } from "@/lib/ui-events";
 
 const NAV_LINKS = [
-  { href: "/moves", label: "Moves", Icon: Activity },
-  { href: "/insights", label: "Insights", Icon: BarChart3 },
-  { href: "/about", label: "About", Icon: Info },
+  { href: "/moves", label: "Moves", Icon: Activity, hideOnPhone: false },
+  { href: "/insights", label: "Insights", Icon: BarChart3, hideOnPhone: false },
+  { href: "/about", label: "About", Icon: Info, hideOnPhone: false },
+  // Hidden under 640px to keep the site name readable; the home intro and footer link to it there.
+  { href: "/contribute", label: "Contribute", Icon: MessageSquarePlus, hideOnPhone: true },
 ];
 
 export function SiteHeader() {
@@ -70,13 +72,15 @@ export function SiteHeader() {
         <ThemeToggle />
 
         <nav aria-label="Pages" className="flex items-center gap-0.5">
-          {NAV_LINKS.map(({ href, label, Icon }) => (
-            <Button key={href} asChild variant="ghost" size="sm">
-              <Link href={href} aria-label={label} aria-current={pathname === href ? "page" : undefined}>
-                <Icon aria-hidden />
-                <span className="hidden lg:inline">{label}</span>
-              </Link>
-            </Button>
+          {NAV_LINKS.map(({ href, label, Icon, hideOnPhone }) => (
+            <span key={href} className={hideOnPhone ? "hidden sm:contents" : "contents"}>
+              <Button asChild variant="ghost" size="sm">
+                <Link href={href} aria-label={label} aria-current={pathname === href ? "page" : undefined}>
+                  <Icon aria-hidden />
+                  <span className="hidden lg:inline">{label}</span>
+                </Link>
+              </Button>
+            </span>
           ))}
         </nav>
       </div>

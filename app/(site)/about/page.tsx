@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
 import { allTools, dataDate, phases, relations } from "@/lib/data";
@@ -9,7 +10,7 @@ import { REQUEST_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "What the AI SDLC Landscape covers, which tools are included, how every fact is sourced, and how to suggest a correction.",
+    "What the AI SDLC Landscape covers, which tools are included, how every fact is sourced, and how to request a change.",
 };
 
 const TIERS = [
@@ -115,14 +116,18 @@ export default function AboutPage() {
           </div>
         </Section>
 
-        <Section id="corrections" title="Suggest a correction">
+        <Section id="corrections" title="Request a change">
           <p>
-            Found something wrong or out of date? Open an issue with the tool, the field and a link to the page that
-            shows the right answer. Corrections with a public source are the fastest to land.
+            Found something wrong, missing or out of date? Anyone, person or agent, can ask in plain words by opening
+            a GitHub issue with the tool, what should change and a link to the page that shows it. Requests with a
+            public source are the fastest to land.
           </p>
-          <p>
+          <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link href="/contribute" className={linkClass}>
+              How to request a change
+            </Link>
             <a href={REQUEST_URL} target="_blank" rel="noreferrer noopener" className={linkClass}>
-              Open a correction issue on GitHub
+              Open a request on GitHub
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </p>

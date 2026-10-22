@@ -47,7 +47,7 @@ export function LandscapeMap(props: LandscapeMapProps) {
     );
   }
   if (view === "map" && isMobile === null) {
-    return <div aria-hidden className="h-[calc(100dvh-10.5rem)] min-h-[32rem] border-b bg-muted/30" />;
+    return <div aria-hidden className="h-[calc(100dvh-10.5rem-var(--intro-h,0rem))] min-h-[32rem] border-b bg-muted/30" />;
   }
   if (view === "network") {
     return (
@@ -135,7 +135,7 @@ function MapCanvas({ tools, relations, externals, phases, layers, fullLifecycleI
   return (
     <MapInteractionProvider value={interaction}>
       <TooltipProvider delayDuration={300}>
-        <div className="relative h-[calc(100dvh-10.5rem)] min-h-[32rem] overflow-hidden border-b bg-muted/30">
+        <div className="relative h-[calc(100dvh-10.5rem-var(--intro-h,0rem))] min-h-[32rem] overflow-hidden border-b bg-muted/30">
           <div
             ref={viewportRef}
             role="group"
