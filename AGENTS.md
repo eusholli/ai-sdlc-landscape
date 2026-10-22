@@ -83,8 +83,10 @@ is a rule nobody follows.
   `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`, `lib/request-advice.ts`,
   `lib/llms.ts`, `lib/jsonld.ts`, `components/logo.tsx`, the `llms` and `schema` routes) are locked
   against v0 runs, which the guard enforces. A session working here by hand may change them, with
-  tests. v0 does the visible UI only, as a new step in `docs/v0-prompts.md`. After hand edits to
-  files v0 holds, run that step with `--new-chat`; the runner refuses otherwise.
+  tests. v0 does the visible UI only, as a new step in `docs/v0-prompts.md`. A UI change is made
+  once, by hand or by v0, whichever suits it; small fixes are done by hand. A hand edit is never
+  redone in v0: the next v0 run just starts with `--new-chat`, which uploads the current tree as
+  v0's starting point (the runner refuses to run on a stale copy otherwise).
 - Repo URLs and the request advice come from `lib/site.ts` and `lib/request-advice.ts`; never
   retype them.
 - Nothing in code, tests or copy hard-codes how many tools, relations or sources there are. The
