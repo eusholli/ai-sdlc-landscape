@@ -37,10 +37,18 @@ export function retrievedOnly(removed: string[], added: string[]): boolean {
  */
 export function recordHistory(root = "."): Map<string, History> | null {
   try { git(root, ["rev-parse", "--git-dir"]); } catch { return null; }
-  if (git(root, ["rev-parse", "--is-shallow-repository"]).trim() === "true") {
-    try { git(root, ["fetch", "--unshallow", "--quiet"]); } catch { /* reported below */ }
-    if (git(root, ["rev-parse", "--is-shallow-repository"]).trim() === "true") {
-      throw new Error("the git checkout is shallow, so record history would be wrong; fetch full history first");
+  const shallow = () => git(root, ["rev-parse", "--is-shallow-repository"]).trim() === "true";
+  if (shallow()) {
+    // Vercel clones shallow and leaves no usable remote, but names the repo, which is public.
+    const { VERCEL_GIT_PROVIDER: provider, VERCEL_GIT_REPO_OWNER: owner, VERCEL_GIT_REPO_SLUG: slug } = process.env;
+    const sources = [[], provider === "github" && owner && slug ? [`https://github.com/${owner}/${slug}.git`] : null];
+    const errors: string[] = [];
+    for (const src of sources) {
+      if (!src || !shallow()) continue;
+      try { git(root, ["fetch", "--unshallow", "--quiet", ...src]); } catch (e) { errors.push((e as Error).message.split("\n")[0]); }
+    }
+    if (shallow()) {
+      throw new Error(`the git checkout is shallow, so record history would be wrong; fetch full history first${errors.length ? ` (${errors.join("; ")})` : ""}`);
     }
     console.log("history: the checkout was shallow; fetched full history");
   }
