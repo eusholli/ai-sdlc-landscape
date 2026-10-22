@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...pages.map(({ path, priority }) => ({ url: `${SITE_URL}${path}`, lastModified, priority })),
     ...allTools().map((tool) => ({
       url: `${SITE_URL}/tools/${tool.id}`,
-      lastModified,
+      lastModified: tool.history ? new Date(tool.history.edited) : lastModified,
       priority: 0.7,
     })),
   ];

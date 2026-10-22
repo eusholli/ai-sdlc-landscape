@@ -1,0 +1,26 @@
+# Tools a scan found and a person screened out, so the next scan does not offer them again.
+#
+#   decision: rejected   fails the inclusion bar in CONTRIBUTING.md. Not offered again unless the
+#                        reason stops being true; then delete the entry and add a record.
+#   decision: deferred   could not be judged yet (the site refused a fetch, or it is not yet
+#                        generally available). Every scan lists these again for another look.
+#
+# url is what a scan matches on, by domain. The entries dated 2026-10-21 are from the first census.
+- {name: AdaCore, url: https://www.adacore.com, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
+- {name: Backstage, url: https://backstage.io, decision: rejected, reason: "no AI claim; kept as a relation target", date: 2026-10-21}
+- {name: Brainboard, url: https://www.brainboard.co, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
+- {name: CodeMender (Google DeepMind), url: https://deepmind.google/discover/blog/introducing-codemender-an-ai-agent-for-code-security/, decision: rejected, reason: "a research agent, not a product", date: 2026-10-21}
+- {name: Dagger, url: https://dagger.io, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
+- {name: Grit, url: https://www.grit.io, decision: rejected, reason: "no AI claim on the site", date: 2026-10-21}
+- {name: Trunk, url: https://trunk.io, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
+- {name: Benzi, url: https://benzi.ai, decision: rejected, reason: "below the inclusion bar", date: 2026-10-21}
+- {name: Foremerge, url: https://github.com/foremerge/foremerge, decision: rejected, reason: "below the inclusion bar", date: 2026-10-21}
+- {name: Slowave, url: https://slowave.ai, decision: rejected, reason: "below the inclusion bar", date: 2026-10-21}
+- {name: Novgraph, url: https://novgraph.com, decision: rejected, reason: "below the inclusion bar", date: 2026-10-21}
+- {name: AntFlow, url: https://antflow.ai, decision: rejected, reason: "below the inclusion bar", date: 2026-10-21}
+- {name: DeepWiki (Cognition), url: https://deepwiki.com, decision: deferred, reason: "the site refused automated fetches (HTTP 429)", date: 2026-10-21}
+- {name: Undo, url: https://undo.io, decision: deferred, reason: "the site refused automated fetches (HTTP 403)", date: 2026-10-21}
+- {name: Skillsync, url: https://skillsync.dev, decision: deferred, reason: "the site timed out, and the URL came from a forum post", date: 2026-10-21}
+- {name: Octomind, url: https://www.octomind.dev, decision: deferred, reason: "screened out with no reason recorded; look again", date: 2026-10-21}
+- {name: System Initiative, url: https://www.systeminit.com, decision: deferred, reason: "screened out with no reason recorded; look again", date: 2026-10-21}
+- {name: Ezra, url: https://ezra.io, decision: deferred, reason: "early access only, so not generally available", date: 2026-10-21}

@@ -1,0 +1,116 @@
+# What `pnpm scan` searches for. {year} becomes the current year, so the queries stay current.
+#
+# A scan reads the results of each query and every page they lead to, collects the sites those
+# pages name, and drops any site already in data/tools/, in data/screened.yaml or in ignore_hosts
+# below. What is left is a list of candidates for a person to judge against the inclusion bar in
+# CONTRIBUTING.md. A scan never writes a record.
+queries:
+  # Across the lifecycle
+  - AI developer tools market map {year} landscape coding agents
+  - AI-native SDLC platform "entire software development lifecycle" agents {year} launch
+  - AI coding agent startups {year} launch
+  - AI coding agent acquisitions {year} acquired startup developer tools
+  - AI developer tools seed funding {year}
+  # By phase
+  - spec-driven development tools {year} AI requirements planning agents
+  - design to code AI tools {year}
+  - AI coding assistant IDE agent {year}
+  - AI CLI coding agent terminal {year}
+  - best AI code review tools {year} comparison
+  - AI test generation QA agent startups {year}
+  - AI application security code remediation startups {year} AppSec agent
+  - AI CI/CD pipeline agent {year}
+  - AI infrastructure as code agent DevOps platform {year}
+  - AI SRE agent startups {year} incident response
+  - AI legacy code modernization migration tools {year} agents
+  - codebase knowledge AI documentation tools {year} code understanding
+  - engineering intelligence platform AI impact measurement {year}
+  - AI internal developer portal platform engineering {year}
+  # Agent infrastructure
+  - sandbox infrastructure for AI coding agents {year}
+  - MCP server tools for coding agents {year}
+
+# Sites that are never a tool: social, video, forums, reference, search, news and app stores. Matched
+# on the domain and every subdomain. Trade press is already excluded through TRADE_PRESS in
+# scripts/build-data.ts.
+ignore_hosts:
+  - google.com
+  - youtube.com
+  - youtu.be
+  - x.com
+  - twitter.com
+  - linkedin.com
+  - facebook.com
+  - instagram.com
+  - reddit.com
+  - news.ycombinator.com
+  - ycombinator.com
+  - medium.com
+  - substack.com
+  - dev.to
+  - hashnode.com
+  - wikipedia.org
+  - github.com
+  - githubusercontent.com
+  - gitlab.com
+  - stackoverflow.com
+  - g2.com
+  - capterra.com
+  - gartner.com
+  - forrester.com
+  - producthunt.com
+  - crunchbase.com
+  - pitchbook.com
+  - tracxn.com
+  - cbinsights.com
+  - apple.com
+  - microsoft.com
+  - amazon.com
+  - npmjs.com
+  - pypi.org
+  - marketplace.visualstudio.com
+  - discord.com
+  - discord.gg
+  - slack.com
+  - t.me
+  - bit.ly
+  - lnkd.in
+  - spotify.com
+  - podcasts.apple.com
+  - eventbrite.com
+  - lu.ma
+  - calendly.com
+  - wordpress.com
+  - wordpress.org
+  - cloudflare.com
+  - schema.org
+  - w3.org
+  - creativecommons.org
+  - mozilla.org
+  - archive.org
+  - arxiv.org
+  - bsky.app
+  - threads.com
+  - threads.net
+  - mastodon.social
+  - tiktok.com
+  - pinterest.com
+  - forem.com
+  - github.blog
+  - github.community
+  - githubstatus.com
+  - stackoverflow.co
+  # Consumer chat apps; the model providers behind them are records already
+  - chatgpt.com
+  - claude.ai
+  - gemini.google.com
+  - perplexity.ai
+  - grok.com
+  # Analysts, consultancies, research and surveys: they write about tools, they are not tools
+  - mckinsey.com
+  - clutch.co
+  - grandviewresearch.com
+  - mordorintelligence.com
+  - marketsandmarkets.com
+  - stanford.edu
+  - dora.dev

@@ -12,7 +12,18 @@ import { CompareButton } from "./tool-actions";
 import { ToolLogo } from "./tool-logo";
 import type { DetailVariant, ToolDetailData, ToolDetailRefs } from "./types";
 
-const CORRECTION_URL = "https://github.com/eusholli/ai-sdlc-landscape/issues/new?template=correction.yml";
+const REPO_URL = "https://github.com/eusholli/ai-sdlc-landscape";
+const CORRECTION_URL = `${REPO_URL}/issues/new?template=correction.yml`;
+const LINK = "rounded-sm underline underline-offset-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50";
+
+/** A date linked to the commit that made it, so the reader can see exactly what changed. */
+function CommitDate({ date, commit }: { date: string; commit: string }) {
+  return (
+    <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={cn(LINK, "tabular-nums")}>
+      {formatDate(date)}
+    </a>
+  );
+}
 
 function StatusIcon({ status }: { status: string }) {
   if (/shut down|end of life/i.test(status)) return <Ban className="size-3.5 shrink-0" aria-hidden />;
@@ -114,9 +125,32 @@ export function ToolDetail({
       <SourceList toolId={tool.id} groups={sourceGroups} heading={heading} />
 
       <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 text-sm">
-        <p className="text-muted-foreground">
-          Last verified <span className="tabular-nums">{formatDate(tool.lastVerified)}</span>
-        </p>
+        <div className="space-y-1 text-muted-foreground">
+          <p>
+            Last verified <span className="tabular-nums">{formatDate(tool.lastVerified)}</span>
+          </p>
+          {tool.history && (
+            <p>
+              Added <CommitDate date={tool.history.added} commit={tool.history.addedCommit} /> by{" "}
+              {tool.history.addedBy}
+              {tool.history.editedCommit !== tool.history.addedCommit && (
+                <>
+                  . Last edited <CommitDate date={tool.history.edited} commit={tool.history.editedCommit} /> by{" "}
+                  {tool.history.editedBy}
+                </>
+              )}
+              .{" "}
+              <a
+                href={`${REPO_URL}/commits/main/data/tools/${tool.id}.yaml`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={LINK}
+              >
+                Full history
+              </a>
+            </p>
+          )}
+        </div>
         <a
           href={`${CORRECTION_URL}&title=${encodeURIComponent(tool.name)}`}
           target="_blank"

@@ -30,6 +30,7 @@ pnpm data             # records -> data/landscape.json (gitignored; every script
 pnpm data:links       # fetch every source URL; --changed for records changed against origin/main,
                       # --refresh to stamp `retrieved` on each source that answered
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
+pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
 ```
 
 `pnpm check` exits non-zero on any failure and is never routed around. CI runs it on every push
@@ -47,6 +48,11 @@ and pull request, and runs `data:links --changed` on pull requests that touch re
    needs an A or B source.
 5. Relations sit on the tool they start from, as `{type, to, sources}`, with a type from
    `REL_TYPES`.
+6. A candidate judged and turned down goes in `data/screened.yaml` with its reason, so no scan
+   offers it again. The inclusion bar is in `CONTRIBUTING.md`.
+7. Who added and last edited a record comes from git (`scripts/history.ts`), never from the
+   record. The site shows author names, never emails. A bulk reformat goes in
+   `.git-blame-ignore-revs` so it is not counted as an edit.
 
 A new rule about the data is enforced in `scripts/build-data.ts` with a test in
 `tests/build-data.test.ts`, then written into `CONTRIBUTING.md`. A rule that only lives in prose
@@ -90,7 +96,11 @@ For UI copy, docs, commit messages and pull request text:
 | Path | What is there |
 |---|---|
 | `data/tools/` | one record per tool, the source of truth |
+| `data/screened.yaml` | candidates judged and rejected or deferred, with reasons |
+| `data/scan.yaml` | the scan's queries and the hosts it never lists |
 | `scripts/build-data.ts` | validation, tiering and the build into `data/landscape.json` |
+| `scripts/history.ts` | added and last-edited dates and authors per record, from git |
+| `scripts/scan.ts` | the repeatable search for new tools |
 | `scripts/check-links.ts` | source URL checker |
 | `scripts/fetch-logos.ts` | logo fetcher |
 | `scripts/guard.ts` | the lock that keeps v0 runs out of data and logic |
@@ -99,5 +109,6 @@ For UI copy, docs, commit messages and pull request text:
 | `components/` | UI components |
 | `tests/` | vitest suites |
 | `docs/design-brief.md` | the design and data contract |
+| `docs/scan.md` | how to run a scan and judge what it finds |
 | `CONTRIBUTING.md` | the data rules for contributors |
-| `.github/` | CI workflow and the correction issue form |
+| `.github/` | CI and monthly scan workflows, the correction and new-tool issue forms |

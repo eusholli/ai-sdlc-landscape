@@ -57,6 +57,17 @@ describe("build-data", () => {
     expect(errors).toContain("fixture-tool: unknown field colour");
   });
 
+  it("fails a screened entry that is also a record, or has no reason", () => {
+    const root = scratch(FIXTURE);
+    writeFileSync(join(root, "data/screened.yaml"),
+      "- {name: Fixture Tool, url: https://fixture.example, decision: rejected, reason: x, date: 2026-01-02}\n" +
+      "- {name: Other, url: https://other.example, decision: maybe, date: 2026-01-02}\n");
+    const { errors } = buildLandscape(root);
+    expect(errors).toContain("screened.yaml: Fixture Tool is also a record; delete one");
+    expect(errors).toContain("screened.yaml: Other: decision must be rejected or deferred");
+    expect(errors).toContain("screened.yaml: Other needs a reason");
+  });
+
   it("accepts the fixture as written", () => {
     expect(buildLandscape(scratch(FIXTURE)).errors).toEqual([]);
   });

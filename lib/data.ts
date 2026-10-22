@@ -8,7 +8,7 @@ import phaseFile from "@/data/phases.json";
 import { pricingBucket, searchLite } from "@/lib/filters";
 import type {
   Autonomy, External, Landscape, Layer, LayerId, MarketMove, Phase, PhaseId, Relation,
-  RelationLite, RelationType, Segment, SegmentId, Source, Tool, ToolLite,
+  RelationLite, RelationType, Segment, SegmentId, Source, Tool, ToolHistory, ToolLite,
 } from "@/lib/types";
 
 type RawNode = (typeof raw.nodes)[number] & Record<string, unknown>;
@@ -23,6 +23,15 @@ const list = (v: unknown): string[] | null => {
   const arr = (Array.isArray(k) ? k : [k]).map(String).filter((s) => s && s !== "unknown");
   return arr.length ? arr : null;
 };
+
+function history(h: unknown): ToolHistory | null {
+  if (!h || typeof h !== "object") return null;
+  const r = h as Record<string, string>;
+  return {
+    added: r.added, addedBy: r.added_by, addedCommit: r.added_commit,
+    edited: r.edited, editedBy: r.edited_by, editedCommit: r.edited_commit,
+  };
+}
 
 function normalise(n: RawNode): Tool {
   const pricingModel = known<string>(n.pricing_model);
@@ -60,6 +69,7 @@ function normalise(n: RawNode): Tool {
     status: known<string>(n.status),
     sources: n.sources as Source[],
     lastVerified: n.last_verified,
+    history: history(n.history),
   };
 }
 

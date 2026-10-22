@@ -6,10 +6,12 @@
 // data/tools/<id>.yaml, one file per tool or model provider, is the hand-kept source. The site
 // reads landscape.json, which is generated and not committed. Provenance is checked, not trusted:
 // a field with a value and no source is an error, and every source carries the date it was read.
-// A field with no value reads "unknown" in the output.
+// A field with no value reads "unknown" in the output. Each record's history (who added it and who
+// last changed it, and when) comes from git; see scripts/history.ts.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { type History, recordHistory } from "./history";
 
 export const FIELDS_SOURCED = [
   "summary", "customers", "traction", "gtm_partners", "pricing_model", "entry_price",
@@ -23,7 +25,7 @@ const KNOWN_KEYS = new Set<string>([...FIELDS_PLACEMENT, ...FIELDS_JUDGED, ...FI
 export const REL_TYPES = new Set([
   "integrates_with", "built_on_model", "acquired_by", "partners_with", "competes_with", "ships_inside",
 ]);
-const TRADE_PRESS = new Set([
+export const TRADE_PRESS = new Set([
   "techcrunch.com", "theregister.com", "venturebeat.com", "thenewstack.io", "devops.com",
   "siliconangle.com", "businesswire.com", "prnewswire.com", "globenewswire.com", "reuters.com",
   "bloomberg.com", "cnbc.com", "forbes.com", "fortune.com", "axios.com", "theinformation.com",
@@ -93,6 +95,9 @@ export function buildLandscape(root = "."): BuildResult {
   const logoDir = join(root, "public/logos");
   const logos = existsSync(logoDir) ? readdirSync(logoDir).sort() : [];
 
+  let history: Map<string, History> | null = null;
+  try { history = recordHistory(root); } catch (e) { errors.push(`history: ${(e as Error).message}`); }
+
   const nodes: Rec[] = [], relations: Rec[] = [], externals = new Map<string, Rec>();
   for (const t of tools) {
     const tid = t.id as string;
@@ -157,6 +162,8 @@ export function buildLandscape(root = "."): BuildResult {
     rec.sources = prov;
     const dates = prov.map((p) => p.retrieved as string).filter((d) => ISO_DATE.test(d)).sort();
     rec.last_verified = dates.at(-1) ?? "unknown";
+    // Null outside a git checkout, and for a record not yet committed.
+    rec.history = history?.get(tid) ?? null;
     nodes.push(rec);
 
     for (const r of asList(t.relations) as RelationIn[]) {
@@ -172,6 +179,21 @@ export function buildLandscape(root = "."): BuildResult {
       relations.push({ from: tid, to, type: r.type, sources: srcs });
     }
     if (rec.kind === "tool" && rec.summary === "unknown") warns.push(`${tid}: no summary`);
+  }
+
+  // The screened list: what a scan found and a person turned away. A tool cannot be both.
+  const scrPath = join(root, "data/screened.yaml");
+  const screened = (existsSync(scrPath) ? parse(readFileSync(scrPath, "utf8")) ?? [] : []) as Rec[];
+  // Whole URLs, not hosts: a screened project on github.com is not the record that also lives there.
+  const sameUrl = (u: string) => host(u) + (() => { try { return new URL(u).pathname.replace(/\/$/, ""); } catch { return ""; } })();
+  const toolUrls = new Set(tools.map((t) => sameUrl(String(t.url ?? ""))));
+  for (const s of screened) {
+    const label = `screened.yaml: ${String(s?.name ?? JSON.stringify(s))}`;
+    if (!s?.name || !/^https?:\/\//.test(String(s.url ?? ""))) errors.push(`${label} needs a name and a web URL`);
+    if (!["rejected", "deferred"].includes(String(s?.decision))) errors.push(`${label}: decision must be rejected or deferred`);
+    if (!s?.reason) errors.push(`${label} needs a reason`);
+    if (!ISO_DATE.test(String(s?.date ?? ""))) errors.push(`${label} needs a date (YYYY-MM-DD)`);
+    if (s?.url && toolUrls.has(sameUrl(String(s.url)))) errors.push(`${label} is also a record; delete one`);
   }
 
   const extPath = join(root, "data/externals.yaml");

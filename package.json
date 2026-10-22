@@ -13,6 +13,7 @@
     "data": "tsx scripts/build-data.ts",
     "data:check": "tsx scripts/build-data.ts --check",
     "data:links": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/check-links.ts",
+    "scan": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/scan.ts",
     "logos": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/fetch-logos.ts"
   },
   "dependencies": {

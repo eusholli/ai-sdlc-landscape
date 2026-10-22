@@ -84,6 +84,18 @@ export interface Tool {
   status: string | null;
   sources: Source[];
   lastVerified: string;
+  /** From git: who added the record and who last changed it. Null before its first commit. */
+  history: ToolHistory | null;
+}
+
+/** Dates are YYYY-MM-DD; commits are full SHAs on the public repo. Names only, never emails. */
+export interface ToolHistory {
+  added: string;
+  addedBy: string;
+  addedCommit: string;
+  edited: string;
+  editedBy: string;
+  editedCommit: string;
 }
 
 export type PricingBucket = "free" | "seat" | "usage" | "subscription" | "enterprise" | "other";

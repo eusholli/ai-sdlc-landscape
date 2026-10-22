@@ -1,0 +1,23 @@
+name: Suggest a tool
+description: An AI tool for building, shipping or running software that the landscape is missing.
+labels: [new-tool]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Tool
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Its website
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What it does
+      description: Which part of the lifecycle it covers, and whether anyone can use it today. The bar is in CONTRIBUTING.md.
+    validations:
+      required: true
