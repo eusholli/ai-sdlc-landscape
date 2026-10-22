@@ -77,10 +77,14 @@ A field with no value is left out, and the site shows "Not published". Then:
 
 [CONTRIBUTING.md](CONTRIBUTING.md) has the source rules.
 
-## Corrections
+## Requests for change
 
-Spotted a wrong or stale fact? [Open a correction](../../issues/new?template=correction.yml) with
-a link to a public page that states the right one.
+Spotted a wrong or stale fact, or a missing tool? [Request a change](../../issues/new?template=request.yml)
+in plain words, with a link to a public page that shows it. Agents can do the same with
+`gh issue create`; [CONTRIBUTING.md](CONTRIBUTING.md#making-a-change) says what to include. The
+data is also readable as [/llms.txt](https://ai-sdlc-landscape.vercel.app/llms.txt),
+[/llms-full.txt](https://ai-sdlc-landscape.vercel.app/llms-full.txt) and
+[/landscape.json](https://ai-sdlc-landscape.vercel.app/landscape.json).
 
 ## Licence and logos
 

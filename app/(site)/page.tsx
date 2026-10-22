@@ -2,10 +2,12 @@ import { Suspense } from "react";
 import { PhaseListStatic } from "@/components/list/phase-list-static";
 import { LandscapeMap } from "@/components/map/landscape-map";
 import { externals, fullLifecycle, layers, phases, relationsLite, segments, toolsLite } from "@/lib/data";
+import { datasetJsonLd, jsonLdText } from "@/lib/jsonld";
 
 export default function Home() {
   return (
     <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(datasetJsonLd()) }} />
       <Suspense
         fallback={
           <>

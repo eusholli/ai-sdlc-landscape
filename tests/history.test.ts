@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { recordHistory, retrievedOnly } from "@/scripts/history";
+import { contributors, parseRequests, recordHistory, retrievedOnly } from "@/scripts/history";
 
 let dir = "";
 afterEach(() => { if (dir) rmSync(dir, { recursive: true, force: true }); dir = ""; });
@@ -46,6 +46,7 @@ describe("record history", () => {
     expect(recordHistory(dir)!.get("a")).toEqual({
       added: "2026-01-02", added_by: "Ada", added_commit: first,
       edited: "2026-02-03", edited_by: "Grace", edited_commit: second,
+      requested_by: [],
     });
   });
 
@@ -88,6 +89,32 @@ describe("record history", () => {
     renameSync(file("a"), join(dir, "elsewhere.yaml"));
     commit("Ada", "2026-01-03");
     expect(recordHistory(dir)!.has("a")).toBe(false);
+  });
+
+  it("credits the person who asked, from the Requested-by trailer, by name only", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), RECORD);
+    commit("Ada", "2026-01-02", "Add A\n\nRequested-by: Linus <linus@example.com> (#7)");
+    writeFileSync(file("a"), RECORD + "hq: London\n");
+    commit("Ada", "2026-02-03", "Set the HQ\n\nCloses #9.\n\nRequested-by: Grace (#9)\nRequested-by: Linus (#9)");
+    writeFileSync(file("a"), RECORD.replace("2026-01-02", "2026-03-04") + "hq: London\n");
+    commit("Refresher", "2026-03-04", "Refresh\n\nRequested-by: Nobody (#11)");
+    expect(recordHistory(dir)!.get("a")!.requested_by).toEqual([
+      { name: "Linus", issue: 7 }, { name: "Grace", issue: 9 }, { name: "Linus", issue: 9 },
+    ]);
+    // The contributor list counts every request that changed the data, a date refresh included.
+    expect(contributors(dir)).toEqual([
+      { name: "Linus", issues: [7, 9], first: "2026-01-02" },
+      { name: "Grace", issues: [9], first: "2026-02-03" },
+      { name: "Nobody", issues: [11], first: "2026-03-04" },
+    ]);
+  });
+
+  it("reads a Requested-by value only when it names an issue, and never keeps an email", () => {
+    expect(parseRequests("Ada (#3)\x1fno issue here\x1fbob@example.com (#4)\x1fAda Lovelace ada@example.com (#5)")).toEqual([
+      { name: "Ada", issue: 3 }, { name: "Ada Lovelace", issue: 5 },
+    ]);
+    expect(parseRequests("")).toEqual([]);
   });
 
   it("tells a date refresh from a real change", () => {

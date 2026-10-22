@@ -1,1 +1,7 @@
+# Blank issues stay open so an agent can file plain text with `gh issue create`. Every open issue
+# is triaged, with or without a label.
 blank_issues_enabled: true
+contact_links:
+  - name: How to request a change
+    url: https://ai-sdlc-landscape.vercel.app/contribute
+    about: What to include, for people and for agents.

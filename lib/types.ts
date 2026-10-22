@@ -96,6 +96,22 @@ export interface ToolHistory {
   edited: string;
   editedBy: string;
   editedCommit: string;
+  /** People whose issues asked for the changes to this record, oldest first. */
+  requestedBy: RequestCredit[];
+}
+
+/** A request for change that was accepted: who asked, and the issue they asked in. */
+export interface RequestCredit {
+  name: string;
+  issue: number;
+}
+
+/** Someone whose requests changed the data, with every issue that did, in order of first change. */
+export interface Contributor {
+  name: string;
+  issues: number[];
+  /** YYYY-MM-DD of their first accepted request. */
+  first: string;
 }
 
 export type PricingBucket = "free" | "seat" | "usage" | "subscription" | "enterprise" | "other";
@@ -153,7 +169,16 @@ export interface MarketMove {
 }
 
 export interface Landscape {
+  /** Date of the newest source read, YYYY-MM-DD. With `commit`, the version of the dataset. */
   generated: string;
+  /** Full SHA of the commit the data was built from, or null when built outside git. */
+  commit: string | null;
+  /** SPDX id of the data licence. */
+  licence: string;
+  licenceUrl: string;
+  repository: string;
+  /** URL of the JSON Schema for one record in data/tools/. */
+  schema: string;
   description: string;
   phases: Phase[];
   layers: Layer[];
@@ -161,4 +186,5 @@ export interface Landscape {
   tools: Tool[];
   externals: External[];
   relations: Relation[];
+  contributors: Contributor[];
 }

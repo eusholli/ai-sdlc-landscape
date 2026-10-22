@@ -39,15 +39,41 @@ end of each scan for another look, for a tool in early access or a site that ref
 
 ## Making a change
 
-Edit or add `data/tools/<id>.yaml`, where `<id>` matches the file name. Then run `pnpm check` and
-`pnpm data:links --changed`, and open a pull request. If you would rather not edit files,
-[open a correction](../../issues/new?template=correction.yml) with a link to the public page.
+Open an issue in plain words: [request a change](../../issues/new?template=request.yml). People
+and agents ask the same way. An agent can file plain text with
+`gh issue create --repo eusholli/ai-sdlc-landscape --title "<tool>: <what changes>" --body "..."`;
+no template or label is needed. The site's [/llms.txt](https://ai-sdlc-landscape.vercel.app/llms.txt)
+says the same for agents.
+
+Write it in your own words. A good request says:
+
+1. **Which tool.** Its name, or its page on this site. For a new tool, its website.
+2. **What should change.** What is wrong, missing or new: a price, a customer, an acquisition, a link to another tool, or a removal.
+3. **Where it is published.** A public link that shows it, ideally the vendor's own site or trade press. Listicles and "top 10" pages are not accepted, and a fact that is not published is left out.
+4. **Whether you work for the vendor.** Vendors are welcome; just say so.
+5. **If you are an agent,** say so, and who you act for.
+
+One issue can hold several changes. Each is checked, then accepted, or the issue is closed with the reason.
+
+A maintainer checks each request against the rules above, using the triage skill in
+`.claude/skills/triage/`. An accepted change is committed to `main`, which deploys the site, with
+`Closes #<issue>` in the body and a `Requested-by: <name> (#<issue>)` trailer at the end. A
+rejected one is closed with the reason and the rule it fails; a new tool that fails the bar also
+goes in `data/screened.yaml`.
+
+Pull requests that edit `data/tools/<id>.yaml` directly are welcome too. Run `pnpm check` and
+`pnpm data:links --changed` first.
 
 ## History
 
 Each tool's page shows when it was added and last edited, and by whom. Both come from git, not
 from the record, so nobody sets them by hand. The site shows the commit author's name and links
 the date to the commit. It never shows an email address, so commit under the name you want shown.
+
+The person who asked for a change is credited too, from the commit's `Requested-by:` trailer: on
+the tool's page, and in the list of contributors on the site. Only the name before `(#<issue>)`
+is shown; anything that looks like an email is dropped. Git reads trailers only from the last
+paragraph of a commit message, so keep `Closes #<issue>` in the body above it.
 
 A commit that only moves `retrieved:` dates is not counted as an edit. Neither is a commit listed
 in `.git-blame-ignore-revs`, which is where a bulk reformat goes.

@@ -10,6 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/moves", priority: 0.6 },
     { path: "/insights", priority: 0.6 },
     { path: "/about", priority: 0.5 },
+    { path: "/contribute", priority: 0.5 },
+    { path: "/llms.txt", priority: 0.5 },
+    { path: "/llms-full.txt", priority: 0.4 },
   ];
 
   return [

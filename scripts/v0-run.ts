@@ -6,11 +6,15 @@
 //   npx tsx scripts/v0-run.ts                    run from the next step, pausing after step 2
 //   npx tsx scripts/v0-run.ts --pull            re-pull v0's latest version and gate it, spend nothing
 //   npx tsx scripts/v0-run.ts --whoami          check the key and the credit balance, spend nothing
-//   flags: --no-push (commit only), --new-chat (forget the saved chat)
+//   flags: --no-push (commit only), --new-chat (forget the saved chat and seed a new one from the tree)
 //   V0_WAIT_MINUTES caps the wait for each version (default 30)
 //
 // Needs V0_API_KEY in .env.local. State (the chat id and the last finished step) is kept in
 // docs/v0-state.json, and every step is logged to docs/v0-log.md.
+//
+// v0 only sees the files it was seeded with plus its own edits. A file it holds that was since
+// changed by hand would be overwritten by the next pull, so a step refuses to run until that drift
+// is gone; --new-chat seeds a chat from the current tree.
 import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, appendFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -50,7 +54,7 @@ function loadSteps(): Step[] {
 const SYSTEM = [
   "You are building a public, neutral Next.js 15 App Router site with Tailwind v4 and shadcn/ui.",
   "docs/design-brief.md is the design contract. Follow it.",
-  "Locked files are the data layer: never edit or recreate data/, lib/data.ts, lib/types.ts, lib/filters.ts, lib/format.ts or components/logo.tsx.",
+  "Locked files are the data layer: never edit or recreate data/, lib/data.ts, lib/types.ts, lib/filters.ts, lib/format.ts, components/logo.tsx, lib/site.ts, lib/request-advice.ts, lib/llms.ts, lib/jsonld.ts, app/llms.txt/, app/llms-full.txt/ or app/schema/.",
   "Client components never import @/lib/data or data/landscape.json; they receive lite data as props.",
   "Use pnpm. Do not remove dependencies. Write no em dashes in UI text.",
 ].join(" ");
@@ -223,6 +227,15 @@ export function pull(files: { name: string; content: string }[], previous: strin
   return changed;
 }
 
+/** Paths v0 holds whose content here differs from v0's copy: hand edits a pull would undo. */
+export function drift(files: { name: string; content: string }[]): string[] {
+  return files
+    .map((f) => ({ name: clean(f.name), content: f.content }))
+    .filter((f) => !isLocked(f.name) && !f.name.includes("..") && /^(app|components|hooks|lib)\//.test(f.name))
+    .filter((f) => !existsSync(f.name) || readFileSync(f.name, "utf8") !== f.content)
+    .map((f) => f.name);
+}
+
 function log(entry: string) {
   if (!existsSync(LOG)) writeFileSync(LOG, "# v0 log\n\nOne entry per step, written by `scripts/v0-run.ts`.\n");
   appendFileSync(LOG, `\n${entry}\n`);
@@ -269,7 +282,15 @@ async function main() {
   if (sh("git", ["status", "--porcelain"])) throw new Error("working tree is not clean; commit or stash first");
   const client = v0();
 
-  if (!state.chatId) {
+  if (state.chatId) {
+    const { chat } = await settle(client, state.chatId);
+    const latest = await client.chats.getVersion({ chatId: chat.id, versionId: chat.latestVersion!.id });
+    const drifted = drift(latest.files);
+    if (drifted.length) {
+      throw new Error(`these files changed here since v0's last version, so a pull would undo them:\n${drifted.join("\n")}\n` +
+        "run with --new-chat to seed a chat from the current tree");
+    }
+  } else {
     const chat = await client.chats.init({ type: "files", files: seedFiles(), name: "AI SDLC Landscape", chatPrivacy: "private" });
     Object.assign(state, { chatId: chat.id, webUrl: chat.webUrl, files: seedFiles().map((f) => f.name) });
     saveState(state);

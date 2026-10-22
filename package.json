@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eusholli/ai-sdlc-landscape.git"
+  },
   "scripts": {
     "dev": "pnpm data && next dev --turbopack",
     "build": "pnpm data && next build --turbopack",

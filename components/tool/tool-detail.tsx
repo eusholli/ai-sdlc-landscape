@@ -2,6 +2,7 @@ import { ArrowRightLeft, ArrowUpRight, Ban, ExternalLink, Info } from "lucide-re
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { formatDate, hostOf } from "@/lib/format";
+import { REPO_URL, requestUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { FactsGrid } from "./facts-grid";
 import { groupSources } from "./facts";
@@ -12,8 +13,6 @@ import { CompareButton } from "./tool-actions";
 import { ToolLogo } from "./tool-logo";
 import type { DetailVariant, ToolDetailData, ToolDetailRefs } from "./types";
 
-const REPO_URL = "https://github.com/eusholli/ai-sdlc-landscape";
-const CORRECTION_URL = `${REPO_URL}/issues/new?template=correction.yml`;
 const LINK = "rounded-sm underline underline-offset-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50";
 
 /** A date linked to the commit that made it, so the reader can see exactly what changed. */
@@ -152,12 +151,12 @@ export function ToolDetail({
           )}
         </div>
         <a
-          href={`${CORRECTION_URL}&title=${encodeURIComponent(tool.name)}`}
+          href={requestUrl(tool.name)}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 rounded-sm underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          Suggest a correction
+          Suggest a change
           <ExternalLink className="size-3" aria-hidden />
           <span className="sr-only">(opens in a new tab)</span>
         </a>

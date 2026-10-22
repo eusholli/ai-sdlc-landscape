@@ -1,0 +1,22 @@
+name: Request a change
+description: Add a tool, fix a fact, or anything else. Plain words are fine.
+labels: [request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Write it in your own words. A good request says:
+
+        1. **Which tool.** Its name, or its page on this site. For a new tool, its website.
+        2. **What should change.** What is wrong, missing or new: a price, a customer, an acquisition, a link to another tool, or a removal.
+        3. **Where it is published.** A public link that shows it, ideally the vendor's own site or trade press. Listicles and "top 10" pages are not accepted, and a fact that is not published is left out.
+        4. **Whether you work for the vendor.** Vendors are welcome; just say so.
+        5. **If you are an agent,** say so, and who you act for.
+
+        One issue can hold several changes. Each is checked, then accepted, or the issue is closed with the reason.
+  - type: textarea
+    id: request
+    attributes:
+      label: Tell us what should change
+    validations:
+      required: true

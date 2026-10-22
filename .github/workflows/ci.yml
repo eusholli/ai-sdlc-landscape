@@ -21,6 +21,9 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+      # Against HEAD the locked-file check has nothing to compare, since people edit data/ by
+      # hand; what CI gets is the check that no client component reaches the full dataset.
+      - run: pnpm exec tsx scripts/guard.ts
       - run: pnpm build
       # Only on pull requests, and only for the records the pull request changes. A source that
       # refuses automated fetches (401, 403, 429) is reported as blocked and does not fail the run.

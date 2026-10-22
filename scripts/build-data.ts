@@ -11,15 +11,15 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { type History, recordHistory } from "./history";
+import { type Contributor, contributors, headCommit, type History, recordHistory } from "./history";
 
 export const FIELDS_SOURCED = [
   "summary", "customers", "traction", "gtm_partners", "pricing_model", "entry_price",
   "deployment", "models", "open_source", "compliance", "founded", "hq", "headcount_band",
   "funding_total", "last_round", "status",
 ] as const;
-const FIELDS_JUDGED = ["sub_kind", "target_buyer", "interface", "autonomy"] as const;
-const FIELDS_PLACEMENT = ["id", "name", "company", "url", "layer", "primary_phase", "phases", "segment"] as const;
+export const FIELDS_JUDGED = ["sub_kind", "target_buyer", "interface", "autonomy"] as const;
+export const FIELDS_PLACEMENT = ["id", "name", "company", "url", "layer", "primary_phase", "phases", "segment"] as const;
 const KNOWN_KEYS = new Set<string>([...FIELDS_PLACEMENT, ...FIELDS_JUDGED, ...FIELDS_SOURCED, "relations", "sources"]);
 
 export const REL_TYPES = new Set([
@@ -96,7 +96,11 @@ export function buildLandscape(root = "."): BuildResult {
   const logos = existsSync(logoDir) ? readdirSync(logoDir).sort() : [];
 
   let history: Map<string, History> | null = null;
-  try { history = recordHistory(root); } catch (e) { errors.push(`history: ${(e as Error).message}`); }
+  let people: Contributor[] | null = null;
+  try {
+    history = recordHistory(root);
+    people = contributors(root);
+  } catch (e) { errors.push(`history: ${(e as Error).message}`); }
 
   const nodes: Rec[] = [], relations: Rec[] = [], externals = new Map<string, Rec>();
   for (const t of tools) {
@@ -208,12 +212,15 @@ export function buildLandscape(root = "."): BuildResult {
   const generated = nodes.map((n) => n.last_verified as string).filter((d) => d !== "unknown").sort().at(-1) ?? "";
   const data = {
     generated,
+    // The commit the data was built from: with `generated`, the version of the dataset.
+    commit: headCommit(root),
     description: "AI in the software development lifecycle: tools by phase, with typed relations. " +
       "Every non-unknown field traces to a public page in `sources`.",
     phases: phases.phases, layers: phases.layers, segments: phases.segments,
     nodes,
     externals: [...externals.values()].sort((a, b) => String(a.id).localeCompare(String(b.id))),
     relations,
+    contributors: people ?? [],
   };
   return { data: errors.length ? null : data, errors, warns };
 }

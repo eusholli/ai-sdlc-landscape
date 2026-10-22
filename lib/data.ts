@@ -6,8 +6,9 @@ import "server-only";
 import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
 import { pricingBucket, searchLite } from "@/lib/filters";
+import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
-  Autonomy, External, Landscape, Layer, LayerId, MarketMove, Phase, PhaseId, Relation,
+  Autonomy, Contributor, External, Landscape, Layer, LayerId, MarketMove, Phase, PhaseId, Relation,
   RelationLite, RelationType, Segment, SegmentId, Source, Tool, ToolHistory, ToolLite,
 } from "@/lib/types";
 
@@ -26,10 +27,11 @@ const list = (v: unknown): string[] | null => {
 
 function history(h: unknown): ToolHistory | null {
   if (!h || typeof h !== "object") return null;
-  const r = h as Record<string, string>;
+  const r = h as Record<string, string> & { requested_by?: { name: string; issue: number }[] };
   return {
     added: r.added, addedBy: r.added_by, addedCommit: r.added_commit,
     edited: r.edited, editedBy: r.edited_by, editedCommit: r.edited_commit,
+    requestedBy: r.requested_by ?? [],
   };
 }
 
@@ -77,6 +79,11 @@ const phaseData = phaseFile as unknown as { phases: Phase[]; layers: Layer[]; se
 
 const landscape: Landscape = {
   generated: raw.generated,
+  commit: (raw as { commit?: string | null }).commit ?? null,
+  licence: DATA_LICENCE,
+  licenceUrl: DATA_LICENCE_URL,
+  repository: REPO_URL,
+  schema: `${SITE_URL}/schema/tool.json`,
   description: raw.description,
   phases: [...phaseData.phases].sort((a, b) => a.order - b.order),
   layers: phaseData.layers,
@@ -84,6 +91,7 @@ const landscape: Landscape = {
   tools: (raw.nodes as RawNode[]).map(normalise),
   externals: raw.externals as External[],
   relations: raw.relations as Relation[],
+  contributors: ((raw as { contributors?: Contributor[] }).contributors ?? []),
 };
 
 const byId = new Map(landscape.tools.map((t) => [t.id, t]));
@@ -100,6 +108,8 @@ export const allTools = (): Tool[] => landscape.tools;
 export const externals = (): External[] => landscape.externals;
 export const relations = (): Relation[] => landscape.relations;
 export const dataDate = (): string => landscape.generated;
+/** Everyone whose request changed the data, in the order they first did. */
+export const contributors = (): Contributor[] => landscape.contributors;
 
 // ---------- Lookups ----------
 

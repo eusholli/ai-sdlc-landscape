@@ -4,7 +4,7 @@ import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
 import { allTools, dataDate, phases, relations } from "@/lib/data";
 import { formatDate } from "@/lib/format";
-import { CORRECTION_URL } from "@/lib/site";
+import { REQUEST_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -121,7 +121,7 @@ export default function AboutPage() {
             shows the right answer. Corrections with a public source are the fastest to land.
           </p>
           <p>
-            <a href={CORRECTION_URL} target="_blank" rel="noreferrer noopener" className={linkClass}>
+            <a href={REQUEST_URL} target="_blank" rel="noreferrer noopener" className={linkClass}>
               Open a correction issue on GitHub
               <span className="sr-only"> (opens in a new tab)</span>
             </a>

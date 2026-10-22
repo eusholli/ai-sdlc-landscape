@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { ToolDetail } from "@/components/tool/tool-detail";
 import { allTools, relationsFor, toolById } from "@/lib/data";
+import { jsonLdText, toolJsonLd } from "@/lib/jsonld";
 import { toolDetailRefs } from "@/lib/tool-refs";
 
 export const dynamicParams = false;
@@ -30,6 +31,7 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
 
   return (
     <main id="main" className={`${SITE_CONTAINER} py-8`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(toolJsonLd(tool)) }} />
       <div className="mx-auto max-w-3xl">
         <Link
           href="/"

@@ -6,21 +6,54 @@
 // dates (what `pnpm data:links --refresh` writes), and one listed in .git-blame-ignore-revs, the
 // usual home for bulk reformatting. The author is used, not the committer, because a GitHub squash
 // merge commits as GitHub. Names only: an email address never reaches the site.
+//
+// A change made from an issue carries a `Requested-by: <name> (#<issue>)` trailer, so the person
+// who asked is credited on the record and in the list of contributors, though the maintainer made
+// the commit.
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
+export interface Request { name: string; issue: number }
+
 export interface History {
   added: string; added_by: string; added_commit: string;
   edited: string; edited_by: string; edited_commit: string;
+  /** Who asked for the counted changes to this record, oldest first. */
+  requested_by: Request[];
 }
 
-interface Commit { sha: string; author: string; date: string }
+export interface Contributor { name: string; issues: number[]; first: string }
+
+interface Commit { sha: string; author: string; date: string; requests: Request[] }
 
 const git = (root: string, args: string[]) =>
   execFileSync("git", ["-C", root, ...args], { encoding: "utf8", maxBuffer: 256 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] });
 
 const RETRIEVED = /,?\s*retrieved:\s*\d{4}-\d{2}-\d{2}/g;
+
+const TRAILER = "%(trailers:key=Requested-by,valueonly,separator=%x1f)";
+
+/**
+ * Parse `Requested-by:` values. A value without an issue number is dropped, and anything that
+ * looks like an email is cut out, so only a name reaches the site.
+ */
+export function parseRequests(raw: string): Request[] {
+  const out: Request[] = [];
+  for (const v of raw.split("\x1f")) {
+    const m = v.trim().match(/^(.*?)\s*\(#(\d+)\)$/);
+    if (!m) continue;
+    const name = m[1].replace(/<[^>]*>/g, "").replace(/\S+@\S+/g, "").replace(/\s+/g, " ").trim();
+    if (name) out.push({ name, issue: Number(m[2]) });
+  }
+  return out;
+}
+
+const addRequests = (list: Request[], more: Request[]) => {
+  const out = [...list];
+  for (const r of more) if (!out.some((o) => o.name === r.name && o.issue === r.issue)) out.push(r);
+  return out;
+};
 
 /** True when a file's changed lines differ only in their `retrieved:` dates. */
 export function retrievedOnly(removed: string[], added: string[]): boolean {
@@ -60,15 +93,15 @@ export function recordHistory(root = "."): Map<string, History> | null {
   const isIgnored = (sha: string) => [...ignored].some((i) => sha.startsWith(i));
 
   // Oldest first, so a rename carries what came before it.
-  const log = git(root, ["log", "--reverse", "-M", "--format=%x00%H%x09%an%x09%as", "--unified=0",
+  const log = git(root, ["log", "--reverse", "-M", `--format=%x00%H%x09%an%x09%as%x09${TRAILER}`, "--unified=0",
     "-p", "--", "data/tools"]);
   const out = new Map<string, History>();
   const idOf = (p: string) => p.match(/^data\/tools\/(.+)\.yaml$/)?.[1];
 
   for (const chunk of log.split("\x00").slice(1)) {
     const [head, ...rest] = chunk.split("\n");
-    const [sha, author, date] = head.split("\t");
-    const c: Commit = { sha, author, date };
+    const [sha, author, date, trailers = ""] = head.split("\t");
+    const c: Commit = { sha, author, date, requests: parseRequests(trailers) };
     // One section per file: "diff --git a/X b/Y", then the rename or new-file lines, then hunks.
     for (const section of rest.join("\n").split(/^diff --git /m).slice(1)) {
       const lines = section.split("\n");
@@ -89,13 +122,40 @@ export function recordHistory(root = "."): Map<string, History> | null {
         out.set(newId, {
           added: c.date, added_by: c.author, added_commit: c.sha,
           edited: c.date, edited_by: c.author, edited_commit: c.sha,
+          requested_by: c.requests,
         });
         continue;
       }
       // A rename changes the id, which is an edit even when no line moved.
       const counts = !isIgnored(c.sha) && (oldId !== newId || !retrievedOnly(removed, added));
-      out.set(newId, counts ? { ...prior, edited: c.date, edited_by: c.author, edited_commit: c.sha } : prior);
+      out.set(newId, counts
+        ? { ...prior, edited: c.date, edited_by: c.author, edited_commit: c.sha, requested_by: addRequests(prior.requested_by, c.requests) }
+        : prior);
     }
   }
   return out;
+}
+
+/** The commit the data was built from, or null outside a git checkout. */
+export function headCommit(root = "."): string | null {
+  try { return git(root, ["rev-parse", "HEAD"]).trim(); } catch { return null; }
+}
+
+/**
+ * Everyone whose request changed the data, with the issues they raised, in the order they first
+ * did. Null outside a git checkout. Assumes the checkout is full; recordHistory makes it so.
+ */
+export function contributors(root = "."): Contributor[] | null {
+  try { git(root, ["rev-parse", "--git-dir"]); } catch { return null; }
+  const log = git(root, ["log", "--reverse", `--format=%as%x09${TRAILER}`, "--", "data"]);
+  const byName = new Map<string, Contributor>();
+  for (const line of log.split("\n")) {
+    const [date, trailers = ""] = line.split("\t");
+    for (const r of parseRequests(trailers)) {
+      const c = byName.get(r.name) ?? { name: r.name, issues: [], first: date };
+      if (!c.issues.includes(r.issue)) c.issues.push(r.issue);
+      byName.set(r.name, c);
+    }
+  }
+  return [...byName.values()];
 }

@@ -111,8 +111,8 @@ Read `docs/design-brief.md`, "Data contract".
   6. Sources: each field's sources as links showing the host (`hostOf`), the tier as a small
      badge (A vendor page, B press or analyst, C secondary) and the retrieved date. Next to each
      fact in the grid, a small superscript link jumps to its source.
-  7. "Last verified <date>" and a "Suggest a correction" link to
-     `https://github.com/eusholli/ai-sdlc-landscape/issues/new?template=correction.yml&title=<name>`.
+  7. "Last verified <date>" and a "Suggest a change" link to `requestUrl(tool.name)` from
+     `lib/site.ts`, which opens the request form with the title filled in.
 
 Rules: the drawer is a client component and fetches JSON; the page is a server component. Do not
 edit locked files. No em dashes in UI text.
@@ -209,3 +209,57 @@ Rules: server components read `@/lib/data`. Do not edit locked files. No em dash
   and about.
 
 Rules: do not edit locked files. No em dashes in UI text.
+
+## Step 10: Title, requests for change and the contribute page
+
+Read `docs/design-brief.md` first, "The title" and "Requests for change" under "Layout and the map"
+in particular.
+
+Anyone, person or agent, can now ask for a change by opening a GitHub issue in plain words. This
+step makes that visible, and gives the home page a real title. Links and copy come from
+`lib/site.ts` (`REPO_URL`, `REQUEST_URL`, `requestUrl(name)`) and `lib/request-advice.ts`
+(`REQUEST_INTRO`, `REQUEST_ADVICE`, `REQUEST_OUTRO`). Use them; never retype a URL or the advice.
+
+- **Home intro.** In `app/(site)/page.tsx`, above the map and inside `SITE_CONTAINER`, add a short
+  intro: `<h1>` "AI SDLC Landscape" (the page's only h1), then this copy:
+  "A neutral, public map of the AI tools that work across the software development lifecycle.
+  Every fact has a public source. The data and code are open on GitHub, and anyone, person or
+  agent, can request a change."
+  "on GitHub" links to `REPO_URL`; "request a change" links to `/contribute`. Keep it compact: one
+  line of title and at most two lines of text on desktop. A small button collapses it to the title
+  alone and expands it again; remember the choice in `localStorage` (wrapped in try/catch, expanded
+  by default) in a small client component. Keep the existing `<script type="application/ld+json">`
+  in the page as it is. Make sure the map's height still fits the viewport with the intro open.
+- **Tool drawer and tool page.** In `components/tool/tool-detail.tsx`, the footer link already
+  reads "Suggest a change" and uses `requestUrl(tool.name)`; keep it. In the history line, when
+  `tool.history.requestedBy` is not empty, add "Requested by" and each name with its issue as a
+  link, e.g. "Requested by Ada (#12), Grace (#30)", where "#12" links to `${REPO_URL}/issues/12`.
+- **`/contribute` page**, `app/(site)/contribute/page.tsx`, a server component in the style of the
+  About page:
+  - `<h1>` "Request a change", and a sentence: anyone, person or agent, can ask in plain words by
+    opening a GitHub issue; a maintainer checks each one against the rules and accepts it or
+    closes it with the reason.
+  - The advice: `REQUEST_INTRO`, then `REQUEST_ADVICE` as a numbered list (title in bold, then
+    body), then `REQUEST_OUTRO`. A primary button "Open a request on GitHub" to `REQUEST_URL`.
+  - "For agents": the same request filed as plain text, with a copyable code block:
+    `gh issue create --repo eusholli/ai-sdlc-landscape --title "<tool>: <what changes>" --body "<the request, with its public source>"`
+    and one line saying no template or label is needed.
+  - "Read the data": a list of the machine-readable files, each a link with one line on what it
+    holds: `/llms.txt` (a map of the site for agents), `/llms-full.txt` (every tool as Markdown,
+    with sources), `/landscape.json` (the full dataset; `null` means not published),
+    `/data/tools/<id>.json` (one tool and its relations), `/schema/tool.json` (the JSON Schema for
+    one record), and the source records on GitHub (`${REPO_URL}/tree/main/data/tools`). Say the
+    data is CC BY 4.0 and the code MIT.
+  - "People who improved this map": from `contributors()` in `@/lib/data`, each name with the
+    issues they raised as links. With none yet, say "No requests accepted yet."
+  - `generateMetadata` or `metadata` with title "Request a change".
+- **About page.** Rename the "Suggest a correction" section to "Request a change", say requests
+  are plain words from people or agents, and link to `/contribute` as well as `REQUEST_URL`.
+- **Navigation.** Add "Contribute" (`/contribute`, an icon such as `MessageSquarePlus`) to the
+  header links next to About, and a "Request a change" link to `/contribute` in the footer.
+
+Rules: server components read `@/lib/data`; client components never import `@/lib/data` or
+`data/landscape.json`. Do not edit `data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`,
+`lib/format.ts`, `components/logo.tsx`, `lib/site.ts` or `lib/request-advice.ts`. Do not remove
+the JSON-LD scripts, `app/llms.txt`, `app/llms-full.txt` or `app/schema`. No em dashes in any UI
+text. Check both themes and a 375 px width.

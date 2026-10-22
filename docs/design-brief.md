@@ -80,12 +80,20 @@ the far zoom level) are the one place for display size.
 
 - 13 phase columns left to right in lifecycle order (`PHASE_ORDER`), grouped under six stage
   headers.
-- Under the columns, two full-width bands: agent infrastructure (13 tools) and model providers
-  (8 nodes).
-- Above the columns, the 5 full-lifecycle platforms draw as horizontal bars spanning every phase
+- Under the columns, two full-width bands: agent infrastructure and model providers.
+- Above the columns, the full-lifecycle platforms draw as horizontal bars spanning every phase
   they cover (gaps where they skip a phase).
 - A tool tile sits under its `primaryPhase` once. Its other phases show in the drawer's coverage
   strip and as faint ticks on hover, not as duplicate tiles.
+
+**The title.** The home page opens with the site's one `<h1>`, "AI SDLC Landscape", and one or two
+sentences under it that say what the map is and link to the GitHub repo and to requesting a
+change. The intro can be collapsed so the map keeps the screen; the choice is remembered per
+browser. The slim header stays as it is. Every other page has its own `<h1>`.
+
+**Requests for change.** Anyone, person or agent, asks for a change by opening a GitHub issue in
+plain words. Links to it use `REQUEST_URL` or `requestUrl(name)` from `lib/site.ts`, and the advice
+on what to include is `REQUEST_ADVICE` in `lib/request-advice.ts`; never retype either.
 
 **Three semantic zoom levels**, crossfading and re-laying out with `motion` layout animations:
 
