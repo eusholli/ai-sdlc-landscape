@@ -42,6 +42,7 @@ export function recordHistory(root = "."): Map<string, History> | null {
     if (git(root, ["rev-parse", "--is-shallow-repository"]).trim() === "true") {
       throw new Error("the git checkout is shallow, so record history would be wrong; fetch full history first");
     }
+    console.log("history: the checkout was shallow; fetched full history");
   }
   const top = git(root, ["rev-parse", "--show-toplevel"]).trim();
   const ignorePath = join(top, ".git-blame-ignore-revs");
