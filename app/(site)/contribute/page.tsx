@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Request a change",
   description:
     "Ask for a change to the AI SDLC Landscape in plain words by opening a GitHub issue. What to include, how agents can file one, and where the data lives.",
+  alternates: { canonical: "/contribute" },
 };
 
 const linkClass =

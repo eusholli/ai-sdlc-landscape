@@ -1,4 +1,6 @@
 // The canonical origin that the sitemap, share tags, llms text and JSON-LD all build on.
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 const origin = async (env: Record<string, string | undefined>) => {
@@ -21,5 +23,20 @@ describe("SITE_URL", () => {
 
   it("is localhost off Vercel", async () => {
     expect(await origin({ NEXT_PUBLIC_SITE_URL: undefined, VERCEL: undefined })).toBe("http://localhost:3000");
+  });
+});
+
+describe("canonical links", () => {
+  // Set per page, never in a layout: a layout's canonical is inherited, so every page would claim
+  // to be the home page.
+  const pages = (readdirSync("app", { recursive: true }) as string[]).filter((f) => f.endsWith("page.tsx"));
+
+  it.each(pages)("%s sets its own", (page) => {
+    expect(readFileSync(join("app", page), "utf8")).toMatch(/alternates: \{ canonical: /);
+  });
+
+  it("is never set in a layout", () => {
+    const layouts = (readdirSync("app", { recursive: true }) as string[]).filter((f) => f.endsWith("layout.tsx"));
+    for (const l of layouts) expect(readFileSync(join("app", l), "utf8")).not.toMatch(/canonical/);
   });
 });

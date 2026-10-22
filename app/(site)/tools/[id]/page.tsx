@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: tool.name,
     description: tool.summary ?? `${tool.name} by ${tool.company}. The vendor has not published a one-line claim.`,
+    alternates: { canonical: `/tools/${tool.id}` },
   };
 }
 

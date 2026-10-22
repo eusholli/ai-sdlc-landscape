@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "What the AI SDLC Landscape covers, which tools are included, how every fact is sourced, and how to request a change.",
+  alternates: { canonical: "/about" },
 };
 
 const TIERS = [

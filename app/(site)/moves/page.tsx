@@ -9,6 +9,7 @@ import type { MarketMove } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Market moves",
   description: "Acquisitions, shutdowns and end-of-life notices among AI SDLC tools, with the source for each.",
+  alternates: { canonical: "/moves" },
 };
 
 function headlineFor(name: string, move: MarketMove): string {

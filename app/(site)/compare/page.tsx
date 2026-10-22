@@ -7,6 +7,7 @@ import { phases, toolsLite } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Compare tools",
   description: "Put up to four AI SDLC tools side by side and see which facts differ.",
+  alternates: { canonical: "/compare" },
 };
 
 export default function ComparePage() {

@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { HomeIntro } from "@/components/home-intro";
 import { PhaseListStatic } from "@/components/list/phase-list-static";
 import { LandscapeMap } from "@/components/map/landscape-map";
 import { externals, fullLifecycle, layers, phases, relationsLite, segments, toolsLite } from "@/lib/data";
 import { datasetJsonLd, jsonLdText } from "@/lib/jsonld";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (

@@ -7,6 +7,7 @@ import { phaseColor } from "@/lib/format";
 export const metadata: Metadata = {
   title: "Insights",
   description: "Where AI tools cluster across the software lifecycle, and how much vendors publish about themselves.",
+  alternates: { canonical: "/insights" },
 };
 
 function Section({
