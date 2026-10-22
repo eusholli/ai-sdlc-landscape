@@ -81,7 +81,11 @@ function PhaseColumn({ phase, index, tools, max, matched, selectedId, level, onS
   const shown = matched ? tools.filter((t) => matched.has(t.id)).length : tools.length;
   const noun = tools.length === 1 ? "tool" : "tools";
   return (
-    <motion.section aria-labelledby={`phase-${phase.id}`} className="flex min-w-0 flex-col gap-2" {...entrance}>
+    <motion.section
+      aria-labelledby={`phase-${phase.id}`}
+      className="row-span-2 grid min-w-0 grid-rows-subgrid items-start"
+      {...entrance}
+    >
       <header className="border-t-2 pt-2" style={{ borderTopColor: phaseColor(phase.id) }}>
         <h3 id={`phase-${phase.id}`} className="text-[13px] leading-tight font-semibold">
           {phase.label}
@@ -121,7 +125,8 @@ export function PhaseColumns({ phases, byPhase, matched, selectedId, level, onSe
           <StageHeader key={stage.id} stage={stage} />
         ))}
       </div>
-      <div style={{ ...COLUMN_GRID, alignItems: "start" }}>
+      {/* Each column is a two-row subgrid, so a label that wraps to three lines pushes every column's body down together. */}
+      <div style={{ ...COLUMN_GRID, gridTemplateRows: "auto auto", rowGap: 8 }}>
         {PHASE_ORDER.map((id, index) => {
           const phase = phaseById.get(id);
           if (!phase) return null;
