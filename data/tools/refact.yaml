@@ -8,15 +8,17 @@ sub_kind: ide-assistant
 target_buyer: [developer, eng leader]
 interface: [ide]
 summary: AI agent for coding that automates coding, debugging and testing with full context; open source and self-hostable.
-deployment: [saas, on-prem]
-models: [Qwen2.5-Coder (completion), choice of LLMs]
+deployment: [on-prem]
+models: [OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter, Groq, xAI, OpenAI-compatible endpoints, Ollama, LM Studio, vLLM]
 open_source: true
-repo: https://github.com/smallcloudai/refact
+repo: https://github.com/JegernOUTT/refact
 last_round: $2M (2024)
 sources:
   - {field: summary, url: https://refact.ai, retrieved: 2026-10-21}
   - {field: open_source, url: https://refact.ai, retrieved: 2026-10-21}
-  - {field: repo, url: https://refact.ai, retrieved: 2026-10-23}
-  - {field: deployment, url: https://refact.ai, retrieved: 2026-10-21}
-  - {field: models, url: https://refact.ai, retrieved: 2026-10-21}
+  - {field: open_source, url: https://refact.ai/blog/2026/refact-cloud-is-shutting-down/, retrieved: 2026-10-23}
+  - {field: repo, url: https://docs.refact.ai/, retrieved: 2026-10-23}
+  - {field: deployment, url: https://refact.ai, retrieved: 2026-10-23}
+  - {field: deployment, url: https://refact.ai/blog/2026/refact-cloud-is-shutting-down/, retrieved: 2026-10-23}
+  - {field: models, url: https://refact.ai/blog/2026/refact-cloud-is-shutting-down/, retrieved: 2026-10-23}
   - {field: last_round, url: https://techcrunch.com/2024/01/29/refact-launches-to-make-code-generating-ai-more-appealing-to-enterprises/, retrieved: 2026-10-21}
