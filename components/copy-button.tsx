@@ -24,7 +24,7 @@ export function CopyButton({ text, label, buttonLabel }: { text: string; label: 
 
   return (
     <>
-      <Button type="button" variant="outline" size="sm" onClick={copy}>
+      <Button type="button" variant="outline" size="sm" className="max-md:h-11 max-md:px-3.5" onClick={copy}>
         {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
         {copied ? "Copied" : (buttonLabel ?? "Copy")}
         {!buttonLabel && <span className="sr-only"> {label}</span>}

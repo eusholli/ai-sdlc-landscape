@@ -93,6 +93,7 @@ export function HomeIntro({ children, whatsNew }: { children: React.ReactNode; w
             type="button"
             variant="ghost"
             size="icon-sm"
+            className="max-md:size-11"
             onClick={toggle}
             aria-expanded={!collapsed}
             aria-controls="home-intro"

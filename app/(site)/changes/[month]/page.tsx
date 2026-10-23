@@ -75,7 +75,7 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
           <nav aria-label="Breadcrumb">
             <Link
               href="/changes"
-              className="inline-flex items-center gap-1 rounded-sm text-sm text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="inline-flex items-center gap-1 rounded-sm text-sm text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 max-md:min-h-11"
             >
               <ArrowLeft aria-hidden className="size-3.5" />
               All changes
@@ -126,7 +126,10 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
               {d.published.map((p) => (
                 <li key={p.id} className="text-pretty">
                   {toolById(p.id) ? (
-                    <ToolLink id={p.id} className={`${TEXT_LINK} font-medium`}>
+                    <ToolLink
+                      id={p.id}
+                      className={`${TEXT_LINK} font-medium max-md:inline-flex max-md:min-h-11 max-md:items-center`}
+                    >
                       {p.name}
                     </ToolLink>
                   ) : (
@@ -148,10 +151,13 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
               {d.phases.map((phase) => (
                 <li
                   key={phase.id}
-                  className="grid grid-cols-[minmax(7rem,12rem)_minmax(0,1fr)_auto] items-center gap-3 text-sm sm:grid-cols-[14rem_minmax(0,1fr)_auto]"
+                  className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 text-sm sm:grid-cols-[14rem_minmax(0,1fr)_auto]"
                 >
-                  <span className="truncate">{phase.label}</span>
-                  <span aria-hidden className="h-2.5 overflow-hidden rounded-full bg-muted">
+                  <span className="text-pretty sm:truncate">{phase.label}</span>
+                  <span
+                    aria-hidden
+                    className="order-1 col-span-2 h-2.5 overflow-hidden rounded-full bg-muted sm:order-none sm:col-span-1"
+                  >
                     <span
                       className="block h-full rounded-full"
                       style={{ width: `${(phase.added / maxAdded) * 100}%`, background: phaseColor(phase.id) }}
@@ -194,7 +200,7 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Issue ${issue} by ${person.name}, opens in a new tab`}
-                          className={`${TEXT_LINK} tabular-nums`}
+                          className={`${TEXT_LINK} tabular-nums max-md:inline-flex max-md:min-h-11 max-md:min-w-11 max-md:items-center max-md:justify-center`}
                         >
                           #{issue}
                         </a>
@@ -225,7 +231,7 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
             {older ? (
               <Link
                 href={`/changes/${older}`}
-                className="inline-flex items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <ArrowLeft aria-hidden className="size-4" />
                 <span className="sr-only">Previous month: </span>
@@ -237,7 +243,7 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
             {newer && (
               <Link
                 href={`/changes/${newer}`}
-                className="inline-flex items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <span className="sr-only">Next month: </span>
                 {monthTitle(newer)}

@@ -51,7 +51,7 @@ export default function ChangesPage() {
               first.
             </p>
           </div>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild variant="outline" size="sm" className="max-md:h-11 max-md:px-4">
             <a href="/changes.xml">
               <Rss aria-hidden />
               Feed
@@ -66,7 +66,7 @@ export default function ChangesPage() {
               {digests.has(month.key) ? (
                 <Link
                   href={`/changes/${month.key}`}
-                  className="group inline-flex items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="group inline-flex items-center gap-1.5 rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 max-md:min-h-11"
                 >
                   {month.label}
                   <span className="sr-only">, monthly digest</span>

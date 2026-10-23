@@ -4,7 +4,7 @@ import { dataDate } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
 const linkClass =
-  "rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
+  "rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:inline-flex max-sm:min-h-11 max-sm:items-center";
 
 export function SiteFooter() {
   const date = dataDate();

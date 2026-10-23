@@ -45,7 +45,7 @@ export function WhatsNewStrip({ items, collapsed }: { items: WhatsNewItem[]; col
         </ul>
         <Link
           href="/changes"
-          className="inline-flex shrink-0 items-center gap-1 rounded-sm text-xs underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="inline-flex shrink-0 items-center gap-1 rounded-sm text-xs underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 max-md:min-h-11 max-md:px-1"
         >
           All changes
           <ArrowRight aria-hidden className="size-3" />

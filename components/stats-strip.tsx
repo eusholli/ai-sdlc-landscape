@@ -1,5 +1,5 @@
 import { SITE_CONTAINER } from "@/components/site-name";
-import { allTools, dataDate, marketMoves, phases, relations } from "@/lib/data";
+import { allTools, dataDate, marketMoves, phases, relations, timeline } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
 export function StatsStrip() {
@@ -10,6 +10,7 @@ export function StatsStrip() {
     { label: "acquisitions", value: marketMoves().filter((m) => m.kind === "acquired").length },
   ];
   const date = dataDate();
+  const newest = timeline(1)[0];
 
   return (
     <div className="border-b bg-muted/40">
@@ -23,6 +24,14 @@ export function StatsStrip() {
             <span>{label}</span>
           </li>
         ))}
+        {newest && (
+          <li className="flex items-baseline gap-1.5">
+            <span>Updated</span>
+            <time dateTime={newest.date} className="font-mono tabular-nums text-foreground">
+              {formatDate(newest.date)}
+            </time>
+          </li>
+        )}
         <li className="flex items-baseline gap-1.5 sm:ml-auto">
           <span>Data as of</span>
           <time dateTime={date} className="font-mono tabular-nums text-foreground">

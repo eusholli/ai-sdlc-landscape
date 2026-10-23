@@ -1,5 +1,5 @@
 {
-  "lastStep": 14,
+  "lastStep": 15,
   "chatId": "ZOkxfWLRQje",
   "webUrl": "https://v0.app/chat/ZOkxfWLRQje",
   "files": [
@@ -82,7 +82,6 @@
     "components/site-name.tsx",
     "components/stage-legend.tsx",
     "components/stats-strip.tsx",
-    "components/theme-toggle.tsx",
     "components/tool/facts-grid.tsx",
     "components/tool/facts.ts",
     "components/tool/relation-groups.tsx",
@@ -130,7 +129,6 @@
     "app/data/tools/[id]/route.ts",
     "components/filters/facets.ts",
     "components/filters/filter-bar.tsx",
-    "components/list/filter-sheet.tsx",
     "components/freshness-meta.tsx",
     "components/tool/freshness-chip.tsx",
     "components/freshness-bar.tsx",
@@ -140,10 +138,12 @@
     "components/copy-button.tsx",
     "components/tool/types.ts",
     "lib/tool-refs.ts",
-    "components/tool/tool-detail.tsx",
     "app/(site)/insights/page.tsx",
     "components/tool/vendor-badge.tsx",
     "app/(site)/tools/[id]/page.tsx",
-    "app/(site)/contribute/page.tsx"
+    "app/(site)/contribute/page.tsx",
+    "components/list/filter-sheet.tsx",
+    "components/theme-toggle.tsx",
+    "components/tool/tool-detail.tsx"
   ]
 }

@@ -50,13 +50,13 @@ export function SiteHeader() {
       </div>
 
       <div className="flex items-center justify-end gap-1.5">
-        <Button variant="outline" size="sm" onClick={() => emit(OPEN_SEARCH_EVENT)}>
+        <Button variant="outline" size="sm" className="max-sm:h-11" onClick={() => emit(OPEN_SEARCH_EVENT)}>
           <Search aria-hidden />
           <span className="sr-only sm:not-sr-only">Search</span>
           <Kbd aria-hidden className="hidden md:inline-flex">⌘K</Kbd>
         </Button>
 
-        <Button asChild variant="outline" size="sm">
+        <Button asChild variant="outline" size="sm" className="max-sm:h-11">
           <Link
             href={compareIds.length ? `/compare?compare=${compareIds.map(encodeURIComponent).join(",")}` : "/compare"}
             aria-label={compareIds.length ? `Compare, ${compareIds.length} selected` : "Compare"}
@@ -76,7 +76,7 @@ export function SiteHeader() {
         <nav aria-label="Pages" className="flex items-center gap-0.5">
           {NAV_LINKS.map(({ href, label, Icon, hideOnPhone }) => (
             <span key={href} className={hideOnPhone ? "hidden sm:contents" : "contents"}>
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="ghost" size="sm" className="max-sm:h-11 max-sm:min-w-9">
                 <Link href={href} aria-label={label} aria-current={pathname === href ? "page" : undefined}>
                   <Icon aria-hidden />
                   <span className="hidden lg:inline">{label}</span>

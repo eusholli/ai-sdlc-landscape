@@ -26,7 +26,7 @@ export function MoveEntry({ item, label }: { item: MoveItem; label?: string }) {
           <h3 className="text-base leading-snug font-semibold text-balance">
             <Link
               href={`/tools/${item.id}`}
-              className="rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="rounded-sm outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 max-md:inline-block max-md:py-3"
             >
               {item.headline}
             </Link>
@@ -45,7 +45,7 @@ export function MoveEntry({ item, label }: { item: MoveItem; label?: string }) {
                 href={source.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex items-center gap-1 rounded-sm max-md:min-h-11 underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 {source.host}
                 <ExternalLink aria-hidden className="size-3" />

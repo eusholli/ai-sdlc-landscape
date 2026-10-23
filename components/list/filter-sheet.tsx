@@ -87,7 +87,7 @@ export function FilterSheet({ tools, phases, segments }: FilterSheetProps) {
       <SheetTrigger asChild>
         <Button
           variant="outline"
-          className="h-9"
+          className="h-11"
           aria-label={activeCount ? `Filters, ${activeCount} active` : "Filters"}
         >
           <SlidersHorizontal aria-hidden />

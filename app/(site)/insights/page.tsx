@@ -50,9 +50,12 @@ function Section({
 
 function BarRow({ label, value, max, colour, trailing }: { label: string; value: number; max: number; colour: string; trailing: string }) {
   return (
-    <li className="grid grid-cols-[minmax(7rem,12rem)_minmax(0,1fr)_auto] items-center gap-3 text-sm sm:grid-cols-[14rem_minmax(0,1fr)_auto]">
-      <span className="truncate">{label}</span>
-      <span aria-hidden className="h-2.5 overflow-hidden rounded-full bg-muted">
+    <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 text-sm sm:grid-cols-[14rem_minmax(0,1fr)_auto]">
+      <span className="text-pretty sm:truncate">{label}</span>
+      <span
+        aria-hidden
+        className="order-1 col-span-2 h-2.5 overflow-hidden rounded-full bg-muted sm:order-none sm:col-span-1"
+      >
         <span className="block h-full rounded-full" style={{ width: `${(value / max) * 100}%`, background: colour }} />
       </span>
       <span className="text-right font-mono text-xs whitespace-nowrap text-muted-foreground tabular-nums">
@@ -155,7 +158,7 @@ export default function InsightsPage() {
                   <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={28} />
                   <ToolLink
                     id={tool.id}
-                    className="min-w-0 flex-1 truncate rounded-sm text-sm font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                    className="-my-3 min-w-0 flex-1 truncate rounded-sm py-3 text-sm font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
                   >
                     {tool.name}
                   </ToolLink>
@@ -172,7 +175,7 @@ export default function InsightsPage() {
               Know a newer source for one of these?{" "}
               <Link
                 href="/contribute"
-                className="rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 max-md:inline-flex max-md:min-h-11 max-md:items-center"
               >
                 Request a change
               </Link>

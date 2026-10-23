@@ -47,6 +47,7 @@ export function CoverageHeatmap({ columns, rows, counts }: CoverageHeatmapProps)
           <Button
             key={option}
             size="sm"
+            className="max-md:h-11 max-md:px-4"
             variant={view === option ? "default" : "outline"}
             aria-pressed={view === option}
             onClick={() => setView(option)}
@@ -58,7 +59,12 @@ export function CoverageHeatmap({ columns, rows, counts }: CoverageHeatmapProps)
 
       {view === "heatmap" ? (
         <TooltipProvider>
-          <div className="overflow-x-auto pb-2">
+          <div
+            role="region"
+            aria-label="Coverage heatmap, scrolls sideways on narrow screens"
+            tabIndex={0}
+            className="overflow-x-auto pb-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
             <div className="grid min-w-[44rem] gap-1" style={{ gridTemplateColumns: gridTemplate }}>
               <div aria-hidden />
               {columns.map((column) => (

@@ -21,7 +21,7 @@ const LINK = "rounded-sm underline underline-offset-4 outline-none focus-visible
 /** A date linked to the commit that made it, so the reader can see exactly what changed. */
 function CommitDate({ date, commit }: { date: string; commit: string }) {
   return (
-    <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={cn(LINK, "tabular-nums")}>
+    <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={cn(LINK, "tabular-nums max-md:inline-flex max-md:min-h-11 max-md:items-center")}>
       {formatDate(date)}
     </a>
   );
@@ -74,7 +74,7 @@ export function ToolDetail({
                 href={tool.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex items-center gap-1 rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 max-md:min-h-11"
               >
                 {hostOf(tool.url)}
                 <ExternalLink className="size-3" aria-hidden />
@@ -92,7 +92,7 @@ export function ToolDetail({
         <div className="flex flex-wrap gap-2">
           <CompareButton id={tool.id} name={tool.name} />
           {!isPage && (
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant="outline" size="sm" className="max-md:h-11">
               <Link href={`/tools/${tool.id}`}>
                 Open page
                 <ArrowUpRight aria-hidden />

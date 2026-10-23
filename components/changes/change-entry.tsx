@@ -35,11 +35,13 @@ export interface LaunchItem {
 
 const LINK =
   "rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
+// Phones get a 44 px tall hit area; the text keeps its size.
+const LINK_TAP = `${LINK} max-md:inline-flex max-md:min-h-11 max-md:min-w-11 max-md:items-center max-md:justify-center`;
 const MAX_LOGOS = 5;
 
 function Meta({ author, requestedBy, commit }: { author: string; requestedBy: RequestCredit[]; commit: string }) {
   return (
-    <p className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
+    <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
       <span>by {author}</span>
       {requestedBy.map((credit) => (
         <span key={`${credit.issue}-${credit.name}`}>
@@ -49,14 +51,14 @@ function Meta({ author, requestedBy, commit }: { author: string; requestedBy: Re
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Issue ${credit.issue} by ${credit.name}, opens in a new tab`}
-            className={`${LINK} tabular-nums`}
+            className={`${LINK_TAP} tabular-nums`}
           >
             #{credit.issue}
           </a>
           )
         </span>
       ))}
-      <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={LINK}>
+      <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={LINK_TAP}>
         commit
         <span className="sr-only"> {commit.slice(0, 7)} (opens in a new tab)</span>
       </a>
@@ -76,7 +78,7 @@ function OneTool({ tool, text }: { tool: TouchedTool; text: string }) {
   const body = tool.linkable ? (
     <ToolLink
       id={tool.id}
-      className="rounded-sm text-sm leading-snug text-pretty underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="rounded-sm text-sm leading-snug text-pretty underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 max-md:inline-flex max-md:min-h-11 max-md:items-center"
     >
       {text}
     </ToolLink>
@@ -112,7 +114,7 @@ function SeveralTools({ tools, text, lines }: { tools: TouchedTool[]; text: stri
         <p className="text-sm leading-snug text-pretty">{text}</p>
         {lines.length > 1 && (
           <details className="group mt-1.5">
-            <summary className="inline-flex cursor-pointer list-none items-center gap-1 rounded-sm text-xs text-muted-foreground outline-none select-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1 rounded-sm text-xs max-md:min-h-11 text-muted-foreground outline-none select-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
               <ChevronRight aria-hidden className="size-3.5 transition-transform group-open:rotate-90" />
               Show all
               <span className="sr-only"> {lines.length} changes in this commit</span>

@@ -66,7 +66,7 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
             placeholder="Search tools"
             value={query.q}
             onChange={(event) => void setQuery({ q: event.target.value || null }, { history: "replace" })}
-            className="h-9 flex-1"
+            className="h-11 flex-1"
           />
           <FilterSheet tools={tools} phases={phases} segments={segments} />
         </div>

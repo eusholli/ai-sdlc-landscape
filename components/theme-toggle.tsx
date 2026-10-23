@@ -31,7 +31,7 @@ export function ThemeToggle() {
           value={value}
           aria-label={label}
           title={label}
-          className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm data-[state=on]:ring-1 data-[state=on]:ring-border"
+          className="inline-flex size-7 items-center max-sm:h-11 max-sm:w-8 justify-center rounded-md text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm data-[state=on]:ring-1 data-[state=on]:ring-border"
         >
           <Icon className="size-3.5" aria-hidden />
         </ToggleGroup.Item>
