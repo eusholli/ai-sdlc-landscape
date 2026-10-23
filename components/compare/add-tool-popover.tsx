@@ -23,16 +23,19 @@ export function AddToolPopover({
   tools,
   selected,
   onAdd,
+  cap = MAX_COMPARE,
 }: {
   tools: ToolLite[];
   selected: string[];
   onAdd: (id: string, name: string) => void;
+  /** The most tools the set holds. null means no limit, and hides the replace-the-oldest note. */
+  cap?: number | null;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const trimmed = query.trim();
   const hits = useMemo(() => searchLite(tools, trimmed).slice(0, MAX_RESULTS), [tools, trimmed]);
-  const full = selected.length >= MAX_COMPARE;
+  const full = cap !== null && selected.length >= cap;
 
   return (
     <Popover
@@ -93,7 +96,7 @@ export function AddToolPopover({
         </Command>
         {full && (
           <p className="border-t px-3 py-2 text-xs text-muted-foreground">
-            Compare holds {MAX_COMPARE} tools. Adding another replaces the oldest.
+            Compare holds {cap} tools. Adding another replaces the oldest.
           </p>
         )}
       </PopoverContent>

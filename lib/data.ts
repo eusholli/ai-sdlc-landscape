@@ -6,11 +6,13 @@ import "server-only";
 import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
 import { pricingBucket, searchLite } from "@/lib/filters";
+import { joinOrNotPublished, notPublished } from "@/lib/format";
+import { KIT, SOURCE_FIELD, type KitQuestion } from "@/lib/kit";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
   Autonomy, Change, Contributor, External, Freshness, FreshnessBand, Landscape, Layer, LayerId, MarketMove,
   Phase, PhaseId, Relation, RelationLite, RelationType, Segment, SegmentId, Source, TimelineEntry, Tool,
-  ToolHistory, ToolLite,
+  ToolHistory, ToolLite, XrayTool,
 } from "@/lib/types";
 
 type RawNode = (typeof raw.nodes)[number] & Record<string, unknown>;
@@ -263,6 +265,44 @@ export const toLite = (t: Tool): ToolLite => ({
 
 export const toolsLite = (): ToolLite[] => landscape.tools.map(toLite);
 export const relationsLite = (): RelationLite[] => landscape.relations.map(({ from, to, type }) => ({ from, to, type }));
+
+export const xrayTools = (): XrayTool[] => landscape.tools.filter((t) => t.kind === "tool")
+  .map((t) => ({ ...toLite(t), models: t.models, status: t.status, pricingModel: t.pricingModel }));
+
+// ---------- Evaluation kit ----------
+
+export interface KitAnswer { q: KitQuestion; value: string | null; sources: Source[] }
+
+/** Names of the tools a record is paired with, or null when no relation is recorded. */
+function relatedNames(id: string): string | null {
+  const names = relationsFor(id).filter((r) => r.type !== "competes_with").map((r) => r.otherName);
+  return names.length ? [...new Set(names)].join(", ") : null;
+}
+
+/** Each kit question answered from one record, or null where the vendor published nothing. */
+export function kitFor(id: string): { tool: Tool; answers: KitAnswer[] } | undefined {
+  const tool = toolById(id);
+  if (!tool) return undefined;
+  const value = (field: KitQuestion["field"]): string | null => {
+    switch (field) {
+      case "deployment": case "models": case "compliance": case "customers": {
+        const v = joinOrNotPublished(tool[field]);
+        return v === joinOrNotPublished(null) ? null : v;
+      }
+      case "pricingModel": return tool.pricingModel;
+      case "status": return tool.status ?? "No acquisition or shutdown recorded";
+      case "openSource": return tool.openSource ? "Open source" : null;
+      case "relations": return relatedNames(id);
+      default: return null;
+    }
+  };
+  const answers = KIT.map((q) => {
+    const v = value(q.field);
+    const sourceField = q.field ? SOURCE_FIELD[q.field] : undefined;
+    return { q, value: v === null ? null : notPublished(v), sources: sourceField ? tool.sources.filter((s) => s.field === sourceField) : [] };
+  });
+  return { tool, answers };
+}
 
 // ---------- Change log and timeline ----------
 

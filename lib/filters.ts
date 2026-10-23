@@ -86,6 +86,7 @@ export const filterParsers = {
   view: parseAsStringLiteral(VIEWS).withDefault("map"),
   tool: parseAsString, // open drawer
   compare: parseAsArrayOf(parseAsString).withDefault([]),
+  xray: parseAsArrayOf(parseAsString).withDefault([]),
 };
 
 export interface Filters {

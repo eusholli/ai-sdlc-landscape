@@ -190,6 +190,14 @@ export function ToolDetail({
           )}
           <ToolChanges changes={data.changes ?? []} />
         </div>
+        {tool.kind === "tool" && (
+          <Link
+            href={`/evaluate/${tool.id}`}
+            className="inline-flex items-center gap-1 rounded-sm underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            Questions to ask this vendor
+          </Link>
+        )}
         <a
           href={requestUrl(tool.name)}
           target="_blank"

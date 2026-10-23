@@ -67,6 +67,8 @@ export function llmsTxt(): string {
     `- [Tool pages](${SITE_URL}/tools/${example}): \`/tools/<id>\`, one per tool`,
     `- [Changes](${SITE_URL}/changes): what changed in the data, newest first`,
     `- [Market moves](${SITE_URL}/moves): acquisitions and shutdowns`,
+    `- [Stack X-ray](${SITE_URL}/x-ray): pick the tools a team runs, see phase coverage, overlaps, model dependence, ownership changes and pricing mix`,
+    `- [Evaluate an AI SDLC tool](${SITE_URL}/evaluate): the questions to put to a vendor on data, continuity, pricing, integration and security; \`/evaluate/<id>\` shows what one tool's vendor has published, and \`/evaluate.md\` and \`/evaluate.csv\` download the list`,
     `- [Insights](${SITE_URL}/insights): coverage and what is published`,
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,
     `- [Contribute](${SITE_URL}/contribute): how to request a change`,
