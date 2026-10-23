@@ -27,12 +27,18 @@ end of each scan for another look, for a tool in early access or a site that ref
   missing field shows as "Not published", which is a fact in its own right.
 - **Quote the vendor's own words for `summary`.** It is their one-line claim, not ours.
 - **Sources are tiered by who published them.** The build works the tier out, so you do not set it:
-  - A: the vendor's own site, or its GitHub.
+  - A: the vendor's own site, or a page under the vendor's own GitHub account (see `repo` below).
   - B: established trade press. The list is `TRADE_PRESS` in `scripts/build-data.ts`.
-  - C: anything else.
+  - C: anything else, including GitHub pages under any other account.
 
   An acquisition needs an A or B source. Market-research listicles and "top 10 tools" pages are not
   accepted.
+- **An open-source tool names its repo.** `repo` is the vendor's main GitHub repository, for
+  example `https://github.com/<owner>/<name>`, and `open_source: true` needs one. Anyone can open a
+  GitHub account under any name, so the vendor has to point at it: the `repo` source is a page on
+  the vendor's own site that links to that account, or the repo itself when the tool's `url` is on
+  GitHub. `pnpm data:links` checks the link is there. That account is then the vendor's, and its
+  pages count as Tier A. A closed-source tool has no `repo`, so GitHub pages about it are Tier C.
 - **Relations** go under `relations` on the tool they start from, as `{type, to, sources}`. The type
   is one of `integrates_with`, `built_on_model`, `acquired_by`, `partners_with`, `competes_with` or
   `ships_inside`. A target that is not a tool here needs a display name in `data/externals.yaml`.

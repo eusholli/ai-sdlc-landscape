@@ -11,10 +11,12 @@ summary: "The open-source AI coding agent, free to use with any provider: OpenAI
 traction: 215K GitHub stars; over 16M developers a month (company claim)
 pricing_model: free (open source), optional Zen model gateway
 open_source: true
+repo: https://github.com/anomalyco/opencode
 sources:
   - {field: summary, url: https://opencode.ai/, retrieved: 2026-10-21}
   - {field: summary, url: https://opencode.ai/docs/ecosystem/, retrieved: 2026-10-21}
   - {field: traction, url: https://opencode.ai/, retrieved: 2026-10-21}
   - {field: open_source, url: https://opencode.ai/, retrieved: 2026-10-21}
+  - {field: repo, url: https://opencode.ai, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://opencode.ai/, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://opencode.ai/docs/ecosystem/, retrieved: 2026-10-21}

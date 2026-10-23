@@ -7,6 +7,8 @@
 //
 // 403, 419 and 429 mean the site refused an automated fetch, not that the page is gone, so they are
 // reported as blocked and do not fail the run. Anything else that is not 2xx after redirects fails.
+// A `repo` source on the vendor's own site must also link to the repo's GitHub account, since that
+// link is what makes the account the vendor's; a page that answers without it fails too.
 // The package script raises Node's header limit: some vendor sites send more than its 16 KB default.
 import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -35,6 +37,16 @@ async function status(url: string): Promise<number> {
   return 0;
 }
 
+/** Whether the page links to github.com/<owner>, the account that `repo` names. Null when unread. */
+async function linksTo(url: string, owner: string): Promise<boolean | null> {
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": UA }, redirect: "follow", signal: AbortSignal.timeout(20_000) });
+    if (!r.ok) { await r.body?.cancel(); return null; }
+    const esc = owner.replace(/[.]/g, "\\.");
+    return new RegExp(`github\\.com/${esc}(?=[/"'?#\\s]|$)`, "i").test(await r.text());
+  } catch { return null; }
+}
+
 function files(changed: boolean): string[] {
   const all = readdirSync(DIR).filter((f) => f.endsWith(".yaml"));
   if (!changed) return all;
@@ -56,6 +68,17 @@ async function main() {
     for (let u = queue.shift(); u; u = queue.shift()) result.set(u, await status(u));
   }));
 
+  const unlinked: string[] = [];
+  for (const { f, doc } of docs) {
+    const t = doc.toJS() as { repo?: string; sources?: { field: string; url: string }[] };
+    if (!t.repo) continue;
+    const owner = new URL(t.repo).pathname.split("/")[1];
+    for (const s of (t.sources ?? []).filter((x) => x.field === "repo" && !x.url.startsWith("https://github.com/"))) {
+      if ((await linksTo(s.url, owner)) === false) unlinked.push(`${f}: ${s.url} does not link to github.com/${owner}`);
+    }
+  }
+  for (const u of unlinked) console.log(`UNLINKED ${u}`);
+
   const dead = urls.filter((u) => { const s = result.get(u)!; return !(s >= 200 && s < 300) && !BLOCKED.has(s); });
   const blocked = urls.filter((u) => BLOCKED.has(result.get(u)!));
   for (const u of blocked) console.log(`blocked ${result.get(u)} ${u}`);
@@ -72,8 +95,8 @@ async function main() {
     }
   }
   console.log(`${urls.length} URLs in ${docs.length} records: ${urls.length - dead.length - blocked.length} ok, ` +
-    `${blocked.length} blocked, ${dead.length} dead`);
-  process.exit(dead.length ? 1 : 0);
+    `${blocked.length} blocked, ${dead.length} dead, ${unlinked.length} repo sources unlinked`);
+  process.exit(dead.length || unlinked.length ? 1 : 0);
 }
 
 main();

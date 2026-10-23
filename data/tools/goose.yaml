@@ -10,6 +10,7 @@ interface: [cli, desktop, api]
 summary: Open-source, extensible AI agent with a desktop app, CLI and API; part of the Agentic AI Foundation at the Linux Foundation.
 pricing_model: free (open source)
 open_source: true
+repo: https://github.com/aaif-goose/goose
 relations:
   - {type: integrates_with, to: mcp, sources: [https://goose-docs.ai, https://github.com/block/goose]}
   - {type: integrates_with, to: claude-code, sources: [https://goose-docs.ai, https://github.com/block/goose]}
@@ -18,6 +19,7 @@ sources:
   - {field: summary, url: https://goose-docs.ai, retrieved: 2026-10-21}
   - {field: summary, url: https://github.com/block/goose, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/block/goose, retrieved: 2026-10-21}
+  - {field: repo, url: https://goose-docs.ai, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://goose-docs.ai, retrieved: 2026-10-21}
   - {field: relations, url: https://goose-docs.ai, retrieved: 2026-10-21}
   - {field: relations, url: https://github.com/block/goose, retrieved: 2026-10-21}

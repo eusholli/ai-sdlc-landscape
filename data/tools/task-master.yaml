@@ -8,6 +8,8 @@ target_buyer: [developer]
 interface: [cli]
 summary: "Open-source, CLI-first tool that structures AI agent work: parse PRDs into tasks and subtasks with dependencies and acceptance criteria."
 open_source: true
+repo: https://github.com/eyaltoledano/claude-task-master
 sources:
   - {field: summary, url: https://www.task-master.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.task-master.dev, retrieved: 2026-10-21}
+  - {field: repo, url: https://www.task-master.dev, retrieved: 2026-10-23}

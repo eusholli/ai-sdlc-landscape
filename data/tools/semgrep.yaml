@@ -12,6 +12,7 @@ traction: AppSec teams triage 80% fewer false positives (company claim)
 pricing_model: per contributor
 entry_price: Free
 open_source: true
+repo: https://github.com/semgrep/semgrep
 last_round: $100M Series D, led by Menlo Ventures (Feb 2025)
 relations:
   - {type: competes_with, to: snyk, sources: [https://docs.semgrep.dev/faq/comparisons/snyk]}
@@ -22,6 +23,7 @@ sources:
   - {field: customers, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
   - {field: traction, url: https://semgrep.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
+  - {field: repo, url: https://semgrep.dev, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://docs.semgrep.dev/faq/comparisons/snyk, retrieved: 2026-10-21}

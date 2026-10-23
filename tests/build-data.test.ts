@@ -77,4 +77,39 @@ describe("build-data", () => {
     expect(tier("https://techcrunch.com/2025/x", "https://kiro.dev")).toBe("B");
     expect(tier("https://example.org/x", "https://kiro.dev")).toBe("C");
   });
+
+  it("counts GitHub as the vendor's only under the vendor's own account", () => {
+    const repo = "https://github.com/fixture-co/fixture";
+    expect(tier("https://github.com/Fixture-Co/fixture#readme", "https://fixture.example", repo)).toBe("A");
+    expect(tier("https://github.com/fixture-co/fixture", "https://fixture.example")).toBe("C");
+    expect(tier("https://github.com/someone-else/fixture", "https://fixture.example", repo)).toBe("C");
+    // A tool that lives on GitHub owns its account, not the whole of github.com.
+    expect(tier("https://github.com/fixture-co/other", "https://github.com/fixture-co/fixture")).toBe("A");
+    expect(tier("https://github.com/someone-else/x", "https://github.com/fixture-co/fixture")).toBe("C");
+    expect(tier("https://docs.github.com/x", "https://github.com/fixture-co/fixture")).toBe("C");
+  });
+
+  it("needs a repo for open source, named on the vendor's own site", () => {
+    const oss = FIXTURE.replace("sources:\n", "open_source: true\nsources:\n") +
+      "  - {field: open_source, url: https://fixture.example/, retrieved: 2026-01-02}\n";
+    expect(buildLandscape(scratch(oss)).errors).toContain("fixture-tool: open_source needs a repo");
+    const withRepo = (src: string) => oss.replace("sources:\n", "repo: https://github.com/fixture-co/fixture\nsources:\n") +
+      `  - {field: repo, url: ${src}, retrieved: 2026-01-02}\n`;
+    expect(buildLandscape(scratch(withRepo("https://fixture.example/"))).errors).toEqual([]);
+    expect(buildLandscape(scratch(withRepo("https://example.org/fixture"))).errors)
+      .toContain("fixture-tool: repo needs a source on the vendor's own site");
+    expect(buildLandscape(scratch(withRepo("https://github.com/fixture-co/fixture"))).errors)
+      .toContain("fixture-tool: repo needs a source on the vendor's own site");
+  });
+
+  it("keeps the repo of a tool on GitHub under the account in its url", () => {
+    const onGithub = FIXTURE.replace("url: https://fixture.example\n", "url: https://github.com/fixture-co/fixture\n")
+      .replace("sources:\n", "repo: https://github.com/someone-else/fixture\nsources:\n") +
+      "  - {field: repo, url: https://github.com/fixture-co/fixture, retrieved: 2026-01-02}\n";
+    const { errors } = buildLandscape(scratch(onGithub));
+    expect(errors).toEqual(["fixture-tool: repo is not under the GitHub account in url"]);
+    expect(buildLandscape(scratch(FIXTURE.replace("sources:\n", "repo: https://gitlab.com/x/y\nsources:\n") +
+      "  - {field: repo, url: https://fixture.example/, retrieved: 2026-01-02}\n")).errors)
+      .toContain("fixture-tool: repo must be https://github.com/<owner>/<name>: https://gitlab.com/x/y");
+  });
 });

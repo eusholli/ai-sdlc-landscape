@@ -55,7 +55,8 @@ and pull request, and runs `data:links --changed` on pull requests that touch re
 1. Every value has a source: `{field, url, retrieved}`. The build fails a value without one.
 2. A fact that is not published is left out, never guessed. The site shows it as "Not published".
 3. `summary` is the vendor's own one-line claim, quoted, not rewritten.
-4. Tiers are computed, never stored: A is the vendor's own site, B is the `TRADE_PRESS` list in
+4. Tiers are computed, never stored: A is the vendor's own site or its own GitHub account (the
+   one in `repo`, which an open-source tool must name), B is the `TRADE_PRESS` list in
    `scripts/build-data.ts`, C is the rest. Listicles and "top 10" pages are refused. An acquisition
    needs an A or B source.
 5. Relations sit on the tool they start from, as `{type, to, sources}`, with a type from

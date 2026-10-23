@@ -11,6 +11,7 @@ summary: A high-performance, multiplayer code editor from the creators of Atom a
 pricing_model: subscription plus usage
 entry_price: Free; Pro $10/month
 open_source: true
+repo: https://github.com/zed-industries/zed
 last_round: $32M Series B, led by Sequoia
 relations:
   - {type: integrates_with, to: claude-code, sources: [https://zed.dev/pricing]}
@@ -18,6 +19,7 @@ relations:
 sources:
   - {field: summary, url: https://zed.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://zed.dev/pricing, retrieved: 2026-10-21}
+  - {field: repo, url: https://zed.dev/pricing, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://zed.dev/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://zed.dev/blog/pricing-change-llm-usage-is-now-token-based, retrieved: 2026-10-21}
   - {field: relations, url: https://zed.dev/pricing, retrieved: 2026-10-21}

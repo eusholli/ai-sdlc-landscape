@@ -12,12 +12,14 @@ summary: Open-source AI coding agent with Plan/Act modes, MCP integration and te
 traction: Trusted by 11M+ developers (company claim)
 models: [Claude, GPT, Gemini, Ollama, LM Studio, any OpenAI-compatible endpoint]
 open_source: true
+repo: https://github.com/cline/cline
 founded: 2024
 funding_total: $32M (seed and Series A)
 sources:
   - {field: summary, url: https://cline.bot, retrieved: 2026-10-21}
   - {field: traction, url: https://cline.bot, retrieved: 2026-10-21}
   - {field: open_source, url: https://cline.bot, retrieved: 2026-10-21}
+  - {field: repo, url: https://cline.bot, retrieved: 2026-10-23}
   - {field: models, url: https://cline.bot, retrieved: 2026-10-21}
   - {field: founded, url: https://startupintros.com/orgs/cline, retrieved: 2026-10-21}
   - {field: funding_total, url: https://cline.bot/blog/cline-raises-32m-series-a-and-seed-funding-building-the-open-source-ai-coding-agent-that-enterprises-trust, retrieved: 2026-10-21}

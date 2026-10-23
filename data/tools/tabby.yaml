@@ -10,8 +10,10 @@ interface: [ide, cli]
 summary: Open-source, self-hosted AI coding assistant, including air-gapped deployment.
 deployment: [self-hosted, air-gapped]
 open_source: true
+repo: https://github.com/TabbyML/tabby
 sources:
   - {field: summary, url: https://www.tabbyml.com, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.tabbyml.com, retrieved: 2026-10-21}
+  - {field: repo, url: https://www.tabbyml.com, retrieved: 2026-10-23}
   - {field: deployment, url: https://www.tabbyml.com, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.tabbyml.com/blog/deploy-tabby-in-air-gapped-environment-with-docker, retrieved: 2026-10-21}

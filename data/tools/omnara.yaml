@@ -13,6 +13,7 @@ entry_price: Free (own model keys and machines)
 deployment: [saas, self-hosted, byoc (enterprise), on-prem (enterprise)]
 models: [OpenAI, Anthropic, OpenRouter, Amazon Bedrock, LiteLLM, Ollama, self-hosted models]
 open_source: true
+repo: https://github.com/omnara-ai/omnara
 relations:
   - {type: competes_with, to: claude-managed-agents, sources: [https://github.com/omnara-ai/omnara]}
   - {type: competes_with, to: openai-agents-api, sources: [https://github.com/omnara-ai/omnara]}
@@ -32,3 +33,4 @@ sources:
   - {field: models, url: https://github.com/omnara-ai/omnara, retrieved: 2026-10-23}
   - {field: open_source, url: https://www.omnara.com/pricing, retrieved: 2026-10-23}
   - {field: open_source, url: https://github.com/omnara-ai/omnara, retrieved: 2026-10-23}
+  - {field: repo, url: https://www.omnara.com, retrieved: 2026-10-23}

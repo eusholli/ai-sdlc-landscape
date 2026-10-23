@@ -9,9 +9,11 @@ interface: [cli]
 summary: "Open-source toolkit for spec-driven development: commands that take an agent from intake through research and definition to tasks."
 pricing_model: free (open source)
 open_source: true
+repo: https://github.com/github/spec-kit
 relations:
   - {type: ships_inside, to: github, sources: []}
 sources:
   - {field: summary, url: https://github.com/github/spec-kit, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/github/spec-kit, retrieved: 2026-10-21}
+  - {field: repo, url: https://github.com/github/spec-kit, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://github.com/github/spec-kit, retrieved: 2026-10-21}

@@ -15,7 +15,7 @@ import { type Contributor, contributors, headCommit, type History, recordHistory
 
 export const FIELDS_SOURCED = [
   "summary", "customers", "traction", "gtm_partners", "pricing_model", "entry_price",
-  "deployment", "models", "open_source", "compliance", "founded", "hq", "headcount_band",
+  "deployment", "models", "open_source", "repo", "compliance", "founded", "hq", "headcount_band",
   "funding_total", "last_round", "status",
 ] as const;
 export const FIELDS_JUDGED = ["sub_kind", "target_buyer", "interface", "autonomy"] as const;
@@ -47,10 +47,25 @@ const host = (url: string) => {
 };
 const base = (h: string) => h.split(".").slice(-2).join(".");
 
-/** A: the vendor's own site (or its GitHub). B: trade press on the list above. C: anything else. */
-export function tier(url: string, toolUrl: string): "A" | "B" | "C" {
+// On GitHub the publisher is the account in the path, not the host: github.com/<owner>/...
+const GITHUB = "github.com";
+const REPO = /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/?$/;
+const owner = (url: string) => {
+  if (host(url) !== GITHUB) return "";
+  try { return new URL(url).pathname.split("/")[1]?.toLowerCase() ?? ""; } catch { return ""; }
+};
+
+/**
+ * A: the vendor's own site, or a page under the vendor's GitHub account, which is the account in
+ * `repo` or in the tool's own url when that is on GitHub. B: trade press on the list above.
+ * C: anything else, including any other GitHub account.
+ */
+export function tier(url: string, toolUrl: string, repo = ""): "A" | "B" | "C" {
   const h = host(url), th = host(toolUrl);
-  if (base(h) === base(th) || (h.endsWith("github.com") && th.includes("github.com"))) return "A";
+  if (h === GITHUB) {
+    const own = owner(repo) || owner(toolUrl);
+    if (own && owner(url) === own) return "A";
+  } else if (th !== GITHUB && base(h) === base(th)) return "A";
   if ([...TRADE_PRESS].some((d) => h === d || h.endsWith("." + d))) return "B";
   return "C";
 }
@@ -91,6 +106,7 @@ export function buildLandscape(root = "."): BuildResult {
   const idSet = new Set(ids);
   if (idSet.size !== ids.length) errors.push(`duplicate ids: ${ids.filter((i, n) => ids.indexOf(i) !== n).join(", ")}`);
   const urlOf = new Map(tools.map((t) => [t.id as string, String(t.url ?? "")]));
+  const repoOf = new Map(tools.map((t) => [t.id as string, String(t.repo ?? "")]));
 
   const logoDir = join(root, "public/logos");
   const logos = existsSync(logoDir) ? readdirSync(logoDir).sort() : [];
@@ -148,7 +164,20 @@ export function buildLandscape(root = "."): BuildResult {
       }
       if (TIER_D_HINT.test(s.url)) errors.push(`${tid}: looks like a Tier D source: ${s.url}`);
       sourced.add(s.field);
-      prov.push({ field: s.field, url: s.url, tier: tier(s.url, String(t.url ?? "")), retrieved: String(s.retrieved) });
+      prov.push({ field: s.field, url: s.url, tier: tier(s.url, String(t.url ?? ""), String(t.repo ?? "")), retrieved: String(s.retrieved) });
+    }
+    // The repo decides which GitHub account speaks for the vendor, so the vendor has to name it:
+    // its source is a page on the vendor's own site (scripts/check-links.ts checks it links there),
+    // or the repo itself when the tool's url is on GitHub.
+    if (t.open_source === true && isEmpty(t.repo)) errors.push(`${tid}: open_source needs a repo`);
+    if (!isEmpty(t.repo)) {
+      const repo = String(t.repo), tu = String(t.url ?? "");
+      if (!REPO.test(repo)) errors.push(`${tid}: repo must be https://github.com/<owner>/<name>: ${repo}`);
+      if (owner(tu) && owner(tu) !== owner(repo)) errors.push(`${tid}: repo is not under the GitHub account in url`);
+      const own = (u: string) => (owner(tu) ? owner(u) === owner(tu) : host(u) !== GITHUB && base(host(u)) === base(host(tu)));
+      if (!prov.some((p) => p.field === "repo" && own(p.url as string))) {
+        errors.push(`${tid}: repo needs a source on the vendor's own site`);
+      }
     }
     for (const k of FIELDS_SOURCED) {
       const v = t[k];
@@ -159,7 +188,7 @@ export function buildLandscape(root = "."): BuildResult {
         // The acquirer's own announcement is a party disclosure, so it is Tier A too.
         const buyers = (asList(t.relations) as RelationIn[]).filter((r) => r?.type === "acquired_by").map((r) => r.to);
         const tiers = new Set(prov.filter((p) => p.field === "status").map((p) =>
-          buyers.some((b) => tier(p.url as string, urlOf.get(b) ?? "") === "A") ? "A" : p.tier));
+          buyers.some((b) => tier(p.url as string, urlOf.get(b) ?? "", repoOf.get(b)) === "A") ? "A" : p.tier));
         if (!tiers.has("A") && !tiers.has("B")) errors.push(`${tid}: acquisition needs a Tier A or B source`);
       }
     }

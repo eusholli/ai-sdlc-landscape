@@ -11,11 +11,13 @@ summary: "AI pair programming in your terminal: maps your whole codebase and wor
 pricing_model: free (open source)
 models: [Claude, DeepSeek, OpenAI, local models]
 open_source: true
+repo: https://github.com/Aider-AI/aider
 relations:
   - {type: integrates_with, to: git, sources: [https://aider.chat/, https://aider.chat/docs/git.html]}
 sources:
   - {field: summary, url: https://aider.chat/, retrieved: 2026-10-21}
   - {field: open_source, url: https://aider.chat/docs/faq.html, retrieved: 2026-10-21}
+  - {field: repo, url: https://aider.chat, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://aider.chat/docs/faq.html, retrieved: 2026-10-21}
   - {field: models, url: https://aider.chat/, retrieved: 2026-10-21}
   - {field: relations, url: https://aider.chat/docs/git.html, retrieved: 2026-10-21}

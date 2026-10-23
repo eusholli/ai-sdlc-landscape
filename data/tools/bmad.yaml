@@ -9,11 +9,13 @@ interface: [cli]
 summary: "Breakthrough Method for Agile AI-Driven Development: open-source skills that bring planning and architecture into an agent's delivery workflow."
 pricing_model: free (open source)
 open_source: true
+repo: https://github.com/bmad-code-org/BMAD-METHOD
 relations:
   - {type: integrates_with, to: claude-code, sources: [https://github.com/bmad-code-org/BMAD-METHOD]}
   - {type: integrates_with, to: openai-codex, sources: [https://github.com/bmad-code-org/BMAD-METHOD]}
 sources:
   - {field: summary, url: https://github.com/bmad-code-org/BMAD-METHOD, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/bmad-code-org/BMAD-METHOD, retrieved: 2026-10-21}
+  - {field: repo, url: https://github.com/bmad-code-org/BMAD-METHOD, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://github.com/bmad-code-org/BMAD-METHOD, retrieved: 2026-10-21}
   - {field: relations, url: https://github.com/bmad-code-org/BMAD-METHOD, retrieved: 2026-10-21}

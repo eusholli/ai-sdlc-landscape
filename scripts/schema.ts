@@ -26,6 +26,10 @@ export function toolSchema(phases: PhaseFile, id: string) {
   props.summary = { type: "string", description: "The vendor's own one-line claim, quoted." };
   props.founded = { type: "integer" };
   props.open_source = { type: "boolean" };
+  props.repo = {
+    type: "string", pattern: "^https://github\\.com/[\\w.-]+/[\\w.-]+/?$",
+    description: "The vendor's main GitHub repository, sourced to a vendor page that links to it. Required when open_source is true.",
+  };
   props.relations = {
     type: "array",
     items: {

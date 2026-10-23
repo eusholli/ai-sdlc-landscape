@@ -9,9 +9,11 @@ target_buyer: [developer]
 interface: [cli]
 summary: Open-source AI agent that brings Gemini into the terminal; for unpaid and Google One users it was replaced by Antigravity CLI on 18 June 2026.
 open_source: true
+repo: https://github.com/google-gemini/gemini-cli
 relations:
   - {type: built_on_model, to: google, sources: []}
   - {type: ships_inside, to: google-co, sources: []}
 sources:
   - {field: summary, url: https://github.com/google-gemini/gemini-cli, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/google-gemini/gemini-cli, retrieved: 2026-10-21}
+  - {field: repo, url: https://github.com/google-gemini/gemini-cli, retrieved: 2026-10-23}

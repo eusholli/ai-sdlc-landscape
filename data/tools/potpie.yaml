@@ -11,10 +11,12 @@ summary: "AI-native SDLC automation: maps how your systems work into a living co
 traction: 200+ developers; 5.7K GitHub stars (company claim)
 deployment: [vpc, on-prem]
 open_source: true
+repo: https://github.com/potpie-ai/potpie
 compliance: [SOC 2, ISO 27001]
 sources:
   - {field: summary, url: https://potpie.ai/, retrieved: 2026-10-21}
   - {field: traction, url: https://potpie.ai/, retrieved: 2026-10-21}
   - {field: open_source, url: https://potpie.ai/, retrieved: 2026-10-21}
+  - {field: repo, url: https://potpie.ai, retrieved: 2026-10-23}
   - {field: compliance, url: https://potpie.ai/, retrieved: 2026-10-21}
   - {field: deployment, url: https://potpie.ai/, retrieved: 2026-10-21}

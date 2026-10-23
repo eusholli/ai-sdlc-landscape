@@ -36,6 +36,8 @@ issue without their yes for that issue.
      inclusion bar and that it is not already in `data/screened.yaml`.
    - Fetch the source. Prefer the vendor's own page; trade press on `TRADE_PRESS` in
      `scripts/build-data.ts` is next. Refuse listicles and "top 10" pages.
+   - For an open-source tool, set `repo` to the GitHub repository that the vendor's own site links
+     to, and source it to that page. A GitHub link the requester gives is not enough on its own.
    - Note whether the requester says they work for the vendor. That is allowed; their claim still
      needs a public source.
 5. **Propose.** For each claim show the maintainer: accept or reject, the YAML diff you would make

@@ -12,6 +12,7 @@ summary: "Open-source AI coding agent platform: start locally, automate engineer
 deployment: [local, saas, vpc]
 models: [closed models, Kimi, DeepSeek, Qwen]
 open_source: true
+repo: https://github.com/OpenHands/OpenHands
 last_round: $18.8M
 relations:
   - {type: integrates_with, to: claude-code, sources: [https://www.all-hands.dev, https://www.all-hands.dev]}
@@ -20,6 +21,7 @@ relations:
 sources:
   - {field: summary, url: https://www.all-hands.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.all-hands.dev, retrieved: 2026-10-21}
+  - {field: repo, url: https://www.all-hands.dev, retrieved: 2026-10-23}
   - {field: models, url: https://www.all-hands.dev, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.all-hands.dev, retrieved: 2026-10-21}
   - {field: relations, url: https://www.all-hands.dev, retrieved: 2026-10-21}

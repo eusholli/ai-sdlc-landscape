@@ -11,11 +11,13 @@ customers: [Jimdo, Acxiom, Infor]
 pricing_model: seat plus traces
 entry_price: Free (1 seat, 5K traces/month)
 open_source: true
+repo: https://github.com/langchain-ai/langchain
 sources:
   - {field: summary, url: https://www.langchain.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.langchain.com/blog/customers-jimdo, retrieved: 2026-10-21}
   - {field: customers, url: https://www.langchain.com/blog/customers-acxiom, retrieved: 2026-10-21}
   - {field: customers, url: https://www.langchain.com/blog/customers-infor, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.langchain.com, retrieved: 2026-10-21}
+  - {field: repo, url: https://www.langchain.com/langchain, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://www.langchain.com/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.langchain.com/pricing, retrieved: 2026-10-21}

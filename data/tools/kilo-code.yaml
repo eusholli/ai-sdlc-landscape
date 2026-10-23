@@ -12,6 +12,7 @@ summary: Open-source AI coding agent for VS Code, JetBrains, CLI and cloud, with
 pricing_model: usage (zero-markup credits)
 models: [500+ models incl. Claude, GPT, open-source]
 open_source: true
+repo: https://github.com/Kilo-Org/kilocode
 last_round: $8M seed, led by Cota Capital (2025)
 relations:
   - {type: integrates_with, to: vs-code, sources: [https://kilo.ai/pricing, https://kilo.ai]}
@@ -19,6 +20,7 @@ relations:
 sources:
   - {field: summary, url: https://kilo.ai, retrieved: 2026-10-21}
   - {field: open_source, url: https://kilo.ai, retrieved: 2026-10-21}
+  - {field: repo, url: https://kilo.ai, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://kilo.ai, retrieved: 2026-10-21}
   - {field: models, url: https://kilo.ai/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://kilo.ai, retrieved: 2026-10-21}

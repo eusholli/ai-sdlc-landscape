@@ -11,6 +11,7 @@ autonomy: agent
 summary: "OpenAI's coding agent: runs locally in the terminal, in the editor (VS Code, Cursor, Windsurf) and in the cloud through ChatGPT."
 pricing_model: included in ChatGPT plans, or API key
 open_source: true
+repo: https://github.com/openai/codex
 relations:
   - {type: ships_inside, to: openai, sources: []}
   - {type: built_on_model, to: openai, sources: []}
@@ -18,4 +19,5 @@ sources:
   - {field: summary, url: https://github.com/openai/codex, retrieved: 2026-10-21}
   - {field: summary, url: https://developers.openai.com/codex, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/openai/codex, retrieved: 2026-10-21}
+  - {field: repo, url: https://developers.openai.com/codex/open-source, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://github.com/openai/codex, retrieved: 2026-10-21}
