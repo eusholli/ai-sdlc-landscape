@@ -58,21 +58,25 @@ describe("data contract", () => {
 });
 
 describe("selectors", () => {
-  it("lists the twelve acquisitions plus shutdown and end of life, dated ones first", () => {
+  it("lists one move per tool with a status, dated ones first in date order", () => {
     const moves = marketMoves();
-    expect(moves.filter((m) => m.kind === "acquired").length).toBe(12);
+    const moved = allTools().filter((t) => t.status && t.status !== "preview");
+    expect(moves.map((m) => m.tool).sort()).toEqual(moved.map((t) => t.id).sort());
+    const acquired = new Set(relations().filter((r) => r.type === "acquired_by").map((r) => r.from));
+    for (const m of moves) {
+      if (m.kind === "acquired" && acquired.has(m.tool)) expect(m.acquirer, m.tool).toBeTruthy();
+    }
+    const dated = moves.filter((m) => m.date).map((m) => m.date!);
+    expect(dated).toEqual([...dated].sort());
     const firstUndated = moves.findIndex((m) => !m.date);
-    expect(moves.slice(firstUndated).every((m) => !m.date)).toBe(true);
-    const arize = moves.find((m) => m.tool === "arize");
-    expect(arize?.date).toBe("2026-10-01");
-    expect(arize?.acquirer).toBeTruthy();
+    if (firstUndated >= 0) expect(moves.slice(firstUndated).every((m) => !m.date)).toBe(true);
   });
 
   it("resolves relation names in both directions", () => {
-    const rel = relationsFor("cursor");
+    const from = relations().find((r) => hasPage(r.from))!.from;
+    const rel = relationsFor(from);
     expect(rel.length).toBeGreaterThan(0);
     expect(rel.every((r) => r.otherName.length > 0)).toBe(true);
-    expect(hasPage("cursor")).toBe(true);
     expect(toolById("no-such-tool")).toBeUndefined();
   });
 
@@ -96,12 +100,14 @@ describe("filters and search", () => {
     const code = applyFilters(lite, { ...empty, phase: ["code"] });
     expect(code.every((t) => t.phases.includes("code"))).toBe(true);
     const oss = applyFilters(lite, { ...empty, oss: true });
-    expect(oss.length).toBe(20);
+    expect(oss.length).toBeGreaterThan(0);
+    expect(oss.length).toBe(lite.filter((t) => t.openSource).length);
   });
 
   it("finds a tool by a customer name", () => {
-    const hits = searchLite(lite, "Autodesk");
-    expect(hits.some((h) => h.id === "chatprd" && h.matched === "customer")).toBe(true);
+    const fixture = { ...lite[0], id: "fixture", name: "Fixture", company: "Fixture Co", summary: null, customers: ["Zyxwv Corp"] };
+    const hits = searchLite([fixture], "zyxwv");
+    expect(hits).toMatchObject([{ id: "fixture", matched: "customer", match: "Zyxwv Corp" }]);
   });
 
   it("buckets pricing and deployment", () => {
