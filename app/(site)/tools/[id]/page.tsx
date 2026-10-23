@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { ToolDetail } from "@/components/tool/tool-detail";
-import { allTools, relationsFor, toolById } from "@/lib/data";
+import { allTools, changesFor, relationsFor, toolById } from "@/lib/data";
 import { jsonLdText, toolJsonLd } from "@/lib/jsonld";
 import { toolDetailRefs } from "@/lib/tool-refs";
 
@@ -42,7 +42,11 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
           Back to the map
         </Link>
         <div className="mt-6">
-          <ToolDetail data={{ tool, relations: relationsFor(tool.id) }} refs={toolDetailRefs()} variant="page" />
+          <ToolDetail
+            data={{ tool, relations: relationsFor(tool.id), changes: changesFor(tool.id) }}
+            refs={toolDetailRefs()}
+            variant="page"
+          />
         </div>
       </div>
     </main>

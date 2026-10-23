@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, ArrowLeftRight, BarChart3, Info, MessageSquarePlus, Search } from "lucide-react";
+import { Activity, ArrowLeftRight, BarChart3, History, Info, MessageSquarePlus, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQueryStates } from "nuqs";
@@ -16,6 +16,8 @@ import { filterParsers } from "@/lib/filters";
 import { OPEN_SEARCH_EVENT, emit } from "@/lib/ui-events";
 
 const NAV_LINKS = [
+  // Hidden under 640px for the same reason as Contribute; the footer links to it there.
+  { href: "/changes", label: "Changes", Icon: History, hideOnPhone: true },
   { href: "/moves", label: "Moves", Icon: Activity, hideOnPhone: false },
   { href: "/insights", label: "Insights", Icon: BarChart3, hideOnPhone: false },
   { href: "/about", label: "About", Icon: Info, hideOnPhone: false },

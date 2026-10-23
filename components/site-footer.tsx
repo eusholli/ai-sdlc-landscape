@@ -18,9 +18,12 @@ export function SiteFooter() {
           Data as of <time dateTime={date}>{formatDate(date)}</time>. Every fact links to its source. Logos belong to
           their owners.
         </p>
-        <nav aria-label="Footer" className="flex items-center gap-4">
+        <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href="/about" className={linkClass}>
             About
+          </Link>
+          <Link href="/changes" className={linkClass}>
+            Changes
           </Link>
           <Link href="/contribute" className={linkClass}>
             Request a change

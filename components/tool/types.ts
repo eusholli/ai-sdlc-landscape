@@ -1,4 +1,4 @@
-import type { Phase, Relation, RelationType, Tool } from "@/lib/types";
+import type { Change, Phase, Relation, RelationType, Tool } from "@/lib/types";
 
 export type ToolRelation = Relation & { other: string; otherName: string; direction: "out" | "in" };
 
@@ -6,6 +6,8 @@ export type ToolRelation = Relation & { other: string; otherName: string; direct
 export interface ToolDetailData {
   tool: Tool;
   relations: ToolRelation[];
+  /** This tool's changes, newest first. */
+  changes: Change[];
 }
 
 /**

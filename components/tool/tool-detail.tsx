@@ -10,6 +10,7 @@ import { PhaseCoverage } from "./phase-coverage";
 import { RelationGroups } from "./relation-groups";
 import { SourceList } from "./source-list";
 import { CompareButton } from "./tool-actions";
+import { ToolChanges } from "./tool-changes";
 import { ToolLogo } from "./tool-logo";
 import type { DetailVariant, ToolDetailData, ToolDetailRefs } from "./types";
 
@@ -171,6 +172,7 @@ export function ToolDetail({
               </a>
             </p>
           )}
+          <ToolChanges changes={data.changes ?? []} />
         </div>
         <a
           href={requestUrl(tool.name)}

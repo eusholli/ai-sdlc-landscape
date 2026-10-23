@@ -16,12 +16,13 @@ export interface MoveItem {
   sources: { url: string; host: string }[];
 }
 
-export function MoveEntry({ item }: { item: MoveItem }) {
+export function MoveEntry({ item, label }: { item: MoveItem; label?: string }) {
   return (
     <article className="rounded-lg border bg-card p-4">
       <div className="flex items-start gap-3">
         <Logo name={item.name} src={item.logo} phase={item.phase} size={36} />
         <div className="min-w-0 flex-1">
+          {label && <p className="mb-0.5 text-xs font-medium tracking-wide text-muted-foreground uppercase">{label}</p>}
           <h3 className="text-base leading-snug font-semibold text-balance">
             <Link
               href={`/tools/${item.id}`}
