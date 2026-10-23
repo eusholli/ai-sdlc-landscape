@@ -1,0 +1,34 @@
+id: omnara
+name: Omnara
+company: Omnara
+url: https://www.omnara.com
+layer: agent-infra
+phases: [code]
+target_buyer: [developer, platform team]
+interface: [api, cli, web, mcp]
+summary: "The open-source managed agent platform. A self-hostable alternative to Claude Managed Agents and OpenAI's Agents API."
+customers: [1Digital Agency, Stellon Labs, The Prompting Company, Modelence, Meridian Supply, Heavybit]
+pricing_model: free platform; usage for Omnara-run models and machines
+entry_price: Free (own model keys and machines)
+deployment: [saas, self-hosted, byoc (enterprise), on-prem (enterprise)]
+models: [OpenAI, Anthropic, OpenRouter, Amazon Bedrock, LiteLLM, Ollama, self-hosted models]
+open_source: true
+relations:
+  - {type: competes_with, to: claude-managed-agents, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: competes_with, to: openai-agents-api, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: integrates_with, to: e2b, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: integrates_with, to: daytona, sources: [https://github.com/omnara-ai/omnara, https://www.omnara.com]}
+  - {type: integrates_with, to: modal, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: integrates_with, to: mcp, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: integrates_with, to: slack, sources: [https://github.com/omnara-ai/omnara]}
+  - {type: integrates_with, to: github, sources: [https://github.com/omnara-ai/omnara]}
+sources:
+  - {field: summary, url: https://github.com/omnara-ai/omnara, retrieved: 2026-10-23}
+  - {field: customers, url: https://www.omnara.com, retrieved: 2026-10-23}
+  - {field: pricing_model, url: https://www.omnara.com/pricing, retrieved: 2026-10-23}
+  - {field: entry_price, url: https://www.omnara.com/pricing, retrieved: 2026-10-23}
+  - {field: deployment, url: https://www.omnara.com/pricing, retrieved: 2026-10-23}
+  - {field: deployment, url: https://docs.omnara.com/introduction, retrieved: 2026-10-23}
+  - {field: models, url: https://github.com/omnara-ai/omnara, retrieved: 2026-10-23}
+  - {field: open_source, url: https://www.omnara.com/pricing, retrieved: 2026-10-23}
+  - {field: open_source, url: https://github.com/omnara-ai/omnara, retrieved: 2026-10-23}

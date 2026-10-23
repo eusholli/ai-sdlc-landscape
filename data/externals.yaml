@@ -5,6 +5,7 @@ azure-devops: Azure DevOps
 backstage: Backstage (CNCF)
 bitbucket: Bitbucket
 boost-security: Boost Security
+claude-managed-agents: Claude Managed Agents (Anthropic)
 clickup: ClickUp
 databricks: Databricks
 figma: Figma
@@ -18,6 +19,7 @@ jira: Jira
 k6: Grafana k6
 mcp: Model Context Protocol
 microsoft: Microsoft
+openai-agents-api: OpenAI Agents API
 pact: Pact
 sap: SAP
 slack: Slack
