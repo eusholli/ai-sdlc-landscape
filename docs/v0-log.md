@@ -116,3 +116,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_LufnAuBqZtV, demo https://demo-kzmk19i12ui6hsf2289i.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..C54KwwnXfH7nm0us.l5lB4mnJAo0Fh4cUh3vea7YaiQec7VKBH_VVvjl0IBUQkg6p7qcK4_o0dQQReV7WGqjsdp9-_ki3gTL7JmcTE33ftgnmrA3VRUq9Sc2Zjuv4zHfVqUX7yAC3WyTAc8BGceBw1gln5Hhs2smICPRIhqjtBrVmzjEOtbU-fixoJJV_Bxr3Xr1LK7AUS8vfzp0m2O4haJMH8UEHaH9BNnss0H9X7W36ZLC0KF3uZBPESLVZy9sFNoWLfxVScdUa9FgZYNQocQEbOFDrmYr1_sU-xkpiqJsL44aI.ulGqkt1R-NtQO74fvI14fA&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
 - credits before: 19.2284989 of 20, after: 18.083529 of 20
 - files written: 12; fix rounds: 0; gate: passed
+
+## Step 14: The vendor badge
+
+- 2026-10-23T16:20:42.264Z
+- chat: https://v0.app/chat/ZOkxfWLRQje
+- version: b_kHU3vScFB30, demo https://demo-kzmoptlrvlnprq3jjlm8.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..AhYxgSGVYNef6Spk.s4rBY-A91c_8YvOibbs6h-nRh0087aUp_ETPNTI2dwQydh7wSfBL9PMfy8lbDZpu1cstke_Hjy7pmQo5FbcxshUDz_ZUhLGbFPHYpefX__E1x43Cgc6IuZzlU5l6Bt0E5r_Hsr4uumm5NKcnk9y6TGI_ZKlfgtiPH6KVrjp_5AVBNjjcnR0jBgAxXIA2EIRu7v8SRG3CbXK84ReqsghbgohaLAAdAr3EnwtVmSbK0QgfDZa8BZqSX0kivW_irhOrHQlUVF_9QVi0GUKuKdNLm5dsInCLlHNr.2dCCcGy7WxTSH6H_Wrlemg&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
+- credits before: 18.083529 of 20, after: 17.9521242 of 20
+- files written: 3; fix rounds: 0; gate: passed

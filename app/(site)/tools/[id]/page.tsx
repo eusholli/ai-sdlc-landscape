@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { ToolDetail } from "@/components/tool/tool-detail";
+import { VendorBadge } from "@/components/tool/vendor-badge";
 import { allTools, changesFor, isNew, relationsFor, toolById } from "@/lib/data";
 import { jsonLdText, toolJsonLd } from "@/lib/jsonld";
 import { toolDetailRefs } from "@/lib/tool-refs";
@@ -48,6 +49,7 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
             variant="page"
           />
         </div>
+        <VendorBadge id={tool.id} name={tool.name} />
       </div>
     </main>
   );

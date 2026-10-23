@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CopyButton } from "@/components/copy-button";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
@@ -97,6 +98,21 @@ export default function ContributePage() {
               <CopyButton text={AGENT_COMMAND} label="command" />
             </div>
           </div>
+        </Section>
+
+        <Section id="vendors" title="For vendors">
+          <p>
+            Every tool page offers a small &ldquo;Listed on&rdquo; badge you can put on your own site or README. It is
+            a static image that links back to the tool&apos;s page here, so readers can see the record and its sources.
+          </p>
+          <p>
+            The badge does not change the record. A record changes only by a public request with a source, the same
+            as for anyone else. See{" "}
+            <Link href={`/tools/${exampleId}`} className={linkClass}>
+              an example tool page
+            </Link>{" "}
+            for the badge and its copyable snippets.
+          </p>
         </Section>
 
         <Section id="data" title="Read the data">
