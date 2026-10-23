@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { contributors, parseRequests, recordHistory, retrievedOnly } from "@/scripts/history";
+import { BATCH, changeLog, contributors, diffRecord, parseRequests, recordHistory, retrievedOnly } from "@/scripts/history";
 
 let dir = "";
 afterEach(() => { if (dir) rmSync(dir, { recursive: true, force: true }); dir = ""; });
@@ -122,5 +122,97 @@ describe("record history", () => {
     expect(retrievedOnly([line], [line.replace("01-02", "05-06")])).toBe(true);
     expect(retrievedOnly([line], [line.replace("a.example", "b.example")])).toBe(false);
     expect(retrievedOnly([], ["hq: London"])).toBe(false);
+  });
+});
+
+describe("change log", () => {
+  const rec = (id: string, extra = "") => RECORD.replace("id: a", `id: ${id}`).replace("name: A", `name: ${id.toUpperCase()}`) + extra;
+
+  it("is null outside a git checkout", () => {
+    dir = mkdtempSync(join(tmpdir(), "history-"));
+    expect(changeLog(dir)).toBeNull();
+  });
+
+  it("folds a large first import into one batch entry", () => {
+    const { commit, file } = repo();
+    const ids = Array.from({ length: BATCH + 1 }, (_, i) => `t${String(i).padStart(2, "0")}`);
+    for (const id of ids) writeFileSync(file(id), rec(id));
+    const sha = commit("Ada", "2026-01-02");
+    expect(changeLog(dir)).toEqual([{
+      kind: "batch", date: "2026-01-02", commit: sha, author: "Ada", requested_by: [],
+      tool: null, name: null, tools: ids,
+    }]);
+  });
+
+  it("lists a single addition with who asked for it", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), rec("a"));
+    commit("Ada", "2026-01-02", "Add A\n\nRequested-by: Lin <lin@example.com> (#4)");
+    const [c] = changeLog(dir)!;
+    expect(c).toMatchObject({ kind: "added", tool: "a", name: "A", requested_by: [{ name: "Lin", issue: 4 }] });
+  });
+
+  it("names the fields an edit published or changed, and the relations it added", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), rec("a", "hq: London\n"));
+    commit("Ada", "2026-01-02");
+    writeFileSync(file("a"), rec("a", "hq: Paris\nentry_price: Free\nrelations:\n  - {type: integrates_with, to: b}\n"));
+    commit("Grace", "2026-02-03");
+    expect(changeLog(dir)![1]).toMatchObject({
+      kind: "updated", tool: "a", author: "Grace",
+      fields: ["entry_price", "hq"], published: ["entry_price"],
+      relations_added: [{ type: "integrates_with", to: "b" }],
+    });
+  });
+
+  it("records a status change with the new text", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), rec("a"));
+    commit("Ada", "2026-01-02");
+    writeFileSync(file("a"), rec("a", "status: shut down\n"));
+    commit("Ada", "2026-02-03");
+    expect(changeLog(dir)![1]).toMatchObject({ kind: "updated", status: "shut down", published: ["status"] });
+  });
+
+  it("leaves out retrieved-only and formatting-only commits", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), rec("a"));
+    commit("Ada", "2026-01-02");
+    writeFileSync(file("a"), rec("a").replace("2026-01-02", "2026-03-04"));
+    commit("Refresher", "2026-03-04");
+    writeFileSync(file("a"), "# a comment\n" + rec("a").replace("2026-01-02", "2026-03-04"));
+    commit("Formatter", "2026-03-05");
+    expect(changeLog(dir)!.map((c) => c.kind)).toEqual(["added"]);
+  });
+
+  it("records renames and removals", () => {
+    const { commit, file } = repo();
+    writeFileSync(file("a"), rec("a"));
+    writeFileSync(file("c"), rec("c"));
+    commit("Ada", "2026-01-02");
+    writeFileSync(file("b"), rec("a").replace("id: a", "id: b"));
+    rmSync(file("a"));
+    rmSync(file("c"));
+    commit("Grace", "2026-02-03");
+    const later = changeLog(dir)!.filter((c) => c.date === "2026-02-03");
+    expect(later.map((c) => [c.kind, c.tool, c.from ?? null, c.name])).toEqual(
+      expect.arrayContaining([["renamed", "b", "a", "A"], ["removed", "c", null, "C"]]));
+  });
+});
+
+describe("diffRecord", () => {
+  it("ignores source dates but notices a new source", () => {
+    const src = (d: string, url = "https://a.example/") => ({ sources: [{ field: "summary", url, retrieved: d }] });
+    expect(diffRecord(src("2026-01-01"), src("2026-02-02"))).toBeNull();
+    expect(diffRecord(src("2026-01-01"), src("2026-01-01", "https://b.example/"))).toEqual({ fields: ["sources"], published: [] });
+  });
+
+  it("treats unknown and empty values as not published", () => {
+    expect(diffRecord({ hq: "unknown" }, { hq: "" })).toBeNull();
+    expect(diffRecord({ hq: "unknown" }, { hq: "Oslo" })).toEqual({ fields: ["hq"], published: ["hq"] });
+  });
+
+  it("reports a cleared status as null", () => {
+    expect(diffRecord({ status: "preview" }, {})).toMatchObject({ fields: ["status"], status: null });
   });
 });

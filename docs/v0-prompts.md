@@ -263,3 +263,148 @@ Rules: server components read `@/lib/data`; client components never import `@/li
 `lib/format.ts`, `components/logo.tsx`, `lib/site.ts` or `lib/request-advice.ts`. Do not remove
 the JSON-LD scripts, `app/llms.txt`, `app/llms-full.txt` or `app/schema`. No em dashes in any UI
 text. Check both themes and a 375 px width.
+
+## Step 11: The changes page
+
+Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particular.
+
+The site now records every change to its data. This step gives that a page.
+
+- **`/changes`**, `app/(site)/changes/page.tsx`, a server component reading `timeline()` and
+  `launch()` from `@/lib/data`.
+  - `<h1>` "What changed", then one line: "Every change to the data, from the public git
+    history, and the market moves the data records. Newest first." Next to it, a small "Feed" link
+    with an RSS icon to `/changes.xml`.
+  - Entries grouped under month headings ("October 2026"). Each month heading links to
+    `/changes/<YYYY-MM>` (the digest page, added in step 13; link it now).
+  - A `kind: "changes"` entry: the date, then `text`. When it touched one tool, show the tool's
+    `<Logo>` and make the text open the drawer for it (the same way map tiles open it). When it
+    touched several, show up to five logos in a small overlapping row and a "Show all" disclosure
+    listing each `change.text`. Under the text, in muted small type: "by <author>", "Requested by
+    <name> (#<issue>)" for each credit with the issue linked, and a "commit" link to
+    `${REPO_URL}/commit/<sha>`.
+  - A `kind: "move"` entry: the tool's logo, `text`, the date, and its source links, in the same
+    design as the /moves page entries, with a small "Market move" label.
+  - The launch entry (`launch()`, shown by the text "The landscape launched with ...") is a card
+    with a subtle border, not a list row.
+  - Entries fade and rise in as they scroll into view (once, springs, 40 ms stagger, reduced
+    motion: opacity only).
+  - `metadata` title "What changed".
+- **Navigation.** Add "Changes" (`/changes`, an icon such as `History`) to the header links,
+  before Market moves, and to the footer.
+- **Tool drawer and tool page.** In `components/tool/tool-detail.tsx`, under the history line, add
+  a "Changes" disclosure listing that tool's changes newest first: date and text, each linking to
+  its commit. The drawer's `/data/tools/<id>.json` now carries `changes: Change[]` (newest first);
+  the tool page can call `changesFor(id)` on the server.
+
+Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
+`@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
+`data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`,
+`lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`, `app/changes.xml` or
+`app/badge`; if you need a new selector, say so in the reply. Never hard-code how many tools,
+changes or relations there are. No em dashes in any UI text. Check both themes and a 375 px width.
+
+## Step 12: What's new on the home page, and New badges
+
+Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particular.
+
+- **What's new strip.** On the home page, between the intro and the map, a single compact row:
+  "What's new" then the three latest `timeline(3)` entries as short items (date, logo when one
+  tool, `text` truncated to one line with the full text in a title attribute), then "All changes"
+  linking to `/changes`. It scrolls sideways on narrow screens rather than wrapping. It collapses
+  with the intro: when the intro is collapsed, the strip shows only "What's new" and the newest
+  item. Keep the map's height fitting the viewport.
+- **New badges.** A tool with `isNew` true gets a small "New" pill: on its map tile at the logo and
+  card zoom levels (a dot at the overview level is too much; skip it there), on its row in the
+  mobile list, and next to its name in the drawer header. Use the accent or primary token, not a
+  stage colour.
+- **Filter.** Add a "New" toggle to the filter chrome next to the existing open-source and moved
+  toggles, if it can be done in a client component from `ToolLite.isNew` without changing
+  `lib/filters.ts`. If it cannot, skip it and say so.
+
+Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
+`@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
+`data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`,
+`lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`, `app/changes.xml` or
+`app/badge`; if you need a new selector, say so in the reply. Never hard-code how many tools,
+changes or relations there are. No em dashes in any UI text. Check both themes and a 375 px width.
+
+## Step 13: Freshness and the monthly digest page
+
+Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particular.
+
+- **Freshness on a tool.** In `components/tool/tool-detail.tsx`, next to "Last verified", show a
+  small chip: an icon and the band's word ("Fresh", "Aging", "Stale"), then "sources checked since
+  <date>" from `tool.freshness.checked`. Its tooltip is `FRESHNESS_LABELS[band]` and one line:
+  "How recently we checked this record's sources. It says nothing about the tool." When
+  `tool.freshness` is null, show `notPublished()`. Neutral tokens, never stage colours.
+- **Freshness on /insights.** A new section "How fresh the data is": `freshnessSummary()` as a
+  single stacked bar of the three bands with counts and labels, then the ten records checked least
+  recently (`leastRecentlyChecked(10)`), each with its logo, name (opening the drawer) and checked
+  date, and a line: "Know a newer source for one of these? Request a change." linking to
+  `/contribute`.
+- **The digest page**, `app/(site)/changes/[month]/page.tsx`, a server component.
+  `generateStaticParams` from `digestMonths()`; a month not in the list is a 404.
+  - `<h1>` "The landscape in <d.title>", then `digestFacts(d)` as a list of large, plain
+    sentences: this is the page people share.
+  - Sections, each only when it has content: "Tools added" (logo grid, each opening the drawer),
+    "Facts published for the first time" (tool and fields), "Where tools were added" (`d.phases`
+    as bars in stage colour), "Market moves", "Thanks" (contributors with issue links),
+    "Freshness" (the stacked bar from /insights), and "Every change" (the month's entries, as on
+    /changes).
+  - Previous and next month links. A "Copy summary" button that copies `digestFacts(d)` as plain
+    lines plus the page URL (reuse `components/copy-button.tsx`).
+  - `generateMetadata` with the title "The landscape in <month>" and a share image in the style
+    of the site's existing `opengraph-image.tsx`, showing the month and the first three facts.
+
+Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
+`@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
+`data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`,
+`lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`, `app/changes.xml` or
+`app/badge`; if you need a new selector, say so in the reply. Never hard-code how many tools,
+changes or relations there are. No em dashes in any UI text. Check both themes and a 375 px width.
+
+## Step 14: The vendor badge
+
+Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particular.
+
+Each tool has a static badge at `/badge/<id>.svg`. This step lets vendors find and use it.
+
+- **Tool page.** In `app/(site)/tools/[id]/page.tsx`, near the end, a section "Listed here?":
+  one line ("If this is your tool, you can show it is listed. Keep the record current by
+  requesting a change when a fact moves."), the badge itself as an `<img>` from
+  `/badge/<id>.svg`, and two copyable snippets (reuse `components/copy-button.tsx`): HTML,
+  `<a href="<SITE_URL>/tools/<id>"><img src="<SITE_URL>/badge/<id>.svg" alt="<name> is listed on AI SDLC Landscape"></a>`,
+  and Markdown, `[![<name> is listed on AI SDLC Landscape](<SITE_URL>/badge/<id>.svg)](<SITE_URL>/tools/<id>)`.
+  `SITE_URL` comes from `@/lib/site`. "requesting a change" links to `requestUrl(name)`.
+- **Contribute page.** A short section "For vendors": what the badge is, that it links back to the
+  tool's page, and that the record changes only by public request with a source. Link to an
+  example tool page.
+- Not in the drawer: it is for vendors, not readers.
+
+Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
+`@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
+`data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`,
+`lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`, `app/changes.xml` or
+`app/badge`; if you need a new selector, say so in the reply. Never hard-code how many tools,
+changes or relations there are. No em dashes in any UI text. Check both themes and a 375 px width.
+
+## Step 15: First impression and a mobile pass
+
+Read `docs/design-brief.md` first.
+
+- **Home first impression.** Make the first screen say, at a glance, that this map is current and
+  open. Keep the `<h1>` and the intro copy. Fold the stats strip and the What's new strip into one
+  calm band if that reads better; show the date of the newest change from `timeline(1)` as
+  "Updated <date>" next to the counts. No new claims and no marketing words.
+- **Mobile pass at 375 px.** Go through the home page, /changes, a digest page, a tool page with
+  the badge section, /insights and /moves. Fix overflow, tap targets under 44 px, truncated
+  headings and anything that scrolls sideways that should not. List what you changed in the
+  reply.
+
+Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
+`@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
+`data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`,
+`lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`, `app/changes.xml` or
+`app/badge`; if you need a new selector, say so in the reply. Never hard-code how many tools,
+changes or relations there are. No em dashes in any UI text. Check both themes and a 375 px width.

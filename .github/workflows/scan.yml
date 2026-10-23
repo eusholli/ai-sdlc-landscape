@@ -2,7 +2,7 @@ name: Scan for new tools
 
 on:
   schedule:
-    - cron: "0 6 1 * *"
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -38,5 +38,5 @@ jobs:
         run: |
           f=".scan/$(date -u +%F).md"
           head -c 60000 "$f" > body.md
-          gh label create scan --color c5def5 --description "Monthly scan for new tools" --force
+          gh label create scan --color c5def5 --description "Weekly scan for new tools" --force
           gh issue create --title "Scan $(date -u +%F): candidates to judge" --label scan --body-file body.md

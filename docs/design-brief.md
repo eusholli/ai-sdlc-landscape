@@ -29,7 +29,7 @@ Copy rules for every label, tooltip, empty state and heading:
 - Import types from `@/lib/types`, helpers from `@/lib/format` and `@/lib/filters`.
 - Server components read data from `@/lib/data` (it is `server-only`). Client components receive
   `ToolLite[]` and `RelationLite[]` as props, and the tool drawer fetches
-  `/data/tools/<id>.json`, which returns `{ tool: Tool, relations: [...] }`.
+  `/data/tools/<id>.json`, which returns `{ tool: Tool, relations: [...], changes: Change[] }`.
 - **Never import `data/landscape.json` or `@/lib/data` from a `"use client"` file.**
 - **Never edit `data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts` or
   `components/logo.tsx`.** They are locked. If a component needs a new selector, say so in the
@@ -94,6 +94,25 @@ browser. The slim header stays as it is. Every other page has its own `<h1>`.
 **Requests for change.** Anyone, person or agent, asks for a change by opening a GitHub issue in
 plain words. Links to it use `REQUEST_URL` or `requestUrl(name)` from `lib/site.ts`, and the advice
 on what to include is `REQUEST_ADVICE` in `lib/request-advice.ts`; never retype either.
+
+**Changes, freshness and the badge.** The site shows that it changes. All of it comes from
+`@/lib/data` and is computed, never typed in:
+
+- `timeline(limit?)` returns `TimelineEntry[]`, newest first: either the changes one commit made
+  (`kind: "changes"`, with `text`, `author`, `requestedBy`, `commit` and `changes: Change[]`) or a
+  dated market move (`kind: "move"`, with `text` and `move`). Every entry has a plain `text`
+  sentence; show it as given. A move's date may be `YYYY-MM` only. `launch()` is the first import.
+  Link a commit to `${REPO_URL}/commit/<sha>` and an issue to `${REPO_URL}/issues/<n>`.
+- `changesFor(id)` gives one tool's changes; `ToolLite.isNew` marks a tool added in the last 30
+  days.
+- `Tool.freshness` is `{ checked, share90, band }` or null, and `ToolLite.freshness` is the band.
+  `FRESHNESS_LABELS` names each band and `freshnessSummary()` counts them. Freshness says how
+  recently we checked the sources, not how good the tool is; the copy must never suggest otherwise.
+- `/changes.xml` is the Atom feed. `/badge/<id>.svg` is a "Listed on" badge for each tool.
+- `@/lib/digest` gives the monthly digest: `digestMonths()`, `digest(month)`, `digestFacts(d)`.
+
+Fresh, aging and stale use neutral tokens with an icon and a word, not the stage colours, which
+mean lifecycle stages only. The "New" badge is small and quiet; it never animates while idle.
 
 **Three semantic zoom levels**, crossfading and re-laying out with `motion` layout animations:
 

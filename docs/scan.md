@@ -16,7 +16,7 @@ It needs `SERPER_API_KEY` in `.env.local`. Without one it prints the queries so 
 hand. A full run makes 21 searches and takes a few minutes. The searches are saved in
 `.scan/<date>.search.json`, so a second run the same day, to try a changed filter, costs nothing.
 
-GitHub runs it on the first of each month (`.github/workflows/scan.yml`) and opens an issue labelled
+GitHub runs it every Monday (`.github/workflows/scan.yml`) and opens an issue labelled
 `scan` with the list. Run it by hand from the Actions tab at any time.
 
 ## How it decides what to list

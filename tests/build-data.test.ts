@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { parse } from "yaml";
-import { buildLandscape, tier } from "@/scripts/build-data";
+import { buildLandscape, FRESH_DAYS, freshness, STALE_DAYS, tier } from "@/scripts/build-data";
 
 type Node = { id: string; kind: string; sources: unknown[] };
 
@@ -111,5 +111,35 @@ describe("build-data", () => {
     expect(buildLandscape(scratch(FIXTURE.replace("sources:\n", "repo: https://gitlab.com/x/y\nsources:\n") +
       "  - {field: repo, url: https://fixture.example/, retrieved: 2026-01-02}\n")).errors)
       .toContain("fixture-tool: repo must be https://github.com/<owner>/<name>: https://gitlab.com/x/y");
+  });
+});
+
+describe("freshness", () => {
+  const day = (d: string, n: number) => new Date(Date.parse(d) + n * 86_400_000).toISOString().slice(0, 10);
+  const today = "2026-06-30";
+
+  it("dates a record by its oldest source read", () => {
+    expect(freshness(["2026-06-20", "2026-06-01", "bad"], today)?.checked).toBe("2026-06-01");
+  });
+
+  it("bands by the age of the oldest read", () => {
+    expect(freshness([day(today, -FRESH_DAYS)], today)?.band).toBe("fresh");
+    expect(freshness([day(today, -FRESH_DAYS - 1)], today)?.band).toBe("aging");
+    expect(freshness([day(today, -STALE_DAYS)], today)?.band).toBe("aging");
+    expect(freshness([day(today, -STALE_DAYS - 1)], today)?.band).toBe("stale");
+  });
+
+  it("counts the share of sources read in the last 90 days", () => {
+    expect(freshness([today, day(today, -STALE_DAYS - 1)], today)?.share90).toBe(0.5);
+  });
+
+  it("is null for a record with no dated sources", () => {
+    expect(freshness([], today)).toBeNull();
+  });
+
+  it("is written onto every built record", () => {
+    const { data } = buildLandscape(scratch(FIXTURE), "2026-01-10");
+    const node = (data!.nodes as Array<Node & { freshness: unknown }>).find((n) => n.id === "fixture-tool");
+    expect(node?.freshness).toEqual({ checked: "2026-01-02", share90: 1, band: "fresh" });
   });
 });

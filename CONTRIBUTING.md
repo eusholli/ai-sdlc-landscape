@@ -84,6 +84,20 @@ paragraph of a commit message, so keep `Closes #<issue>` in the body above it.
 A commit that only moves `retrieved:` dates is not counted as an edit. Neither is a commit listed
 in `.git-blame-ignore-revs`, which is where a bulk reformat goes.
 
+The change log on the site (`/changes`, and the Atom feed at `/changes.xml`) comes from the same
+git history. Each counted commit becomes one entry, naming the records it added, removed or
+renamed, the fields it changed or published for the first time, and the relations it added. A
+commit that adds more than 20 records at once, such as the first import, is one entry. A commit
+that changes no fact, such as a new comment, is left out.
+
+## Freshness
+
+Each record shows how recently its sources were checked: the date of its oldest `retrieved`, and
+a band. Fresh means every source was read in the last 30 days, aging in the last 90, and stale
+means longer ago. The build works it out from the `retrieved` dates; it is never stored. It
+measures our checking, not the tool. `pnpm data:links --refresh` stamps today on every source that
+still answers.
+
 ## Licence
 
 The dataset is published under CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA)). By contributing data you

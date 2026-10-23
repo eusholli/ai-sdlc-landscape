@@ -11,7 +11,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { type Contributor, contributors, headCommit, type History, recordHistory } from "./history";
+import { type Change, changeLog, type Contributor, contributors, headCommit, type History, recordHistory } from "./history";
 
 export const FIELDS_SOURCED = [
   "summary", "customers", "traction", "gtm_partners", "pricing_model", "entry_price",
@@ -75,9 +75,30 @@ const isEmpty = (v: unknown) =>
   v == null || v === "" || v === "unknown" || (Array.isArray(v) && v.length === 0) ||
   (typeof v === "object" && !Array.isArray(v) && Object.keys(v as object).length === 0);
 
+// Freshness: how recently we checked a record's sources, not how good the tool is. A record is
+// fresh when every source was read within FRESH_DAYS, aging within STALE_DAYS, and stale after.
+export const FRESH_DAYS = 30;
+export const STALE_DAYS = 90;
+
+const daysBetween = (from: string, to: string) => Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+
+/** The freshness of a record whose sources were read on `dates`, as of `today` (YYYY-MM-DD). */
+export function freshness(dates: string[], today: string) {
+  const ok = dates.filter((d) => ISO_DATE.test(d)).sort();
+  if (!ok.length) return null;
+  const checked = ok[0];
+  const age = daysBetween(checked, today);
+  const recent = ok.filter((d) => daysBetween(d, today) <= STALE_DAYS).length;
+  return {
+    checked,
+    share90: Math.round((recent / ok.length) * 100) / 100,
+    band: age <= FRESH_DAYS ? "fresh" : age <= STALE_DAYS ? "aging" : "stale",
+  };
+}
+
 export interface BuildResult { data: Rec | null; errors: string[]; warns: string[] }
 
-export function buildLandscape(root = "."): BuildResult {
+export function buildLandscape(root = ".", today = new Date().toISOString().slice(0, 10)): BuildResult {
   const errors: string[] = [], warns: string[] = [];
   const phases = JSON.parse(readFileSync(join(root, "data/phases.json"), "utf8"));
   const phaseIds = new Set(phases.phases.map((p: Rec) => p.id));
@@ -113,9 +134,11 @@ export function buildLandscape(root = "."): BuildResult {
 
   let history: Map<string, History> | null = null;
   let people: Contributor[] | null = null;
+  let changes: Change[] | null = null;
   try {
     history = recordHistory(root);
     people = contributors(root);
+    changes = changeLog(root);
   } catch (e) { errors.push(`history: ${(e as Error).message}`); }
 
   const nodes: Rec[] = [], relations: Rec[] = [], externals = new Map<string, Rec>();
@@ -195,6 +218,7 @@ export function buildLandscape(root = "."): BuildResult {
     rec.sources = prov;
     const dates = prov.map((p) => p.retrieved as string).filter((d) => ISO_DATE.test(d)).sort();
     rec.last_verified = dates.at(-1) ?? "unknown";
+    rec.freshness = freshness(dates, today);
     // Null outside a git checkout, and for a record not yet committed.
     rec.history = history?.get(tid) ?? null;
     nodes.push(rec);
@@ -241,6 +265,7 @@ export function buildLandscape(root = "."): BuildResult {
   const generated = nodes.map((n) => n.last_verified as string).filter((d) => d !== "unknown").sort().at(-1) ?? "";
   const data = {
     generated,
+    built: today,
     // The commit the data was built from: with `generated`, the version of the dataset.
     commit: headCommit(root),
     description: "AI in the software development lifecycle: tools by phase, with typed relations. " +
@@ -250,6 +275,8 @@ export function buildLandscape(root = "."): BuildResult {
     externals: [...externals.values()].sort((a, b) => String(a.id).localeCompare(String(b.id))),
     relations,
     contributors: people ?? [],
+    // From git, oldest first; see changeLog in scripts/history.ts.
+    changes: changes ?? [],
   };
   return { data: errors.length ? null : data, errors, warns };
 }

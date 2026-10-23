@@ -8,8 +8,9 @@ import phaseFile from "@/data/phases.json";
 import { pricingBucket, searchLite } from "@/lib/filters";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
-  Autonomy, Contributor, External, Landscape, Layer, LayerId, MarketMove, Phase, PhaseId, Relation,
-  RelationLite, RelationType, Segment, SegmentId, Source, Tool, ToolHistory, ToolLite,
+  Autonomy, Change, Contributor, External, Freshness, FreshnessBand, Landscape, Layer, LayerId, MarketMove,
+  Phase, PhaseId, Relation, RelationLite, RelationType, Segment, SegmentId, Source, TimelineEntry, Tool,
+  ToolHistory, ToolLite,
 } from "@/lib/types";
 
 type RawNode = (typeof raw.nodes)[number] & Record<string, unknown>;
@@ -72,6 +73,7 @@ function normalise(n: RawNode): Tool {
     status: known<string>(n.status),
     sources: n.sources as Source[],
     lastVerified: n.last_verified,
+    freshness: (n.freshness as Freshness | null | undefined) ?? null,
     history: history(n.history),
   };
 }
@@ -80,6 +82,7 @@ const phaseData = phaseFile as unknown as { phases: Phase[]; layers: Layer[]; se
 
 const landscape: Landscape = {
   generated: raw.generated,
+  built: (raw as { built?: string }).built ?? raw.generated,
   commit: (raw as { commit?: string | null }).commit ?? null,
   licence: DATA_LICENCE,
   licenceUrl: DATA_LICENCE_URL,
@@ -93,6 +96,7 @@ const landscape: Landscape = {
   externals: raw.externals as External[],
   relations: raw.relations as Relation[],
   contributors: ((raw as { contributors?: Contributor[] }).contributors ?? []),
+  changes: [],
 };
 
 const byId = new Map(landscape.tools.map((t) => [t.id, t]));
@@ -111,6 +115,7 @@ export const relations = (): Relation[] => landscape.relations;
 export const dataDate = (): string => landscape.generated;
 /** Everyone whose request changed the data, in the order they first did. */
 export const contributors = (): Contributor[] => landscape.contributors;
+export const buildDate = (): string => landscape.built;
 
 // ---------- Lookups ----------
 
@@ -252,7 +257,175 @@ export const toLite = (t: Tool): ToolLite => ({
   summary: t.summary, autonomy: t.autonomy, openSource: t.openSource, pricingBucket: t.pricingBucket,
   deployment: t.deployment, interface: t.interface, targetBuyer: t.targetBuyer, customers: t.customers,
   moved: !!t.status && t.status !== "preview",
+  isNew: isNew(t.id),
+  freshness: t.freshness?.band ?? null,
 });
 
 export const toolsLite = (): ToolLite[] => landscape.tools.map(toLite);
 export const relationsLite = (): RelationLite[] => landscape.relations.map(({ from, to, type }) => ({ from, to, type }));
+
+// ---------- Change log and timeline ----------
+
+/** Plain labels for the record's YAML keys, as the change log names them. */
+export const FIELD_LABELS: Record<string, string> = {
+  name: "name", company: "company", url: "website", layer: "layer", primary_phase: "primary phase",
+  phases: "phases", segment: "segment", sub_kind: "kind", target_buyer: "target buyer",
+  interface: "interface", autonomy: "autonomy", summary: "one-line claim", customers: "named customers",
+  traction: "traction", gtm_partners: "go-to-market partners", pricing_model: "pricing model",
+  entry_price: "entry price", deployment: "deployment", models: "models", open_source: "open source",
+  repo: "repository", compliance: "compliance", founded: "founding year", hq: "headquarters",
+  headcount_band: "headcount", funding_total: "funding total", last_round: "last round",
+  status: "status", sources: "sources",
+};
+
+const label = (f: string) => FIELD_LABELS[f] ?? f.replace(/_/g, " ");
+
+/** "a", "a and b", "a, b and c". */
+export const andList = (xs: string[]): string =>
+  xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
+
+const upper = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+interface RawChange {
+  kind: Change["kind"]; date: string; commit: string; author: string;
+  requested_by?: { name: string; issue: number }[];
+  tool: string | null; name: string | null; tools?: string[]; from?: string;
+  fields?: string[]; published?: string[];
+  relations_added?: { type: string; to: string }[]; relations_removed?: { type: string; to: string }[];
+  status?: string | null;
+}
+
+/** What changed in one record, without its name: "entry price now published; integrates with GitHub". */
+function whatChanged(c: Omit<Change, "text">): string {
+  const parts: string[] = [];
+  if (c.status !== undefined) parts.push(c.status ? `status now "${c.status}"` : "status cleared");
+  for (const r of c.relationsAdded) parts.push(`${RELATION_LABELS[r.type]?.out.toLowerCase() ?? r.type} ${nameOf(r.to)}`);
+  if (c.relationsRemoved.length) {
+    parts.push(`no longer listed as ${andList(c.relationsRemoved.map((r) => `${RELATION_LABELS[r.type]?.out.toLowerCase() ?? r.type} ${nameOf(r.to)}`))}`);
+  }
+  const facts = c.fields.filter((f) => f !== "status" && f !== "sources");
+  const published = facts.filter((f) => c.published.includes(f));
+  const updated = facts.filter((f) => !c.published.includes(f));
+  if (published.length) parts.push(`${andList(published.map(label))} now published`);
+  if (updated.length) parts.push(`${andList(updated.map(label))} updated`);
+  if (!parts.length && c.fields.includes("sources")) parts.push("sources updated");
+  return parts.join("; ");
+}
+
+function toChange(r: RawChange): Change {
+  const c: Omit<Change, "text"> = {
+    kind: r.kind, date: r.date, commit: r.commit, author: r.author,
+    requestedBy: r.requested_by ?? [], tool: r.tool, name: r.name ?? (r.tool ? nameOf(r.tool) : null),
+    tools: r.tools ?? [], from: r.from ?? null, fields: r.fields ?? [], published: r.published ?? [],
+    relationsAdded: (r.relations_added ?? []) as Change["relationsAdded"],
+    relationsRemoved: (r.relations_removed ?? []) as Change["relationsRemoved"],
+    ...(r.status !== undefined ? { status: r.status } : {}),
+  };
+  const name = c.name ?? c.tool ?? "";
+  const text =
+    c.kind === "batch" ? `${c.tools.length} tools added in one import`
+    : c.kind === "added" ? `${name} added`
+    : c.kind === "removed" ? `${name} removed`
+    : c.kind === "renamed" ? [`${c.from} renamed to ${name}`, whatChanged(c)].filter(Boolean).join("; ")
+    : `${name}: ${whatChanged(c)}`;
+  return { ...c, text };
+}
+
+// Filled here, not with the rest of `landscape`, because the sentences need the labels above.
+landscape.changes = ((raw as { changes?: RawChange[] }).changes ?? []).map(toChange);
+
+/** Every change to the records, newest first. */
+export const changes = (): Change[] => [...landscape.changes].reverse();
+
+/** The changes that touched one record, newest first. */
+export const changesFor = (id: string): Change[] =>
+  changes().filter((c) => c.tool === id || c.from === id || c.tools.includes(id));
+
+/** The commit that brought in the first records, if it was a batch: the landscape's launch. */
+export const launch = (): Change | null => (landscape.changes[0]?.kind === "batch" ? landscape.changes[0] : null);
+
+const daysBefore = (date: string, days: number) =>
+  new Date(Date.parse(date) - days * 86_400_000).toISOString().slice(0, 10);
+
+/** Days a tool added on its own counts as new. */
+export const NEW_DAYS = 30;
+
+const newIds = new Set(landscape.changes
+  .filter((c) => c.kind === "added" && c.tool && c.date >= daysBefore(landscape.built, NEW_DAYS))
+  .map((c) => c.tool!));
+
+/** Added on its own, not in a batch, within NEW_DAYS of the build. */
+export const isNew = (id: string): boolean => newIds.has(id);
+
+/** One sentence for the changes one commit made. */
+function commitText(cs: Change[]): string {
+  if (cs.length === 1) {
+    const c = cs[0];
+    if (c.kind === "batch" && c === launch()) {
+      const models = c.tools.filter((id) => byId.get(id)?.kind === "model").length;
+      return `The landscape launched with ${c.tools.length - models} tools${models ? ` and ${models} model providers` : ""}`;
+    }
+    return c.text;
+  }
+  const names = (xs: Change[]) => {
+    const n = xs.map((c) => c.name ?? c.tool ?? "");
+    return n.length > 3 ? `${n.slice(0, 2).join(", ")} and ${n.length - 2} more` : andList(n);
+  };
+  const updated = cs.filter((c) => c.kind === "updated");
+  const same = updated.length === cs.length && cs.every((c) => whatChanged(c) === whatChanged(cs[0]));
+  if (same) return `${names(cs)}: ${whatChanged(cs[0])}`;
+  const added = cs.filter((c) => c.kind === "added");
+  const parts = [
+    added.length ? `${names(added)} added` : "",
+    updated.length ? `${updated.length} ${updated.length === 1 ? "record" : "records"} updated` : "",
+  ].filter(Boolean);
+  return upper(parts.join("; ") || `${cs.length} records changed`);
+}
+
+function moveText(m: MarketMove): string {
+  const name = nameOf(m.tool);
+  return m.kind === "acquired" ? (m.acquirer ? `${name} acquired by ${m.acquirer}` : `${name} acquired`)
+    : m.kind === "shut down" ? `${name} shut down` : `${name} reached end of life`;
+}
+
+/**
+ * Changes grouped by commit, merged with the dated market moves, newest first. Undated moves are
+ * left out: the timeline never invents a date. `limit` caps the number of entries.
+ */
+export function timeline(limit?: number): TimelineEntry[] {
+  const byCommit = new Map<string, Change[]>();
+  for (const c of landscape.changes) byCommit.set(c.commit, [...(byCommit.get(c.commit) ?? []), c]);
+  const entries: TimelineEntry[] = [...byCommit.values()].map((cs) => ({
+    kind: "changes", date: cs[0].date, commit: cs[0].commit, author: cs[0].author,
+    requestedBy: cs.flatMap((c) => c.requestedBy).filter((r, i, a) => a.findIndex((o) => o.name === r.name && o.issue === r.issue) === i),
+    text: commitText(cs), changes: cs,
+  }));
+  for (const m of marketMoves()) if (m.date) entries.push({ kind: "move", date: m.date, text: moveText(m), move: m });
+  // Newest first; on the same date, a commit before a move, and later commits first.
+  const order = entries.map((e, i) => ({ e, i }));
+  order.sort((a, b) => b.e.date.localeCompare(a.e.date) ||
+    (a.e.kind === b.e.kind ? b.i - a.i : a.e.kind === "changes" ? -1 : 1));
+  const out = order.map((o) => o.e);
+  return limit === undefined ? out : out.slice(0, limit);
+}
+
+// ---------- Freshness ----------
+
+export const FRESHNESS_LABELS: Record<FreshnessBand, string> = {
+  fresh: "Checked in the last 30 days", aging: "Checked in the last 90 days", stale: "Not checked in 90 days",
+};
+
+/** How many records sit in each freshness band. */
+export function freshnessSummary(): { band: FreshnessBand; label: string; count: number }[] {
+  const bands: FreshnessBand[] = ["fresh", "aging", "stale"];
+  return bands.map((band) => ({
+    band, label: FRESHNESS_LABELS[band],
+    count: landscape.tools.filter((t) => t.freshness?.band === band).length,
+  }));
+}
+
+/** Records whose oldest source read is furthest back, for "next to check" lists. */
+export const leastRecentlyChecked = (n = 10): Tool[] =>
+  landscape.tools.filter((t) => t.freshness)
+    .sort((a, b) => a.freshness!.checked.localeCompare(b.freshness!.checked) || a.name.localeCompare(b.name))
+    .slice(0, n);

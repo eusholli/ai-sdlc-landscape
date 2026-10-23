@@ -2,7 +2,7 @@
 // /llms-full.txt (every record as Markdown). Built from the data at build time; counts are derived.
 import "server-only";
 
-import { allTools, dataDate, getLandscape, nameOf, phases, relationsFor, RELATION_LABELS } from "@/lib/data";
+import { allTools, dataDate, getLandscape, nameOf, phases, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
 import { notPublished } from "@/lib/format";
 import { requestAdviceMarkdown } from "@/lib/request-advice";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO, REPO_URL, REQUEST_URL, SITE_URL } from "@/lib/site";
@@ -56,6 +56,8 @@ export function llmsTxt(): string {
     `- [Full dataset as Markdown](${SITE_URL}/llms-full.txt): every tool with its facts, relations and sources`,
     `- [Full dataset as JSON](${SITE_URL}/landscape.json): phases, layers, segments, tools, externals, relations, contributors; \`null\` means not published`,
     `- [One tool as JSON](${SITE_URL}/data/tools/${example}.json): \`/data/tools/<id>.json\`, the tool and its relations`,
+    `- [Changes feed](${SITE_URL}/changes.xml): Atom feed of every change to the records and the dated market moves`,
+    `- [Badge](${SITE_URL}/badge/${example}.svg): \`/badge/<id>.svg\`, a "Listed on" badge for each tool`,
     `- [Record schema](${SITE_URL}/schema/tool.json): JSON Schema for one source record in \`data/tools/<id>.yaml\``,
     `- [Source records](${REPO_URL}/tree/main/data/tools): the YAML the site is built from`,
     "",
@@ -63,10 +65,15 @@ export function llmsTxt(): string {
     "",
     `- [Map](${SITE_URL}/): every tool by lifecycle phase`,
     `- [Tool pages](${SITE_URL}/tools/${example}): \`/tools/<id>\`, one per tool`,
+    `- [Changes](${SITE_URL}/changes): what changed in the data, newest first`,
     `- [Market moves](${SITE_URL}/moves): acquisitions and shutdowns`,
     `- [Insights](${SITE_URL}/insights): coverage and what is published`,
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,
     `- [Contribute](${SITE_URL}/contribute): how to request a change`,
+    "",
+    "## Recent changes",
+    "",
+    ...timeline(10).map((e) => `- ${e.date}: ${e.text}`),
     "",
     "## Rules",
     "",
@@ -115,6 +122,7 @@ function toolMarkdown(t: Tool): string {
     line("Last round", t.lastRound),
     line("Status", t.status),
     `- Last verified: ${t.lastVerified}`,
+    line("Sources checked since", t.freshness ? `${t.freshness.checked} (${t.freshness.band})` : null),
   ];
   const rels = relationsFor(t.id).filter((r) => r.direction === "out");
   if (rels.length) {

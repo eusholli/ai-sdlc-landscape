@@ -21,9 +21,14 @@ How a record reaches the page: `scripts/build-data.ts` validates the YAML, compu
 git history from `scripts/history.ts` and writes `data/landscape.json`. `lib/data.ts` is the only
 reader of that file. It is server only and folds unpublished values to `null`. Server components
 in `app/(site)/` pass the slim `toolsLite()` and `relationsLite()` to client components, and
-`app/data/tools/[id]/route.ts` turns each tool into a static JSON file for the drawer. For agents,
+`app/data/tools/[id]/route.ts` turns each tool, its relations and its changes into a static JSON
+file for the drawer. For agents,
 `/llms.txt`, `/llms-full.txt`, `/landscape.json` and `/schema/tool.json` are built from the same
 data (`lib/llms.ts`, `scripts/schema.ts`), and pages carry schema.org JSON-LD (`lib/jsonld.ts`).
+The change log comes from git too (`changeLog` in `scripts/history.ts`). `lib/data.ts` turns it
+into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly digest
+(`lib/digest.ts`, `pnpm digest`). Each tool has a "Listed on" badge at `/badge/<id>.svg`
+(`lib/badge.ts`).
 
 The repo stands alone. It depends on no other repository, and no other repository writes into it.
 Nobody is selling anything on this site, so no company's view of the market belongs in the data
@@ -43,6 +48,7 @@ pnpm data:links       # fetch every source URL; --changed for records changed ag
                       # --refresh to stamp `retrieved` on each source that answered
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
 pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
+pnpm digest [YYYY-MM] # last month's changes as a short post and a long version, in .digest/
 ```
 
 `pnpm check` exits non-zero on any failure and is never routed around. CI runs it on every push
@@ -82,7 +88,8 @@ is a rule nobody follows.
 - `null` means not published: render it with `notPublished()`, never an empty cell or a dash.
 - The files `LOCKED` in `scripts/guard.ts` names (`data/`, `scripts/`, `tests/`, `lib/data.ts`,
   `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`, `lib/request-advice.ts`,
-  `lib/llms.ts`, `lib/jsonld.ts`, `components/logo.tsx`, the `llms` and `schema` routes) are locked
+  `lib/llms.ts`, `lib/jsonld.ts`, `lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`,
+  the `llms`, `schema`, `changes.xml` and `badge` routes) are locked
   against v0 runs, which the guard enforces. A session working here by hand may change them, with
   tests. v0 does the visible UI only, as a new step in `docs/v0-prompts.md`. A UI change is made
   once, by hand or by v0, whichever suits it; small fixes are done by hand. A hand edit is never
@@ -128,12 +135,12 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/fetch-logos.ts` | logo fetcher |
 | `scripts/guard.ts` | the lock that keeps v0 runs out of data and logic |
 | `scripts/v0-run.ts` | drives v0 step by step with a build gate; state in `docs/v0-state.json`, log in `docs/v0-log.md` |
-| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD |
+| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, feed, badge, digest |
 | `app/` | routes; `app/data/` serves per-tool JSON to the drawer; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
 | `components/` | UI components |
 | `tests/` | vitest suites |
 | `docs/design-brief.md` | the design and data contract |
 | `docs/scan.md` | how to run a scan and judge what it finds |
 | `CONTRIBUTING.md` | the data rules for contributors |
-| `.github/` | CI and monthly scan workflows, the plain-language request form |
+| `.github/` | CI and weekly scan workflows, the plain-language request form |
 | `.claude/skills/triage/` | the local skill for working through request issues |

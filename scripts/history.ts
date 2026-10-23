@@ -13,6 +13,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { parse } from "yaml";
 
 export interface Request { name: string; issue: number }
 
@@ -64,12 +65,12 @@ export function retrievedOnly(removed: string[], added: string[]): boolean {
 }
 
 /**
- * History per record id, or null when `root` is not inside a git checkout (a scratch copy in a
- * test, say). Throws when the checkout is shallow: a shallow clone makes its oldest commit look
- * like the one that added every record, and a wrong date reads as true.
+ * Makes sure the checkout has full history. False when `root` is not inside a git checkout (a
+ * scratch copy in a test, say). Throws when the checkout stays shallow: a shallow clone makes its
+ * oldest commit look like the one that added every record, and a wrong date reads as true.
  */
-export function recordHistory(root = "."): Map<string, History> | null {
-  try { git(root, ["rev-parse", "--git-dir"]); } catch { return null; }
+function fullHistory(root: string): boolean {
+  try { git(root, ["rev-parse", "--git-dir"]); } catch { return false; }
   const shallow = () => git(root, ["rev-parse", "--is-shallow-repository"]).trim() === "true";
   if (shallow()) {
     // Vercel clones shallow and leaves no usable remote, but names the repo, which is public.
@@ -85,6 +86,21 @@ export function recordHistory(root = "."): Map<string, History> | null {
     }
     console.log("history: the checkout was shallow; fetched full history");
   }
+  return true;
+}
+
+/** One record file touched by one commit. */
+interface FileEvent {
+  c: Commit;
+  oldId?: string; newId?: string;
+  oldPath: string; newPath: string;
+  deleted: boolean;
+  /** False for a commit that only moves `retrieved:` dates or is listed in .git-blame-ignore-revs. */
+  counts: boolean;
+}
+
+/** Every change to a record file, oldest first, with renames followed. */
+function fileEvents(root: string): FileEvent[] {
   const top = git(root, ["rev-parse", "--show-toplevel"]).trim();
   const ignorePath = join(top, ".git-blame-ignore-revs");
   const ignored = new Set(existsSync(ignorePath)
@@ -95,8 +111,8 @@ export function recordHistory(root = "."): Map<string, History> | null {
   // Oldest first, so a rename carries what came before it.
   const log = git(root, ["log", "--reverse", "-M", `--format=%x00%H%x09%an%x09%as%x09${TRAILER}`, "--unified=0",
     "-p", "--", "data/tools"]);
-  const out = new Map<string, History>();
   const idOf = (p: string) => p.match(/^data\/tools\/(.+)\.yaml$/)?.[1];
+  const out: FileEvent[] = [];
 
   for (const chunk of log.split("\x00").slice(1)) {
     const [head, ...rest] = chunk.split("\n");
@@ -109,28 +125,157 @@ export function recordHistory(root = "."): Map<string, History> | null {
       const to = lines.find((l) => l.startsWith("+++ "))?.slice(4) ?? "";
       const renameFrom = lines.find((l) => l.startsWith("rename from "))?.slice(12);
       const renameTo = lines.find((l) => l.startsWith("rename to "))?.slice(10);
-      const oldId = idOf(renameFrom ?? from.replace(/^a\//, ""));
-      const newId = idOf(renameTo ?? to.replace(/^b\//, ""));
-      if (to === "/dev/null") { if (oldId) out.delete(oldId); continue; }
-      if (!newId) continue;
-      const prior = oldId ? out.get(oldId) : undefined;
-      if (oldId && oldId !== newId) out.delete(oldId);
+      const oldPath = renameFrom ?? from.replace(/^a\//, "");
+      const newPath = renameTo ?? to.replace(/^b\//, "");
+      const oldId = idOf(oldPath), newId = idOf(newPath);
       const body = lines.filter((l) => !l.startsWith("--- ") && !l.startsWith("+++ "));
       const removed = body.filter((l) => l.startsWith("-")).map((l) => l.slice(1));
       const added = body.filter((l) => l.startsWith("+")).map((l) => l.slice(1));
-      if (!prior) {
-        out.set(newId, {
-          added: c.date, added_by: c.author, added_commit: c.sha,
-          edited: c.date, edited_by: c.author, edited_commit: c.sha,
-          requested_by: c.requests,
-        });
-        continue;
-      }
       // A rename changes the id, which is an edit even when no line moved.
       const counts = !isIgnored(c.sha) && (oldId !== newId || !retrievedOnly(removed, added));
-      out.set(newId, counts
-        ? { ...prior, edited: c.date, edited_by: c.author, edited_commit: c.sha, requested_by: addRequests(prior.requested_by, c.requests) }
-        : prior);
+      out.push({ c, oldId, newId, oldPath, newPath, deleted: to === "/dev/null", counts });
+    }
+  }
+  return out;
+}
+
+/** History per record id, or null when `root` is not inside a git checkout. */
+export function recordHistory(root = "."): Map<string, History> | null {
+  if (!fullHistory(root)) return null;
+  const out = new Map<string, History>();
+  for (const { c, oldId, newId, deleted, counts } of fileEvents(root)) {
+    if (deleted) { if (oldId) out.delete(oldId); continue; }
+    if (!newId) continue;
+    const prior = oldId ? out.get(oldId) : undefined;
+    if (oldId && oldId !== newId) out.delete(oldId);
+    if (!prior) {
+      out.set(newId, {
+        added: c.date, added_by: c.author, added_commit: c.sha,
+        edited: c.date, edited_by: c.author, edited_commit: c.sha,
+        requested_by: c.requests,
+      });
+      continue;
+    }
+    out.set(newId, counts
+      ? { ...prior, edited: c.date, edited_by: c.author, edited_commit: c.sha, requested_by: addRequests(prior.requested_by, c.requests) }
+      : prior);
+  }
+  return out;
+}
+
+/** A commit that adds more records than this is one batch, such as the first import. */
+export const BATCH = 20;
+
+export interface RelationRef { type: string; to: string }
+
+/** One change to the data, as the change log on the site shows it. */
+export interface Change {
+  kind: "batch" | "added" | "updated" | "renamed" | "removed";
+  date: string; commit: string; author: string;
+  requested_by: Request[];
+  /** The record's id after the change; null for a batch. */
+  tool: string | null;
+  /** Its name as the record gave it then, so a removed record still reads. */
+  name: string | null;
+  /** A batch: the ids it added. */
+  tools?: string[];
+  /** A rename: the old id. */
+  from?: string;
+  /** Fields whose value changed. Those also in `published` had no value before. */
+  fields?: string[];
+  published?: string[];
+  relations_added?: RelationRef[];
+  relations_removed?: RelationRef[];
+  /** The new status text, when the status changed; null when it was cleared. */
+  status?: string | null;
+}
+
+type Yaml = Record<string, unknown>;
+
+const blank = (v: unknown) =>
+  v == null || v === "" || v === "unknown" || (Array.isArray(v) && v.length === 0) ||
+  (typeof v === "object" && !Array.isArray(v) && Object.keys(v as object).length === 0);
+
+// Fields that are bookkeeping rather than facts. Sources are compared without their dates.
+const NOT_FACTS = new Set(["id", "sources", "relations"]);
+
+const relKeys = (y: Yaml): Map<string, RelationRef> => new Map(
+  (Array.isArray(y.relations) ? y.relations as RelationRef[] : [])
+    .filter((r) => r && typeof r === "object")
+    .map((r) => [`${r.type} ${r.to}`, { type: String(r.type), to: String(r.to) }]));
+
+const sourceKeys = (y: Yaml): string =>
+  JSON.stringify((Array.isArray(y.sources) ? y.sources as { field?: string; url?: string }[] : [])
+    .map((s) => `${s?.field} ${s?.url}`).sort());
+
+/** What changed between two versions of a record, or null when no fact did. */
+export function diffRecord(before: Yaml, after: Yaml):
+  Pick<Change, "fields" | "published" | "relations_added" | "relations_removed" | "status"> | null {
+  const fields: string[] = [], published: string[] = [];
+  for (const k of [...new Set([...Object.keys(before), ...Object.keys(after)])].sort()) {
+    if (NOT_FACTS.has(k)) continue;
+    const a = blank(before[k]) ? null : before[k], b = blank(after[k]) ? null : after[k];
+    if (JSON.stringify(a) === JSON.stringify(b)) continue;
+    fields.push(k);
+    if (a === null) published.push(k);
+  }
+  if (sourceKeys(before) !== sourceKeys(after)) fields.push("sources");
+  const rb = relKeys(before), ra = relKeys(after);
+  const relations_added = [...ra].filter(([k]) => !rb.has(k)).map(([, r]) => r);
+  const relations_removed = [...rb].filter(([k]) => !ra.has(k)).map(([, r]) => r);
+  if (!fields.length && !relations_added.length && !relations_removed.length) return null;
+  const out: ReturnType<typeof diffRecord> = { fields, published };
+  if (relations_added.length) out!.relations_added = relations_added;
+  if (relations_removed.length) out!.relations_removed = relations_removed;
+  if (fields.includes("status")) out!.status = blank(after.status) ? null : String(after.status);
+  return out;
+}
+
+/**
+ * Every counted change to the records, oldest first, or null outside a git checkout. A commit
+ * that adds more than BATCH records is one `batch` entry. A commit whose only changes are
+ * bookkeeping (formatting, comments) is left out, as are the commits recordHistory skips.
+ */
+export function changeLog(root = "."): Change[] | null {
+  if (!fullHistory(root)) return null;
+  const show = (sha: string, path: string): Yaml => {
+    try { return (parse(git(root, ["show", `${sha}:${path}`])) ?? {}) as Yaml; } catch { return {}; }
+  };
+  const events = fileEvents(root);
+  const out: Change[] = [];
+  const base = (e: FileEvent) => ({
+    date: e.c.date, commit: e.c.sha, author: e.c.author, requested_by: e.c.requests,
+  });
+  const name = (y: Yaml) => (blank(y.name) ? null : String(y.name));
+
+  for (let i = 0; i < events.length;) {
+    const sha = events[i].c.sha;
+    let j = i;
+    while (j < events.length && events[j].c.sha === sha) j++;
+    const commit = events.slice(i, j);
+    i = j;
+    const adds = commit.filter((e) => e.newId && !e.deleted && e.oldPath === "/dev/null");
+    if (adds.length > BATCH) {
+      out.push({ kind: "batch", ...base(adds[0]), tool: null, name: null, tools: adds.map((e) => e.newId!).sort() });
+    }
+    for (const e of commit) {
+      if (!e.counts) continue;
+      if (e.deleted) {
+        if (e.oldId) out.push({ kind: "removed", ...base(e), tool: e.oldId, name: name(show(`${sha}^`, e.oldPath)) });
+        continue;
+      }
+      if (!e.newId) continue;
+      const after = show(sha, e.newPath);
+      if (e.oldPath === "/dev/null") {
+        if (adds.length <= BATCH) out.push({ kind: "added", ...base(e), tool: e.newId, name: name(after) });
+        continue;
+      }
+      const diff = diffRecord(show(`${sha}^`, e.oldPath), after);
+      if (e.oldId !== e.newId) {
+        out.push({ kind: "renamed", ...base(e), tool: e.newId, name: name(after), from: e.oldId, ...diff });
+      } else if (diff) {
+        out.push({ kind: "updated", ...base(e), tool: e.newId, name: name(after), ...diff });
+      }
     }
   }
   return out;

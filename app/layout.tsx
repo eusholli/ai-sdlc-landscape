@@ -27,6 +27,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable, geistMono.variable)}>
       <body className="bg-background text-foreground antialiased">
+        {/* Here, not in `metadata`: a page's own `alternates` would replace it. React puts it in <head>. */}
+        <link rel="alternate" type="application/atom+xml" href="/changes.xml" title="AI SDLC Landscape: changes" />
         <Providers>{children}</Providers>
       </body>
     </html>

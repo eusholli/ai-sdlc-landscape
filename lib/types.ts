@@ -86,6 +86,8 @@ export interface Tool {
   status: string | null;
   sources: Source[];
   lastVerified: string;
+  /** How recently every source was checked. Null when the record has no sources. */
+  freshness: Freshness | null;
   /** From git: who added the record and who last changed it. Null before its first commit. */
   history: ToolHistory | null;
 }
@@ -100,6 +102,20 @@ export interface ToolHistory {
   editedCommit: string;
   /** People whose issues asked for the changes to this record, oldest first. */
   requestedBy: RequestCredit[];
+}
+
+/**
+ * fresh: every source read within 30 days of the build. aging: within 90. stale: older. It
+ * measures our checking, not the tool.
+ */
+export type FreshnessBand = "fresh" | "aging" | "stale";
+
+export interface Freshness {
+  /** YYYY-MM-DD of the oldest source read: every source was checked on or after it. */
+  checked: string;
+  /** Share of the record's sources read within 90 days of the build, 0 to 1. */
+  share90: number;
+  band: FreshnessBand;
 }
 
 /** A request for change that was accepted: who asked, and the issue they asked in. */
@@ -141,6 +157,9 @@ export interface ToolLite {
   customers: string[] | null;
   /** True when status records an acquisition or shutdown. */
   moved: boolean;
+  /** Added on its own (not in the first import) within the last 30 days. */
+  isNew: boolean;
+  freshness: FreshnessBand | null;
 }
 
 /** Companies and platforms that tools relate to but which are not tools in the census. */
@@ -170,9 +189,49 @@ export interface MarketMove {
   sources: string[];
 }
 
+/** One change to one record, from git. Field names are the record's own YAML keys. */
+export interface Change {
+  kind: "batch" | "added" | "updated" | "renamed" | "removed";
+  /** YYYY-MM-DD the commit was authored. */
+  date: string;
+  commit: string;
+  /** Who made the commit. Names only. */
+  author: string;
+  requestedBy: RequestCredit[];
+  /** The record's id after the change; null for a batch. */
+  tool: string | null;
+  /** The record's name at the time, so a removed record still reads. */
+  name: string | null;
+  /** A batch: the ids it added. */
+  tools: string[];
+  /** A rename: the old id. */
+  from: string | null;
+  /** Fields whose value changed. Those also in `published` had no value before. */
+  fields: string[];
+  published: string[];
+  relationsAdded: { type: RelationType; to: string }[];
+  relationsRemoved: { type: RelationType; to: string }[];
+  /** The new status text when the status changed; undefined when it did not. */
+  status?: string | null;
+  /** One plain sentence, e.g. "Cursor: entry price now published". */
+  text: string;
+}
+
+/**
+ * One entry on the timeline: the changes one commit made, or a dated market move. Newest first.
+ * A move's date may be a year and month only, as the status text gives it.
+ */
+export type TimelineEntry =
+  | { kind: "changes"; date: string; commit: string; author: string; requestedBy: RequestCredit[];
+      /** One sentence for the whole commit, e.g. "Repository now published for 20 tools". */
+      text: string; changes: Change[] }
+  | { kind: "move"; date: string; text: string; move: MarketMove };
+
 export interface Landscape {
   /** Date of the newest source read, YYYY-MM-DD. With `commit`, the version of the dataset. */
   generated: string;
+  /** YYYY-MM-DD the site was built. Freshness and "new" are measured from it. */
+  built: string;
   /** Full SHA of the commit the data was built from, or null when built outside git. */
   commit: string | null;
   /** SPDX id of the data licence. */
@@ -189,4 +248,6 @@ export interface Landscape {
   externals: External[];
   relations: Relation[];
   contributors: Contributor[];
+  /** Every counted change to the records, oldest first. */
+  changes: Change[];
 }
