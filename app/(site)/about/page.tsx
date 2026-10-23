@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const TIERS = [
-  { tier: "A", text: "The vendor's own page: product, docs, pricing, changelog, or its own GitHub repository." },
+  { tier: "A", text: "The vendor's own page: product, docs, pricing, changelog, or its own GitHub account." },
   { tier: "B", text: "Reputable press or analyst coverage." },
   { tier: "C", text: "Secondary sources, used only when nothing better exists." },
 ];

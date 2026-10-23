@@ -23,6 +23,7 @@ export const FACTS: Fact[] = [
   { label: "Deployment", field: "deployment", value: (t) => joinOrNotPublished(t.deployment) },
   { label: "Models", field: "models", wide: true, value: (t) => joinOrNotPublished(t.models) },
   { label: "Open source", field: "open_source", value: (t) => (t.openSource ? "Yes" : UNKNOWN) },
+  { label: "Repository", field: "repo", value: (t) => notPublished(t.repo, (r) => r.replace(/^https:\/\//, "")) },
   { label: "Compliance", field: "compliance", wide: true, value: (t) => joinOrNotPublished(t.compliance) },
   { label: "Interface", field: "interface", value: (t) => joinOrNotPublished(t.interface) },
   { label: "Target buyer", field: "target_buyer", value: (t) => joinOrNotPublished(t.targetBuyer) },

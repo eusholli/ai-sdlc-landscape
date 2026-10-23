@@ -74,6 +74,8 @@ export interface Tool {
   models: string[] | null;
   /** true when published as open source; null when not stated (never false in the data). */
   openSource: true | null;
+  /** The vendor's main GitHub repository, set for every open-source tool. */
+  repo: string | null;
   compliance: string[] | null;
   founded: number | null;
   hq: string | null;

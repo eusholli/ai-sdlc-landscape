@@ -55,6 +55,10 @@ describe("data contract", () => {
   it("points every logo at a file under /logos or null", () => {
     for (const t of allTools()) if (t.logo) expect(t.logo).toMatch(/^\/logos\/[\w.-]+\.(png|svg|ico|jpg|webp)$/);
   });
+
+  it("names a GitHub repo for every open-source tool", () => {
+    for (const t of allTools()) if (t.openSource) expect(t.repo, t.id).toMatch(/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/?$/);
+  });
 });
 
 describe("selectors", () => {

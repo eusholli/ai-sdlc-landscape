@@ -106,6 +106,7 @@ function toolMarkdown(t: Tool): string {
     line("Deployment", t.deployment),
     line("Models", t.models),
     line("Open source", t.openSource),
+    line("Repository", t.repo),
     line("Compliance", t.compliance),
     line("Founded", t.founded),
     line("Headquarters", t.hq),

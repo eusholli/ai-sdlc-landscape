@@ -62,6 +62,7 @@ function normalise(n: RawNode): Tool {
     deployment: list(n.deployment),
     models: list(n.models),
     openSource: n.open_source === true ? true : null,
+    repo: known<string>(n.repo),
     compliance: list(n.compliance),
     founded: typeof n.founded === "number" ? n.founded : null,
     hq: known<string>(n.hq),
