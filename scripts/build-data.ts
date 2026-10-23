@@ -233,6 +233,7 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
       if (!idSet.has(to) && !externals.has(to)) externals.set(to, { id: to, kind: "external", name: to });
       const srcs = asList(r.sources).map(String);
       if (!srcs.length) warns.push(`${tid}: relation ${r.type} ${to} has no source`);
+      if (new Set(srcs).size !== srcs.length) errors.push(`${tid}: relation ${r.type} ${to} lists a source twice`);
       relations.push({ from: tid, to, type: r.type, sources: srcs });
     }
     if (rec.kind === "tool" && rec.summary === "unknown") warns.push(`${tid}: no summary`);

@@ -15,7 +15,7 @@ import type { NetworkCanvasHandle } from "./network-canvas";
 import { NetworkPanel } from "./network-panel";
 import { usePalette } from "./use-palette";
 
-const VIEW_HEIGHT = "h-[calc(100dvh-10.5rem-var(--intro-h,0rem))] min-h-[32rem]";
+const VIEW_HEIGHT = "h-[calc(100dvh-12.75rem-var(--intro-h,0rem))] min-h-[32rem]";
 
 const NetworkCanvas = dynamic(() => import("./network-canvas"), {
   ssr: false,

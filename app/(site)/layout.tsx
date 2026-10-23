@@ -5,9 +5,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
 import { StatsStrip } from "@/components/stats-strip";
+import { WhatsNewStrip } from "@/components/whats-new-strip";
 import { ToolDrawer } from "@/components/tool/tool-drawer";
 import { phases, segments, toolsLite } from "@/lib/data";
 import { toolDetailRefs } from "@/lib/tool-refs";
+import { whatsNewItems } from "@/lib/whats-new";
 
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -18,6 +20,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       >
         Skip to content
       </a>
+      <WhatsNewStrip items={whatsNewItems()} />
       <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
         <Suspense
           fallback={

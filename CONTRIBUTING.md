@@ -42,6 +42,7 @@ end of each scan for another look, for a tool in early access or a site that ref
 - **Relations** go under `relations` on the tool they start from, as `{type, to, sources}`. The type
   is one of `integrates_with`, `built_on_model`, `acquired_by`, `partners_with`, `competes_with` or
   `ships_inside`. A target that is not a tool here needs a display name in `data/externals.yaml`.
+  Each URL appears once in a relation's `sources`.
 
 ## Making a change
 

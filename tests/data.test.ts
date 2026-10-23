@@ -72,6 +72,7 @@ describe("selectors", () => {
     }
     const dated = moves.filter((m) => m.date).map((m) => m.date!);
     expect(dated).toEqual([...dated].sort());
+    for (const m of moves) expect(new Set(m.sources).size, m.tool).toBe(m.sources.length);
     const firstUndated = moves.findIndex((m) => !m.date);
     if (firstUndated >= 0) expect(moves.slice(firstUndated).every((m) => !m.date)).toBe(true);
   });

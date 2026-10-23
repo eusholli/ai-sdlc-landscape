@@ -18,25 +18,25 @@ export interface WhatsNewItem {
 }
 
 /**
- * One compact row at the top of the home page: the latest entries from the changes timeline. It
- * scrolls sideways rather than wrapping. When the intro is collapsed it keeps only the newest
- * entry. The entries slide in once on load, newest first, and then stay still.
+ * One compact row at the very top of every page, above the header: the latest entries from the
+ * changes timeline. It scrolls sideways rather than wrapping, and scrolls away with the page while
+ * the header sticks. On md and up it is exactly WHATS_NEW_H tall, which the map views subtract.
+ * The entries slide in once on load, newest first, and then stay still.
  */
-export function WhatsNewStrip({ items, collapsed }: { items: WhatsNewItem[]; collapsed: boolean }) {
+export function WhatsNewStrip({ items }: { items: WhatsNewItem[] }) {
   const reduce = useReducedMotion();
   if (items.length === 0) return null;
-  const shown = collapsed ? items.slice(0, 1) : items;
 
   return (
-    <div className="border-b bg-background">
-      <div className={`${SITE_CONTAINER} flex items-center gap-3 py-1.5`}>
+    <div className="border-b bg-muted/50">
+      <div className={`${SITE_CONTAINER} flex items-center gap-3 py-1.5 md:h-9 md:py-0`}>
         <p className="shrink-0 text-xs font-semibold">What&apos;s new</p>
         <ul
           aria-label="Latest changes"
           tabIndex={0}
           className="flex min-w-0 flex-1 items-center gap-5 overflow-x-auto rounded-sm p-0.5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          {shown.map((item, index) => (
+          {items.map((item, index) => (
             <motion.li
               key={item.key}
               className="flex shrink-0 items-center gap-1.5 text-xs"

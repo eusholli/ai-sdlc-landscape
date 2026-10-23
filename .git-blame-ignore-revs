@@ -1,0 +1,4 @@
+# Bulk changes to data/tools that are not edits. scripts/history.ts skips these, as git blame can.
+
+# List each relation source once
+618ac9f3d64db3e53c812d24e3796eb277efa7ac

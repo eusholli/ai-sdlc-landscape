@@ -68,6 +68,12 @@ describe("build-data", () => {
     expect(errors).toContain("screened.yaml: Other needs a reason");
   });
 
+  it("fails a relation that lists the same source twice", () => {
+    const url = "https://fixture.example/news";
+    const root = scratch(FIXTURE + `relations:\n  - {type: integrates_with, to: github, sources: [${url}, ${url}]}\n`);
+    expect(buildLandscape(root).errors).toContain("fixture-tool: relation integrates_with github lists a source twice");
+  });
+
   it("accepts the fixture as written", () => {
     expect(buildLandscape(scratch(FIXTURE)).errors).toEqual([]);
   });
