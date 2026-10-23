@@ -32,7 +32,7 @@ into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly di
 
 The repo stands alone. It depends on no other repository, and no other repository writes into it.
 Nobody is selling anything on this site, so no company's view of the market belongs in the data
-or the copy.
+or the copy. `/ownership` is the maintainer's signed thesis. It is not data, and no record may cite it.
 
 ## Commands
 

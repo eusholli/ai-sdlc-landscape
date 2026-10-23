@@ -1,7 +1,8 @@
 // The evaluation kit: questions a buyer puts to an AI SDLC vendor. Client-safe: no data import.
+import { SITE_URL } from "@/lib/site";
 import type { Tool } from "@/lib/types";
 
-export type KitGroup = "data" | "continuity" | "pricing" | "integration" | "security";
+export type KitGroup = "data" | "continuity" | "pricing" | "integration" | "security" | "acceptance";
 /** The record field that may answer a question. Relations live beside the tools, not on one. */
 export type KitField = keyof Tool | "relations";
 export interface KitQuestion {
@@ -22,6 +23,7 @@ export const KIT_GROUPS: { id: KitGroup; title: string; blurb: string }[] = [
   { id: "pricing", title: "Pricing", blurb: "What it costs at your scale, beyond the seat." },
   { id: "integration", title: "Integration", blurb: "How it fits the tools you already run." },
   { id: "security", title: "Security", blurb: "Controls, assurance and what you can show an auditor." },
+  { id: "acceptance", title: "Acceptance", blurb: "What the tool gives the person who must answer for the changes it produces. These come from the maintainer's thesis, and few vendors publish them." },
 ];
 
 /** The field name a source row uses, for each field a question can name. */
@@ -37,6 +39,7 @@ export const SOURCE_FIELD: Partial<Record<KitField, string>> = {
 };
 
 const CURSOR = { label: "Cursor, privacy and data governance", url: "https://cursor.com/docs/enterprise/privacy-and-data-governance" };
+const THESIS = { label: "The thesis, accountable acceptance", url: `${SITE_URL}/ownership#9-accountable-acceptance` };
 const GITHUB = { label: "GitHub Docs, model hosting", url: "https://docs.github.com/en/copilot/reference/ai-models/model-hosting" };
 const DX = { label: "DX, AI coding assistant pricing", url: "https://getdx.com/blog/ai-coding-assistant-pricing/" };
 const SNYK = { label: "Snyk, GenAI coding security RFP template", url: "https://snyk.io/lp/genai-coding-security-rfp/" };
@@ -117,4 +120,23 @@ export const KIT: KitQuestion[] = [
   { id: "sec-rollout", group: "security", field: null, ref: TRUST,
     text: "Can we start on low-stakes work and widen the scope as we build trust?",
     why: "The published rollout pattern starts with boilerplate, tests and documentation, keeps people accountable for generated code, then widens." },
+
+  { id: "acc-rights", group: "acceptance", field: null, ref: THESIS,
+    text: "Can a named person accept or refuse each AI-generated change, and can an administrator set who holds that authority?",
+    why: "Acceptance that cannot be refused is not acceptance, so the authority and the right to refuse come first." },
+  { id: "acc-brief", group: "acceptance", field: null, ref: THESIS,
+    text: "What does the reviewer see before accepting: the change's intent, its footprint, what changed in the system meanwhile, the evidence and its gaps?",
+    why: "A person can only decide from a brief that is short enough to read and complete enough to trust." },
+  { id: "acc-load", group: "acceptance", field: null, ref: THESIS,
+    text: "Can we set a boundary below which changes are accepted by policy, so only consequential changes reach a person?",
+    why: "The number of decisions each person faces has to stay within what they can judge." },
+  { id: "acc-record", group: "acceptance", field: null, ref: THESIS,
+    text: "Does the tool record who accepted which change, on what evidence, and can we export that record?",
+    why: "A decision has to be reconstructable before anyone can answer for it." },
+  { id: "acc-stop", group: "acceptance", field: null, ref: THESIS,
+    text: "After acceptance, can a person halt, roll back or disable an AI-generated change, and is doing so safe by design?",
+    why: "Authority without a way to stop and reverse is not control." },
+  { id: "acc-feedback", group: "acceptance", field: null, ref: THESIS,
+    text: "Does the tool show a person how the changes they accepted behaved in production?",
+    why: "People keep their judgment accurate only when they see how past decisions turned out." },
 ];

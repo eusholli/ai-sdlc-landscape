@@ -28,4 +28,12 @@ describe("evaluation kit", () => {
     const kit = kitFor("cursor")!;
     for (const a of kit.answers) if (a.q.field === null) expect(a.value).toBeNull();
   });
+  it("links every acceptance question to the thesis", () => {
+    const acceptance = KIT.filter((q) => q.group === "acceptance");
+    expect(acceptance).toHaveLength(6);
+    for (const q of acceptance) {
+      expect(q.field).toBeNull();
+      expect(q.ref?.url).toContain("/ownership#");
+    }
+  });
 });

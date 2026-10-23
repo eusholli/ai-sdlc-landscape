@@ -117,6 +117,14 @@ export default function AboutPage() {
           </div>
         </Section>
 
+        <Section id="thesis" title="The thesis behind the map">
+          <p>
+            The map&apos;s data carries no one&apos;s view. The maintainer&apos;s own thesis on software ownership is
+            published separately at <Link href="/ownership" className={linkClass}>/ownership</Link>, and it changes no
+            record.
+          </p>
+        </Section>
+
         <Section id="corrections" title="Request a change">
           <p>
             Found something wrong, missing or out of date? Anyone, person or agent, can ask in plain words by opening

@@ -43,3 +43,18 @@ export function toolJsonLd(t: Tool) {
 
 /** JSON for a <script> tag: `<` escaped so a value can never close the tag. */
 export const jsonLdText = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
+
+export function paperJsonLd(p: { title: string; author: string; date: string; version: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    headline: p.title,
+    url: `${SITE_URL}/ownership`,
+    author: { "@type": "Person", name: p.author },
+    datePublished: p.date,
+    version: p.version,
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    isPartOf: { "@type": "WebSite", name: "AI SDLC Landscape", url: SITE_URL },
+  };
+}

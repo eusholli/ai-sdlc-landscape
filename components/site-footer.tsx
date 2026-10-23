@@ -22,6 +22,9 @@ export function SiteFooter() {
           <Link href="/about" className={linkClass}>
             About
           </Link>
+          <Link href="/ownership" className={linkClass}>
+            Thesis
+          </Link>
           <Link href="/changes" className={linkClass}>
             Changes
           </Link>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { marketMoves, phases, relationsLite, xrayTools } from "@/lib/data";
-import { buildXray } from "@/lib/xray";
+import { LENS, buildXray } from "@/lib/xray";
 
 const PICK = ["cursor", "coderabbit", "snyk", "datadog-bits", "linear"];
 const all = xrayTools();
@@ -41,5 +41,12 @@ describe("buildXray", () => {
   it("keeps gaps apart from covered phases", () => {
     const covered = new Set(report.coverage.filter((c) => c.tools.length > 0).map((c) => c.phase));
     for (const g of report.gaps) expect(covered.has(g)).toBe(false);
+  });
+});
+
+describe("LENS", () => {
+  it("maps every phase id", () => {
+    expect(Object.keys(LENS).sort()).toEqual([...phaseIds].sort());
+    expect(Object.keys(LENS)).toHaveLength(13);
   });
 });

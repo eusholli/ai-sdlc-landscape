@@ -17,7 +17,7 @@ export default function EvaluatePage() {
     <main id="main" className={`${SITE_CONTAINER} py-8`}>
       <h1 className="text-2xl font-semibold tracking-tight">Evaluate an AI SDLC tool</h1>
       <p className="mt-1 max-w-prose text-sm text-muted-foreground">
-        {KIT.length} questions to put to a vendor, in five groups. Each says why a buyer asks it. Open a tool&apos;s
+        {KIT.length} questions to put to a vendor, in six groups. Each says why a buyer asks it. Open a tool&apos;s
         questions to see which ones its vendor has answered in public, with the source, and which it has not.
       </p>
       <p className="mt-3 flex flex-wrap gap-x-4 text-sm">

@@ -9,7 +9,7 @@ import { ToolLink } from "@/components/tool/tool-actions";
 import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/site";
 import type { MarketMove, Phase, PhaseId, PricingBucket, RelationLite, XrayTool } from "@/lib/types";
-import { buildXray } from "@/lib/xray";
+import { LENS, LENS_ORDER, buildXray } from "@/lib/xray";
 import { useXray } from "./use-xray";
 
 const PRICING_LABELS: Record<PricingBucket | "unpublished", string> = {
@@ -197,6 +197,48 @@ export function XrayView({
             {report.isolated.length > 0 && (
               <p className="text-sm">No recorded link to another selected tool: {names(report.isolated)}.</p>
             )}
+          </Section>
+
+          <Section title="Read through the thesis">
+            <p className="text-sm text-muted-foreground">
+              The maintainer&apos;s{" "}
+              <Link href="/ownership" className="underline underline-offset-2">thesis</Link> groups the phases by what a
+              team has to own. This groups your picks the same way, by each tool&apos;s primary phase.
+            </p>
+            <ul className="divide-y rounded-lg border text-sm">
+              {LENS_ORDER.map((group) => {
+                const inGroup = sel.filter((t) => t.primaryPhase !== null && LENS[t.primaryPhase] === group);
+                return (
+                  <li key={group} className="flex flex-wrap gap-x-4 gap-y-1 px-3 py-2">
+                    <span className="w-44 shrink-0 text-muted-foreground">{group}</span>
+                    <span>{inGroup.length ? names(inGroup.map((t) => t.id)) : <span className="text-muted-foreground">No selected tool</span>}</span>
+                  </li>
+                );
+              })}
+              {sel.some((t) => t.primaryPhase === null) && (
+                <li className="flex flex-wrap gap-x-4 gap-y-1 px-3 py-2">
+                  <span className="w-44 shrink-0 text-muted-foreground">No primary phase recorded</span>
+                  <span>{names(sel.filter((t) => t.primaryPhase === null).map((t) => t.id))}</span>
+                </li>
+              )}
+            </ul>
+            <p className="text-sm">
+              No phase in this map covers admission, drift between changes in flight, or accountable acceptance. The
+              thesis sets out{" "}
+              <Link href="/ownership#9-accountable-acceptance" className="underline underline-offset-2">what acceptance has to require</Link>,
+              and the{" "}
+              <Link href="/evaluate" className="underline underline-offset-2">evaluation kit</Link> turns that into questions.
+            </p>
+            <details className="text-sm">
+              <summary className="cursor-pointer text-muted-foreground">How phases map to these groups</summary>
+              <ul className="mt-2 flex flex-col gap-1">
+                {LENS_ORDER.map((group) => (
+                  <li key={group}>
+                    {group}: {(Object.keys(LENS) as PhaseId[]).filter((id) => LENS[id] === group).map(labelOf).join(", ")}
+                  </li>
+                ))}
+              </ul>
+            </details>
           </Section>
 
           <Section title="Questions to ask">

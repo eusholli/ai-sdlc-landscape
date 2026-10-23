@@ -159,3 +159,23 @@
 [data-radix-popper-content-wrapper]:has(> [data-map-card]) {
   pointer-events: none;
 }
+
+/* The thesis paper: rendered Markdown, so type is set here rather than per element. */
+.paper { font-size: 16px; line-height: 1.7; }
+.paper > :first-child { margin-top: 0; }
+.paper h2 { margin: 2.5rem 0 0.75rem; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; scroll-margin-top: 5rem; }
+.paper h3 { margin: 1.75rem 0 0.5rem; font-size: 1.15rem; font-weight: 600; scroll-margin-top: 5rem; }
+.paper p, .paper ul, .paper ol, .paper table, .paper pre, .paper blockquote { margin: 0 0 1rem; }
+.paper ul { list-style: disc; padding-left: 1.5rem; }
+.paper ol { list-style: decimal; padding-left: 1.5rem; }
+.paper li { margin: 0.25rem 0; }
+.paper a { text-decoration: underline; text-underline-offset: 4px; }
+.paper blockquote { border-left: 3px solid var(--border); padding-left: 1rem; color: var(--muted-foreground); }
+.paper code { font-size: 0.9em; }
+.paper pre { overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; font-size: 0.85rem; }
+.paper table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 0.9rem; }
+.paper th, .paper td { border: 1px solid var(--border); padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+.paper th { background: var(--muted); font-weight: 600; }
+.paper .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+.paper .paper-mermaid-drawn { display: flex; justify-content: center; border: 0; padding: 0; overflow-x: auto; }
+.paper .paper-mermaid-drawn svg { max-width: 100%; height: auto; }
