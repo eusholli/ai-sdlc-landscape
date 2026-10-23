@@ -10,8 +10,8 @@ interface: [ide]
 summary: The first AI-native IDE that keeps developers in flow; now the base of Cognition's Devin Desktop.
 status: acquired
 relations:
-  - {type: acquired_by, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
-  - {type: ships_inside, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html, https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
+  - {type: acquired_by, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
+  - {type: ships_inside, to: cognition-devin, sources: [https://www.cnbc.com/2025/11/13/cursor-ai-startup-funding-round-valuation.html]}
 sources:
   - {field: summary, url: https://windsurf.com/pricing/(organization-plan-setup)/teams, retrieved: 2026-10-21}
   - {field: summary, url: https://cognition.ai/blog, retrieved: 2026-10-21}

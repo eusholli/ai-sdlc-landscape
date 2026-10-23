@@ -11,9 +11,9 @@ traction: 47% of suggestions get implemented (company claim)
 compliance: [SOC 2 Type 2]
 status: acquired
 relations:
-  - {type: acquired_by, to: boost-security, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/, https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
-  - {type: integrates_with, to: github, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/, https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
-  - {type: integrates_with, to: bitbucket, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/, https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
+  - {type: acquired_by, to: boost-security, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
+  - {type: integrates_with, to: github, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://siliconangle.com/2026/05/06/boost-security-acquires-secureiqx-korbit-adds-4m-new-funding/]}
 sources:
   - {field: summary, url: https://www.korbit.ai, retrieved: 2026-10-21}
   - {field: traction, url: https://www.korbit.ai, retrieved: 2026-10-21}

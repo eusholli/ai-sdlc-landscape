@@ -11,9 +11,9 @@ pricing_model: subscription
 entry_price: From $5/month
 models: [DeepSeek, GLM (unlimited)]
 relations:
-  - {type: integrates_with, to: claude-code, sources: [https://www.conifer.build/parallax, https://www.conifer.build/parallax]}
-  - {type: integrates_with, to: openai-codex, sources: [https://www.conifer.build/parallax, https://www.conifer.build/parallax]}
-  - {type: integrates_with, to: cursor, sources: [https://www.conifer.build/parallax, https://www.conifer.build/parallax]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.conifer.build/parallax]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.conifer.build/parallax]}
+  - {type: integrates_with, to: cursor, sources: [https://www.conifer.build/parallax]}
 sources:
   - {field: summary, url: https://www.conifer.build/parallax, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.conifer.build/parallax, retrieved: 2026-10-21}

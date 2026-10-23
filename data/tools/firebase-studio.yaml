@@ -12,8 +12,8 @@ pricing_model: free during preview
 models: [Gemini]
 status: preview
 relations:
-  - {type: ships_inside, to: google-co, sources: [https://firebase.studio, https://firebase.studio]}
-  - {type: built_on_model, to: google, sources: [https://firebase.studio, https://firebase.studio]}
+  - {type: ships_inside, to: google-co, sources: [https://firebase.studio]}
+  - {type: built_on_model, to: google, sources: [https://firebase.studio]}
 sources:
   - {field: summary, url: https://firebase.studio, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://firebase.studio, retrieved: 2026-10-21}

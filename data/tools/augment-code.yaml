@@ -13,7 +13,7 @@ entry_price: $20/month flat, up to 50 seats
 compliance: [SOC 2 Type II, ISO 42001, CMEK]
 status: acquired (select assets, by Harness, 2026-10-08)
 relations:
-  - {type: acquired_by, to: harness, sources: [https://www.harness.io/press-and-news/harness-acquires-augment-code, https://www.harness.io/press-and-news/harness-acquires-augment-code]}
+  - {type: acquired_by, to: harness, sources: [https://www.harness.io/press-and-news/harness-acquires-augment-code]}
 sources:
   - {field: summary, url: https://www.augmentcode.com, retrieved: 2026-09-04}
   - {field: pricing_model, url: https://www.augmentcode.com/pricing, retrieved: 2026-10-21}

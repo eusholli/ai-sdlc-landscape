@@ -15,14 +15,14 @@ compliance: [SOC 2 Type II]
 founded: 2023
 last_round: $30M, with GV and Thrive Capital (Sept 2025)
 relations:
-  - {type: integrates_with, to: claude-code, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: integrates_with, to: openai-codex, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: integrates_with, to: cursor, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: integrates_with, to: opencode, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: competes_with, to: augment-code, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: competes_with, to: qodo, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: competes_with, to: greptile, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
-  - {type: competes_with, to: coderabbit, sources: [https://macroscope.com/comparison/macroscope-vs-qodo, https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: integrates_with, to: claude-code, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: integrates_with, to: openai-codex, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: integrates_with, to: cursor, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: integrates_with, to: opencode, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: competes_with, to: augment-code, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: competes_with, to: qodo, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: competes_with, to: greptile, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
+  - {type: competes_with, to: coderabbit, sources: [https://macroscope.com/comparison/macroscope-vs-qodo]}
 sources:
   - {field: summary, url: https://macroscope.com, retrieved: 2026-10-21}
   - {field: traction, url: https://macroscope.com, retrieved: 2026-10-21}

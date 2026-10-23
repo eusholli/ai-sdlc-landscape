@@ -13,9 +13,9 @@ deployment: [saas, single-tenant, self-hosted]
 models: [bring your own model]
 funding_total: $125M (seed plus Series A)
 relations:
-  - {type: integrates_with, to: claude-code, sources: [https://tessl.io, https://tessl.io]}
-  - {type: integrates_with, to: cursor, sources: [https://tessl.io, https://tessl.io]}
-  - {type: integrates_with, to: github-copilot, sources: [https://tessl.io, https://tessl.io]}
+  - {type: integrates_with, to: claude-code, sources: [https://tessl.io]}
+  - {type: integrates_with, to: cursor, sources: [https://tessl.io]}
+  - {type: integrates_with, to: github-copilot, sources: [https://tessl.io]}
 sources:
   - {field: summary, url: https://tessl.io, retrieved: 2026-10-05}
   - {field: pricing_model, url: https://tessl.io/pricing, retrieved: 2026-10-05}

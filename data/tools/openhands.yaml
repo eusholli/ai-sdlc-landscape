@@ -15,9 +15,9 @@ open_source: true
 repo: https://github.com/OpenHands/OpenHands
 last_round: $18.8M
 relations:
-  - {type: integrates_with, to: claude-code, sources: [https://www.all-hands.dev, https://www.all-hands.dev]}
-  - {type: integrates_with, to: openai-codex, sources: [https://www.all-hands.dev, https://www.all-hands.dev]}
-  - {type: integrates_with, to: gemini-cli, sources: [https://www.all-hands.dev, https://www.all-hands.dev]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.all-hands.dev]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.all-hands.dev]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://www.all-hands.dev]}
 sources:
   - {field: summary, url: https://www.all-hands.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.all-hands.dev, retrieved: 2026-10-21}

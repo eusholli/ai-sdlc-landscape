@@ -13,7 +13,7 @@ pricing_model: subscription (credits)
 entry_price: Free; paid from $16/month
 status: acquired
 relations:
-  - {type: acquired_by, to: wix, sources: [https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267]}
+  - {type: acquired_by, to: wix, sources: [https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267]}
 sources:
   - {field: summary, url: https://base44.com/, retrieved: 2026-10-21}
   - {field: traction, url: https://base44.com/, retrieved: 2026-10-21}

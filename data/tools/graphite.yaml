@@ -11,9 +11,9 @@ founded: 2020
 last_round: $52M Series B, led by Accel, with Anthropic's Anthology Fund (Mar 2025)
 status: acquired
 relations:
-  - {type: acquired_by, to: cursor, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
-  - {type: integrates_with, to: github, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
-  - {type: integrates_with, to: vs-code, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+  - {type: acquired_by, to: cursor, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+  - {type: integrates_with, to: github, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
+  - {type: integrates_with, to: vs-code, sources: [https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal]}
 sources:
   - {field: summary, url: https://graphite.dev, retrieved: 2026-10-21}
   - {field: status, url: https://techcrunch.com/2025/12/19/cursor-continues-acquisition-spree-with-graphite-deal, retrieved: 2026-10-21}

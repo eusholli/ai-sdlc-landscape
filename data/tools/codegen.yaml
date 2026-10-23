@@ -10,7 +10,7 @@ founded: 2022
 funding_total: $16.2M (2023)
 status: acquired
 relations:
-  - {type: acquired_by, to: clickup, sources: [https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/]}
+  - {type: acquired_by, to: clickup, sources: [https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/]}
 sources:
   - {field: summary, url: https://codegen.com/, retrieved: 2026-10-21}
   - {field: summary, url: https://www.reworked.co/digital-workplace/clickup-acquires-codegen-to-power-project-management-work-management-super-agents/, retrieved: 2026-10-21}

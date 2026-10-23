@@ -15,15 +15,15 @@ models: [Claude, Codex, Gemini]
 compliance: [SOC 2 Type II, GDPR]
 founded: 2019
 relations:
-  - {type: integrates_with, to: github, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: integrates_with, to: gitlab, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: integrates_with, to: bitbucket, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: integrates_with, to: slack, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: integrates_with, to: jira, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: competes_with, to: lovable, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: competes_with, to: bolt, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: competes_with, to: replit, sources: [https://www.builder.io/, https://www.builder.io/]}
-  - {type: competes_with, to: figma-make, sources: [https://www.builder.io/, https://www.builder.io/]}
+  - {type: integrates_with, to: github, sources: [https://www.builder.io/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.builder.io/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.builder.io/]}
+  - {type: integrates_with, to: slack, sources: [https://www.builder.io/]}
+  - {type: integrates_with, to: jira, sources: [https://www.builder.io/]}
+  - {type: competes_with, to: lovable, sources: [https://www.builder.io/]}
+  - {type: competes_with, to: bolt, sources: [https://www.builder.io/]}
+  - {type: competes_with, to: replit, sources: [https://www.builder.io/]}
+  - {type: competes_with, to: figma-make, sources: [https://www.builder.io/]}
 sources:
   - {field: summary, url: https://www.builder.io/, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.builder.io/pricing, retrieved: 2026-10-21}
