@@ -31,7 +31,7 @@ function writeCollapsed(collapsed: boolean) {
 
 /**
  * The home page title and one-line description, with the map slotted below it. The intro can be
- * collapsed to the title alone. The "What's new" strip sits under it and shrinks with it. The
+ * collapsed to the title alone. The "What's new" strip sits above it and shrinks with it. The
  * measured height of both is published as `--intro-h` so the map views can subtract it and still
  * fit the viewport.
  */
@@ -65,6 +65,7 @@ export function HomeIntro({ children, whatsNew }: { children: React.ReactNode; w
   return (
     <div style={{ "--intro-h": height === null ? FALLBACK_HEIGHT : `${height}px` } as React.CSSProperties}>
       <div ref={introRef}>
+      <WhatsNewStrip items={whatsNew} collapsed={collapsed} />
       <section aria-labelledby="home-title" className="border-b bg-background">
         <div className={`${SITE_CONTAINER} flex items-start justify-between gap-4 py-2.5`}>
           <div className="min-w-0">
@@ -103,7 +104,6 @@ export function HomeIntro({ children, whatsNew }: { children: React.ReactNode; w
           </Button>
         </div>
       </section>
-      <WhatsNewStrip items={whatsNew} collapsed={collapsed} />
       </div>
       {children}
     </div>

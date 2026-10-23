@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { SITE_CONTAINER } from "@/components/site-name";
@@ -15,10 +18,12 @@ export interface WhatsNewItem {
 }
 
 /**
- * One compact row under the home intro: the latest entries from the changes timeline. It scrolls
- * sideways rather than wrapping. When the intro is collapsed it keeps only the newest entry.
+ * One compact row at the top of the home page: the latest entries from the changes timeline. It
+ * scrolls sideways rather than wrapping. When the intro is collapsed it keeps only the newest
+ * entry. The entries slide in once on load, newest first, and then stay still.
  */
 export function WhatsNewStrip({ items, collapsed }: { items: WhatsNewItem[]; collapsed: boolean }) {
+  const reduce = useReducedMotion();
   if (items.length === 0) return null;
   const shown = collapsed ? items.slice(0, 1) : items;
 
@@ -31,8 +36,18 @@ export function WhatsNewStrip({ items, collapsed }: { items: WhatsNewItem[]; col
           tabIndex={0}
           className="flex min-w-0 flex-1 items-center gap-5 overflow-x-auto rounded-sm p-0.5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          {shown.map((item) => (
-            <li key={item.key} className="flex shrink-0 items-center gap-1.5 text-xs">
+          {shown.map((item, index) => (
+            <motion.li
+              key={item.key}
+              className="flex shrink-0 items-center gap-1.5 text-xs"
+              initial={reduce ? { opacity: 0 } : { opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={
+                reduce
+                  ? { duration: 0.15 }
+                  : { type: "spring", stiffness: 260, damping: 26, delay: 0.15 + index * 0.12 }
+              }
+            >
               <time dateTime={item.date} className="font-mono whitespace-nowrap text-muted-foreground tabular-nums">
                 {item.dateLabel}
               </time>
@@ -40,7 +55,7 @@ export function WhatsNewStrip({ items, collapsed }: { items: WhatsNewItem[]; col
               <span title={item.text} className="max-w-[18rem] truncate">
                 {item.text}
               </span>
-            </li>
+            </motion.li>
           ))}
         </ul>
         <Link

@@ -6,14 +6,7 @@
       display: none;
     }
 
-    @media (prefers-color-scheme: dark) {
-      #light-icon {
-        display: none;
-      }
-      #dark-icon {
-        display: inline;
-      }
-    }
+    
   </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(4.464285714285714,0,0,4.464285714285714,0,2.232142857142833)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="224" height="223"><svg width="224" height="223" viewBox="0 0 224 223" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M125.007 125.677C106.635 144.28 80.6492 114.01 100.57 97.9649C118.503 83.5155 141.19 109.293 125.007 125.677Z" fill="black"></path>
 <path d="M97.8083 144.842C96.9298 161.026 91.4351 178.666 78.8121 189.485C63.4457 202.655 40.7813 198.009 30.6706 180.97C15.3581 155.169 40.2265 124.105 68.6089 130.316C78.8353 132.551 87.9596 141.321 97.8083 144.842Z" fill="black"></path>

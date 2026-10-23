@@ -21,7 +21,7 @@ const LINK = "rounded-sm underline underline-offset-4 outline-none focus-visible
 /** A date linked to the commit that made it, so the reader can see exactly what changed. */
 function CommitDate({ date, commit }: { date: string; commit: string }) {
   return (
-    <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={cn(LINK, "tabular-nums max-md:inline-flex max-md:min-h-11 max-md:items-center")}>
+    <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={cn(LINK, "tabular-nums max-md:py-3")}>
       {formatDate(date)}
     </a>
   );

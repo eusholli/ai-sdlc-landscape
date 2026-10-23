@@ -6,10 +6,11 @@
 // For each record it reads the vendor homepage, takes the largest declared apple-touch-icon or
 // icon link, falls back to /apple-touch-icon.png and /favicon.ico, and saves it. Only the vendor's
 // own site is used; no third-party logo service. A tool with no icon gets none, and the site draws
-// a monogram.
+// a monogram. An SVG loses any dark-mode rules (see svg.ts), since tiles stay white.
 import { mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { lightOnly } from "./svg";
 
 const OUT = "public/logos";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36";
@@ -70,7 +71,8 @@ async function fetchOne(t: { id: string; url: string }, force: boolean, acquired
     try { r = await get(u); } catch { continue; }
     const ctype = (r.headers.get("content-type") ?? "").split(";")[0].trim();
     const ext = TYPES[ctype] ?? (u.slice(-5).includes(".") ? u.split(".").at(-1)!.toLowerCase() : "");
-    const body = Buffer.from(await r.arrayBuffer());
+    const raw = Buffer.from(await r.arrayBuffer());
+    const body = ext === "svg" ? Buffer.from(lightOnly(raw.toString("utf8"))) : raw;
     if (r.status !== 200 || !EXTS.has(ext) || body.length < 100) continue;
     clear(t.id);
     writeFileSync(join(OUT, `${t.id}.${ext}`), body);

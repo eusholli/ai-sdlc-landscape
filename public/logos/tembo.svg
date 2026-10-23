@@ -8,15 +8,7 @@
       fill: #000000;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .bg {
-        fill: #000000;
-      }
-
-      .mark {
-        fill: #ffffff;
-      }
-    }
+    
   </style>
   <path class="bg" d="M0 0h1024v1024H0z" />
   <path class="mark" d="M247 247h530v176H600v178H424V423H247V247Z" />
