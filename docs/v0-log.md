@@ -108,3 +108,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_uVObE8mJs9b, demo https://demo-kzmq8szhl39f1s15ohuq.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..k0b1fw5O9tsuiKDp.57ue6hEMvVF_OiSxT6wwVwKezanYstxSNfkyY7fMXSm7vGw7gCMIEvWJUpE6Ftep9BopsxDfeT3wq1J-C7vlteOUDzFXH9Zf6If3HCBTM6EgUjN-gZXA5xtNm0OlE_XZb6R4bXxsMYIDDy6Bdr9YjkWeuk7GExh7B0pkMVS4L2gX_EbcXa1U8ooV4I5v7o-1zR-6q1ewXmwPBykQce7jaGYMlaksr0xnJSspJ38l1y_BZclfPgXGboKjJgbv_7kUiKHdoQldnLb-UMsWT0ByPLFiBHnd6mTQ.Px-xy00h2p9P16b_wYbsBA&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
 - credits before: 19.8615135 of 20, after: 19.2284989 of 20
 - files written: 15; fix rounds: 0; gate: passed
+
+## Step 13: Freshness and the monthly digest page
+
+- 2026-10-23T16:15:31.505Z
+- chat: https://v0.app/chat/ZOkxfWLRQje
+- version: b_LufnAuBqZtV, demo https://demo-kzmk19i12ui6hsf2289i.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..C54KwwnXfH7nm0us.l5lB4mnJAo0Fh4cUh3vea7YaiQec7VKBH_VVvjl0IBUQkg6p7qcK4_o0dQQReV7WGqjsdp9-_ki3gTL7JmcTE33ftgnmrA3VRUq9Sc2Zjuv4zHfVqUX7yAC3WyTAc8BGceBw1gln5Hhs2smICPRIhqjtBrVmzjEOtbU-fixoJJV_Bxr3Xr1LK7AUS8vfzp0m2O4haJMH8UEHaH9BNnss0H9X7W36ZLC0KF3uZBPESLVZy9sFNoWLfxVScdUa9FgZYNQocQEbOFDrmYr1_sU-xkpiqJsL44aI.ulGqkt1R-NtQO74fvI14fA&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
+- credits before: 19.2284989 of 20, after: 18.083529 of 20
+- files written: 12; fix rounds: 0; gate: passed

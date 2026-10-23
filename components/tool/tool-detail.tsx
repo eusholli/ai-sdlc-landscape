@@ -2,10 +2,11 @@ import { ArrowRightLeft, ArrowUpRight, Ban, ExternalLink, Info } from "lucide-re
 import Link from "next/link";
 import { NewBadge } from "@/components/new-badge";
 import { Button } from "@/components/ui/button";
-import { formatDate, hostOf } from "@/lib/format";
+import { formatDate, hostOf, notPublished } from "@/lib/format";
 import { REPO_URL, requestUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { FactsGrid } from "./facts-grid";
+import { FreshnessChip } from "./freshness-chip";
 import { groupSources } from "./facts";
 import { PhaseCoverage } from "./phase-coverage";
 import { RelationGroups } from "./relation-groups";
@@ -130,8 +131,19 @@ export function ToolDetail({
 
       <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 text-sm">
         <div className="space-y-1 text-muted-foreground">
-          <p>
-            Last verified <span className="tabular-nums">{formatDate(tool.lastVerified)}</span>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <span>
+              Last verified <span className="tabular-nums">{formatDate(tool.lastVerified)}</span>
+            </span>
+            {tool.freshness ? (
+              <FreshnessChip
+                band={tool.freshness.band}
+                checked={tool.freshness.checked}
+                description={refs.freshnessLabels[tool.freshness.band]}
+              />
+            ) : (
+              <span>Sources checked: {notPublished(null)}</span>
+            )}
           </p>
           {tool.history && (
             <p>

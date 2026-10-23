@@ -1,4 +1,4 @@
-import type { Change, Phase, Relation, RelationType, Tool } from "@/lib/types";
+import type { Change, FreshnessBand, Phase, Relation, RelationType, Tool } from "@/lib/types";
 
 export type ToolRelation = Relation & { other: string; otherName: string; direction: "out" | "in" };
 
@@ -19,6 +19,8 @@ export interface ToolDetailData {
 export interface ToolDetailRefs {
   phases: Phase[];
   relationLabels: Record<RelationType, { out: string; in: string }>;
+  /** What each freshness band means, for the chip's tooltip. */
+  freshnessLabels: Record<FreshnessBand, string>;
   /** Ids that have their own page or drawer. Any other relation endpoint is an external. */
   toolIds: string[];
 }

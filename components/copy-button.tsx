@@ -4,7 +4,8 @@ import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export function CopyButton({ text, label }: { text: string; label: string }) {
+/** `buttonLabel` replaces the default "Copy" text when the button needs a fuller visible name. */
+export function CopyButton({ text, label, buttonLabel }: { text: string; label: string; buttonLabel?: string }) {
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -25,8 +26,8 @@ export function CopyButton({ text, label }: { text: string; label: string }) {
     <>
       <Button type="button" variant="outline" size="sm" onClick={copy}>
         {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
-        {copied ? "Copied" : "Copy"}
-        <span className="sr-only"> {label}</span>
+        {copied ? "Copied" : (buttonLabel ?? "Copy")}
+        {!buttonLabel && <span className="sr-only"> {label}</span>}
       </Button>
       <span role="status" className="sr-only">
         {copied ? "Copied to clipboard" : ""}

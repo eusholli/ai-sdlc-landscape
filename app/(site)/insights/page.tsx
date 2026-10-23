@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { FreshnessBar } from "@/components/freshness-bar";
 import { CoverageHeatmap } from "@/components/insights/coverage-heatmap";
+import { Logo } from "@/components/logo";
 import { SITE_CONTAINER } from "@/components/site-name";
-import { coverageMatrix, fieldCompleteness, layers, phases, segments, toolsByPhase } from "@/lib/data";
-import { phaseColor } from "@/lib/format";
+import { ToolLink } from "@/components/tool/tool-actions";
+import {
+  buildDate,
+  coverageMatrix,
+  fieldCompleteness,
+  freshnessSummary,
+  layers,
+  leastRecentlyChecked,
+  phases,
+  segments,
+  toolsByPhase,
+} from "@/lib/data";
+import { formatDate, phaseColor } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -64,6 +78,7 @@ export default function InsightsPage() {
   const least = crowded[crowded.length - 1];
 
   const completeness = fieldCompleteness();
+  const stalest = leastRecentlyChecked(10);
 
   return (
     <main id="main" className={`${SITE_CONTAINER} py-10`}>
@@ -124,6 +139,46 @@ export default function InsightsPage() {
               />
             ))}
           </ul>
+        </Section>
+
+        <Section
+          id="freshness-heading"
+          title="How fresh the data is"
+          intro={`Measured when the site was built, as of ${formatDate(buildDate())}. It shows how recently we checked each record's sources. It says nothing about the tools.`}
+        >
+          <FreshnessBar summary={freshnessSummary()} />
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-medium">Checked least recently</h3>
+            <ol className="flex flex-col divide-y rounded-lg border">
+              {stalest.map((tool) => (
+                <li key={tool.id} className="flex items-center gap-3 px-3 py-2.5">
+                  <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={28} />
+                  <ToolLink
+                    id={tool.id}
+                    className="min-w-0 flex-1 truncate rounded-sm text-sm font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                  >
+                    {tool.name}
+                  </ToolLink>
+                  <time
+                    dateTime={tool.freshness!.checked}
+                    className="font-mono text-xs whitespace-nowrap text-muted-foreground tabular-nums"
+                  >
+                    {formatDate(tool.freshness!.checked)}
+                  </time>
+                </li>
+              ))}
+            </ol>
+            <p className="text-sm text-muted-foreground">
+              Know a newer source for one of these?{" "}
+              <Link
+                href="/contribute"
+                className="rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+              >
+                Request a change
+              </Link>
+              .
+            </p>
+          </div>
         </Section>
       </div>
     </main>
