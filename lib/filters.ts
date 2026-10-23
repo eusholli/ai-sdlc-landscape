@@ -81,6 +81,7 @@ export const filterParsers = {
   buyer: parseAsArrayOf(parseAsString).withDefault([]),
   oss: parseAsBoolean.withDefault(false),
   moved: parseAsBoolean.withDefault(false), // only acquired or shut down
+  recent: parseAsBoolean.withDefault(false), // only tools added in the last 30 days
   layers: parseAsBoolean.withDefault(true), // show agent-infra and model bands
   view: parseAsStringLiteral(VIEWS).withDefault("map"),
   tool: parseAsString, // open drawer
@@ -99,6 +100,7 @@ export interface Filters {
   buyer: string[];
   oss: boolean;
   moved: boolean;
+  recent: boolean;
 }
 
 /** The value a facet reads from a tool. null means "Not published", which is its own bucket. */
@@ -133,6 +135,7 @@ function matchesFacets(t: ToolLite, f: Filters, skip?: FacetKey): boolean {
   }
   if (f.oss && !t.openSource) return false;
   if (f.moved && !t.moved) return false;
+  if (f.recent && !t.isNew) return false;
   return true;
 }
 
@@ -157,7 +160,7 @@ export function facetCounts(tools: ToolLite[], f: Filters, key: FacetKey): { val
 }
 
 export const isFiltered = (f: Filters): boolean =>
-  !!f.q || f.oss || f.moved ||
+  !!f.q || f.oss || f.moved || f.recent ||
   (["phase", "segment", "kind", "pricing", "deploy", "autonomy", "iface", "buyer"] as const).some((k) => f[k].length > 0);
 
 // ---------- Search ----------

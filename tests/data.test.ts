@@ -9,7 +9,7 @@ import { applyFilters, deploymentBuckets, pricingBucket, searchLite, type Filter
 
 const empty: Filters = {
   q: "", phase: [], segment: [], kind: [], pricing: [], deploy: [], autonomy: [], iface: [], buyer: [],
-  oss: false, moved: false,
+  oss: false, moved: false, recent: false,
 };
 
 describe("data contract", () => {
@@ -106,6 +106,12 @@ describe("filters and search", () => {
     const oss = applyFilters(lite, { ...empty, oss: true });
     expect(oss.length).toBeGreaterThan(0);
     expect(oss.length).toBe(lite.filter((t) => t.openSource).length);
+  });
+
+  it("keeps only new tools when asked", () => {
+    const fixture = (id: string, isNew: boolean) => ({ ...lite[0], id, isNew });
+    const picked = applyFilters([fixture("old", false), fixture("new", true)], { ...empty, recent: true });
+    expect(picked.map((t) => t.id)).toEqual(["new"]);
   });
 
   it("finds a tool by a customer name", () => {

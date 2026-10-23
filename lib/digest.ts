@@ -37,8 +37,14 @@ const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "Ju
 
 export const monthTitle = (month: string) => `${MONTH_NAMES[Number(month.slice(5, 7)) - 1]} ${month.slice(0, 4)}`;
 
-/** Every month with at least one entry on the timeline, newest first. */
-export const digestMonths = (): string[] => [...new Set(timeline().map((e) => e.date.slice(0, 7)))];
+/**
+ * Every month with at least one entry on the timeline, newest first, from the launch on. Moves
+ * from before the launch are on the timeline, but the landscape had no month of its own then.
+ */
+export const digestMonths = (): string[] => {
+  const start = (launch() ?? changes().at(-1))?.date.slice(0, 7) ?? "";
+  return [...new Set(timeline().map((e) => e.date.slice(0, 7)))].filter((m) => m >= start);
+};
 
 export function digest(month: string): Digest {
   const inMonth = (d: string) => d.startsWith(month);
@@ -118,7 +124,7 @@ export function digestPost(d: Digest): string {
     "",
     ...digestFacts(d).map((f) => `- ${f}`),
     "",
-    `${fresh} of ${total} records had every source checked in the last 30 days.`,
+    `As of ${buildDate()}, ${fresh} of ${total} records had every source checked in the last 30 days.`,
     "",
     `The full list, with sources: ${SITE_URL}/changes/${d.month}`,
     "",

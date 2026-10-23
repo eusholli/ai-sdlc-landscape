@@ -75,8 +75,9 @@ describe("badge", () => {
 });
 
 describe("digest", () => {
-  it("covers every month on the timeline", () => {
-    const months = new Set(timeline().map((e) => e.date.slice(0, 7)));
+  it("covers every month on the timeline from the first change on", () => {
+    const first = changes().at(-1)?.date.slice(0, 7) ?? "";
+    const months = new Set(timeline().map((e) => e.date.slice(0, 7)).filter((m) => m >= first));
     expect(new Set(digestMonths())).toEqual(months);
   });
 

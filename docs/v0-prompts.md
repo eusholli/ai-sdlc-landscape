@@ -275,8 +275,8 @@ The site now records every change to its data. This step gives that a page.
   - `<h1>` "What changed", then one line: "Every change to the data, from the public git
     history, and the market moves the data records. Newest first." Next to it, a small "Feed" link
     with an RSS icon to `/changes.xml`.
-  - Entries grouped under month headings ("October 2026"). Each month heading links to
-    `/changes/<YYYY-MM>` (the digest page, added in step 13; link it now).
+  - Entries grouped under month headings ("October 2026"). The headings are plain text for now;
+    step 13 links them to the month's digest page.
   - A `kind: "changes"` entry: the date, then `text`. When it touched one tool, show the tool's
     `<Logo>` and make the text open the drawer for it (the same way map tiles open it). When it
     touched several, show up to five logos in a small overlapping row and a "Show all" disclosure
@@ -318,9 +318,11 @@ Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particu
   card zoom levels (a dot at the overview level is too much; skip it there), on its row in the
   mobile list, and next to its name in the drawer header. Use the accent or primary token, not a
   stage colour.
-- **Filter.** Add a "New" toggle to the filter chrome next to the existing open-source and moved
-  toggles, if it can be done in a client component from `ToolLite.isNew` without changing
-  `lib/filters.ts`. If it cannot, skip it and say so.
+- **Filter.** `filterParsers` in `lib/filters.ts` now has `recent` (a boolean), and `applyFilters`
+  keeps only tools with `isNew` when it is set. In `components/filters/filter-bar.tsx`, add a "New"
+  toggle next to the "Acquired or shut down" one, built the same way (URL state through
+  `patchUrl`, a removable chip "Added in the last 30 days"). Hide the toggle when no tool in the
+  props is new.
 
 Rules: server components read `@/lib/data` (and `@/lib/digest`); client components never import
 `@/lib/data`, `@/lib/digest` or `data/landscape.json`, and get what they need as props. Do not edit
@@ -333,9 +335,14 @@ changes or relations there are. No em dashes in any UI text. Check both themes a
 
 Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particular.
 
+Freshness is measured when the site is built, so every freshness label says so: "as of
+<buildDate()>" from `@/lib/data` (pass it as a prop to client components), or the date in the
+tool's own `checked`. Never write "today" or "this week".
+
 - **Freshness on a tool.** In `components/tool/tool-detail.tsx`, next to "Last verified", show a
   small chip: an icon and the band's word ("Fresh", "Aging", "Stale"), then "sources checked since
-  <date>" from `tool.freshness.checked`. Its tooltip is `FRESHNESS_LABELS[band]` and one line:
+  <date>" from `tool.freshness.checked`. The drawer has no build date; the chip there reads from
+  `checked` only. Its tooltip is `FRESHNESS_LABELS[band]` and one line:
   "How recently we checked this record's sources. It says nothing about the tool." When
   `tool.freshness` is null, show `notPublished()`. Neutral tokens, never stage colours.
 - **Freshness on /insights.** A new section "How fresh the data is": `freshnessSummary()` as a
@@ -343,6 +350,8 @@ Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particu
   recently (`leastRecentlyChecked(10)`), each with its logo, name (opening the drawer) and checked
   date, and a line: "Know a newer source for one of these? Request a change." linking to
   `/contribute`.
+- **Month links.** On `/changes`, each month heading now links to `/changes/<YYYY-MM>` when that
+  month is in `digestMonths()`; earlier months stay plain text.
 - **The digest page**, `app/(site)/changes/[month]/page.tsx`, a server component.
   `generateStaticParams` from `digestMonths()`; a month not in the list is a 404.
   - `<h1>` "The landscape in <d.title>", then `digestFacts(d)` as a list of large, plain
@@ -350,7 +359,8 @@ Read `docs/design-brief.md` first, "Changes, freshness and the badge" in particu
   - Sections, each only when it has content: "Tools added" (logo grid, each opening the drawer),
     "Facts published for the first time" (tool and fields), "Where tools were added" (`d.phases`
     as bars in stage colour), "Market moves", "Thanks" (contributors with issue links),
-    "Freshness" (the stacked bar from /insights), and "Every change" (the month's entries, as on
+    "Freshness" (only on the newest month's page, the stacked bar from /insights, headed "As of
+    <buildDate()>"), and "Every change" (the month's entries, as on
     /changes).
   - Previous and next month links. A "Copy summary" button that copies `digestFacts(d)` as plain
     lines plus the page URL (reuse `components/copy-button.tsx`).

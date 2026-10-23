@@ -20,7 +20,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync
 import { dirname, join } from "node:path";
 import { config } from "dotenv";
 import { createClient } from "v0-sdk";
-import { guard, isLocked } from "./guard";
+import { guard, isLocked, LOCKED } from "./guard";
 
 config({ path: ".env.local", override: false });
 
@@ -54,7 +54,7 @@ function loadSteps(): Step[] {
 const SYSTEM = [
   "You are building a public, neutral Next.js 15 App Router site with Tailwind v4 and shadcn/ui.",
   "docs/design-brief.md is the design contract. Follow it.",
-  "Locked files are the data layer: never edit or recreate data/, lib/data.ts, lib/types.ts, lib/filters.ts, lib/format.ts, components/logo.tsx, lib/site.ts, lib/request-advice.ts, lib/llms.ts, lib/jsonld.ts, app/llms.txt/, app/llms-full.txt/ or app/schema/.",
+  `Locked files are the data layer: never edit or recreate ${LOCKED.filter((p) => !/^(scripts|tests|docs)\//.test(p)).join(", ")}.`,
   "Client components never import @/lib/data or data/landscape.json; they receive lite data as props.",
   "Use pnpm. Do not remove dependencies. Write no em dashes in UI text.",
 ].join(" ");
