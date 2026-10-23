@@ -1,6 +1,6 @@
 // One static JSON file per tool at /data/tools/<id>.json, generated at build time. The drawer
 // fetches this so client bundles never carry the full dataset.
-import { allTools, changesFor, relationsFor, toolById } from "@/lib/data";
+import { allTools, changesFor, isNew, relationsFor, toolById } from "@/lib/data";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -13,5 +13,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const tool = toolById(id.replace(/\.json$/, ""));
   if (!tool) return new Response("Not found", { status: 404 });
-  return Response.json({ tool, relations: relationsFor(tool.id), changes: changesFor(tool.id) });
+  return Response.json({ tool, relations: relationsFor(tool.id), changes: changesFor(tool.id),
+    isNew: isNew(tool.id),
+  });
 }

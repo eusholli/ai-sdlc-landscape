@@ -100,3 +100,11 @@ One entry per step, written by `scripts/v0-run.ts`.
 - version: b_dV3Uqwq6SwN, demo https://demo-kzmnnu85ccslu6xih1e6.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..PFZr9XR68MYiXFsG.rYthqNY7oVbEpi3Dk69jNsbGah_ZsfNFZhvJru3lSPb4yr2ZdOwLu9wm2nHUw6ef6OTe0vPs-2oZKZj0tOFHDu50iq4XRkwIY1jXAtU4_BlMDs7DigYjsqDN51t6czTU9X5FPNQQ11aV_RPTn0nDD-2VencAMtE0RaXhDxkLONLxTAXgmrROpiYFG4xEDYyuoE1-iwzZX8QJhtlPJ8uO8DwtArpP_TrUy4JoRVkf4Q9efvChN_cQFx6oodXX6krcQbm_gne_r9jMWeKn2aoGpKK7nqZcg8Bj.u1Kb9zO_276yxQiclrjYYA&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
 - credits before: 21.3151501 of 20, after: 19.8615135 of 20
 - files written: 10; fix rounds: 0; gate: passed
+
+## Step 12: What's new on the home page, and New badges
+
+- 2026-10-23T16:06:49.054Z
+- chat: https://v0.app/chat/ZOkxfWLRQje
+- version: b_uVObE8mJs9b, demo https://demo-kzmq8szhl39f1s15ohuq.vusercontent.net?__v0_token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..k0b1fw5O9tsuiKDp.57ue6hEMvVF_OiSxT6wwVwKezanYstxSNfkyY7fMXSm7vGw7gCMIEvWJUpE6Ftep9BopsxDfeT3wq1J-C7vlteOUDzFXH9Zf6If3HCBTM6EgUjN-gZXA5xtNm0OlE_XZb6R4bXxsMYIDDy6Bdr9YjkWeuk7GExh7B0pkMVS4L2gX_EbcXa1U8ooV4I5v7o-1zR-6q1ewXmwPBykQce7jaGYMlaksr0xnJSspJ38l1y_BZclfPgXGboKjJgbv_7kUiKHdoQldnLb-UMsWT0ByPLFiBHnd6mTQ.Px-xy00h2p9P16b_wYbsBA&__v0_vercel_project_id=prj_ixl9zEhV1j53SCYrASiQqPUTdobs
+- credits before: 19.8615135 of 20, after: 19.2284989 of 20
+- files written: 15; fix rounds: 0; gate: passed

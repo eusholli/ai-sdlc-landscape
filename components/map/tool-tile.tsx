@@ -4,6 +4,7 @@ import { ArrowRightLeft, Code2 } from "lucide-react";
 import { motion } from "motion/react";
 import { memo, type ComponentType } from "react";
 import { Logo } from "@/components/logo";
+import { NewBadge } from "@/components/new-badge";
 import { cn } from "@/lib/utils";
 import type { ToolLite } from "@/lib/types";
 import { TileHover, useTileBehaviour } from "./map-interaction";
@@ -15,6 +16,8 @@ export interface TileProps {
   dimmed: boolean;
   selected: boolean;
   onSelect: (id: string) => void;
+  /** False at the overview level, where a pill on every logo is too much. */
+  showNew?: boolean;
 }
 
 /** The logo carries `layoutId`, so it travels between the logo grid and the card at a level change. */
@@ -26,7 +29,7 @@ function TileLogo({ tool, size, layoutId }: { tool: ToolLite; size: number; layo
   );
 }
 
-function LogoTile({ tool, dimmed, selected, onSelect }: TileProps) {
+function LogoTile({ tool, dimmed, selected, onSelect, showNew = true }: TileProps) {
   const { fade, handlers, layoutId } = useTileBehaviour(tool, dimmed);
   return (
     <div className={cn("group relative w-full transition-opacity duration-150", fade)}>
@@ -44,6 +47,7 @@ function LogoTile({ tool, dimmed, selected, onSelect }: TileProps) {
         >
           <TileLogo tool={tool} size={40} layoutId={layoutId} />
           <span className="line-clamp-2 w-full text-[11px] leading-tight font-medium break-words">{tool.name}</span>
+          {showNew && tool.isNew && <NewBadge className="absolute top-0.5 left-0.5" />}
           {tool.moved && (
             <>
               <ArrowRightLeft className="absolute top-1 right-1 size-3 text-muted-foreground" aria-hidden />
@@ -83,8 +87,9 @@ function CardTile({ tool, dimmed, selected, onSelect }: TileProps) {
           <span className="line-clamp-2 text-[10px] leading-snug text-muted-foreground">
             {tool.summary ? `“${tool.summary}”` : "Not published"}
           </span>
-          {(tool.openSource || tool.moved) && (
+          {(tool.openSource || tool.moved || tool.isNew) && (
             <span className="flex flex-wrap gap-1">
+              {tool.isNew && <NewBadge />}
               {tool.openSource && (
                 <span className="inline-flex items-center gap-1 rounded border px-1 text-[9px] leading-4">
                   <Code2 className="size-2.5" aria-hidden />
@@ -118,5 +123,5 @@ const RENDERERS: Record<ZoomLevel, ComponentType<TileProps>> = {
 
 export const ToolTile = memo(function ToolTile({ level, ...props }: TileProps & { level: ZoomLevel }) {
   const Renderer = RENDERERS[level];
-  return <Renderer {...props} />;
+  return <Renderer {...props} showNew={level !== "overview"} />;
 });

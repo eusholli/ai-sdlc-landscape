@@ -1,5 +1,6 @@
 import { ArrowRightLeft, ArrowUpRight, Ban, ExternalLink, Info } from "lucide-react";
 import Link from "next/link";
+import { NewBadge } from "@/components/new-badge";
 import { Button } from "@/components/ui/button";
 import { formatDate, hostOf } from "@/lib/format";
 import { REPO_URL, requestUrl } from "@/lib/site";
@@ -62,7 +63,10 @@ export function ToolDetail({
         <div className="flex items-start gap-4">
           <ToolLogo id={tool.id} name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={56} />
           <div className="min-w-0 flex-1">
-            <Title className="text-xl font-semibold tracking-tight break-words">{tool.name}</Title>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <Title className="text-xl font-semibold tracking-tight break-words">{tool.name}</Title>
+              {data.isNew && <NewBadge className="text-[10px]" />}
+            </div>
             <p className="text-sm text-muted-foreground">{tool.company}</p>
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
               <a

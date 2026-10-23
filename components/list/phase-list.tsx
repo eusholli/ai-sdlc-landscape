@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FilterSheet } from "@/components/list/filter-sheet";
 import { buildGroups } from "@/components/list/groups";
 import { Logo } from "@/components/logo";
+import { NewBadge } from "@/components/new-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CLEAR_ALL_FILTERS } from "@/components/filters/facets";
@@ -108,7 +109,10 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
                     >
                       <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={36} />
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-medium">{tool.name}</span>
+                        <span className="flex items-center gap-2">
+                          <span className="min-w-0 truncate text-sm font-medium">{tool.name}</span>
+                          {tool.isNew && <NewBadge className="shrink-0" />}
+                        </span>
                         <span className="block truncate text-xs text-muted-foreground">
                           {tool.company}
                           {tool.moved && " \u00B7 Acquired or shut down"}

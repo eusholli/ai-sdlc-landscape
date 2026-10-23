@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
+import { WhatsNewStrip, type WhatsNewItem } from "@/components/whats-new-strip";
 import { REPO_URL } from "@/lib/site";
 
 const STORAGE_KEY = "ai-sdlc-landscape:intro-collapsed";
@@ -30,13 +31,14 @@ function writeCollapsed(collapsed: boolean) {
 
 /**
  * The home page title and one-line description, with the map slotted below it. The intro can be
- * collapsed to the title alone. Its measured height is published as `--intro-h` so the map views
- * can subtract it and still fit the viewport.
+ * collapsed to the title alone. The "What's new" strip sits under it and shrinks with it. The
+ * measured height of both is published as `--intro-h` so the map views can subtract it and still
+ * fit the viewport.
  */
-export function HomeIntro({ children }: { children: React.ReactNode }) {
+export function HomeIntro({ children, whatsNew }: { children: React.ReactNode; whatsNew: WhatsNewItem[] }) {
   const [collapsed, setCollapsed] = useState(false);
   const [height, setHeight] = useState<number | null>(null);
-  const introRef = useRef<HTMLElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCollapsed(readCollapsed());
@@ -62,7 +64,8 @@ export function HomeIntro({ children }: { children: React.ReactNode }) {
 
   return (
     <div style={{ "--intro-h": height === null ? FALLBACK_HEIGHT : `${height}px` } as React.CSSProperties}>
-      <section ref={introRef} aria-labelledby="home-title" className="border-b bg-background">
+      <div ref={introRef}>
+      <section aria-labelledby="home-title" className="border-b bg-background">
         <div className={`${SITE_CONTAINER} flex items-start justify-between gap-4 py-2.5`}>
           <div className="min-w-0">
             <h1 id="home-title" className="text-lg leading-7 font-semibold tracking-tight">
@@ -99,6 +102,8 @@ export function HomeIntro({ children }: { children: React.ReactNode }) {
           </Button>
         </div>
       </section>
+      <WhatsNewStrip items={whatsNew} collapsed={collapsed} />
+      </div>
       {children}
     </div>
   );

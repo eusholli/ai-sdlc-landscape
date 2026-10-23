@@ -65,8 +65,12 @@ export function FilterSheet({ tools, phases, segments }: FilterSheetProps) {
   );
 
   const shown = useMemo(() => applyFilters(tools, state).length, [tools, state]);
+  const anyNew = useMemo(() => tools.some((t) => t.isNew), [tools]);
   const activeCount =
-    facets.reduce((sum, def) => sum + state[def.key].length, 0) + (state.oss ? 1 : 0) + (state.moved ? 1 : 0);
+    facets.reduce((sum, def) => sum + state[def.key].length, 0) +
+    (state.oss ? 1 : 0) +
+    (state.moved ? 1 : 0) +
+    (state.recent ? 1 : 0);
 
   function patch(values: Record<string, string[] | boolean | null>) {
     void setState(values as never, { history: "replace" });
@@ -129,6 +133,13 @@ export function FilterSheet({ tools, phases, segments }: FilterSheetProps) {
               checked={state.moved}
               onCheckedChange={(on) => patch({ moved: on ? true : null })}
             />
+            {(anyNew || state.recent) && (
+              <CheckRow
+                label="Added in the last 30 days"
+                checked={state.recent}
+                onCheckedChange={(on) => patch({ recent: on ? true : null })}
+              />
+            )}
           </fieldset>
         </div>
 

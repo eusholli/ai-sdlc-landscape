@@ -80,4 +80,5 @@ export const CLEAR_ALL_FILTERS = {
   buyer: null,
   oss: null,
   moved: null,
+  recent: null,
 } as const;

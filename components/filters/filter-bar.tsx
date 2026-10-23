@@ -62,6 +62,7 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
   // Counts cover the census tools; the model providers are context, not part of the count.
   const census = useMemo(() => tools.filter((t) => t.layer !== "model"), [tools]);
   const shown = useMemo(() => applyFilters(census, state).length, [census, state]);
+  const anyNew = useMemo(() => tools.some((t) => t.isNew), [tools]);
 
   function patchUrl(values: Record<string, string[] | boolean | null>) {
     void setState(values as never, { history: "replace" });
@@ -90,6 +91,9 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
   if (state.oss) chips.push({ id: "oss", label: "Open source only", remove: () => patchUrl({ oss: null }) });
   if (state.moved) {
     chips.push({ id: "moved", label: "Acquired or shut down", remove: () => patchUrl({ moved: null }) });
+  }
+  if (state.recent) {
+    chips.push({ id: "recent", label: "Added in the last 30 days", remove: () => patchUrl({ recent: null }) });
   }
 
   return (
@@ -129,6 +133,17 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
               {state.moved && <Check aria-hidden />}
               Acquired or shut down
             </Button>
+            {(anyNew || state.recent) && (
+              <Button
+                variant={state.recent ? "default" : "outline"}
+                size="sm"
+                aria-pressed={state.recent}
+                onClick={() => patchUrl({ recent: state.recent ? null : true })}
+              >
+                {state.recent && <Check aria-hidden />}
+                New
+              </Button>
+            )}
           </div>
           <p aria-live="polite" className="shrink-0 text-xs whitespace-nowrap text-muted-foreground">
             Showing <span className="font-mono tabular-nums">{shown}</span> of{" "}

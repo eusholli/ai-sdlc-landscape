@@ -8,6 +8,8 @@ export interface ToolDetailData {
   relations: ToolRelation[];
   /** This tool's changes, newest first. */
   changes: Change[];
+  /** True when the tool was added in the last 30 days. Absent in older cached responses. */
+  isNew?: boolean;
 }
 
 /**

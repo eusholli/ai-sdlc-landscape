@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { SlidersHorizontal } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { NewBadge } from "@/components/new-badge";
 import { buildGroups } from "@/components/list/groups";
 import type { PhaseListProps } from "@/components/list/phase-list";
 
@@ -47,7 +48,10 @@ export function PhaseListStatic({ tools, phases, layers, fullLifecycleIds }: Pha
                   <Link href={`/tools/${tool.id}`} className="flex min-h-14 w-full items-center gap-3 px-4 py-2">
                     <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={36} />
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium">{tool.name}</span>
+                      <span className="flex items-center gap-2">
+                        <span className="min-w-0 truncate text-sm font-medium">{tool.name}</span>
+                        {tool.isNew && <NewBadge className="shrink-0" />}
+                      </span>
                       <span className="block truncate text-xs text-muted-foreground">
                         {tool.company}
                         {tool.moved && " · Acquired or shut down"}
