@@ -21,3 +21,6 @@ export const requestUrl = (subject?: string) =>
 
 export const DATA_LICENCE = "CC-BY-4.0";
 export const DATA_LICENCE_URL = "https://creativecommons.org/licenses/by/4.0/";
+
+/** The thesis as a PDF, in public/. The name carries no version, so links outlive each new draft. */
+export const PAPER_PDF_PATH = "/software-ownership.pdf";

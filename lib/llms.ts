@@ -5,7 +5,7 @@ import "server-only";
 import { allTools, dataDate, getLandscape, nameOf, phases, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
 import { notPublished } from "@/lib/format";
 import { requestAdviceMarkdown } from "@/lib/request-advice";
-import { DATA_LICENCE, DATA_LICENCE_URL, REPO, REPO_URL, REQUEST_URL, SITE_URL } from "@/lib/site";
+import { DATA_LICENCE, DATA_LICENCE_URL, PAPER_PDF_PATH, REPO, REPO_URL, REQUEST_URL, SITE_URL } from "@/lib/site";
 import type { Tool } from "@/lib/types";
 
 const ABOUT =
@@ -69,7 +69,7 @@ export function llmsTxt(): string {
     `- [Market moves](${SITE_URL}/moves): acquisitions and shutdowns`,
     `- [Stack X-ray](${SITE_URL}/x-ray): pick the tools a team runs, see phase coverage, overlaps, model dependence, ownership changes and pricing mix`,
     `- [Evaluate an AI SDLC tool](${SITE_URL}/evaluate): the questions to put to a vendor on data, continuity, pricing, integration and security; \`/evaluate/<id>\` shows what one tool's vendor has published, and \`/evaluate.md\` and \`/evaluate.csv\` download the list`,
-    `- [Software ownership: the thesis](${SITE_URL}/ownership): the maintainer's paper on convergence, flow and accountability in agentic development, separate from the records`,
+    `- [Software ownership: the thesis](${SITE_URL}/ownership): the maintainer's paper on convergence, flow and accountability in agentic development, separate from the records; [PDF](${SITE_URL}${PAPER_PDF_PATH})`,
     `- [Insights](${SITE_URL}/insights): coverage and what is published`,
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,
     `- [Contribute](${SITE_URL}/contribute): how to request a change`,
@@ -153,7 +153,7 @@ export function llmsFullTxt(): string {
     "",
     howToRequest(),
     "",
-    `The maintainer's paper on software ownership is at ${SITE_URL}/ownership. It is separate from the records below.`,
+    `The maintainer's paper on software ownership is at ${SITE_URL}/ownership, and as a PDF at ${SITE_URL}${PAPER_PDF_PATH}. It is separate from the records below.`,
     "",
     ...allTools().map(toolMarkdown).flatMap((s) => [s, ""]),
   ].join("\n");

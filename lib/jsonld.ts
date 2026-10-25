@@ -3,7 +3,7 @@
 import "server-only";
 
 import { allTools, dataDate, getLandscape } from "@/lib/data";
-import { DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
+import { DATA_LICENCE_URL, PAPER_PDF_PATH, REPO_URL, SITE_URL } from "@/lib/site";
 import type { Tool } from "@/lib/types";
 
 export function datasetJsonLd() {
@@ -55,6 +55,7 @@ export function paperJsonLd(p: { title: string; author: string; date: string; ve
     version: p.version,
     inLanguage: "en",
     isAccessibleForFree: true,
+    encoding: { "@type": "MediaObject", contentUrl: `${SITE_URL}${PAPER_PDF_PATH}`, encodingFormat: "application/pdf" },
     isPartOf: { "@type": "WebSite", name: "AI SDLC Landscape", url: SITE_URL },
   };
 }

@@ -70,12 +70,12 @@ export function buildXray(sel: XrayTool[], rels: RelationLite[], moves: MarketMo
   };
 }
 
-export type LensGroup = "generation" | "per-change controls" | "control knowledge" | "run and operate" | "measure and platform";
+export type LensGroup = "generation" | "per-change controls" | "governing knowledge" | "run and operate" | "measure and platform";
 
 /** Each phase read through the thesis: where it sits in the paper's account of what a team has to own. */
 export const LENS: Record<PhaseId, LensGroup> = {
-  plan: "control knowledge",
-  understand: "control knowledge",
+  plan: "governing knowledge",
+  understand: "governing knowledge",
   design: "generation",
   code: "generation",
   maintain: "generation",
@@ -89,4 +89,4 @@ export const LENS: Record<PhaseId, LensGroup> = {
   platform: "measure and platform",
 };
 
-export const LENS_ORDER: LensGroup[] = ["generation", "per-change controls", "control knowledge", "run and operate", "measure and platform"];
+export const LENS_ORDER: LensGroup[] = ["generation", "per-change controls", "governing knowledge", "run and operate", "measure and platform"];
