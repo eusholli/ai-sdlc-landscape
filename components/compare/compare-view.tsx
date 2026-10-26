@@ -25,17 +25,23 @@ export function useCompareColumns(scope: string, ids: string[], tools: ToolLite[
   return { columnsFor, retry: () => void mutate() };
 }
 
-/** The chosen tools side by side, with rows that differ marked and an option to hide the rest. */
+/**
+ * The chosen tools side by side, with rows that differ marked and an option to hide the rest.
+ * Focused on a phase, `ids` are the choices in it and a line names the phase.
+ */
 export function CompareView({
   ids,
   tools,
   phases,
   onRemove,
+  focus,
 }: {
   ids: string[];
   tools: ToolLite[];
   phases: Phase[];
   onRemove: (id: string) => void;
+  /** The phase the comparison is narrowed to, and how to show every choice again. */
+  focus?: { label: string; onClear: () => void };
 }) {
   const [hideMatching, setHideMatching] = useState(false);
   const { columnsFor, retry } = useCompareColumns("compare", ids, tools);
@@ -64,6 +70,18 @@ export function CompareView({
 
   return (
     <div className="flex flex-col gap-4">
+      {focus && (
+        <p className="flex flex-wrap items-baseline gap-x-3 text-sm">
+          <span className="font-medium">{`Your choices in ${focus.label}`}</span>
+          <button
+            type="button"
+            onClick={focus.onClear}
+            className="rounded-sm text-xs underline underline-offset-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:min-h-11"
+          >
+            Show all choices
+          </button>
+        </p>
+      )}
       <div className="flex flex-wrap items-center gap-2">
         <Button
           type="button"

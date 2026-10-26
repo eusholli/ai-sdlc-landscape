@@ -1,33 +1,33 @@
 "use client";
 
-import { useQueryStates } from "nuqs";
-import { normalizeCompare, splitChoices } from "@/lib/compare";
-import { filterParsers } from "@/lib/filters";
+import { useSyncExternalStore } from "react";
+import { EMPTY_CHOICES, choicesStore } from "@/lib/choices";
+
+const subscribe = (listener: () => void) => choicesStore().subscribe(listener);
+const getSnapshot = () => choicesStore().get();
+const getServerSnapshot = () => EMPTY_CHOICES;
 
 /**
- * The chosen tools from the `compare` URL key, with add and remove. No cap. `via` lists the ones
- * added from a linked suggestion on Analyze choices. Needs a Suspense boundary above it, like any
- * nuqs hook.
+ * The chosen tools, saved in the browser (`lib/choices.ts`), with add and remove. No cap. `via`
+ * lists the ones added from a linked suggestion on Analyze choices. Only these actions change the
+ * selection; following a link never does. `ChoicesUrlSync` reads a shared link in.
  */
 export function useCompare() {
-  const [{ compare, via: rawVia }, setQuery] = useQueryStates(filterParsers);
-  const ids = normalizeCompare(compare);
-  const via = splitChoices(ids, rawVia).added;
+  const { compare: ids, via } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const add = (id: string) => {
-    if (!ids.includes(id)) void setQuery({ compare: [...ids, id] });
+    if (!ids.includes(id)) choicesStore().set({ compare: [...ids, id], via });
   };
 
   /** Add a tool from a linked suggestion, so the phase it fills stays open for more. */
-  const addVia = (id: string) =>
-    void setQuery({ compare: ids.includes(id) ? ids : [...ids, id], via: via.includes(id) ? via : [...via, id] });
+  const addVia = (id: string) => choicesStore().set({ compare: [...ids, id], via: [...via, id] });
 
   const remove = (id: string) =>
-    void setQuery({ compare: ids.filter((x) => x !== id), via: via.filter((x) => x !== id) });
+    choicesStore().set({ compare: ids.filter((x) => x !== id), via: via.filter((x) => x !== id) });
 
   const toggle = (id: string) => (ids.includes(id) ? remove(id) : add(id));
 
-  const clear = () => void setQuery({ compare: [], via: [] });
+  const clear = () => choicesStore().set(EMPTY_CHOICES);
 
   return { ids, via, has: (id: string) => ids.includes(id), add, addVia, remove, toggle, clear };
 }

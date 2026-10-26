@@ -7,7 +7,7 @@ import { Logo } from "@/components/logo";
 import { ToolLink } from "@/components/tool/tool-actions";
 import { Button } from "@/components/ui/button";
 import { phaseColor } from "@/lib/format";
-import { unlinkedNote, type PhaseChoice } from "@/lib/connections";
+import { phaseState, unlinkedNote, type PhaseChoice, type PhaseState } from "@/lib/connections";
 import type { Phase, PhaseId, ToolLite } from "@/lib/types";
 
 /** How many suggestions a phase card lists before "Show more". Added ones are always listed. */
@@ -17,28 +17,38 @@ const LINK = "font-medium underline-offset-2 hover:underline";
 const TEXT_BUTTON =
   "self-start rounded-sm text-xs underline underline-offset-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:min-h-11";
 
+/** What a phase card's corner says for each state. */
+const STATE_LABEL: Record<Exclude<PhaseState, "via">, string> = {
+  covered: "Covered",
+  open: "Not covered",
+  empty: "Nothing linked",
+};
+
 /**
- * The chosen tools, then one card per phase the stack leaves empty that a linked tool or platform
- * covers. Suggestions are ticked in and out; the phase stays open so several can be compared. The
- * phases already covered, the gaps nothing linked covers and the choices with no link at all are
- * named below.
+ * The chosen tools, then one card per phase of the lifecycle, in order. A covered card lists the
+ * choices that cover it. A phase the stack leaves empty lists the tools and platforms linked to the
+ * choices that cover it; they are ticked in and out, and the phase stays open so several can be
+ * compared. A phase nothing linked covers says so. The choices with no link at all are named below.
  */
 export function ChoicePanel({
   tools,
   phases,
   ids,
+  added: addedIds,
   coverage,
   unlinked,
   onAdd,
   onAddVia,
   onRemove,
   onClear,
-  onMore,
+  onCompare,
 }: {
   /** Tools and platforms; the picker lists the tools only. */
   tools: ToolLite[];
   phases: Phase[];
   ids: string[];
+  /** The chosen ids added from a linked suggestion. */
+  added: string[];
   coverage: PhaseChoice[];
   /** Chosen ids with no recorded link to anything on the map. */
   unlinked: string[];
@@ -47,17 +57,15 @@ export function ChoicePanel({
   onAddVia: (id: string) => void;
   onRemove: (id: string) => void;
   onClear: () => void;
-  /** Open Analyze stacks, where every suggestion is compared. */
-  onMore: () => void;
+  /** Open Compare tools on the choices in one phase. */
+  onCompare: (phase: PhaseId) => void;
 }) {
   const byId = new Map(tools.map((t) => [t.id, t]));
   const nameOf = (id: string) => byId.get(id)?.name ?? id;
   const labelOf = (id: PhaseId) => phases.find((p) => p.id === id)?.label ?? id;
   const chosen = ids.flatMap((id) => byId.get(id) ?? []);
   const covered = coverage.filter((c) => c.tools.length > 0).length;
-  const open = coverage.filter((c) => c.gap && c.suggested.length > 0);
-  const closed = coverage.filter((c) => !c.gap).map((c) => c.phase);
-  const unfilled = coverage.filter((c) => c.gap && c.suggested.length === 0).map((c) => c.phase);
+  const fromVia = new Set(addedIds);
   const note = unlinkedNote(unlinked.map(nameOf));
   const pickable = tools.filter((t) => t.kind === "tool");
   const [expanded, setExpanded] = useState<Set<PhaseId>>(new Set());
@@ -119,33 +127,65 @@ export function ChoicePanel({
             ))}
           </ul>
 
-          {open.length > 0 ? (
-            <>
-              <p className="text-sm text-muted-foreground">
-                Each card is a phase your stack leaves empty. Tick as many linked tools in a phase as you like, then
-                compare them side by side in{" "}
-                <button type="button" onClick={onMore} className={`${LINK} rounded-sm text-foreground underline outline-none focus-visible:ring-3 focus-visible:ring-ring/50`}>
-                  Analyze stacks
+          <p className="text-sm text-muted-foreground">
+            Each card is a phase of the lifecycle. Where your choices leave a phase empty, tick as many linked
+            tools as you like. A phase with two or more of your choices can be compared side by side.
+          </p>
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-label="Lifecycle phases">
+            {coverage.map((c) => {
+              const state = phaseState(c);
+              const isOpen = expanded.has(c.phase);
+              const shown = isOpen ? c.suggested : c.suggested.filter((s, i) => i < CARD_SUGGESTIONS || c.added.includes(s.tool));
+              const hidden = c.suggested.length - shown.length;
+              const compare = c.tools.length >= 2 && (
+                <button
+                  type="button"
+                  onClick={() => onCompare(c.phase)}
+                  className={TEXT_BUTTON}
+                  aria-label={`Compare your ${c.tools.length} choices in ${labelOf(c.phase)}`}
+                >
+                  Compare tools
                 </button>
-                .
-              </p>
-              <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-label="Phases you can fill">
-                {open.map((c) => {
-                  const isOpen = expanded.has(c.phase);
-                  const shown = isOpen ? c.suggested : c.suggested.filter((s, i) => i < CARD_SUGGESTIONS || c.added.includes(s.tool));
-                  const hidden = c.suggested.length - shown.length;
-                  return (
-                    <li
-                      key={c.phase}
-                      className={`flex flex-col gap-1.5 rounded-lg border border-l-4 bg-card px-3 py-2 text-sm ${c.added.length ? "" : "border-dashed"}`}
-                      style={{ borderLeftColor: phaseColor(c.phase) }}
-                    >
-                      <div className="flex items-baseline justify-between gap-2">
-                        <h3 className="font-medium">{labelOf(c.phase)}</h3>
-                        <span className="shrink-0 text-xs text-muted-foreground">
-                          {c.added.length ? `${c.added.length} added` : "Not covered"}
-                        </span>
-                      </div>
+              );
+              return (
+                <li
+                  key={c.phase}
+                  className={`flex flex-col gap-1.5 rounded-lg border border-l-4 px-3 py-2 text-sm ${
+                    state === "covered" || state === "via" ? "bg-card" : "border-dashed"
+                  }`}
+                  style={{ borderLeftColor: phaseColor(c.phase) }}
+                >
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h3 className={`font-medium ${state === "empty" ? "text-muted-foreground" : ""}`}>{labelOf(c.phase)}</h3>
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {state === "via" ? `${c.added.length} added via a link` : STATE_LABEL[state]}
+                    </span>
+                  </div>
+
+                  {state === "covered" && (
+                    <ul className="flex flex-col gap-1" aria-label={`Your choices in ${labelOf(c.phase)}`}>
+                      {c.tools.map((id) => {
+                        const t = byId.get(id);
+                        return (
+                          <li key={id} className="flex items-center gap-1.5">
+                            {t && <Logo name={t.name} src={t.logo} phase={t.primaryPhase} size={18} />}
+                            <ToolLink id={id} className={`${LINK} min-w-0 truncate`}>
+                              {nameOf(id)}
+                            </ToolLink>
+                            {fromVia.has(id) && <span className="text-xs text-muted-foreground">added via a link</span>}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                  {state === "covered" && compare}
+
+                  {state === "empty" && (
+                    <p className="text-xs text-muted-foreground">Nothing linked to your choices covers this phase.</p>
+                  )}
+
+                  {(state === "open" || state === "via") && (
+                    <>
                       <p className="text-xs text-muted-foreground">Linked to your choices:</p>
                       <ul className="flex flex-col gap-1">
                         {shown.map((s) => {
@@ -184,31 +224,15 @@ export function ChoicePanel({
                             {isOpen ? "Show fewer" : `Show ${hidden} more`}
                           </button>
                         )}
-                        {c.added.length > 0 && (
-                          <button type="button" onClick={onMore} className={TEXT_BUTTON}>
-                            {`Compare ${c.added.length} added in Analyze stacks`}
-                          </button>
-                        )}
+                        {compare}
                       </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              No phase your stack leaves empty has a tool or platform with a recorded link to your choices.
-            </p>
-          )}
-          {(closed.length > 0 || unfilled.length > 0 || note) && (
-            <p className="text-sm text-muted-foreground">
-              {[
-                closed.length > 0 && `Covered by your choices: ${closed.map(labelOf).join(", ")}.`,
-                unfilled.length > 0 && `Nothing linked to your choices covers ${unfilled.map(labelOf).join(", ")}.`,
-                note,
-              ].filter(Boolean).join(" ")}
-            </p>
-          )}
+                    </>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          {note && <p className="text-sm text-muted-foreground">{note}</p>}
           <p className="text-xs text-muted-foreground">
             A suggestion covers a phase none of your choices covers and has a recorded integration, partnership or
             bundling with one of them. A platform, such as a code host or tracker, is not an AI tool; it is listed

@@ -199,3 +199,15 @@ export function choiceCoverage(
     return { phase, tools, gap: fill.has(phase), suggested, added: suggested.filter((s) => chosen.has(s.tool)).map((s) => s.tool) };
   });
 }
+
+/**
+ * How a phase stands for a set of choices: covered by the stack, filled by a tool added from a
+ * suggestion, open with suggestions to pick from, or empty with nothing linked that covers it.
+ */
+export type PhaseState = "covered" | "via" | "open" | "empty";
+
+export function phaseState(c: PhaseChoice): PhaseState {
+  if (!c.gap) return "covered";
+  if (c.added.length) return "via";
+  return c.suggested.length ? "open" : "empty";
+}

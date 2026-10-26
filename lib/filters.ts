@@ -67,8 +67,10 @@ export const NOT_PUBLISHED = "Not published";
 
 const SEGMENTS = ["full-lifecycle", "multi-phase", "point"] as const;
 const VIEWS = ["map", "network", "list", "moves"] as const;
-export const ANALYZE_TABS = ["choose", "compare", "stack"] as const;
+export const ANALYZE_TABS = ["choose", "compare"] as const;
 export type AnalyzeTab = (typeof ANALYZE_TABS)[number];
+// "stack" was the Analyze stacks tab; old links that name it are sent to Compare tools.
+const ANALYZE_TAB_VALUES = [...ANALYZE_TABS, "stack"] as const;
 
 /** Every query key the site reads. Use with nuqs `useQueryStates(filterParsers)`. */
 export const filterParsers = {
@@ -87,9 +89,12 @@ export const filterParsers = {
   layers: parseAsBoolean.withDefault(true), // show the agent-infra, model and platform bands
   view: parseAsStringLiteral(VIEWS).withDefault("map"),
   tool: parseAsString, // open drawer
+  // A shared selection: read into the saved choices by ChoicesUrlSync, which writes it back on
+  // /analyze. The saved choices (lib/choices.ts) are the state; read them with useCompare.
   compare: parseAsArrayOf(parseAsString).withDefault([]),
   via: parseAsArrayOf(parseAsString).withDefault([]), // chosen tools added from a linked suggestion
-  tab: parseAsStringLiteral(ANALYZE_TABS).withDefault("choose"), // the Analyze choices tab
+  tab: parseAsStringLiteral(ANALYZE_TAB_VALUES).withDefault("choose"), // the Analyze choices tab
+  focus: parseAsString, // a phase id: Compare tools shows only the choices in that phase
 };
 
 export interface Filters {

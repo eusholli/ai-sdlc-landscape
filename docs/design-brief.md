@@ -38,8 +38,9 @@ Copy rules for every label, tooltip, empty state and heading:
 - Logos: always `<Logo name src phase size />` from `@/components/logo`. It handles SVG, ICO and
   PNG and draws a monogram when there is no file.
 - URL state: `useQueryStates(filterParsers)` from `nuqs` with `filterParsers` from
-  `@/lib/filters`. Every view, filter, open drawer and compare set lives in the URL so any screen
-  can be shared.
+  `@/lib/filters`. Every view, filter and open drawer lives in the URL so any screen can be shared.
+  The chosen tools are the exception: they are saved in the browser (`lib/choices.ts`, read with
+  `useCompare`), so only an explicit add, remove or clear changes them, whatever link is followed.
 
 ## Colour
 
@@ -94,16 +95,22 @@ the Map, Network, List and Market moves switcher. On phones the map and list vie
 whose own search and Filters row carries the switcher beside the count, so the separate row shows
 there only for network and market moves. Every other page has its own `<h1>`.
 
-**Analyze choices.** `/analyze` keeps one selection of chosen tools in the `compare` URL key, fed
-from the map tiles, the drawer and the search. Tools added from a linked suggestion are also
+**Analyze choices.** `/analyze` shows one selection of chosen tools, fed from the map tiles, the
+drawer and the search, and saved in the browser across pages, tabs and visits. On `/analyze` the
+selection is also written to the `compare` URL key, so the address is the share link. A link that
+carries `compare` is taken as is when nothing is saved; when it would change a saved selection, a
+bar under the header asks: add to mine, replace mine or keep mine (`ChoicesUrlSync`). Tools added from a linked suggestion are also
 listed in `via`: they do not count as the stack, so the phase they fill stays open and several can
 be ticked and weighed. The top of the page lists the choices, each removable, with Clear all, and
-one card per phase the stack leaves empty that a tool linked to a choice covers. A suggestion is
-added with + and shows a green tick once added; a tick takes it out again. One line under the
-cards names the phases already covered and the gaps no linked tool covers. Three tabs in the same
-switcher style follow: Choose tools (the panel alone), Compare tools (the choices side by side)
-and Analyze stacks (for each empty phase, a compare table of every tool added for it, then the
-top suggestions up to four). A suggestion is a sourced link, never a judgement of fit. Green
+then one card per phase of the lifecycle, in order, so the layout stays put as tools are added. A
+card is in one of four states, named in its corner: covered (solid, listing the choices that cover
+it), filled via a link (solid, the added tools ticked above the other suggestions), not covered
+(dashed, the tools linked to a choice that cover it, each added with +) or nothing linked (dashed
+and muted). A suggestion shows a green tick once added; a tick takes it out again. Any card with
+two or more choices in its phase, whatever its state, shows a "Compare tools" link. It opens Compare
+tools on just those choices (`focus=<phase>`) and scrolls to the table, where "Show all choices"
+widens it again. Two tabs in the same switcher style follow: Choose tools (the panel alone) and
+Compare tools (the choices side by side). An old `tab=stack` link opens Compare tools. A suggestion is a sourced link, never a judgement of fit. Green
 (`text-success`) is a status mark for an added tool, never a data colour.
 
 **Phase pages.** `/phases/<id>` gives each phase a page of its own that search engines and

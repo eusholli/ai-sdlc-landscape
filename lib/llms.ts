@@ -77,7 +77,7 @@ export function llmsTxt(): string {
     `- [Phase pages](${SITE_URL}/phases/${phases()[0]?.id ?? "<id>"}): \`/phases/<id>\`, the tools in one lifecycle phase; \`/phases/<id>.md\` for Markdown`,
     `- [Changes](${SITE_URL}/changes): what changed in the data, newest first`,
     `- [Market moves](${SITE_URL}/?view=moves): acquisitions and shutdowns`,
-    `- [Analyze choices](${SITE_URL}/analyze): pick tools from \`?compare=<id>,<id>\`; see the phases they cover, tools with a recorded link that cover the empty phases, a side-by-side comparison (\`&tab=compare\`) and those suggestions compared phase by phase (\`&tab=stack\`)`,
+    `- [Analyze choices](${SITE_URL}/analyze): pick tools from \`?compare=<id>,<id>\`; see the phases they cover, tools with a recorded link that cover the empty phases, and a side-by-side comparison (\`&tab=compare\`, or one phase's choices with \`&focus=<phase>\`)`,
     `- [Software ownership: the thesis](${SITE_URL}/ownership): the maintainer's paper on convergence, flow and accountability in agentic development, separate from the records; [PDF](${SITE_URL}${PAPER_PDF_PATH})`,
     ...paperTerms().map((line) => `  ${line}`),
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,

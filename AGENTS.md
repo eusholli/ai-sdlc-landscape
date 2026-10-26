@@ -99,7 +99,7 @@ is a rule nobody follows.
   data layer (`data/`, `scripts/`, `lib/data.ts`, `lib/types.ts`) comes with a test in the same change.
 - `scripts/guard.ts`, part of `pnpm check`, fails when a `"use client"` file imports the dataset.
 - Navigation lives in `components/site-nav.ts`: Landscape (map, network, list and market moves
-  views), Analyze choices (choose, compare and analyze stacks), Update tool data (`/contribute`),
+  views), Analyze choices (choose and compare tools), Update tool data (`/contribute`),
   Latest updates and an About menu.
   The header, the phone menu and the footer read it; a new page is added there once. The footer
   also lists every phase page.
@@ -147,7 +147,7 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/guard.ts` | fails when a client component imports the dataset |
 | `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
 | `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
-| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), feed, badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) |
+| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), feed, badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) and how it is saved in the browser (`choices.ts`) |
 | `app/` | routes; `app/data/` serves per-tool and per-phase JSON and Markdown; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
 | `components/` | UI components; `components/analyze/` is the Analyze choices page |
 | `tests/` | vitest suites |

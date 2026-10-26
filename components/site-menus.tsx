@@ -3,14 +3,13 @@
 import { ChevronDown, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useQueryStates } from "nuqs";
 import { DropdownMenu } from "radix-ui";
 import { useState, type ComponentProps } from "react";
+import { useCompare } from "@/components/compare/use-compare";
 import { NAV, isCurrent, isGroupCurrent, type NavGroup, type NavItem } from "@/components/site-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { analyzeHref } from "@/lib/compare";
-import { filterParsers } from "@/lib/filters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
@@ -40,8 +39,8 @@ const ITEM =
 
 /** A direct link's href. Analyze choices carries the tools chosen so far, so the choice survives the move. */
 function useGroupHref() {
-  const [{ compare, via }] = useQueryStates(filterParsers);
-  return (group: NavGroup) => (group.id === "analyze" ? analyzeHref(compare, "choose", via) : group.href!);
+  const { ids, via } = useCompare();
+  return (group: NavGroup) => (group.id === "analyze" ? analyzeHref(ids, "choose", via) : group.href!);
 }
 
 /** The direct links and the About menu, from 1024 px up. */

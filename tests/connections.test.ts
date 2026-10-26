@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  choiceCoverage, connectionsFor, gapFillers, stackCoverage, stackGaps, unlinkedChoices, unlinkedNote, type ConnNode,
+  choiceCoverage, connectionsFor, gapFillers, phaseState, stackCoverage, stackGaps, unlinkedChoices, unlinkedNote, type ConnNode,
 } from "@/lib/connections";
 import type { Relation } from "@/lib/types";
 
@@ -124,6 +124,27 @@ describe("choiceCoverage", () => {
   it("works out suggestions from the stack only, not from the added tools", () => {
     const cicd = choiceCoverage(["builder"], ["editor"], NODES, RELS, [...phases]).find((c) => c.phase === "cicd");
     expect(cicd).toMatchObject({ gap: true, suggested: [] });
+  });
+});
+
+describe("phaseState", () => {
+  const phases = ["design", "code", "review", "cicd"] as const;
+  const states = (stack: string[], added: string[]) =>
+    choiceCoverage(stack, added, NODES, RELS, [...phases]).map((c) => [c.phase, phaseState(c)]);
+
+  it("marks each phase covered, open or empty from the stack", () => {
+    expect(states(["builder"], [])).toEqual([["design", "covered"], ["code", "open"], ["review", "open"], ["cicd", "empty"]]);
+  });
+
+  it("marks a phase filled by an added suggestion as via, in every phase the tool covers", () => {
+    expect(states(["builder"], ["editor"])).toEqual([["design", "covered"], ["code", "via"], ["review", "via"], ["cicd", "empty"]]);
+  });
+
+  it("keeps a phase the stack covers as covered when an added tool covers it too", () => {
+    const nodes = [...NODES, node("coder", "code")];
+    const out = choiceCoverage(["builder", "coder"], ["editor"], nodes, RELS, [...phases]);
+    expect(out.map(phaseState)).toEqual(["covered", "covered", "via", "empty"]);
+    expect(out[1].tools).toEqual(["coder", "editor"]);
   });
 });
 

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ChoicesUrlSync } from "@/components/compare/choices-url-sync";
 import { SearchPalette } from "@/components/filters/search-palette";
 import { Notices } from "@/components/notices";
 import { SiteFooter } from "@/components/site-footer";
@@ -31,6 +32,9 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
         </Suspense>
       </header>
+      <Suspense fallback={null}>
+        <ChoicesUrlSync names={Object.fromEntries(toolsLite().map((t) => [t.id, t.name]))} />
+      </Suspense>
       <Suspense fallback={null}>
         <SearchPalette tools={toolsLite()} phases={phases()} />
       </Suspense>
