@@ -252,4 +252,3 @@ export interface Landscape {
   changes: Change[];
 }
 
-export interface XrayTool extends ToolLite { models: string[] | null; status: string | null; pricingModel: string | null; }

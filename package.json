@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "pnpm data && vitest run",
-    "check": "pnpm data && tsc --noEmit && eslint && vitest run",
+    "check": "pnpm data && tsc --noEmit && eslint && tsx scripts/guard.ts && vitest run",
+    "shots": "tsx scripts/shots.ts",
     "data": "tsx scripts/build-data.ts",
     "data:check": "tsx scripts/build-data.ts --check",
     "data:links": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/check-links.ts",
@@ -57,11 +58,11 @@
     "dotenv": "^18.0.8",
     "eslint": "^9",
     "eslint-config-next": "15.5.28",
+    "playwright": "1.48.2",
     "postcss": "8.5.31",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
-    "v0-sdk": "^0.16.7",
     "vitest": "^5.0.5",
     "yaml": "2.8.1"
   }

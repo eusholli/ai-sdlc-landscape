@@ -4,7 +4,7 @@ import { Check, Plus } from "lucide-react";
 import { useCompare } from "@/components/compare/use-compare";
 import { cn } from "@/lib/utils";
 
-/** Corner button on a map tile. Hidden until the tile is hovered or focused, unless the tool is already in compare. */
+/** Corner button on a map tile. Hidden until the tile is hovered or focused, unless the tool is already chosen. */
 export function TileCompareButton({ id, name }: { id: string; name: string }) {
   const { has, toggle } = useCompare();
   const inSet = has(id);
@@ -14,10 +14,10 @@ export function TileCompareButton({ id, name }: { id: string; name: string }) {
     <button
       type="button"
       aria-pressed={inSet}
-      aria-label={inSet ? `Remove ${name} from compare` : `Add ${name} to compare`}
+      aria-label={inSet ? `Remove ${name} from your choices` : `Add ${name} to your choices`}
       onClick={(event) => {
         event.stopPropagation();
-        toggle(id, name);
+        toggle(id);
       }}
       className={cn(
         "absolute top-0.5 left-0.5 grid size-6 place-items-center rounded-md border bg-background text-muted-foreground opacity-0 outline-none transition-opacity hover:text-foreground focus-visible:opacity-100 focus-visible:ring-3 focus-visible:ring-ring/50 group-focus-within:opacity-100 group-hover:opacity-100",

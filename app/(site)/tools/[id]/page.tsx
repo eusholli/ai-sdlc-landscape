@@ -5,8 +5,9 @@ import { notFound } from "next/navigation";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { ToolDetail } from "@/components/tool/tool-detail";
 import { VendorBadge } from "@/components/tool/vendor-badge";
-import { allTools, changesFor, isNew, relationsFor, toolById } from "@/lib/data";
-import { jsonLdText, toolJsonLd } from "@/lib/jsonld";
+import { allTools, changesFor, connectionsOf, isNew, placeLabel, relationsFor, toolById } from "@/lib/data";
+import { breadcrumbJsonLd, jsonLdText, toolJsonLd } from "@/lib/jsonld";
+import { OPEN_GRAPH, toolDescription, toolTitle } from "@/lib/seo";
 import { toolDetailRefs } from "@/lib/tool-refs";
 
 export const dynamicParams = false;
@@ -19,10 +20,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const tool = toolById(id);
   if (!tool) return { title: "Tool not found" };
+  const place = placeLabel(tool);
+  const description = toolDescription(tool, place);
   return {
-    title: tool.name,
-    description: tool.summary ?? `${tool.name} by ${tool.company}. The vendor has not published a one-line claim.`,
-    alternates: { canonical: `/tools/${tool.id}` },
+    title: toolTitle(tool, place),
+    description,
+    alternates: {
+      canonical: `/tools/${tool.id}`,
+      types: { "text/markdown": `/tools/${tool.id}.md`, "application/json": `/data/tools/${tool.id}.json` },
+    },
+    openGraph: { ...OPEN_GRAPH, description, url: `/tools/${tool.id}` },
   };
 }
 
@@ -30,10 +37,16 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const tool = toolById(id);
   if (!tool) notFound();
+  const phaseLabel = tool.primaryPhase ? placeLabel(tool) : null;
+  const crumbs: [string, string][] = [
+    ...(tool.primaryPhase && phaseLabel ? [[phaseLabel, `/phases/${tool.primaryPhase}`] as [string, string]] : []),
+    [tool.name, `/tools/${tool.id}`],
+  ];
 
   return (
     <main id="main" className={`${SITE_CONTAINER} py-8`}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(toolJsonLd(tool)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(toolJsonLd(tool, placeLabel(tool))) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(breadcrumbJsonLd(crumbs)) }} />
       <div className="mx-auto max-w-3xl">
         <Link
           href="/"
@@ -44,7 +57,8 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
         </Link>
         <div className="mt-6">
           <ToolDetail
-            data={{ tool, relations: relationsFor(tool.id), changes: changesFor(tool.id), isNew: isNew(tool.id) }}
+            data={{ tool, relations: relationsFor(tool.id), changes: changesFor(tool.id), isNew: isNew(tool.id),
+              connections: tool.kind === "tool" ? connectionsOf(tool.id) : undefined }}
             refs={toolDetailRefs()}
             variant="page"
           />

@@ -2,7 +2,7 @@ import { readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import raw from "@/data/landscape.json";
 import {
-  allTools, coverageMatrix, externals, fieldCompleteness, hasPage, marketMoves, relations,
+  allTools, externals, hasPage, marketMoves, relations,
   relationsFor, toolById, toolsByLayer, toolsByPhase, toolsLite,
 } from "@/lib/data";
 import { applyFilters, deploymentBuckets, pricingBucket, searchLite, type Filters } from "@/lib/filters";
@@ -83,14 +83,6 @@ describe("selectors", () => {
     expect(rel.length).toBeGreaterThan(0);
     expect(rel.every((r) => r.otherName.length > 0)).toBe(true);
     expect(toolById("no-such-tool")).toBeUndefined();
-  });
-
-  it("builds a coverage matrix and a completeness panel", () => {
-    const tools = allTools().filter((t) => t.kind === "tool").length;
-    expect(coverageMatrix().reduce((a, c) => a + c.count, 0)).toBeGreaterThan(tools);
-    const gtm = fieldCompleteness().find((f) => f.field === "gtmPartners")!;
-    expect(gtm.total).toBe(tools);
-    expect(gtm.known).toBeLessThan(gtm.total);
   });
 });
 

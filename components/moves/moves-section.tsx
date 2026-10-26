@@ -1,16 +1,9 @@
-import type { Metadata } from "next";
 import { MoveEntry, type MoveItem } from "@/components/moves/move-entry";
 import { MovesTimeline } from "@/components/moves/moves-timeline";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { marketMoves, toolById } from "@/lib/data";
 import { formatDate, hostOf } from "@/lib/format";
 import type { MarketMove } from "@/lib/types";
-
-export const metadata: Metadata = {
-  title: "Market moves",
-  description: "Acquisitions, shutdowns and end-of-life notices among AI SDLC tools, with the source for each.",
-  alternates: { canonical: "/moves" },
-};
 
 function headlineFor(name: string, move: MarketMove): string {
   if (move.kind === "acquired") return move.acquirer ? `${name} acquired by ${move.acquirer}` : `${name} acquired`;
@@ -34,7 +27,8 @@ function toItem(move: MarketMove): MoveItem | null {
   };
 }
 
-export default function MovesPage() {
+/** Acquisitions, shutdowns and end-of-life notices: the Landscape's market moves view. */
+export function MovesSection() {
   const items = marketMoves()
     .map((move) => toItem(move))
     .filter((item): item is MoveItem => item !== null);
@@ -42,10 +36,10 @@ export default function MovesPage() {
   const undated = items.filter((item) => !item.dateIso);
 
   return (
-    <main id="main" className={`${SITE_CONTAINER} py-10`}>
+    <div className={`${SITE_CONTAINER} border-b py-10`}>
       <div className="mx-auto flex max-w-3xl flex-col gap-10">
         <header className="flex flex-col gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight text-balance">Market moves</h1>
+          <h2 className="text-3xl font-semibold tracking-tight text-balance">Market moves</h2>
           <p className="text-pretty text-muted-foreground">
             {items.length} acquisitions, shutdowns and end-of-life notices. A date appears only when the vendor&apos;s
             status text gives one. Everything else is listed as undated, not guessed.
@@ -53,12 +47,12 @@ export default function MovesPage() {
         </header>
 
         <section aria-labelledby="dated-heading" className="flex flex-col gap-5">
-          <h2 id="dated-heading" className="text-lg font-semibold tracking-tight">
+          <h3 id="dated-heading" className="text-lg font-semibold tracking-tight">
             Dated moves
             <span className="ml-2 font-mono text-sm font-normal text-muted-foreground tabular-nums">
               {dated.length}
             </span>
-          </h2>
+          </h3>
           {dated.length > 0 ? (
             <MovesTimeline items={dated} />
           ) : (
@@ -68,12 +62,12 @@ export default function MovesPage() {
 
         {undated.length > 0 && (
           <section aria-labelledby="undated-heading" className="flex flex-col gap-5">
-            <h2 id="undated-heading" className="text-lg font-semibold tracking-tight">
+            <h3 id="undated-heading" className="text-lg font-semibold tracking-tight">
               Undated in the source data
               <span className="ml-2 font-mono text-sm font-normal text-muted-foreground tabular-nums">
                 {undated.length}
               </span>
-            </h2>
+            </h3>
             <ol className="flex flex-col gap-3">
               {undated.map((item) => (
                 <li key={item.id}>
@@ -84,6 +78,6 @@ export default function MovesPage() {
           </section>
         )}
       </div>
-    </main>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import { REPO_URL, requestUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { FactsGrid } from "./facts-grid";
 import { FreshnessChip } from "./freshness-chip";
+import { ConnectionGroups } from "./connection-groups";
 import { groupSources } from "./facts";
 import { PhaseCoverage } from "./phase-coverage";
 import { RelationGroups } from "./relation-groups";
@@ -90,7 +91,7 @@ export function ToolDetail({
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <CompareButton id={tool.id} name={tool.name} />
+          <CompareButton id={tool.id} />
           {!isPage && (
             <Button asChild variant="outline" size="sm" className="max-md:h-11">
               <Link href={`/tools/${tool.id}`}>
@@ -127,6 +128,7 @@ export function ToolDetail({
       <PhaseCoverage tool={tool} phases={refs.phases} heading={heading} />
       <FactsGrid tool={tool} sourceNumbers={sourceNumbers} heading={heading} />
       <RelationGroups relations={relations} refs={refs} heading={heading} />
+      {data.connections && <ConnectionGroups name={tool.name} connections={data.connections} refs={refs} heading={heading} />}
       <SourceList toolId={tool.id} groups={sourceGroups} heading={heading} />
 
       <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 text-sm">
@@ -190,14 +192,6 @@ export function ToolDetail({
           )}
           <ToolChanges changes={data.changes ?? []} />
         </div>
-        {tool.kind === "tool" && (
-          <Link
-            href={`/evaluate/${tool.id}`}
-            className="inline-flex items-center gap-1 rounded-sm underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
-          >
-            Questions to ask this vendor
-          </Link>
-        )}
         <a
           href={requestUrl(tool.name)}
           target="_blank"

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 import { cn } from "@/lib/utils";
 import { allTools } from "@/lib/data";
+import { OPEN_GRAPH } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -19,6 +20,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "AI SDLC Landscape", template: "%s | AI SDLC Landscape" },
+  applicationName: "AI SDLC Landscape",
+  openGraph: OPEN_GRAPH,
   description:
     `${allTools().filter((t) => t.kind === "tool").length} AI tools across the software development lifecycle, by phase, with customers, partners, pricing and how they connect. Every fact links to its source.`,
 };

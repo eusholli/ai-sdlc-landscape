@@ -8,6 +8,7 @@ import { Logo } from "@/components/logo";
 import { NewBadge } from "@/components/new-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ViewSwitcher } from "@/components/view-switcher";
 import { CLEAR_ALL_FILTERS } from "@/components/filters/facets";
 import { applyFilters, filterParsers } from "@/lib/filters";
 import type { Layer, Phase, Segment, ToolLite } from "@/lib/types";
@@ -70,10 +71,13 @@ export function PhaseList({ tools, phases, layers, segments, fullLifecycleIds }:
           />
           <FilterSheet tools={tools} phases={phases} segments={segments} />
         </div>
-        <p aria-live="polite" className="text-xs text-muted-foreground">
-          Showing <span className="font-mono tabular-nums">{censusShown}</span> of{" "}
-          <span className="font-mono tabular-nums">{census.length}</span>
-        </p>
+        <div className="flex items-center justify-between gap-2">
+          <p aria-live="polite" className="text-xs text-muted-foreground">
+            Showing <span className="font-mono tabular-nums">{censusShown}</span> of{" "}
+            <span className="font-mono tabular-nums">{census.length}</span>
+          </p>
+          <ViewSwitcher pillId="view-pill-list" />
+        </div>
       </div>
 
       <div className="mx-auto max-w-3xl">

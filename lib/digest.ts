@@ -120,7 +120,7 @@ export function digestPost(d: Digest): string {
   const fresh = d.freshness.find((f) => f.band === "fresh")?.count ?? 0;
   const total = d.freshness.reduce((s, f) => s + f.count, 0);
   return [
-    `AI SDLC Landscape, ${d.title}`,
+    `${d.title}: what changed in the AI SDLC Landscape`,
     "",
     ...digestFacts(d).map((f) => `- ${f}`),
     "",
@@ -133,7 +133,7 @@ export function digestPost(d: Digest): string {
 
 /** The longer version, as Markdown. */
 export function digestMarkdown(d: Digest): string {
-  const out = [`# The AI SDLC Landscape in ${d.title}`, "", ...digestFacts(d).map((f) => `- ${f}`), ""];
+  const out = [`# ${d.title}`, "", "What changed in the AI SDLC Landscape.", "", ...digestFacts(d).map((f) => `- ${f}`), ""];
   if (d.added.length) {
     out.push("## Tools added", "", ...d.added.map((a) => `- [${a.name}](${SITE_URL}/tools/${a.id})`), "");
   }

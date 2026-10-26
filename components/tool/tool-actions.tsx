@@ -18,7 +18,9 @@ interface ToolLinkProps {
   children: ReactNode;
 }
 
-const toolHref = (id: string) => `/?tool=${encodeURIComponent(id)}`;
+// The tool's own page, so crawlers and new tabs reach it. On the home page a plain click opens the
+// drawer instead. No prefetch: a page can list many tools.
+const toolHref = (id: string) => `/tools/${encodeURIComponent(id)}`;
 
 function ToolLinkInner({ id, className, children }: ToolLinkProps) {
   const [, setQuery] = useQueryStates(filterParsers);
@@ -32,18 +34,18 @@ function ToolLinkInner({ id, className, children }: ToolLinkProps) {
   };
 
   return (
-    <Link href={toolHref(id)} onClick={onClick} className={className}>
+    <Link href={toolHref(id)} prefetch={false} onClick={onClick} className={className}>
       {children}
     </Link>
   );
 }
 
-/** Opens a tool in the drawer. On the home page it keeps the current view and filters. */
+/** Links to a tool's page. On the home page a plain click opens the drawer and keeps the view and filters. */
 export function ToolLink(props: ToolLinkProps) {
   return (
     <Suspense
       fallback={
-        <Link href={toolHref(props.id)} className={props.className}>
+        <Link href={toolHref(props.id)} prefetch={false} className={props.className}>
           {props.children}
         </Link>
       }
@@ -53,7 +55,7 @@ export function ToolLink(props: ToolLinkProps) {
   );
 }
 
-function CompareButtonInner({ id, name }: { id: string; name?: string }) {
+function CompareButtonInner({ id }: { id: string }) {
   const { has, add, remove } = useCompare();
   const inSet = has(id);
 
@@ -63,25 +65,25 @@ function CompareButtonInner({ id, name }: { id: string; name?: string }) {
       variant="outline"
       size="sm"
       aria-pressed={inSet}
-      onClick={() => (inSet ? remove(id) : add(id, name))}
+      onClick={() => (inSet ? remove(id) : add(id))}
     >
       {inSet ? <Minus aria-hidden /> : <Plus aria-hidden />}
-      {inSet ? "Remove from compare" : "Add to compare"}
+      {inSet ? "Remove from choices" : "Add to choices"}
     </Button>
   );
 }
 
-export function CompareButton({ id, name }: { id: string; name?: string }) {
+export function CompareButton({ id }: { id: string }) {
   return (
     <Suspense
       fallback={
         <Button type="button" variant="outline" size="sm" disabled>
           <Plus aria-hidden />
-          Add to compare
+          Add to choices
         </Button>
       }
     >
-      <CompareButtonInner id={id} name={name} />
+      <CompareButtonInner id={id} />
     </Suspense>
   );
 }

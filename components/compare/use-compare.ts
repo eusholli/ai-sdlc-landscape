@@ -1,36 +1,33 @@
 "use client";
 
 import { useQueryStates } from "nuqs";
-import { MAX_COMPARE, addToCompare, normalizeCompare } from "@/lib/compare";
+import { normalizeCompare, splitChoices } from "@/lib/compare";
 import { filterParsers } from "@/lib/filters";
-import { notify } from "@/lib/ui-events";
 
 /**
- * The compare set from the URL, with add and remove. Adding a fifth tool replaces the oldest
- * and says so in a toast. Needs a Suspense boundary above it, like any nuqs hook.
+ * The chosen tools from the `compare` URL key, with add and remove. No cap. `via` lists the ones
+ * added from a linked suggestion on Analyze choices. Needs a Suspense boundary above it, like any
+ * nuqs hook.
  */
-export function useCompare(nameOf?: (id: string) => string | undefined) {
-  const [{ compare }, setQuery] = useQueryStates(filterParsers);
+export function useCompare() {
+  const [{ compare, via: rawVia }, setQuery] = useQueryStates(filterParsers);
   const ids = normalizeCompare(compare);
+  const via = splitChoices(ids, rawVia).added;
 
-  const add = (id: string, name?: string) => {
-    const { next, dropped } = addToCompare(ids, id);
-    if (next === ids || next.join() === ids.join()) return;
-    void setQuery({ compare: next });
-    if (!dropped) return;
-    const added = name ?? nameOf?.(id);
-    const removed = nameOf?.(dropped);
-    const holds = `Compare holds ${MAX_COMPARE} tools.`;
-    if (added && removed) notify(`${holds} ${added} replaced ${removed}.`);
-    else if (added) notify(`${holds} ${added} replaced the oldest.`);
-    else notify(`${holds} The oldest was replaced.`);
+  const add = (id: string) => {
+    if (!ids.includes(id)) void setQuery({ compare: [...ids, id] });
   };
 
-  const remove = (id: string) => void setQuery({ compare: ids.filter((x) => x !== id) });
+  /** Add a tool from a linked suggestion, so the phase it fills stays open for more. */
+  const addVia = (id: string) =>
+    void setQuery({ compare: ids.includes(id) ? ids : [...ids, id], via: via.includes(id) ? via : [...via, id] });
 
-  const toggle = (id: string, name?: string) => (ids.includes(id) ? remove(id) : add(id, name));
+  const remove = (id: string) =>
+    void setQuery({ compare: ids.filter((x) => x !== id), via: via.filter((x) => x !== id) });
 
-  const clear = () => void setQuery({ compare: [] });
+  const toggle = (id: string) => (ids.includes(id) ? remove(id) : add(id));
 
-  return { ids, has: (id: string) => ids.includes(id), add, remove, toggle, clear };
+  const clear = () => void setQuery({ compare: [], via: [] });
+
+  return { ids, via, has: (id: string) => ids.includes(id), add, addVia, remove, toggle, clear };
 }

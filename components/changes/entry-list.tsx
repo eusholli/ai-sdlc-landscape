@@ -30,7 +30,7 @@ function touchedTools(changes: Change[]): TouchedTool[] {
   return [...seen.values()];
 }
 
-/** A market move as the card the /moves page shows. Null when the tool has since been removed. */
+/** A market move as the card the market moves view shows. Null when the tool has since been removed. */
 export function moveItem(entry: MoveTimelineEntry): MoveItem | null {
   const tool = toolById(entry.move.tool);
   if (!tool) return null;

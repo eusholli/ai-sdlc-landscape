@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Fragment } from "react";
 import { PHASE_ORDER } from "@/lib/filters";
 import { phaseColor } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -61,12 +63,39 @@ export function PhaseCoverage({
       </SectionHeading>
       <CoverageSegments tool={tool} labelOf={labelOf} />
       <p className="text-xs text-muted-foreground">
-        {tool.phases.length === 0
-          ? "Not tied to one lifecycle phase."
-          : tool.primaryPhase
-            ? `Primary: ${labelOf(tool.primaryPhase)}.${others.length ? ` Also covers ${others.map(labelOf).join(", ")}.` : ""}`
-            : `Covers ${tool.phases.map(labelOf).join(", ")}.`}
+        {tool.phases.length === 0 ? (
+          "Not tied to one lifecycle phase."
+        ) : tool.primaryPhase ? (
+          <>
+            Primary: <PhaseLinks ids={[tool.primaryPhase]} labelOf={labelOf} />.
+            {others.length > 0 && (
+              <>
+                {" "}Also covers <PhaseLinks ids={others} labelOf={labelOf} />.
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            Covers <PhaseLinks ids={tool.phases} labelOf={labelOf} />.
+          </>
+        )}
       </p>
     </section>
   );
+}
+
+/** Each phase named links to its page, comma separated. */
+function PhaseLinks({ ids, labelOf }: { ids: PhaseId[]; labelOf: (id: PhaseId) => string }) {
+  return ids.map((id, i) => (
+    <Fragment key={id}>
+      {i > 0 && ", "}
+      <Link
+        href={`/phases/${id}`}
+        prefetch={false}
+        className="rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+      >
+        {labelOf(id)}
+      </Link>
+    </Fragment>
+  ));
 }

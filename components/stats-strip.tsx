@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { allTools, dataDate, marketMoves, phases, relations, timeline } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
+/** The home page line that says what the site is, with the dataset counts and dates. */
 export function StatsStrip() {
   const stats = [
     { label: "tools", value: allTools().filter((t) => t.kind === "tool").length },
@@ -18,6 +20,7 @@ export function StatsStrip() {
         aria-label="Dataset summary"
         className={`${SITE_CONTAINER} flex flex-wrap items-baseline gap-x-5 gap-y-0.5 py-1.5 text-xs text-muted-foreground`}
       >
+        <li className="w-full text-foreground sm:w-auto">A sourced map of AI tools across the software lifecycle:</li>
         {stats.map(({ label, value }) => (
           <li key={label} className="flex items-baseline gap-1.5">
             <span className="font-mono font-semibold tabular-nums text-foreground">{value}</span>
@@ -37,6 +40,14 @@ export function StatsStrip() {
           <time dateTime={date} className="font-mono tabular-nums text-foreground">
             {formatDate(date)}
           </time>
+        </li>
+        <li>
+          <Link
+            href="/about"
+            className="rounded-sm text-foreground underline underline-offset-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            About the data
+          </Link>
         </li>
       </ul>
     </div>

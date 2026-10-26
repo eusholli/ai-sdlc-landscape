@@ -22,9 +22,13 @@ git history from `scripts/history.ts` and writes `data/landscape.json`. `lib/dat
 reader of that file. It is server only and folds unpublished values to `null`. Server components
 in `app/(site)/` pass the slim `toolsLite()` and `relationsLite()` to client components, and
 `app/data/tools/[id]/route.ts` turns each tool, its relations and its changes into a static JSON
-file for the drawer. For agents,
-`/llms.txt`, `/llms-full.txt`, `/landscape.json` and `/schema/tool.json` are built from the same
-data (`lib/llms.ts`, `scripts/schema.ts`), and pages carry schema.org JSON-LD (`lib/jsonld.ts`).
+file for the drawer, and into Markdown. Each phase has a page at `/phases/<id>` (`lib/phase-page.ts`),
+with JSON and Markdown from `app/data/phases/[id]/route.ts`. For agents,
+`/llms.txt`, `/llms-full.txt`, `/landscape.json`, `/schema/tool.json` and a Markdown copy of every
+tool and phase page (`/tools/<id>.md`, `/phases/<id>.md`, rewritten in `next.config.ts`) are built
+from the same data (`lib/llms.ts`, `scripts/schema.ts`). Pages carry schema.org JSON-LD
+(`lib/jsonld.ts`), and titles, descriptions and Open Graph fields come from `lib/seo.ts`. A route
+that is removed gets a permanent redirect in `REDIRECTS` in `next.config.ts`, in the same commit.
 The change log comes from git too (`changeLog` in `scripts/history.ts`). `lib/data.ts` turns it
 into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly digest
 (`lib/digest.ts`, `pnpm digest`). Each tool has a "Listed on" badge at `/badge/<id>.svg`
@@ -49,6 +53,7 @@ pnpm data:links       # fetch every source URL; --changed for records changed ag
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
 pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
 pnpm digest [YYYY-MM] # last month's changes as a short post and a long version, in .digest/
+pnpm shots            # with `pnpm dev` running: screenshots of the main pages in both themes, in .shots/
 ```
 
 `pnpm check` exits non-zero on any failure and is never routed around. CI runs it on every push
@@ -86,15 +91,19 @@ is a rule nobody follows.
 - Never import `data/landscape.json` or `@/lib/data` from a `"use client"` file. Client components
   get `ToolLite[]` and `RelationLite[]` as props; the drawer fetches `/data/tools/<id>.json`.
 - `null` means not published: render it with `notPublished()`, never an empty cell or a dash.
-- The files `LOCKED` in `scripts/guard.ts` names (`data/`, `scripts/`, `tests/`, `lib/data.ts`,
-  `lib/types.ts`, `lib/filters.ts`, `lib/format.ts`, `lib/site.ts`, `lib/request-advice.ts`,
-  `lib/llms.ts`, `lib/jsonld.ts`, `lib/feed.ts`, `lib/badge.ts`, `lib/digest.ts`, `components/logo.tsx`,
-  the `llms`, `schema`, `changes.xml` and `badge` routes) are locked
-  against v0 runs, which the guard enforces. A session working here by hand may change them, with
-  tests. v0 does the visible UI only, as a new step in `docs/v0-prompts.md`. A UI change is made
-  once, by hand or by v0, whichever suits it; small fixes are done by hand. A hand edit is never
-  redone in v0: the next v0 run just starts with `--new-chat`, which uploads the current tree as
-  v0's starting point (the runner refuses to run on a stale copy otherwise).
+- UI work is done by hand in this repo, following the `ui` skill in `.claude/skills/ui/`: edit,
+  look at it in `pnpm dev`, run `pnpm shots` (both themes, phone and desktop widths, fails on
+  sideways scroll, console errors or a bad response), then `pnpm check` and `pnpm build`.
+- Logic that a page needs goes in `lib/` with a fixture test, not in a component. A change to the
+  data layer (`data/`, `scripts/`, `lib/data.ts`, `lib/types.ts`) comes with a test in the same change.
+- `scripts/guard.ts`, part of `pnpm check`, fails when a `"use client"` file imports the dataset.
+- Navigation lives in `components/site-nav.ts`: Landscape (map, network, list and market moves
+  views), Analyze choices (choose, compare and analyze stacks), Update tool data (`/contribute`),
+  Latest updates and an About menu.
+  The header, the phone menu and the footer read it; a new page is added there once. The footer
+  also lists every phase page.
+- Tool links use `ToolLink` (`components/tool/tool-actions.tsx`), which points at `/tools/<id>`
+  so crawlers can follow it; on `/` a plain click opens the drawer instead.
 - Repo URLs and the request advice come from `lib/site.ts` and `lib/request-advice.ts`; never
   retype them.
 - Nothing in code, tests or copy hard-codes how many tools, relations or sources there are. The
@@ -133,14 +142,16 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/scan.ts` | the repeatable search for new tools |
 | `scripts/check-links.ts` | source URL checker |
 | `scripts/fetch-logos.ts` | logo fetcher |
-| `scripts/guard.ts` | the lock that keeps v0 runs out of data and logic |
-| `scripts/v0-run.ts` | drives v0 step by step with a build gate; state in `docs/v0-state.json`, log in `docs/v0-log.md` |
-| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, feed, badge, digest |
-| `app/` | routes; `app/data/` serves per-tool JSON to the drawer; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
-| `components/` | UI components |
+| `scripts/guard.ts` | fails when a client component imports the dataset |
+| `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
+| `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
+| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), feed, badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) |
+| `app/` | routes; `app/data/` serves per-tool and per-phase JSON and Markdown; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
+| `components/` | UI components; `components/analyze/` is the Analyze choices page |
 | `tests/` | vitest suites |
 | `docs/design-brief.md` | the design and data contract |
 | `docs/scan.md` | how to run a scan and judge what it finds |
 | `CONTRIBUTING.md` | the data rules for contributors |
 | `.github/` | CI and weekly scan workflows, the plain-language request form |
 | `.claude/skills/triage/` | the local skill for working through request issues |
+| `.claude/skills/ui/` | the local skill for changing the visible UI |

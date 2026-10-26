@@ -1,17 +1,16 @@
 import type { MetadataRoute } from "next";
-import { allTools, dataDate } from "@/lib/data";
+import { allTools, dataDate, phases } from "@/lib/data";
+import { digestMonths } from "@/lib/digest";
+import { getPaper } from "@/lib/paper";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(dataDate());
   const pages = [
     { path: "", priority: 1 },
-    { path: "/compare", priority: 0.6 },
-    { path: "/x-ray", priority: 0.7 },
-    { path: "/evaluate", priority: 0.7 },
+    { path: "/analyze", priority: 0.7 },
     { path: "/ownership", priority: 0.8 },
-    { path: "/moves", priority: 0.6 },
-    { path: "/insights", priority: 0.6 },
+    { path: "/changes", priority: 0.6 },
     { path: "/about", priority: 0.5 },
     { path: "/contribute", priority: 0.5 },
     { path: "/llms.txt", priority: 0.5 },
@@ -19,16 +18,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
-    ...pages.map(({ path, priority }) => ({ url: `${SITE_URL}${path}`, lastModified, priority })),
+    ...pages.map(({ path, priority }) => ({
+      url: `${SITE_URL}${path}`,
+      // The thesis changes with its own date, not the data's.
+      lastModified: path === "/ownership" ? new Date(getPaper().date) : lastModified,
+      priority,
+    })),
+    ...phases().map((phase) => ({
+      url: `${SITE_URL}/phases/${phase.id}`,
+      lastModified,
+      priority: 0.8,
+    })),
+    ...digestMonths().map((month) => ({
+      url: `${SITE_URL}/changes/${month}`,
+      lastModified,
+      priority: 0.4,
+    })),
     ...allTools().map((tool) => ({
       url: `${SITE_URL}/tools/${tool.id}`,
       lastModified: tool.history ? new Date(tool.history.edited) : lastModified,
       priority: 0.7,
-    })),
-    ...allTools().filter((t) => t.kind === "tool").map((tool) => ({
-      url: `${SITE_URL}/evaluate/${tool.id}`,
-      lastModified: tool.history ? new Date(tool.history.edited) : lastModified,
-      priority: 0.5,
     })),
   ];
 }

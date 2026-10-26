@@ -1,6 +1,6 @@
 "use client";
 
-import { X } from "lucide-react";
+import { Check, Plus, X } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { UNKNOWN } from "@/components/tool/facts";
@@ -17,7 +17,13 @@ export interface CompareColumn {
   status: "loading" | "ready" | "failed";
 }
 
-function ColumnHeader({ column, onRemove }: { column: CompareColumn; onRemove: (id: string) => void }) {
+/**
+ * What a column header's button does: take a chosen tool out, add a suggested one, or show a
+ * suggestion already added with a tick that takes it out again.
+ */
+export type ColumnAction = { kind: "remove" | "add" | "added"; run: (id: string) => void };
+
+function ColumnHeader({ column, action }: { column: CompareColumn; action?: ColumnAction }) {
   const name = column.lite?.name ?? column.id;
   return (
     <div className="flex items-start gap-3">
@@ -36,14 +42,26 @@ function ColumnHeader({ column, onRemove }: { column: CompareColumn; onRemove: (
         </Link>
         {column.lite && <p className="text-xs break-words text-muted-foreground">{column.lite.company}</p>}
       </div>
-      <button
-        type="button"
-        onClick={() => onRemove(column.id)}
-        aria-label={`Remove ${name} from compare`}
-        className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-      >
-        <X className="size-4" aria-hidden />
-      </button>
+      {action && (
+        <button
+          type="button"
+          onClick={() => action.run(column.id)}
+          aria-label={action.kind === "add" ? `Add ${name} to your choices` : `Remove ${name} from your choices`}
+          aria-pressed={action.kind === "remove" ? undefined : action.kind === "added"}
+          className={cn(
+            "grid size-7 shrink-0 place-items-center rounded-md outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:size-11",
+            action.kind === "added" ? "text-success" : "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {action.kind === "remove" ? (
+            <X className="size-4" aria-hidden />
+          ) : action.kind === "added" ? (
+            <Check className="size-4" strokeWidth={3} aria-hidden />
+          ) : (
+            <Plus className="size-4" aria-hidden />
+          )}
+        </button>
+      )}
     </div>
   );
 }
@@ -89,16 +107,29 @@ export function CompareTable({
   rows,
   labelOf,
   onRemove,
+  onAdd,
+  actionFor,
+  caption = "Facts for the selected tools, one column per tool",
 }: {
   columns: CompareColumn[];
   rows: CompareRow[];
   labelOf: (id: PhaseId) => string;
-  onRemove: (id: string) => void;
+  onRemove?: (id: string) => void;
+  /** For suggested tools: each column header offers to add the tool to the choices instead. */
+  onAdd?: (id: string) => void;
+  /** A button per column, when the columns differ; takes the place of `onAdd` and `onRemove`. */
+  actionFor?: (id: string) => ColumnAction;
+  caption?: string;
 }) {
+  const action: ColumnAction | undefined = onAdd
+    ? { kind: "add", run: onAdd }
+    : onRemove
+      ? { kind: "remove", run: onRemove }
+      : undefined;
   return (
-    <div className="overflow-x-auto rounded-lg border">
+    <div className="relative overflow-x-auto rounded-lg border">
       <table className="w-full border-collapse text-sm" style={{ minWidth: `${9 + columns.length * 14}rem` }}>
-        <caption className="sr-only">Facts for the selected tools, one column per tool</caption>
+        <caption className="sr-only">{caption}</caption>
         <thead>
           <tr>
             <th
@@ -109,7 +140,7 @@ export function CompareTable({
             </th>
             {columns.map((column) => (
               <th key={column.id} scope="col" className="min-w-56 border-l p-3 text-left align-top font-normal">
-                <ColumnHeader column={column} onRemove={onRemove} />
+                <ColumnHeader column={column} action={actionFor ? actionFor(column.id) : action} />
               </th>
             ))}
           </tr>

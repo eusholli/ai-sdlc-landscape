@@ -5,14 +5,13 @@ import "server-only";
 
 import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
-import { pricingBucket, searchLite } from "@/lib/filters";
-import { joinOrNotPublished, notPublished } from "@/lib/format";
-import { KIT, SOURCE_FIELD, type KitQuestion } from "@/lib/kit";
+import { connectionsFor, type ConnGroup, type ConnectionGroup } from "@/lib/connections";
+import { PHASE_ORDER, pricingBucket, searchLite } from "@/lib/filters";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
   Autonomy, Change, Contributor, External, Freshness, FreshnessBand, Landscape, Layer, LayerId, MarketMove,
   Phase, PhaseId, Relation, RelationLite, RelationType, Segment, SegmentId, Source, TimelineEntry, Tool,
-  ToolHistory, ToolLite, XrayTool,
+  ToolHistory, ToolLite,
 } from "@/lib/types";
 
 type RawNode = (typeof raw.nodes)[number] & Record<string, unknown>;
@@ -129,6 +128,13 @@ export const nameOf = (id: string): string => byId.get(id)?.name ?? externalById
 /** True when the id is a node with its own page (tools and models), false for externals. */
 export const hasPage = (id: string): boolean => byId.has(id);
 
+/** The label of where a tool sits on the map: its primary phase, or its layer. Null when neither. */
+export function placeLabel(t: Pick<Tool, "primaryPhase" | "layer">): string | null {
+  if (t.primaryPhase) return landscape.phases.find((p) => p.id === t.primaryPhase)?.label ?? null;
+  if (t.layer) return landscape.layers.find((l) => l.id === t.layer)?.label ?? null;
+  return null;
+}
+
 // ---------- Selectors ----------
 
 /**
@@ -165,6 +171,21 @@ export function relationsFor(id: string): Array<Relation & { other: string; othe
       const other = out ? r.to : r.from;
       return { ...r, other, otherName: nameOf(other), direction: out ? "out" : "in" };
     });
+}
+
+/** A tool's connections across the lifecycle, with the names of every tool they mention. */
+export interface ToolConnections {
+  groups: ConnectionGroup<Relation>[];
+  names: Record<string, string>;
+}
+
+const CONN_ORDER: ConnGroup[] = [...PHASE_ORDER, "agent-infra"];
+
+/** Tools linked to this one directly or through one other tool, by phase, each step sourced. */
+export function connectionsOf(id: string): ToolConnections {
+  const groups = connectionsFor(id, landscape.tools, landscape.relations, CONN_ORDER, nameOf);
+  const ids = new Set(groups.flatMap((g) => [...g.direct, ...g.twoStep]).flatMap((c) => [c.tool, ...c.paths.flatMap((p) => p.steps.flatMap((s) => [s.from, s.to]))]));
+  return { groups, names: Object.fromEntries([...ids].map((x) => [x, nameOf(x)])) };
 }
 
 /** Human labels for each relation type, in both directions. */
@@ -218,36 +239,6 @@ export function marketMoves(): MarketMove[] {
     a.date && b.date ? a.date.localeCompare(b.date) : a.date ? -1 : b.date ? 1 : nameOf(a.tool).localeCompare(nameOf(b.tool)));
 }
 
-/** Count of tools per phase (any coverage, not just primary) and segment, for the heatmap. */
-export function coverageMatrix(): { phase: PhaseId; segment: SegmentId | "layer"; count: number }[] {
-  const cells = new Map<string, number>();
-  for (const t of landscape.tools) {
-    if (t.kind !== "tool") continue;
-    const seg = t.layer ? "layer" : t.segment ?? "point";
-    for (const p of t.phases) cells.set(`${p}|${seg}`, (cells.get(`${p}|${seg}`) ?? 0) + 1);
-  }
-  return [...cells].map(([k, count]) => {
-    const [phase, segment] = k.split("|");
-    return { phase: phase as PhaseId, segment: segment as SegmentId | "layer", count };
-  });
-}
-
-/** For each field, how many of the tools have it published. Drives the honesty panel. */
-export function fieldCompleteness(): { field: keyof Tool; label: string; known: number; total: number }[] {
-  const tools = landscape.tools.filter((t) => t.kind === "tool");
-  const fields: [keyof Tool, string][] = [
-    ["summary", "One-line claim"], ["targetBuyer", "Target buyer"], ["interface", "Interface"],
-    ["customers", "Named customers"], ["pricingModel", "Pricing model"], ["entryPrice", "Entry price"],
-    ["autonomy", "Autonomy"], ["deployment", "Deployment"], ["models", "Models"],
-    ["traction", "Traction"], ["compliance", "Compliance"], ["gtmPartners", "Go-to-market partners"],
-    ["openSource", "Open source"], ["founded", "Founded"], ["hq", "Headquarters"],
-    ["headcountBand", "Headcount"], ["fundingTotal", "Funding total"], ["lastRound", "Last round"],
-  ];
-  return fields
-    .map(([field, label]) => ({ field, label, known: tools.filter((t) => t[field] !== null).length, total: tools.length }))
-    .sort((a, b) => b.known - a.known);
-}
-
 /** Server-side search across names, companies, customers and claims. The palette calls `searchLite`. */
 export const search = (q: string) => searchLite(toolsLite(), q);
 
@@ -265,44 +256,6 @@ export const toLite = (t: Tool): ToolLite => ({
 
 export const toolsLite = (): ToolLite[] => landscape.tools.map(toLite);
 export const relationsLite = (): RelationLite[] => landscape.relations.map(({ from, to, type }) => ({ from, to, type }));
-
-export const xrayTools = (): XrayTool[] => landscape.tools.filter((t) => t.kind === "tool")
-  .map((t) => ({ ...toLite(t), models: t.models, status: t.status, pricingModel: t.pricingModel }));
-
-// ---------- Evaluation kit ----------
-
-export interface KitAnswer { q: KitQuestion; value: string | null; sources: Source[] }
-
-/** Names of the tools a record is paired with, or null when no relation is recorded. */
-function relatedNames(id: string): string | null {
-  const names = relationsFor(id).filter((r) => r.type !== "competes_with").map((r) => r.otherName);
-  return names.length ? [...new Set(names)].join(", ") : null;
-}
-
-/** Each kit question answered from one record, or null where the vendor published nothing. */
-export function kitFor(id: string): { tool: Tool; answers: KitAnswer[] } | undefined {
-  const tool = toolById(id);
-  if (!tool) return undefined;
-  const value = (field: KitQuestion["field"]): string | null => {
-    switch (field) {
-      case "deployment": case "models": case "compliance": case "customers": {
-        const v = joinOrNotPublished(tool[field]);
-        return v === joinOrNotPublished(null) ? null : v;
-      }
-      case "pricingModel": return tool.pricingModel;
-      case "status": return tool.status ?? "No acquisition or shutdown recorded";
-      case "openSource": return tool.openSource ? "Open source" : null;
-      case "relations": return relatedNames(id);
-      default: return null;
-    }
-  };
-  const answers = KIT.map((q) => {
-    const v = value(q.field);
-    const sourceField = q.field ? SOURCE_FIELD[q.field] : undefined;
-    return { q, value: v === null ? null : notPublished(v), sources: sourceField ? tool.sources.filter((s) => s.field === sourceField) : [] };
-  });
-  return { tool, answers };
-}
 
 // ---------- Change log and timeline ----------
 

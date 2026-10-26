@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OG_COLORS } from "@/lib/og";
 
-export const alt = "Software ownership: the thesis, from the AI SDLC Landscape";
+export const alt = "Software ownership, the software factory and factory engineering: the thesis, from the AI SDLC Landscape";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -26,7 +26,7 @@ export default function Image() {
             Software ownership
           </div>
           <div style={{ display: "flex", fontSize: 34, lineHeight: 1.35, marginTop: 36, maxWidth: 1000 }}>
-            Convergence, flow and accountability in agentic software development.
+            The software factory, factory engineering and accountability in agentic software development.
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 24, color: OG_COLORS.muted }}>Geoff Hollingworth, maintainer</div>

@@ -7,6 +7,7 @@ import { useQueryStates } from "nuqs";
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { RELATION_ORDER } from "@/components/map/relation-style";
 import { MapControls } from "@/components/map/map-controls";
+import { VIEW_HEIGHT } from "@/components/map/map-layout";
 import { Button } from "@/components/ui/button";
 import { applyFilters, filterParsers, isFiltered } from "@/lib/filters";
 import type { External, Layer, Phase, RelationLite, RelationType, ToolLite } from "@/lib/types";
@@ -14,8 +15,6 @@ import { buildGraphModel, inIsolate, type GraphNode, type Isolate } from "./grap
 import type { NetworkCanvasHandle } from "./network-canvas";
 import { NetworkPanel } from "./network-panel";
 import { usePalette } from "./use-palette";
-
-const VIEW_HEIGHT = "h-[calc(100dvh-12.75rem-var(--intro-h,0rem))] min-h-[32rem]";
 
 const NetworkCanvas = dynamic(() => import("./network-canvas"), {
   ssr: false,

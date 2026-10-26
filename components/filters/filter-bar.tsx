@@ -32,9 +32,15 @@ export function FilterBar(props: FilterBarProps) {
   if (pathname !== "/") return null;
   return (
     <Suspense fallback={<div aria-hidden className={`${BAR_HEIGHT} border-b`} />}>
-      <FilterBarContent {...props} />
+      <FilterBarGate {...props} />
     </Suspense>
   );
+}
+
+/** The filters act on the map, network and list, so the market moves view leaves them out. */
+function FilterBarGate(props: FilterBarProps) {
+  const [{ view }] = useQueryStates(filterParsers);
+  return view === "moves" ? null : <FilterBarContent {...props} />;
 }
 
 interface Chip {

@@ -95,6 +95,10 @@ describe("digest", () => {
     }
   });
 
+  it("links the post to the month's page", () => {
+    expect(digestPost(digest("1999-01"))).toContain("/changes/1999-01");
+  });
+
   it("measures freshness from the build", () => {
     expect(digestMarkdown(digest(buildDate().slice(0, 7)))).toContain(`As of ${buildDate()}:`);
   });

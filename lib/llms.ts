@@ -1,9 +1,12 @@
-// The text surfaces for agents: /llms.txt (a map of the site, after llmstxt.org) and
-// /llms-full.txt (every record as Markdown). Built from the data at build time; counts are derived.
+// The text surfaces for agents: /llms.txt (a map of the site, after llmstxt.org),
+// /llms-full.txt (every record as Markdown) and one Markdown file per tool and per phase. Built from the data at build time; counts are derived.
 import "server-only";
 
-import { allTools, dataDate, getLandscape, nameOf, phases, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
+import { allTools, dataDate, getLandscape, nameOf, phases, placeLabel, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
+import { digestMonths, monthTitle } from "@/lib/digest";
 import { notPublished } from "@/lib/format";
+import { getPaper, keyTerms } from "@/lib/paper";
+import { phaseCountLine, phasePage, phaseTitle } from "@/lib/phase-page";
 import { requestAdviceMarkdown } from "@/lib/request-advice";
 import { DATA_LICENCE, DATA_LICENCE_URL, PAPER_PDF_PATH, REPO, REPO_URL, REQUEST_URL, SITE_URL } from "@/lib/site";
 import type { Tool } from "@/lib/types";
@@ -11,6 +14,11 @@ import type { Tool } from "@/lib/types";
 const ABOUT =
   "A neutral, public map of the AI tools that work across the software development lifecycle. " +
   "Every fact links to a public source, and a fact that is not published is shown as \"Not published\".";
+
+// The terms the maintainer's paper defines, each with its anchor. Signed as the maintainer's view,
+// and kept apart from the records.
+const paperTerms = () =>
+  keyTerms(getPaper()).map((t) => `- [${t.term}](${SITE_URL}/ownership#${t.id}): ${t.definition}.`);
 
 function howToRequest(): string {
   return [
@@ -63,16 +71,33 @@ export function llmsTxt(): string {
     "",
     "## Pages",
     "",
-    `- [Map](${SITE_URL}/): every tool by lifecycle phase`,
-    `- [Tool pages](${SITE_URL}/tools/${example}): \`/tools/<id>\`, one per tool`,
+    `- [Landscape](${SITE_URL}/): every tool by lifecycle phase, as a map, a network or a list (\`?view=map|network|list\`)`,
+    `- [Tool pages](${SITE_URL}/tools/${example}): \`/tools/<id>\`, one per tool; \`/tools/<id>.md\` for Markdown`,
+    `- [Phase pages](${SITE_URL}/phases/${phases()[0]?.id ?? "<id>"}): \`/phases/<id>\`, the tools in one lifecycle phase; \`/phases/<id>.md\` for Markdown`,
     `- [Changes](${SITE_URL}/changes): what changed in the data, newest first`,
-    `- [Market moves](${SITE_URL}/moves): acquisitions and shutdowns`,
-    `- [Stack X-ray](${SITE_URL}/x-ray): pick the tools a team runs, see phase coverage, overlaps, model dependence, ownership changes and pricing mix`,
-    `- [Evaluate an AI SDLC tool](${SITE_URL}/evaluate): the questions to put to a vendor on data, continuity, pricing, integration and security; \`/evaluate/<id>\` shows what one tool's vendor has published, and \`/evaluate.md\` and \`/evaluate.csv\` download the list`,
+    `- [Market moves](${SITE_URL}/?view=moves): acquisitions and shutdowns`,
+    `- [Analyze choices](${SITE_URL}/analyze): pick tools from \`?compare=<id>,<id>\`; see the phases they cover, tools with a recorded link that cover the empty phases, a side-by-side comparison (\`&tab=compare\`) and those suggestions compared phase by phase (\`&tab=stack\`)`,
     `- [Software ownership: the thesis](${SITE_URL}/ownership): the maintainer's paper on convergence, flow and accountability in agentic development, separate from the records; [PDF](${SITE_URL}${PAPER_PDF_PATH})`,
-    `- [Insights](${SITE_URL}/insights): coverage and what is published`,
+    ...paperTerms().map((line) => `  ${line}`),
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,
     `- [Contribute](${SITE_URL}/contribute): how to request a change`,
+    "",
+    "## Phases",
+    "",
+    ...phases().map((p) => {
+      const page = phasePage(p.id, phases(), tools)!;
+      return `- [${p.label}](${SITE_URL}/phases/${p.id}.md): ${p.description} ${phaseCountLine(page)}`;
+    }),
+    "",
+    "## Tools",
+    "",
+    `One line per record. Each links to its Markdown; the HTML page is the same URL without \`.md\`.`,
+    "",
+    ...tools.map((t) => `- [${t.name}](${SITE_URL}/tools/${t.id}.md): ${t.company}, ${placeLabel(t) ?? "not tied to one phase"}`),
+    "",
+    "## Monthly digests",
+    "",
+    ...digestMonths().map((m) => `- [${monthTitle(m)}](${SITE_URL}/changes/${m})`),
     "",
     "## Recent changes",
     "",
@@ -90,9 +115,10 @@ export function llmsTxt(): string {
 const line = (label: string, v: string | string[] | number | true | null) =>
   `- ${label}: ${notPublished(v, (x) => (Array.isArray(x) ? x.join(", ") : x === true ? "yes" : String(x)))}`;
 
-function toolMarkdown(t: Tool): string {
+/** One record as Markdown. `level` is the heading depth: 2 inside llms-full.txt, 1 on its own. */
+export function toolMarkdown(t: Tool, level = 2): string {
   const out = [
-    `## ${t.name}`,
+    `${"#".repeat(level)} ${t.name}`,
     "",
     `- id: \`${t.id}\``,
     `- Company: ${t.company}`,
@@ -128,6 +154,7 @@ function toolMarkdown(t: Tool): string {
     line("Sources checked since", t.freshness ? `${t.freshness.checked} (${t.freshness.band})` : null),
   ];
   const rels = relationsFor(t.id).filter((r) => r.direction === "out");
+  if (level === 1) out.splice(2, 0, `> From the AI SDLC Landscape (${SITE_URL}/tools/${t.id}). ${DATA_LICENCE}. Data as of ${dataDate()}.`, "");
   if (rels.length) {
     out.push("", "Relations:", "");
     for (const r of rels) out.push(`- ${RELATION_LABELS[r.type].out} ${r.otherName} (\`${r.other}\`)${r.sources.length ? `: ${r.sources.join(" ")}` : ""}`);
@@ -155,6 +182,34 @@ export function llmsFullTxt(): string {
     "",
     `The maintainer's paper on software ownership is at ${SITE_URL}/ownership, and as a PDF at ${SITE_URL}${PAPER_PDF_PATH}. It is separate from the records below.`,
     "",
+    `It defines these terms. They are ${getPaper().author}'s view, not part of any record:`,
+    "",
+    ...paperTerms(),
+    "",
     ...allTools().map(toolMarkdown).flatMap((s) => [s, ""]),
+  ].join("\n");
+}
+
+/** One phase as Markdown: what it covers and the tools in it, main phase first. */
+export function phaseMarkdown(id: string): string | null {
+  const page = phasePage(id, phases(), allTools());
+  if (!page) return null;
+  const item = (t: Tool) => `- [${t.name}](${SITE_URL}/tools/${t.id}.md) (${t.company})${t.summary ? `: "${t.summary}"` : ""}`;
+  return [
+    `# ${phaseTitle(page.phase)}`,
+    "",
+    `> From the AI SDLC Landscape (${SITE_URL}/phases/${id}). ${DATA_LICENCE}. Data as of ${dataDate()}.`,
+    "",
+    page.phase.description,
+    "",
+    phaseCountLine(page),
+    "",
+    "## Main phase",
+    "",
+    ...(page.primary.length ? page.primary.map(item) : ["None listed."]),
+    ...(page.alsoCovers.length ? ["", "## Also covers this phase", "", ...page.alsoCovers.map(item)] : []),
+    "",
+    `Claims are each vendor's own words. Every fact on a tool's page links to its source.`,
+    "",
   ].join("\n");
 }

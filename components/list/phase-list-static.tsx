@@ -24,10 +24,13 @@ export function PhaseListStatic({ tools, phases, layers, fullLifecycleIds }: Pha
             Filters
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Showing <span className="font-mono tabular-nums">{census}</span> of{" "}
-          <span className="font-mono tabular-nums">{census}</span>
-        </p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs text-muted-foreground">
+            Showing <span className="font-mono tabular-nums">{census}</span> of{" "}
+            <span className="font-mono tabular-nums">{census}</span>
+          </p>
+          <div aria-hidden className="h-11 w-[10.25rem] rounded-lg bg-muted" />
+        </div>
       </div>
       <div className="mx-auto max-w-3xl">
         {groups.map((group) => (

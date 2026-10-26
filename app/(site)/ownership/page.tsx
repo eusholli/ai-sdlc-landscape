@@ -4,20 +4,38 @@ import { PaperMermaid } from "@/components/paper/paper-mermaid";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { formatDate } from "@/lib/format";
 import { jsonLdText, paperJsonLd } from "@/lib/jsonld";
-import { getPaper } from "@/lib/paper";
-import { PAPER_PDF_PATH } from "@/lib/site";
+import { getPaper, keyTerms, type PaperTerm } from "@/lib/paper";
+import { PAPER_PDF_PATH, SITE_URL } from "@/lib/site";
 
 const DESCRIPTION =
-  "A paper on software ownership in agentic development: why the scarce resource is the capacity to bring many concurrent changes to one accountable state, with eight beliefs and the research that would test them.";
+  "A paper that defines software ownership, the software factory and factory engineering for agentic development: why the scarce resource is the capacity to bring many concurrent changes to one accountable state.";
 
-export const metadata: Metadata = {
-  title: "Software ownership: the thesis",
-  description: DESCRIPTION,
-  alternates: { canonical: "/ownership" },
-};
+export function generateMetadata(): Metadata {
+  const paper = getPaper();
+  return {
+    title: "Software ownership, the software factory and factory engineering",
+    description: DESCRIPTION,
+    alternates: { canonical: "/ownership" },
+    // Google Scholar reads these to index the paper and its PDF.
+    other: {
+      citation_title: paper.title,
+      citation_author: paper.author,
+      citation_publication_date: paper.date.replace(/-/g, "/"),
+      citation_pdf_url: `${SITE_URL}${PAPER_PDF_PATH}`,
+    },
+  };
+}
+
+// "X is Y." from a glossary row, quotable on its own. A countable term takes an article.
+const COUNTABLE = new Set(["Software factory"]);
+function definitionSentence(t: PaperTerm): string {
+  const subject = COUNTABLE.has(t.term) ? `A ${t.term.toLowerCase()}` : t.term;
+  return `${subject} is ${t.definition.charAt(0).toLowerCase()}${t.definition.slice(1)}.`;
+}
 
 export default function OwnershipPage() {
   const paper = getPaper();
+  const terms = keyTerms(paper);
   return (
     <main id="main" className={`${SITE_CONTAINER} py-10`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdText(paperJsonLd(paper)) }} />
@@ -90,10 +108,27 @@ export default function OwnershipPage() {
               would test them. These are beliefs, not findings, and researchers and practitioners are invited to take
               them up. The contents on the left link to each section.
             </p>
-            <p className="text-sm text-muted-foreground">
-              This is the maintainer&apos;s own argument. The landscape&apos;s records carry no part of it, and every fact on
-              the map stands on its source alone.
-            </p>
+          </section>
+          <section aria-labelledby="key-terms" className="mt-8 flex flex-col gap-3 border-b pb-6">
+            <h2 id="key-terms" className="text-xl font-semibold tracking-tight">
+              The terms this paper defines
+            </h2>
+            <dl className="flex flex-col gap-3">
+              {terms.map((t) => (
+                <div key={t.id} id={t.id.replace(/^term-/, "")} className="scroll-mt-6">
+                  <dt className="font-semibold">{t.term}</dt>
+                  <dd className="text-pretty">
+                    {definitionSentence(t)}{" "}
+                    <a
+                      href={`#${t.id}`}
+                      className="rounded-sm text-sm text-muted-foreground underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                    >
+                      Glossary
+                    </a>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </section>
           <div id="paper-body" className="paper mt-8" dangerouslySetInnerHTML={{ __html: paper.html }} />
           <PaperMermaid targetId="paper-body" />

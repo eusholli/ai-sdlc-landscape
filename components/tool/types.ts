@@ -1,4 +1,5 @@
-import type { Change, FreshnessBand, Phase, Relation, RelationType, Tool } from "@/lib/types";
+import type { ConnectionGroup } from "@/lib/connections";
+import type { Change, FreshnessBand, Layer, Phase, Relation, RelationType, Tool } from "@/lib/types";
 
 export type ToolRelation = Relation & { other: string; otherName: string; direction: "out" | "in" };
 
@@ -10,6 +11,8 @@ export interface ToolDetailData {
   changes: Change[];
   /** True when the tool was added in the last 30 days. Absent in older cached responses. */
   isNew?: boolean;
+  /** Tools linked across the lifecycle, for tools only. Absent in older cached responses. */
+  connections?: { groups: ConnectionGroup<Relation>[]; names: Record<string, string> };
 }
 
 /**
@@ -18,6 +21,7 @@ export interface ToolDetailData {
  */
 export interface ToolDetailRefs {
   phases: Phase[];
+  layers: Layer[];
   relationLabels: Record<RelationType, { out: string; in: string }>;
   /** What each freshness band means, for the chip's tooltip. */
   freshnessLabels: Record<FreshnessBand, string>;

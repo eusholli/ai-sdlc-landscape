@@ -2,6 +2,13 @@ import type { CSSProperties } from "react";
 import { PHASE_ORDER } from "@/lib/filters";
 import type { PhaseId } from "@/lib/types";
 
+/**
+ * The height of the map and network views: the viewport less the fixed chrome above the home intro
+ * (the What's new strip and the header). The intro, stats strip and filter bar publish their own
+ * measured height as `--intro-h`.
+ */
+export const VIEW_HEIGHT = "h-[calc(100dvh-7.75rem-var(--intro-h,0rem))] min-h-[32rem]";
+
 export const COL_W = 160;
 export const COL_GAP = 10;
 export const WORLD_PAD = 24;

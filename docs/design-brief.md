@@ -31,9 +31,8 @@ Copy rules for every label, tooltip, empty state and heading:
   `ToolLite[]` and `RelationLite[]` as props, and the tool drawer fetches
   `/data/tools/<id>.json`, which returns `{ tool: Tool, relations: [...], changes: Change[] }`.
 - **Never import `data/landscape.json` or `@/lib/data` from a `"use client"` file.**
-- **Never edit `data/`, `lib/data.ts`, `lib/types.ts`, `lib/filters.ts`, `lib/format.ts` or
-  `components/logo.tsx`.** They are locked. If a component needs a new selector, say so in the
-  reply and we will add it.
+- A component that needs new data gets a selector in `lib/data.ts` or a pure function in `lib/`,
+  with a fixture test. Components do not compute over the dataset themselves.
 - `null` means the vendor has not published that fact. Render it with `notPublished()` or
   `joinOrNotPublished()`; never an empty cell, never a dash.
 - Logos: always `<Logo name src phase size />` from `@/components/logo`. It handles SVG, ICO and
@@ -86,10 +85,42 @@ the far zoom level) are the one place for display size.
 - A tool tile sits under its `primaryPhase` once. Its other phases show in the drawer's coverage
   strip and as faint ticks on hover, not as duplicate tiles.
 
-**The title.** The home page opens with the site's one `<h1>`, "AI SDLC Landscape", and one or two
-sentences under it that say what the map is and link to the GitHub repo and to requesting a
-change. The intro can be collapsed so the map keeps the screen; the choice is remembered per
-browser. The slim header stays as it is. Every other page has its own `<h1>`.
+**The title.** The header already names the site, so the home page's one `<h1>`, "AI SDLC
+Landscape: AI tools across the software development lifecycle", is for screen readers only. The stats strip comes first and opens with one phrase
+that says what the site is, then the counts, the dates and a link to About, which holds the longer
+statement, the GitHub link and how to request a change. Then the filter bar, which hides on the
+market moves view, which it does not act on. Under the filters, just above the view, a row carries
+the Map, Network, List and Market moves switcher. On phones the map and list views show the list,
+whose own search and Filters row carries the switcher beside the count, so the separate row shows
+there only for network and market moves. Every other page has its own `<h1>`.
+
+**Analyze choices.** `/analyze` keeps one selection of chosen tools in the `compare` URL key, fed
+from the map tiles, the drawer and the search. Tools added from a linked suggestion are also
+listed in `via`: they do not count as the stack, so the phase they fill stays open and several can
+be ticked and weighed. The top of the page lists the choices, each removable, with Clear all, and
+one card per phase the stack leaves empty that a tool linked to a choice covers. A suggestion is
+added with + and shows a green tick once added; a tick takes it out again. One line under the
+cards names the phases already covered and the gaps no linked tool covers. Three tabs in the same
+switcher style follow: Choose tools (the panel alone), Compare tools (the choices side by side)
+and Analyze stacks (for each empty phase, a compare table of every tool added for it, then the
+top suggestions up to four). A suggestion is a sourced link, never a judgement of fit. Green
+(`text-success`) is a status mark for an added tool, never a data colour.
+
+**Phase pages.** `/phases/<id>` gives each phase a page of its own that search engines and
+agents can find: an `<h1>` from `phaseTitle()`, the phase description, a count line from
+`phaseCountLine()`, then the tools whose main phase it is and the tools that also cover it, each
+with logo, company and quoted claim, linking to its tool page. A thin top border in the phase's
+stage colour is the only colour. `lib/phase-page.ts` builds the data; layer records are left out,
+as on the map's columns. Tool pages link each phase in Phase coverage here, and the footer lists
+every phase.
+
+**Tool links.** `ToolLink` points at `/tools/<id>` everywhere, so crawlers can follow it. On `/` a
+plain click opens the drawer instead; elsewhere it navigates. Its links set `prefetch={false}`.
+
+**The header.** The site name, then Landscape, Analyze choices, Update tool data (`/contribute`) and
+Latest updates as direct links
+and an About menu, then Search and the theme. Below 1024 px the links fold into one Menu sheet. The menus, the sheet and the
+footer all read `components/site-nav.ts`.
 
 **Requests for change.** Anyone, person or agent, asks for a change by opening a GitHub issue in
 plain words. Links to it use `REQUEST_URL` or `requestUrl(name)` from `lib/site.ts`, and the advice
@@ -153,7 +184,6 @@ requirement (WCAG 2.3.3), not a style choice.
 
 ## What the data looks like
 
-In v0, `data/landscape.json` is a trimmed copy of the real 435 KB file (the full one ships in the
-repo). It keeps the same shape and carries the edge cases on purpose: an acquired tool, the
+`data/landscape.json` is generated from the records. Design for the edge cases it carries: an acquired tool, the
 full-lifecycle platforms, agent-infrastructure and model-layer nodes, a mostly unknown node and a
 node with no logo. Design for all of them, not only the clean case.

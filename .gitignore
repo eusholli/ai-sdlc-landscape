@@ -50,3 +50,6 @@ next-env.d.ts
 
 # monthly digest drafts (pnpm digest)
 /.digest/
+
+# screenshots from pnpm shots
+/.shots/

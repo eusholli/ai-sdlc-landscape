@@ -13,7 +13,7 @@ const esc = (s: string) =>
 const stamp = (date: string) => `${date.length === 7 ? `${date}-01` : date}T00:00:00Z`;
 
 function entryId(e: TimelineEntry): string {
-  return e.kind === "changes" ? `${REPO_URL}/commit/${e.commit}` : `${SITE_URL}/moves#${e.move.tool}`;
+  return e.kind === "changes" ? `${REPO_URL}/commit/${e.commit}` : `${SITE_URL}/?view=moves#${e.move.tool}`;
 }
 
 function entryLink(e: TimelineEntry): string {

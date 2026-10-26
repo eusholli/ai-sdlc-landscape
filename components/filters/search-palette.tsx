@@ -36,7 +36,7 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
   const [query, setQuery] = useState("");
   const [highlighted, setHighlighted] = useState("");
   const [, setState] = useQueryStates(filterParsers);
-  const { has, toggle } = useCompare((id) => tools.find((t) => t.id === id)?.name);
+  const { has, toggle } = useCompare();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -65,7 +65,7 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
   function openTool(id: string) {
     handleOpenChange(false);
     if (pathname === "/") void setState({ tool: id });
-    else router.push(`/?tool=${encodeURIComponent(id)}`);
+    else router.push(`/tools/${encodeURIComponent(id)}`);
   }
 
   function filterByPhase(id: string) {
@@ -121,15 +121,15 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
                       type="button"
                       tabIndex={-1}
                       aria-pressed={inSet}
-                      aria-label={inSet ? `Remove ${hit.name} from compare` : `Add ${hit.name} to compare`}
+                      aria-label={inSet ? `Remove ${hit.name} from your choices` : `Add ${hit.name} to your choices`}
                       onClick={(event) => {
                         event.stopPropagation();
-                        toggle(hit.id, hit.name);
+                        toggle(hit.id);
                       }}
                       className="inline-flex shrink-0 items-center gap-1 rounded-md border bg-background px-1.5 py-0.5 text-xs text-muted-foreground outline-none hover:text-foreground"
                     >
                       <Icon className="size-3" aria-hidden />
-                      {inSet ? "Added" : "Compare"}
+                      {inSet ? "Chosen" : "Choose"}
                     </button>
                   </CommandItem>
                 );
@@ -154,7 +154,7 @@ export function SearchPalette({ tools, phases }: { tools: ToolLite[]; phases: Ph
           )}
         </CommandList>
         <p className="border-t px-3 py-2 text-xs text-muted-foreground">
-          Enter opens a tool. Shift and Enter adds it to compare.
+          Enter opens a tool. Shift and Enter adds it to your choices.
         </p>
       </Command>
     </CommandDialog>

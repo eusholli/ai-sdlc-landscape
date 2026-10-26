@@ -31,30 +31,29 @@ pnpm build      # static build: every tool page and per-tool JSON
 | `components/logo.tsx` | vendor logo with a monogram fallback |
 | `app/data/tools/[id]` | one static JSON file per tool, fetched by the tool drawer |
 | `docs/design-brief.md` | the design contract |
-| `scripts/guard.ts` | fails when generated code edits the data layer or ships the dataset to the client |
-| `scripts/v0-run.ts` | drives v0 one prompt at a time from `docs/v0-prompts.md`, with a build gate |
+| `scripts/guard.ts` | fails when a client component imports the dataset |
+| `scripts/shots.ts` | `pnpm shots`: screenshots of the main pages in both themes, with checks |
+| `components/site-nav.ts` | the navigation: Landscape, Analyze choices, Latest updates and About |
 
 Client components never import `lib/data.ts` or the JSON. Server components pass a slim
 projection (`toolsLite()`), and the drawer fetches `/data/tools/<id>.json`. `scripts/guard.ts`
 enforces this.
 
-## Building the UI with v0
+## Changing the UI
 
-The UI was built with [v0](https://v0.app) through its Platform API. The runner seeds one v0 chat
-with the design brief, the data layer (locked, so v0 cannot change it) and a trimmed sample of the
-data, then sends each prompt in `docs/v0-prompts.md` in turn. After each step it pulls the files,
-runs the guard, the build and the tests, sends any failure back to v0 at most twice, then commits
-and pushes so Vercel posts a preview.
+The UI is written by hand. The `ui` skill in `.claude/skills/ui/` sets out the loop for a person
+or an agent:
 
 ```bash
-cp .env.example .env.local          # add V0_API_KEY
-npx tsx scripts/v0-run.ts --dry-run # show what would be sent, spend nothing
-npx tsx scripts/v0-run.ts           # run from the next step; pauses after step 2
-npx tsx scripts/v0-run.ts --from 3  # carry on
-npx tsx scripts/v0-run.ts --step 5  # re-run one step
+pnpm exec playwright install chromium   # once per machine, for pnpm shots
+pnpm dev     # make the change and look at it, light and dark
+pnpm shots   # in a second terminal: every main page at phone and desktop width, both themes
+pnpm check   # data, types, lint, guard and tests
+pnpm build   # the production build, as Vercel runs it
 ```
 
-Each step is logged in `docs/v0-log.md` with the v0 version, its demo URL and credits used.
+`pnpm shots` writes PNGs to `.shots/` and fails on sideways scroll, a console error or a page
+that does not answer 200. Read `docs/design-brief.md` before touching a component.
 
 ## Updating the data
 

@@ -66,7 +66,9 @@ export const NOT_PUBLISHED = "Not published";
 // ---------- URL state ----------
 
 const SEGMENTS = ["full-lifecycle", "multi-phase", "point"] as const;
-const VIEWS = ["map", "network", "list"] as const;
+const VIEWS = ["map", "network", "list", "moves"] as const;
+export const ANALYZE_TABS = ["choose", "compare", "stack"] as const;
+export type AnalyzeTab = (typeof ANALYZE_TABS)[number];
 
 /** Every query key the site reads. Use with nuqs `useQueryStates(filterParsers)`. */
 export const filterParsers = {
@@ -86,7 +88,8 @@ export const filterParsers = {
   view: parseAsStringLiteral(VIEWS).withDefault("map"),
   tool: parseAsString, // open drawer
   compare: parseAsArrayOf(parseAsString).withDefault([]),
-  xray: parseAsArrayOf(parseAsString).withDefault([]),
+  via: parseAsArrayOf(parseAsString).withDefault([]), // chosen tools added from a linked suggestion
+  tab: parseAsStringLiteral(ANALYZE_TABS).withDefault("choose"), // the Analyze choices tab
 };
 
 export interface Filters {

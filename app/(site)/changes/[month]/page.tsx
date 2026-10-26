@@ -12,6 +12,8 @@ import { ToolLink } from "@/components/tool/tool-actions";
 import { andList, buildDate, FIELD_LABELS, toolById } from "@/lib/data";
 import { digest, digestFacts, digestMonths, monthTitle } from "@/lib/digest";
 import { formatDate, phaseColor } from "@/lib/format";
+import { breadcrumbJsonLd, jsonLdText, monthJsonLd } from "@/lib/jsonld";
+import { OPEN_GRAPH } from "@/lib/seo";
 import { REPO_URL, SITE_URL } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -29,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ month: st
     title,
     description,
     alternates: { canonical: `/changes/${month}` },
-    openGraph: { title, description, type: "article", url: `/changes/${month}` },
+    openGraph: { ...OPEN_GRAPH, title, description, type: "article", url: `/changes/${month}` },
   };
 }
 
@@ -70,6 +72,18 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
 
   return (
     <main id="main" className={`${SITE_CONTAINER} py-10`}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdText(monthJsonLd({ month, title: `The landscape in ${d.title}`, description: facts.slice(0, 3).join(" "), modified: buildDate() })),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdText(breadcrumbJsonLd([["Latest updates", "/changes"], [d.title, `/changes/${month}`]])),
+        }}
+      />
       <div className="mx-auto flex max-w-3xl flex-col gap-12">
         <header className="flex flex-col gap-6">
           <nav aria-label="Breadcrumb">
@@ -81,9 +95,12 @@ export default async function DigestPage({ params }: { params: Promise<{ month: 
               All changes
             </Link>
           </nav>
-          <h1 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            The landscape in {d.title}
-          </h1>
+          <div className="flex flex-col gap-1">
+            <p className="text-sm text-muted-foreground">Latest updates, {d.title}</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+              The landscape in {d.title}
+            </h1>
+          </div>
           <ul className="flex flex-col gap-4">
             {facts.map((fact) => (
               <li key={fact} className="text-xl leading-snug text-pretty sm:text-2xl">

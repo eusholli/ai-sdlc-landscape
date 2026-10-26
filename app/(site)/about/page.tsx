@@ -5,7 +5,7 @@ import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
 import { allTools, dataDate, phases, relations } from "@/lib/data";
 import { formatDate } from "@/lib/format";
-import { REQUEST_URL } from "@/lib/site";
+import { REPO_URL, REQUEST_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -45,8 +45,20 @@ export default function AboutPage() {
           <h1 className="text-3xl font-semibold tracking-tight text-balance">About the landscape</h1>
           <p className="text-pretty text-muted-foreground">
             A public, neutral map of {toolCount} AI tools across the {phases().length} phases of the software
-            lifecycle, with {relations().length} typed relations between them. It takes no money from vendors and
-            ranks nobody.
+            lifecycle, with {relations().length} typed relations between them. Every fact has a public source. It
+            takes no money from vendors and ranks nobody.
+          </p>
+          <p className="text-pretty text-muted-foreground">
+            The data and code are open{" "}
+            <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              on GitHub
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            , and anyone, person or agent, can{" "}
+            <Link href="/contribute" className={linkClass}>
+              request a change
+            </Link>
+            .
           </p>
         </header>
 
@@ -78,8 +90,7 @@ export default function AboutPage() {
           </ul>
           <p>
             Where a tool shows <span className="font-medium">Not published</span>, the vendor does not say. It does not
-            mean we could not be bothered to look, and it is never a guess. Thin fields are a floor, not a census: see
-            the <a href="/insights" className={linkClass}>insights page</a> for how complete each field is.
+            mean we could not be bothered to look, and it is never a guess. Thin fields are a floor, not a census.
           </p>
         </Section>
 
@@ -107,6 +118,14 @@ export default function AboutPage() {
             : credit the AI SDLC Landscape and link back. The code is MIT. Logos belong to their owners and are not
             covered.
           </p>
+          <p>
+            Agents can read the same data as text.{" "}
+            <a href="/llms.txt" className={linkClass}>
+              /llms.txt
+            </a>{" "}
+            lists every page, phase and tool. Each tool and phase page also has a Markdown version at the same address
+            with <code>.md</code> added: <code>/tools/&lt;id&gt;.md</code> and <code>/phases/&lt;id&gt;.md</code>.
+          </p>
           <div>
             <Button asChild variant="outline">
               <a href="/landscape.json" download>
@@ -120,8 +139,11 @@ export default function AboutPage() {
         <Section id="thesis" title="The thesis behind the map">
           <p>
             The map&apos;s data carries no one&apos;s view. The maintainer&apos;s own thesis on software ownership is
-            published separately at <Link href="/ownership" className={linkClass}>/ownership</Link>, and it changes no
-            record.
+            published separately as{" "}
+            <Link href="/ownership" className={linkClass}>
+              Software ownership: the thesis
+            </Link>
+            , and it changes no record.
           </p>
         </Section>
 

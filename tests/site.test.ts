@@ -32,7 +32,7 @@ describe("canonical links", () => {
   const pages = (readdirSync("app", { recursive: true }) as string[]).filter((f) => f.endsWith("page.tsx"));
 
   it.each(pages)("%s sets its own", (page) => {
-    expect(readFileSync(join("app", page), "utf8")).toMatch(/alternates: \{ canonical: /);
+    expect(readFileSync(join("app", page), "utf8")).toMatch(/alternates: \{\s*canonical: /);
   });
 
   it("is never set in a layout", () => {

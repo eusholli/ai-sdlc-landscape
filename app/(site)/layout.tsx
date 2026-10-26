@@ -1,13 +1,12 @@
 import { Suspense } from "react";
-import { FilterChrome } from "@/components/filters/filter-chrome";
+import { SearchPalette } from "@/components/filters/search-palette";
 import { Notices } from "@/components/notices";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { HEADER_GRID, SITE_CONTAINER, SiteName } from "@/components/site-name";
-import { StatsStrip } from "@/components/stats-strip";
 import { WhatsNewStrip } from "@/components/whats-new-strip";
 import { ToolDrawer } from "@/components/tool/tool-drawer";
-import { phases, segments, toolsLite } from "@/lib/data";
+import { phases, toolsLite } from "@/lib/data";
 import { toolDetailRefs } from "@/lib/tool-refs";
 import { whatsNewItems } from "@/lib/whats-new";
 
@@ -32,8 +31,9 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
         </Suspense>
       </header>
-      <StatsStrip />
-      <FilterChrome tools={toolsLite()} phases={phases()} segments={segments()} />
+      <Suspense fallback={null}>
+        <SearchPalette tools={toolsLite()} phases={phases()} />
+      </Suspense>
       <div className="flex-1">{children}</div>
       <SiteFooter />
       <Suspense fallback={null}>

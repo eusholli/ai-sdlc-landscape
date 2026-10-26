@@ -12,7 +12,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LayerBands, type LayerBand } from "./layer-bands";
 import { MapControls } from "./map-controls";
 import { MapInteractionProvider, type MapInteraction } from "./map-interaction";
-import { WORLD_PAD, WORLD_W } from "./map-layout";
+import { VIEW_HEIGHT, WORLD_PAD, WORLD_W } from "./map-layout";
 import { PhaseColumns } from "./phase-columns";
 import { PlatformBars } from "./platform-bars";
 import { RelationCurves } from "./relation-curves";
@@ -30,11 +30,14 @@ export interface LandscapeMapProps {
   layers: Layer[];
   segments: Segment[];
   fullLifecycleIds: string[];
+  /** The market moves view, rendered on the server and shown when `view` is "moves". */
+  moves?: React.ReactNode;
 }
 
 export function LandscapeMap(props: LandscapeMapProps) {
   const [{ view }] = useQueryStates(filterParsers);
   const isMobile = useIsMobile();
+  if (view === "moves") return props.moves;
   if (view === "list" || (view === "map" && isMobile)) {
     return (
       <PhaseList
@@ -47,7 +50,7 @@ export function LandscapeMap(props: LandscapeMapProps) {
     );
   }
   if (view === "map" && isMobile === null) {
-    return <div aria-hidden className="h-[calc(100dvh-12.75rem-var(--intro-h,0rem))] min-h-[32rem] border-b bg-muted/30" />;
+    return <div aria-hidden className={cn(VIEW_HEIGHT, "border-b bg-muted/30")} />;
   }
   if (view === "network") {
     return (
@@ -63,7 +66,7 @@ export function LandscapeMap(props: LandscapeMapProps) {
   return <MapCanvas {...props} />;
 }
 
-function MapCanvas({ tools, relations, externals, phases, layers, fullLifecycleIds }: LandscapeMapProps) {
+function MapCanvas({ tools, relations, externals, phases, layers, fullLifecycleIds }: Omit<LandscapeMapProps, "moves">) {
   const [query, setQuery] = useQueryStates(filterParsers);
   const { viewportRef, worldRef, x, y, scale, zoomLevel, dragging, zoomIn, zoomOut, zoomTo, fit, viewportProps } =
     usePanZoom();
@@ -135,7 +138,7 @@ function MapCanvas({ tools, relations, externals, phases, layers, fullLifecycleI
   return (
     <MapInteractionProvider value={interaction}>
       <TooltipProvider delayDuration={300}>
-        <div className="relative h-[calc(100dvh-12.75rem-var(--intro-h,0rem))] min-h-[32rem] overflow-hidden border-b bg-muted/30">
+        <div className={cn(VIEW_HEIGHT, "relative overflow-hidden border-b bg-muted/30")}>
           <div
             ref={viewportRef}
             role="group"
@@ -200,6 +203,7 @@ function MapCanvas({ tools, relations, externals, phases, layers, fullLifecycleI
             onZoomTo={zoomTo}
             onFit={fit}
             fitLabel="Fit to width"
+            layers={{ on: query.layers, onToggle: () => void setQuery({ layers: !query.layers }) }}
           />
         </div>
       </TooltipProvider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Maximize, ZoomIn, ZoomOut } from "lucide-react";
+import { Layers, Maximize, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ZOOM_LEVELS, type ZoomLevel } from "./zoom-level";
@@ -13,6 +13,8 @@ interface MapControlsProps {
   onZoomOut: () => void;
   onFit: () => void;
   fitLabel?: string;
+  /** Shows a toggle for the agent infrastructure and model bands below the phases. */
+  layers?: { on: boolean; onToggle: () => void };
 }
 
 export function MapControls({
@@ -22,6 +24,7 @@ export function MapControls({
   onZoomTo,
   onFit,
   fitLabel = "Fit to screen",
+  layers,
 }: MapControlsProps) {
   return (
     <div className="absolute right-4 bottom-4 flex items-end gap-2">
@@ -48,6 +51,20 @@ export function MapControls({
         </div>
       )}
       <div role="group" aria-label="Map zoom" className="flex flex-col gap-1">
+        {layers && (
+          <Button
+            type="button"
+            variant={layers.on ? "secondary" : "outline"}
+            size="icon-sm"
+            aria-pressed={layers.on}
+            aria-label="Show agent infrastructure and models"
+            title={layers.on ? "Hide agent infrastructure and models" : "Show agent infrastructure and models"}
+            onClick={layers.onToggle}
+            className="mb-1"
+          >
+            <Layers />
+          </Button>
+        )}
         <Button
           type="button"
           variant="outline"
