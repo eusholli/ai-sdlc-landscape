@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { memo, type ComponentType } from "react";
 import { Logo } from "@/components/logo";
 import { NewBadge } from "@/components/new-badge";
+import { tileNameClass } from "@/lib/tile-name";
 import { cn } from "@/lib/utils";
 import type { ToolLite } from "@/lib/types";
 import { TileHover, useTileBehaviour } from "./map-interaction";
@@ -41,12 +42,12 @@ function LogoTile({ tool, dimmed, selected, onSelect, showNew = true }: TileProp
           data-tool={tool.id}
           {...handlers}
           className={cn(
-            "relative flex w-full flex-col items-center gap-1 rounded-lg border border-transparent p-1.5 text-center outline-none transition-[background-color,border-color] duration-150 hover:border-border hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
+            "relative flex w-full flex-col items-center gap-1 rounded-lg border border-transparent px-0 py-1.5 text-center outline-none transition-[background-color,border-color] duration-150 hover:border-border hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
             selected && "border-foreground/40 bg-muted",
           )}
         >
           <TileLogo tool={tool} size={40} layoutId={layoutId} />
-          <span className="line-clamp-2 w-full text-[11px] leading-tight font-medium break-words">{tool.name}</span>
+          <span className={cn("line-clamp-2 w-full leading-tight font-medium", tileNameClass(tool.name))}>{tool.name}</span>
           {showNew && tool.isNew && <NewBadge className="absolute top-0.5 left-0.5" />}
           {tool.moved && (
             <>
