@@ -5,7 +5,7 @@
 // the light-theme stage colours from app/globals.css; keep the two in step.
 export const BADGE_COLOURS = {
   1: "#2a78d6", 2: "#eb6834", 3: "#1baf7a", 4: "#eda100", 5: "#e87ba4", 6: "#008300",
-  "agent-infra": "#6250d6", model: "#6b6a65",
+  "agent-infra": "#6250d6", model: "#6b6a65", systems: "#6b6a65",
 } as const;
 
 const esc = (s: string) =>

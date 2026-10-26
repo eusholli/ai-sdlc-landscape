@@ -5,7 +5,7 @@ import { SITE_CONTAINER } from "@/components/site-name";
 import { phases, relationsLite, toolsLite } from "@/lib/data";
 
 const DESCRIPTION =
-  "Choose AI SDLC tools, see the lifecycle phases they deliver to, find tools with a recorded link that cover the gaps, and compare them side by side.";
+  "Choose AI SDLC tools, see the lifecycle phases they deliver to, find tools and platforms with a recorded link that cover the gaps, and compare them side by side.";
 
 export const metadata: Metadata = {
   title: "Analyze choices",
@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function AnalyzePage() {
-  const tools = toolsLite().filter((t) => t.kind === "tool");
+  // Platforms come too: they can be suggested for a gap and added, though the picker lists tools only.
+  const tools = toolsLite().filter((t) => t.kind !== "model");
   return (
     <main id="main" className={`${SITE_CONTAINER} py-8`}>
       {/* The view reads the URL, so the static HTML holds only this fallback: give it the page's h1. */}

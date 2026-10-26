@@ -1,0 +1,10 @@
+id: vs-code
+name: Visual Studio Code
+company: Microsoft
+url: https://code.visualstudio.com
+layer: systems
+phases: [code]
+summary: The open source AI code editor.
+sources:
+  - {field: summary, url: https://code.visualstudio.com/, retrieved: 2026-10-26}
+  - {field: phases, url: https://code.visualstudio.com/, retrieved: 2026-10-26}

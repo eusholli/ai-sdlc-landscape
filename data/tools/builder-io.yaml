@@ -20,6 +20,8 @@ relations:
   - {type: integrates_with, to: bitbucket, sources: [https://www.builder.io/]}
   - {type: integrates_with, to: slack, sources: [https://www.builder.io/]}
   - {type: integrates_with, to: jira, sources: [https://www.builder.io/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.builder.io/c/docs/projects]}
+  - {type: integrates_with, to: figma, sources: [https://www.builder.io/, https://www.builder.io/c/docs/projects]}
   - {type: competes_with, to: lovable, sources: [https://www.builder.io/]}
   - {type: competes_with, to: bolt, sources: [https://www.builder.io/]}
   - {type: competes_with, to: replit, sources: [https://www.builder.io/]}
@@ -32,6 +34,7 @@ sources:
   - {field: compliance, url: https://www.builder.io/compare/builder-vs-lovable, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.builder.io/compare/builder-vs-bolt, retrieved: 2026-10-21}
   - {field: relations, url: https://www.builder.io/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.builder.io/c/docs/projects, retrieved: 2026-10-26}
   - {field: relations, url: https://www.builder.io/compare/builder-vs-lovable, retrieved: 2026-10-21}
   - {field: relations, url: https://www.builder.io/compare/builder-vs-bolt, retrieved: 2026-10-21}
   - {field: relations, url: https://www.builder.io/compare/builder-vs-replit, retrieved: 2026-10-21}

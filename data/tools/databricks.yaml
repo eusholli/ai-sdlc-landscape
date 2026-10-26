@@ -1,0 +1,8 @@
+id: databricks
+name: Databricks
+company: Databricks
+url: https://www.databricks.com
+layer: systems
+summary: Databricks is the data and AI company.
+sources:
+  - {field: summary, url: https://www.databricks.com/company/about-us, retrieved: 2026-10-26}

@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { choiceCoverage, connectionsFor, gapFillers, stackCoverage, stackGaps, type ConnNode } from "@/lib/connections";
+import {
+  choiceCoverage, connectionsFor, gapFillers, stackCoverage, stackGaps, unlinkedChoices, unlinkedNote, type ConnNode,
+} from "@/lib/connections";
 import type { Relation } from "@/lib/types";
 
 // A fixture of our own: tests never depend on a real record.
@@ -122,5 +124,55 @@ describe("choiceCoverage", () => {
   it("works out suggestions from the stack only, not from the added tools", () => {
     const cicd = choiceCoverage(["builder"], ["editor"], NODES, RELS, [...phases]).find((c) => c.phase === "cicd");
     expect(cicd).toMatchObject({ gap: true, suggested: [] });
+  });
+});
+
+describe("platforms", () => {
+  // A code host two tools integrate with, and a tool that links to nothing but the host.
+  const NODES_P: ConnNode[] = [
+    ...NODES,
+    node("host", null, { kind: "platform", layer: "systems", phases: ["review", "cicd"] }),
+    node("deployer", "cicd"),
+  ];
+  const RELS_P: Relation[] = [...RELS, rel("builder", "integrates_with", "host"), rel("deployer", "integrates_with", "host")];
+  const ORDER_P = [...ORDER, "systems"] as const;
+
+  it("suggests a platform that covers an empty phase and links straight to the stack", () => {
+    const out = gapFillers(["builder"], ["cicd"], NODES_P, RELS_P);
+    expect(out[0].tools).toEqual([{ tool: "host", linkedTo: ["builder"] }]);
+  });
+
+  it("never links two tools through a shared platform", () => {
+    expect(gapFillers(["deployer"], ["design"], NODES_P, RELS_P)[0].tools).toEqual([]);
+    const all = connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P]).flatMap((g) => [...g.direct, ...g.twoStep]);
+    expect(all.map((c) => c.tool)).not.toContain("deployer");
+    expect(all.flatMap((c) => c.paths.map((p) => p.via))).not.toContain("host");
+  });
+
+  it("lists a platform only as a direct link, in its own group", () => {
+    const groups = connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P]);
+    expect(groups.find((g) => g.group === "systems")).toMatchObject({ direct: [{ tool: "host" }], twoStep: [] });
+    // editor reaches host only through builder: no two-step path ends at a platform.
+    const fromEditor = connectionsFor("editor", NODES_P, RELS_P, [...ORDER_P]);
+    expect(fromEditor.find((g) => g.group === "systems")).toBeUndefined();
+  });
+
+  it("covers a platform's phases once it is added from a suggestion", () => {
+    const cicd = choiceCoverage(["builder"], ["host"], NODES_P, RELS_P, ["design", "cicd"]).find((c) => c.phase === "cicd");
+    expect(cicd).toMatchObject({ tools: ["host"], gap: true, added: ["host"] });
+  });
+});
+
+describe("unlinkedChoices and unlinkedNote", () => {
+  it("names the choices with no link to a tool or platform, ignoring externals and unknown ids", () => {
+    // builder links to github only as an external besides its tool links; lonely links to nothing.
+    const rels = [...RELS, rel("lonely", "integrates_with", "github")];
+    expect(unlinkedChoices(["builder", "lonely", "no-such-tool"], NODES, rels)).toEqual(["lonely"]);
+  });
+
+  it("writes one line for one or several names, and nothing for none", () => {
+    expect(unlinkedNote([])).toBeNull();
+    expect(unlinkedNote(["A"])).toBe("A has no recorded link to another tool or platform on the map.");
+    expect(unlinkedNote(["A", "B", "C"])).toBe("A, B and C have no recorded link to another tool or platform on the map.");
   });
 });

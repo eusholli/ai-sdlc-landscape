@@ -16,7 +16,7 @@ export function toolSchema(phases: PhaseFile, id: string) {
     name: text,
     company: text,
     url: { type: "string", format: "uri", description: "The tool's own website." },
-    layer: { enum: phases.layers.map((l) => l.id), description: "Set for cross-cutting nodes instead of a primary phase." },
+    layer: { enum: phases.layers.map((l) => l.id), description: "Set for cross-cutting nodes instead of a primary phase. `model` is a model provider, `systems` a platform tools integrate with." },
     primary_phase: { enum: phaseIds },
     phases: { type: "array", items: { enum: phaseIds } },
     segment: { enum: phases.segments.map((s) => s.id), description: "Worked out from phases when left out." },
@@ -38,7 +38,7 @@ export function toolSchema(phases: PhaseFile, id: string) {
       additionalProperties: false,
       properties: {
         type: { enum: [...REL_TYPES] },
-        to: { type: "string", pattern: "^[\\w.-]+$", description: "A tool id, or a key in data/externals.yaml." },
+        to: { type: "string", pattern: "^[\\w.-]+$", description: "A record id (a tool, model provider or platform), or a key in data/externals.yaml." },
         sources: { type: "array", items: { type: "string", format: "uri" } },
       },
     },
@@ -50,7 +50,7 @@ export function toolSchema(phases: PhaseFile, id: string) {
       required: ["field", "url", "retrieved"],
       additionalProperties: false,
       properties: {
-        field: { enum: [...FIELDS_SOURCED, "relations"] },
+        field: { enum: [...FIELDS_SOURCED, "relations", "phases"] },
         url: { type: "string", format: "uri", pattern: "^https?://" },
         retrieved: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$" },
       },

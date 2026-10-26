@@ -5,7 +5,7 @@ import { buildRows } from "@/components/compare/compare-rows";
 import { useCompareColumns } from "@/components/compare/compare-view";
 import { Button } from "@/components/ui/button";
 import { MAX_SUGGESTED } from "@/lib/compare";
-import type { PhaseChoice } from "@/lib/connections";
+import { unlinkedNote, type PhaseChoice } from "@/lib/connections";
 import { phaseColor } from "@/lib/format";
 import type { Phase, PhaseId, ToolLite } from "@/lib/types";
 
@@ -19,6 +19,7 @@ export function StackAnalysis({
   phases,
   ids,
   coverage,
+  unlinked,
   onAddVia,
   onRemove,
 }: {
@@ -26,6 +27,8 @@ export function StackAnalysis({
   phases: Phase[];
   ids: string[];
   coverage: PhaseChoice[];
+  /** Chosen ids with no recorded link to anything on the map. */
+  unlinked: string[];
   onAddVia: (id: string) => void;
   onRemove: (id: string) => void;
 }) {
@@ -40,6 +43,7 @@ export function StackAnalysis({
   const allIds = [...new Set(filled.flatMap(topOf))];
   const { columnsFor, retry } = useCompareColumns("stack", allIds, tools);
   const labelOf = (id: PhaseId) => phases.find((p) => p.id === id)?.label ?? id;
+  const note = unlinkedNote(unlinked.map((id) => tools.find((t) => t.id === id)?.name ?? id));
 
   if (ids.length === 0) {
     return (
@@ -72,7 +76,7 @@ export function StackAnalysis({
       )}
       {filled.length === 0 && (
         <p className="text-sm text-muted-foreground">
-          No tool covering an empty phase has a recorded link to your choices.
+          {["No tool or platform covering an empty phase has a recorded link to your choices.", note].filter(Boolean).join(" ")}
         </p>
       )}
       {filled.map((g) => {
@@ -100,7 +104,10 @@ export function StackAnalysis({
       })}
       {unfilled.length > 0 && (
         <p className="text-sm text-muted-foreground">
-          {`No tool with a recorded link to your choices covers ${unfilled.map((g) => labelOf(g.phase)).join(", ")}.`}
+          {[
+            `Nothing with a recorded link to your choices covers ${unfilled.map((g) => labelOf(g.phase)).join(", ")}.`,
+            filled.length > 0 && note,
+          ].filter(Boolean).join(" ")}
         </p>
       )}
     </div>

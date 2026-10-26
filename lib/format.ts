@@ -1,5 +1,5 @@
 // Display helpers shared by every view. Client-safe.
-import type { PhaseId } from "@/lib/types";
+import type { LayerId, PhaseId } from "@/lib/types";
 import { NOT_PUBLISHED } from "@/lib/filters";
 
 /**
@@ -26,7 +26,8 @@ export const stageOf = (phase: PhaseId): StageId =>
 export const phaseColor = (phase: PhaseId | null): string =>
   phase ? `var(--stage-${stageOf(phase)})` : "var(--muted-foreground)";
 
-export const layerColor = (layer: "agent-infra" | "model"): string =>
+/** Models and platforms share the neutral colour: neither is an AI tool on the map. */
+export const layerColor = (layer: LayerId): string =>
   layer === "agent-infra" ? "var(--layer-infra)" : "var(--layer-model)";
 
 /** The text for any unpublished fact. Every view uses this; nothing renders an empty cell. */

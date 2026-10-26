@@ -1,0 +1,10 @@
+id: jetbrains
+name: JetBrains IDEs
+company: JetBrains
+url: https://www.jetbrains.com/ides/
+layer: systems
+phases: [code]
+summary: Code your way. Ship with confidence.
+sources:
+  - {field: summary, url: https://www.jetbrains.com/ides/, retrieved: 2026-10-26}
+  - {field: phases, url: https://www.jetbrains.com/ides/, retrieved: 2026-10-26}

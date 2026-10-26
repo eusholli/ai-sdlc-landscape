@@ -74,6 +74,11 @@ describe("build-data", () => {
     expect(buildLandscape(root).errors).toContain("fixture-tool: relation integrates_with github lists a source twice");
   });
 
+  it("fails a record with no sources", () => {
+    const bare = "id: fixture-tool\nname: Fixture Tool\ncompany: Fixture Co\nurl: https://fixture.example\nprimary_phase: plan\n";
+    expect(buildLandscape(scratch(bare)).errors).toContain("fixture-tool: a record needs at least one source");
+  });
+
   it("accepts the fixture as written", () => {
     expect(buildLandscape(scratch(FIXTURE)).errors).toEqual([]);
   });
@@ -106,6 +111,54 @@ describe("build-data", () => {
       .toContain("fixture-tool: repo needs a source on the vendor's own site");
     expect(buildLandscape(scratch(withRepo("https://github.com/fixture-co/fixture"))).errors)
       .toContain("fixture-tool: repo needs a source on the vendor's own site");
+  });
+
+  describe("platforms", () => {
+    const PLATFORM = `id: fixture-platform
+name: Fixture Platform
+company: Fixture Co
+url: https://platform.example
+layer: systems
+phases: [plan]
+summary: A platform that exists only in tests.
+sources:
+  - {field: summary, url: https://platform.example/, retrieved: 2026-01-02}
+  - {field: phases, url: https://platform.example/, retrieved: 2026-01-02}
+`;
+    const LINKED = FIXTURE + "relations:\n  - {type: integrates_with, to: fixture-platform, sources: [https://fixture.example/]}\n";
+    /** The fixture tool and the fixture platform, side by side. */
+    const withPlatform = (tool: string, platform: string) => {
+      const root = scratch(tool);
+      writeFileSync(join(root, "data/tools/fixture-platform.yaml"), platform);
+      return root;
+    };
+
+    it("builds a platform a tool links to as its own kind, with no segment", () => {
+      const { data, errors } = buildLandscape(withPlatform(LINKED, PLATFORM));
+      expect(errors).toEqual([]);
+      const p = (data!.nodes as (Node & { segment: unknown; phases: string[] })[]).find((n) => n.id === "fixture-platform")!;
+      expect(p.kind).toBe("platform");
+      expect(p.segment).toBeNull();
+      expect(p.phases).toEqual(["plan"]);
+    });
+
+    it("fails a platform no tool links to", () => {
+      expect(buildLandscape(withPlatform(FIXTURE, PLATFORM)).errors)
+        .toContain("fixture-platform: a platform needs a relation to it from a tool");
+    });
+
+    it("fails a platform with unsourced phases, or a primary phase", () => {
+      const unsourced = PLATFORM.replace(/\n {2}- \{field: phases,[^\n]*/, "");
+      expect(buildLandscape(withPlatform(LINKED, unsourced)).errors).toContain("fixture-platform: a platform's phases need a source");
+      const placed = PLATFORM.replace("phases: [plan]\n", "phases: [plan]\nprimary_phase: plan\n");
+      expect(buildLandscape(withPlatform(LINKED, placed)).errors).toContain("fixture-platform: a platform has no primary_phase or segment");
+    });
+
+    it("fails a name in externals.yaml that is also a record", () => {
+      const root = withPlatform(LINKED, PLATFORM);
+      writeFileSync(join(root, "data/externals.yaml"), "fixture-platform: Fixture Platform\n");
+      expect(buildLandscape(root).errors).toContain("externals.yaml: fixture-platform is also a record; delete one");
+    });
   });
 
   it("keeps the repo of a tool on GitHub under the account in its url", () => {

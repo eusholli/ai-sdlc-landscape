@@ -1,0 +1,10 @@
+id: bitbucket
+name: Bitbucket
+company: Atlassian
+url: https://bitbucket.org
+layer: systems
+phases: [code, review, cicd]
+summary: Code & CI/CD, powered by AI and the Atlassian platform.
+sources:
+  - {field: summary, url: https://bitbucket.org/product, retrieved: 2026-10-26}
+  - {field: phases, url: https://bitbucket.org/product, retrieved: 2026-10-26}

@@ -1,0 +1,10 @@
+id: gitlab
+name: GitLab
+company: GitLab
+url: https://about.gitlab.com
+layer: systems
+phases: [plan, code, review, cicd]
+summary: Planning, source control, and CI/CD in one platform.
+sources:
+  - {field: summary, url: https://about.gitlab.com/, retrieved: 2026-10-26}
+  - {field: phases, url: https://about.gitlab.com/, retrieved: 2026-10-26}

@@ -1,0 +1,8 @@
+id: slack
+name: Slack
+company: Salesforce
+url: https://slack.com
+layer: systems
+summary: All your people and AI agents working together.
+sources:
+  - {field: summary, url: https://slack.com/, retrieved: 2026-10-26}

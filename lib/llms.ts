@@ -55,7 +55,8 @@ export function llmsTxt(): string {
     "",
     `> ${ABOUT}`,
     "",
-    `${tools.filter((t) => t.kind === "tool").length} tools and ${tools.filter((t) => t.kind === "model").length} model providers ` +
+    `${tools.filter((t) => t.kind === "tool").length} tools, ${tools.filter((t) => t.kind === "model").length} model providers ` +
+      `and ${tools.filter((t) => t.kind === "platform").length} platforms the tools connect to (code hosts, trackers, editors; not AI tools) ` +
       `across ${phases().length} lifecycle phases, with ${getLandscape().relations.length} typed relations. Data as of ${dataDate()}. ` +
       `The data is ${DATA_LICENCE} (${DATA_LICENCE_URL}); the code is MIT. Source: ${REPO_URL}`,
     "",
@@ -176,7 +177,7 @@ export function llmsFullTxt(): string {
     `> ${ABOUT}`,
     "",
     `Data as of ${dataDate()}. ${DATA_LICENCE} (${DATA_LICENCE_URL}). Source: ${REPO_URL}. ` +
-      `Relation targets that are not tools here are shown by name: ${getLandscape().externals.map((e) => nameOf(e.id)).join(", ")}.`,
+      `Relation targets with no record here are shown by name: ${getLandscape().externals.map((e) => nameOf(e.id)).join(", ")}.`,
     "",
     howToRequest(),
     "",

@@ -8,7 +8,7 @@ export type PhaseId =
   | "plan" | "design" | "code" | "review" | "test" | "security" | "cicd"
   | "deploy" | "operate" | "maintain" | "understand" | "measure" | "platform";
 
-export type LayerId = "agent-infra" | "model";
+export type LayerId = "agent-infra" | "model" | "systems";
 export type SegmentId = "full-lifecycle" | "multi-phase" | "point";
 export type Autonomy = "agent" | "autonomous";
 export type RelationType =
@@ -43,10 +43,17 @@ export interface Source {
   retrieved: string;
 }
 
-/** Everything the site knows about one tool or model provider. */
+/**
+ * A tool is an AI tool on the map. A model provider is a node for built_on_model edges. A platform,
+ * such as a code host or tracker, is listed only because tools integrate with it; neither of the
+ * last two is ever counted as a tool.
+ */
+export type NodeKind = "tool" | "model" | "platform";
+
+/** Everything the site knows about one tool, model provider or platform. */
 export interface Tool {
   id: string;
-  kind: "tool" | "model";
+  kind: NodeKind;
   name: string;
   company: string;
   url: string;
@@ -137,7 +144,7 @@ export type PricingBucket = "free" | "seat" | "usage" | "subscription" | "enterp
 /** The slim projection client components receive. No sources, no long lists. */
 export interface ToolLite {
   id: string;
-  kind: "tool" | "model";
+  kind: NodeKind;
   name: string;
   company: string;
   logo: string | null;

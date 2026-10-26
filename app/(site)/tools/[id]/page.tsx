@@ -63,7 +63,8 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
             variant="page"
           />
         </div>
-        <VendorBadge id={tool.id} name={tool.name} />
+        {/* Only tools carry the "Listed on" badge; a platform is listed because tools link to it. */}
+        {tool.kind === "tool" && <VendorBadge id={tool.id} name={tool.name} />}
       </div>
     </main>
   );

@@ -277,7 +277,7 @@ export function NetworkView({ tools, externals, relations, phases, layers }: Net
         aria-live="polite"
         className="pointer-events-none absolute bottom-4 left-4 hidden max-w-[calc(100%-6rem)] rounded-md bg-background/80 px-2 py-1 text-xs text-muted-foreground backdrop-blur sm:block"
       >
-        {selectable.length} tools and models
+        {selectable.length} tools, models and platforms
         {visibleExternals > 0 ? `, ${visibleExternals} outside companies` : ""}, {links.length} relations. Click a node to focus it.
       </p>
 

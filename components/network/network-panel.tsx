@@ -9,6 +9,7 @@ import { LINE_STYLE, type Isolate } from "./graph-model";
 const LAYER_ITEMS = [
   { id: "agent-infra", label: "Agent infrastructure", color: "var(--layer-infra)" },
   { id: "model", label: "Model providers", color: "var(--layer-model)" },
+  { id: "systems", label: "Platforms tools connect to", color: "var(--layer-model)" },
 ] as const;
 
 interface NetworkPanelProps {

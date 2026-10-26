@@ -1,0 +1,10 @@
+id: jira
+name: Jira
+company: Atlassian
+url: https://www.atlassian.com/software/jira
+layer: systems
+phases: [plan]
+summary: Turn plans into agent-ready tasks.
+sources:
+  - {field: summary, url: https://www.atlassian.com/software/jira, retrieved: 2026-10-26}
+  - {field: phases, url: https://www.atlassian.com/software/jira, retrieved: 2026-10-26}

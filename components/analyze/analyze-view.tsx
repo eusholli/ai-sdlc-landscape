@@ -7,7 +7,7 @@ import { CompareView } from "@/components/compare/compare-view";
 import { useCompare } from "@/components/compare/use-compare";
 import { SegmentedSwitcher, type SegmentOption } from "@/components/segmented-switcher";
 import { splitChoices } from "@/lib/compare";
-import { choiceCoverage, type PhaseChoice } from "@/lib/connections";
+import { choiceCoverage, unlinkedChoices, type PhaseChoice } from "@/lib/connections";
 import { filterParsers, type AnalyzeTab } from "@/lib/filters";
 import type { Phase, RelationLite, ToolLite } from "@/lib/types";
 import { ChoicePanel } from "./choice-panel";
@@ -35,6 +35,11 @@ export function AnalyzeView({ tools, relations, phases }: { tools: ToolLite[]; r
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [base.join(","), added.join(","), tools, relations, phases],
   );
+  const unlinked = useMemo(
+    () => unlinkedChoices(base, tools, relations),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [base.join(","), tools, relations],
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,6 +59,7 @@ export function AnalyzeView({ tools, relations, phases }: { tools: ToolLite[]; r
         phases={phases}
         ids={ids}
         coverage={coverage}
+        unlinked={unlinked}
         onAdd={add}
         onAddVia={addVia}
         onRemove={remove}
@@ -63,7 +69,15 @@ export function AnalyzeView({ tools, relations, phases }: { tools: ToolLite[]; r
 
       {tab === "compare" && <CompareView ids={ids} tools={tools} phases={phases} onRemove={remove} />}
       {tab === "stack" && (
-        <StackAnalysis tools={tools} phases={phases} ids={ids} coverage={coverage} onAddVia={addVia} onRemove={remove} />
+        <StackAnalysis
+          tools={tools}
+          phases={phases}
+          ids={ids}
+          coverage={coverage}
+          unlinked={unlinked}
+          onAddVia={addVia}
+          onRemove={remove}
+        />
       )}
     </div>
   );

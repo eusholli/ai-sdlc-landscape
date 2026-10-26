@@ -1,0 +1,10 @@
+id: azure-devops
+name: Azure DevOps
+company: Microsoft
+url: https://azure.microsoft.com/products/devops
+layer: systems
+phases: [plan, code, review, test, cicd]
+summary: Azure DevOps is a cloud-based platform that provides integrated tools for software development teams.
+sources:
+  - {field: summary, url: https://learn.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops, retrieved: 2026-10-26}
+  - {field: phases, url: https://learn.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops, retrieved: 2026-10-26}

@@ -70,6 +70,11 @@ export function ToolDetail({
               {data.isNew && <NewBadge className="text-[10px]" />}
             </div>
             <p className="text-sm text-muted-foreground">{tool.company}</p>
+            {tool.kind === "platform" && (
+              <p className="mt-1 text-sm text-muted-foreground">
+                A platform tools on the map connect to. It is not an AI tool and is listed for its links.
+              </p>
+            )}
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
               <a
                 href={tool.url}
@@ -90,17 +95,20 @@ export function ToolDetail({
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <CompareButton id={tool.id} />
-          {!isPage && (
-            <Button asChild variant="outline" size="sm" className="max-md:h-11">
-              <Link href={`/tools/${tool.id}`}>
-                Open page
-                <ArrowUpRight aria-hidden />
-              </Link>
-            </Button>
-          )}
-        </div>
+        {(tool.kind === "tool" || !isPage) && (
+          <div className="flex flex-wrap gap-2">
+            {/* Analyze choices takes tools; a platform joins only as a suggestion for an empty phase. */}
+            {tool.kind === "tool" && <CompareButton id={tool.id} />}
+            {!isPage && (
+              <Button asChild variant="outline" size="sm" className="max-md:h-11">
+                <Link href={`/tools/${tool.id}`}>
+                  Open page
+                  <ArrowUpRight aria-hidden />
+                </Link>
+              </Button>
+            )}
+          </div>
+        )}
       </header>
 
       <figure className="border-l-2 pl-4">

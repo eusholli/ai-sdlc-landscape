@@ -109,7 +109,7 @@ export const getLandscape = (): Landscape => landscape;
 export const phases = (): Phase[] => landscape.phases;
 export const layers = (): Layer[] => landscape.layers;
 export const segments = (): Segment[] => landscape.segments;
-/** Every node: the tools plus the model providers. */
+/** Every node: the tools, the model providers and the platforms. */
 export const allTools = (): Tool[] => landscape.tools;
 export const externals = (): External[] => landscape.externals;
 export const relations = (): Relation[] => landscape.relations;
@@ -122,10 +122,10 @@ export const buildDate = (): string => landscape.built;
 
 export const toolById = (id: string): Tool | undefined => byId.get(id);
 
-/** Display name for any relation endpoint: a tool, a model provider or an external company. */
+/** Display name for any relation endpoint: a tool, a model provider, a platform or an external. */
 export const nameOf = (id: string): string => byId.get(id)?.name ?? externalById.get(id)?.name ?? id;
 
-/** True when the id is a node with its own page (tools and models), false for externals. */
+/** True when the id is a node with its own page (tools, models and platforms), false for externals. */
 export const hasPage = (id: string): boolean => byId.has(id);
 
 /** The label of where a tool sits on the map: its primary phase, or its layer. Null when neither. */
@@ -140,7 +140,7 @@ export function placeLabel(t: Pick<Tool, "primaryPhase" | "layer">): string | nu
 /**
  * Tools grouped under each phase column. A tool appears under its primary phase only; the
  * `phases` array drives the coverage strip and spanning bars, not duplicate tiles.
- * Layer nodes (agent infrastructure, models) are excluded: see `toolsByLayer`.
+ * Layer nodes (agent infrastructure, models, platforms) are excluded: see `toolsByLayer`.
  */
 export function toolsByPhase(): Record<PhaseId, Tool[]> {
   const out = Object.fromEntries(landscape.phases.map((p) => [p.id, [] as Tool[]])) as Record<PhaseId, Tool[]>;
@@ -153,7 +153,7 @@ export function toolsByPhase(): Record<PhaseId, Tool[]> {
 }
 
 export function toolsByLayer(): Record<LayerId, Tool[]> {
-  const out: Record<LayerId, Tool[]> = { "agent-infra": [], model: [] };
+  const out: Record<LayerId, Tool[]> = { "agent-infra": [], model: [], systems: [] };
   for (const t of landscape.tools) if (t.layer) out[t.layer].push(t);
   for (const k of Object.keys(out) as LayerId[]) out[k].sort((a, b) => a.name.localeCompare(b.name));
   return out;
@@ -179,9 +179,9 @@ export interface ToolConnections {
   names: Record<string, string>;
 }
 
-const CONN_ORDER: ConnGroup[] = [...PHASE_ORDER, "agent-infra"];
+const CONN_ORDER: ConnGroup[] = [...PHASE_ORDER, "agent-infra", "systems"];
 
-/** Tools linked to this one directly or through one other tool, by phase, each step sourced. */
+/** Tools and platforms linked to this one directly, and tools through one other tool, by phase, each step sourced. */
 export function connectionsOf(id: string): ToolConnections {
   const groups = connectionsFor(id, landscape.tools, landscape.relations, CONN_ORDER, nameOf);
   const ids = new Set(groups.flatMap((g) => [...g.direct, ...g.twoStep]).flatMap((c) => [c.tool, ...c.paths.flatMap((p) => p.steps.flatMap((s) => [s.from, s.to]))]));

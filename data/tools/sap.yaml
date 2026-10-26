@@ -1,0 +1,8 @@
+id: sap
+name: SAP
+company: SAP
+url: https://www.sap.com
+layer: systems
+summary: "As a global leader in enterprise applications and business AI, SAP (NYSE:SAP) stands at the nexus of business and technology."
+sources:
+  - {field: summary, url: https://news.sap.com/2026/10/sap-announces-q3-2026-results/, retrieved: 2026-10-26}

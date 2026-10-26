@@ -3,7 +3,7 @@
 //   npx tsx scripts/build-data.ts           # check, then write data/landscape.json
 //   npx tsx scripts/build-data.ts --check   # check only; exits 1 on any error
 //
-// data/tools/<id>.yaml, one file per tool or model provider, is the hand-kept source. The site
+// data/tools/<id>.yaml, one file per tool, model provider or platform, is the hand-kept source. The site
 // reads landscape.json, which is generated and not committed. Provenance is checked, not trusted:
 // a field with a value and no source is an error, and every source carries the date it was read.
 // A field with no value reads "unknown" in the output. Each record's history (who added it and who
@@ -37,6 +37,12 @@ export const TRADE_PRESS = new Set([
 ]);
 const TIER_D_HINT = /(wiseguy|marketresearch|giiresearch|top-\d+|best-.*-tools)/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * A record's kind follows its layer. A platform (layer `systems`) is not an AI tool: it is on the
+ * map only because tools on it integrate with it or ship inside it, and it is never counted as one.
+ */
+export const KIND_OF_LAYER: Record<string, "model" | "platform"> = { model: "model", systems: "platform" };
 
 type Rec = Record<string, unknown>;
 interface SourceIn { field: string; url: string; retrieved: string }
@@ -146,7 +152,7 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
     const tid = t.id as string;
     for (const k of ["name", "company", "url"]) if (isEmpty(t[k])) errors.push(`${tid}: ${k} is required`);
     const layer = (t.layer as string | undefined) ?? null;
-    const rec: Rec = { id: tid, kind: layer === "model" ? "model" : "tool" };
+    const rec: Rec = { id: tid, kind: (layer && KIND_OF_LAYER[layer]) || "tool" };
     rec.name = t.name ?? "unknown";
     rec.company = String(t.company ?? "unknown");
     rec.url = t.url ?? "unknown";
@@ -161,6 +167,7 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
     } else if (!phaseIds.has(pp)) {
       errors.push(`${tid}: primary_phase ${JSON.stringify(pp)} not in phases.json`);
     }
+    if (rec.kind === "platform" && (pp || t.segment)) errors.push(`${tid}: a platform has no primary_phase or segment`);
     let ph = asList(t.phases) as string[];
     if (!ph.length && pp) ph = [pp];
     for (const p of ph) if (!phaseIds.has(p)) errors.push(`${tid}: phase ${JSON.stringify(p)} not in phases.json`);
@@ -176,6 +183,8 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
     // sourced fields
     const prov: Rec[] = [];
     const sourced = new Set<string>();
+    // With no source the record has no date it was last checked, so every record needs one.
+    if (!asList(t.sources).length) errors.push(`${tid}: a record needs at least one source`);
     for (const s of asList(t.sources) as SourceIn[]) {
       if (!s || typeof s !== "object" || !s.field || !s.url) {
         errors.push(`${tid}: a source needs field and url: ${JSON.stringify(s)}`);
@@ -215,6 +224,8 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
         if (!tiers.has("A") && !tiers.has("B")) errors.push(`${tid}: acquisition needs a Tier A or B source`);
       }
     }
+    // A platform's phases are a claim about someone else's product, so they need its own page.
+    if (rec.kind === "platform" && ph.length && !sourced.has("phases")) errors.push(`${tid}: a platform's phases need a source`);
     rec.sources = prov;
     const dates = prov.map((p) => p.retrieved as string).filter((d) => ISO_DATE.test(d)).sort();
     rec.last_verified = dates.at(-1) ?? "unknown";
@@ -239,6 +250,15 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
     if (rec.kind === "tool" && rec.summary === "unknown") warns.push(`${tid}: no summary`);
   }
 
+  // A platform is listed only as a target: one no tool links to has no reason to be on the map.
+  const kindOf = new Map(nodes.map((n) => [n.id as string, n.kind]));
+  for (const n of nodes) {
+    if (n.kind !== "platform") continue;
+    if (!relations.some((r) => r.to === n.id && kindOf.get(r.from as string) === "tool")) {
+      errors.push(`${n.id}: a platform needs a relation to it from a tool`);
+    }
+  }
+
   // The screened list: what a scan found and a person turned away. A tool cannot be both.
   const scrPath = join(root, "data/screened.yaml");
   const screened = (existsSync(scrPath) ? parse(readFileSync(scrPath, "utf8")) ?? [] : []) as Rec[];
@@ -257,7 +277,10 @@ export function buildLandscape(root = ".", today = new Date().toISOString().slic
   const extPath = join(root, "data/externals.yaml");
   const extNames: Record<string, string> = existsSync(extPath) ? parse(readFileSync(extPath, "utf8")) ?? {} : {};
   for (const [k, e] of externals) e.name = extNames[k] ?? k;
-  for (const k of Object.keys(extNames)) if (!externals.has(k)) warns.push(`externals.yaml: ${k} is not a relation target`);
+  for (const k of Object.keys(extNames)) {
+    if (idSet.has(k)) errors.push(`externals.yaml: ${k} is also a record; delete one`);
+    else if (!externals.has(k)) warns.push(`externals.yaml: ${k} is not a relation target`);
+  }
 
   // Phase order, then the cross-cutting layers, then name: the order the census page lists them.
   const rank = (n: Rec): number => (n.layer ? 100 : (phaseOrder.get(n.primary_phase) ?? 99));
@@ -289,8 +312,9 @@ function main() {
   for (const w of warns) console.log("warn ", w);
   if (data) {
     const nodes = data.nodes as Rec[];
-    const tools = nodes.filter((n) => n.kind === "tool").length;
-    console.log(`${tools} tools, ${nodes.length - tools} model nodes, ${(data.externals as Rec[]).length} external nodes, ` +
+    const count = (k: string) => nodes.filter((n) => n.kind === k).length;
+    console.log(`${count("tool")} tools, ${count("model")} model nodes, ${count("platform")} platforms, ` +
+      `${(data.externals as Rec[]).length} external nodes, ` +
       `${(data.relations as Rec[]).length} relations, ${warns.length} warnings`);
     if (!check) writeFileSync("data/landscape.json", JSON.stringify(data, null, 1) + "\n");
   } else {

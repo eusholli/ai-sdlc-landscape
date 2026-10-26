@@ -14,6 +14,13 @@ A tool is in the landscape when all three hold:
 
 A site that writes about tools (a blog, an analyst, an agency, a listicle) is not a tool.
 
+**Platforms** are the one exception. A code host, tracker, editor or other product that a tool on
+the map integrates with or ships inside can have a record with `layer: systems`, so the link has
+a page and Analyze choices can suggest it for an empty phase. A platform is not an AI tool and is
+never counted as one. Its record has no `primary_phase` and no `segment`; its `phases` are optional
+and need a source when given; and at least one tool must have a relation to it. Two tools are never
+linked to each other through a platform they share.
+
 A candidate that fails the bar goes in `data/screened.yaml` with the reason, so the next person
 does not judge it again. `rejected` keeps it out of every future scan; `deferred` lists it at the
 end of each scan for another look, for a tool in early access or a site that refused to be read.
@@ -22,7 +29,7 @@ end of each scan for another look, for a tool in early access or a site that ref
 
 - **Every value has a public source.** Add a `sources` entry naming the field, the URL of a public
   page that states the fact, and the date you read it (`retrieved: YYYY-MM-DD`). `pnpm check` fails
-  a value without one.
+  a value without one, and a record with no sources at all.
 - **Leave out what is not published.** Do not guess a price, a customer or a founding year. A
   missing field shows as "Not published", which is a fact in its own right.
 - **Quote the vendor's own words for `summary`.** It is their one-line claim, not ours.
@@ -41,7 +48,8 @@ end of each scan for another look, for a tool in early access or a site that ref
   pages count as Tier A. A closed-source tool has no `repo`, so GitHub pages about it are Tier C.
 - **Relations** go under `relations` on the tool they start from, as `{type, to, sources}`. The type
   is one of `integrates_with`, `built_on_model`, `acquired_by`, `partners_with`, `competes_with` or
-  `ships_inside`. A target that is not a tool here needs a display name in `data/externals.yaml`.
+  `ships_inside`. A target with no record here (a company, a standard, a product off the map) needs a display
+  name in `data/externals.yaml`. An id cannot be both a record and an external.
   Each URL appears once in a relation's `sources`.
 
 ## Making a change

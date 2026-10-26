@@ -11,7 +11,8 @@ development lifecycle, live at https://aisdlclandscape.org. Two things live here
 both are public:
 
 - **The dataset.** One YAML record per tool in `data/tools/<id>.yaml`, plus `data/phases.json`
-  and `data/externals.yaml`. Every fact carries a public source. Anyone, person or agent, asks for
+  and `data/externals.yaml`. Model providers (`layer: model`) and the platforms tools integrate with
+  (`layer: systems`, such as code hosts and trackers) have records too, but are never counted as tools. Every fact carries a public source. Anyone, person or agent, asks for
   a change by opening a GitHub issue in plain words; the maintainer triages each one locally with
   the `triage` skill. Pull requests that edit records are welcome too. Licence CC BY 4.0 (`LICENSE-DATA`).
 - **The site.** Next.js 15 (App Router), React 19, Tailwind 4, TypeScript. It reads only
@@ -134,6 +135,7 @@ For UI copy, docs, commit messages and pull request text:
 | Path | What is there |
 |---|---|
 | `data/tools/` | one record per tool, the source of truth |
+| `data/externals.yaml` | display names for relation targets with no record |
 | `data/screened.yaml` | candidates judged and rejected or deferred, with reasons |
 | `data/scan.yaml` | the scan's queries and the hosts it never lists |
 | `scripts/build-data.ts` | validation, tiering and the build into `data/landscape.json` |

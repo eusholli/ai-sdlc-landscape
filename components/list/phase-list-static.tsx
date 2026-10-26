@@ -10,7 +10,7 @@ import { buildGroups } from "@/components/list/groups";
 import type { PhaseListProps } from "@/components/list/phase-list";
 
 export function PhaseListStatic({ tools, phases, layers, fullLifecycleIds }: PhaseListProps) {
-  const census = tools.filter((t) => t.layer !== "model").length;
+  const census = tools.filter((t) => t.kind === "tool").length;
   const groups = buildGroups(tools, phases, layers, fullLifecycleIds, false).filter((g) => g.tools.length > 0);
   return (
     <div className="border-b">

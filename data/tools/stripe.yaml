@@ -1,0 +1,8 @@
+id: stripe
+name: Stripe
+company: Stripe
+url: https://stripe.com
+layer: systems
+summary: Financial infrastructure to grow your revenue.
+sources:
+  - {field: summary, url: https://stripe.com/, retrieved: 2026-10-26}

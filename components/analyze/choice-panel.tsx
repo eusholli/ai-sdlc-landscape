@@ -7,7 +7,7 @@ import { Logo } from "@/components/logo";
 import { ToolLink } from "@/components/tool/tool-actions";
 import { Button } from "@/components/ui/button";
 import { phaseColor } from "@/lib/format";
-import type { PhaseChoice } from "@/lib/connections";
+import { unlinkedNote, type PhaseChoice } from "@/lib/connections";
 import type { Phase, PhaseId, ToolLite } from "@/lib/types";
 
 /** How many suggestions a phase card lists before "Show more". Added ones are always listed. */
@@ -18,25 +18,30 @@ const TEXT_BUTTON =
   "self-start rounded-sm text-xs underline underline-offset-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:min-h-11";
 
 /**
- * The chosen tools, then one card per phase the stack leaves empty that a linked tool covers.
- * Linked tools are ticked in and out; the phase stays open so several can be compared. The
- * phases already covered, and the gaps no linked tool covers, are named in one line below.
+ * The chosen tools, then one card per phase the stack leaves empty that a linked tool or platform
+ * covers. Suggestions are ticked in and out; the phase stays open so several can be compared. The
+ * phases already covered, the gaps nothing linked covers and the choices with no link at all are
+ * named below.
  */
 export function ChoicePanel({
   tools,
   phases,
   ids,
   coverage,
+  unlinked,
   onAdd,
   onAddVia,
   onRemove,
   onClear,
   onMore,
 }: {
+  /** Tools and platforms; the picker lists the tools only. */
   tools: ToolLite[];
   phases: Phase[];
   ids: string[];
   coverage: PhaseChoice[];
+  /** Chosen ids with no recorded link to anything on the map. */
+  unlinked: string[];
   onAdd: (id: string) => void;
   /** Add a linked suggestion, keeping its phase open. */
   onAddVia: (id: string) => void;
@@ -52,7 +57,9 @@ export function ChoicePanel({
   const covered = coverage.filter((c) => c.tools.length > 0).length;
   const open = coverage.filter((c) => c.gap && c.suggested.length > 0);
   const closed = coverage.filter((c) => !c.gap).map((c) => c.phase);
-  const unlinked = coverage.filter((c) => c.gap && c.suggested.length === 0).map((c) => c.phase);
+  const unfilled = coverage.filter((c) => c.gap && c.suggested.length === 0).map((c) => c.phase);
+  const note = unlinkedNote(unlinked.map(nameOf));
+  const pickable = tools.filter((t) => t.kind === "tool");
   const [expanded, setExpanded] = useState<Set<PhaseId>>(new Set());
   const toggleExpanded = (phase: PhaseId) =>
     setExpanded((prev) => {
@@ -67,7 +74,7 @@ export function ChoicePanel({
         Your choices
       </h2>
       <div className="flex flex-wrap items-center gap-2">
-        <AddToolPopover tools={tools} selected={ids} onAdd={(id) => onAdd(id)} />
+        <AddToolPopover tools={pickable} selected={ids} onAdd={(id) => onAdd(id)} />
         {chosen.length > 0 && (
           <Button type="button" variant="ghost" size="sm" className="max-sm:h-11" onClick={onClear}>
             Clear all
@@ -84,8 +91,8 @@ export function ChoicePanel({
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed px-6 py-12 text-center">
           <p className="font-medium">No tools chosen yet</p>
           <p className="max-w-prose text-sm text-muted-foreground">
-            Add the tools you run or are weighing. For each phase none of them covers, you see the tools with a
-            recorded integration or partnership with one you chose, and can tick several to compare. You can also add a tool
+            Add the tools you run or are weighing. For each phase none of them covers, you see the tools and
+            platforms with a recorded integration or partnership with one you chose, and can tick several to compare. You can also add a tool
             from the map, the search or a tool&apos;s detail view.
           </p>
         </div>
@@ -149,6 +156,9 @@ export function ChoicePanel({
                                 <ToolLink id={s.tool} className={LINK}>
                                   {nameOf(s.tool)}
                                 </ToolLink>{" "}
+                                {byId.get(s.tool)?.kind === "platform" && (
+                                  <span className="rounded-sm border px-1 text-[0.6875rem] text-muted-foreground">Platform</span>
+                                )}{" "}
                                 <span className="text-xs text-muted-foreground">via {s.linkedTo.map(nameOf).join(", ")}</span>
                               </span>
                               <Button
@@ -187,19 +197,22 @@ export function ChoicePanel({
             </>
           ) : (
             <p className="text-sm text-muted-foreground">
-              No phase your stack leaves empty has a tool with a recorded link to your choices.
+              No phase your stack leaves empty has a tool or platform with a recorded link to your choices.
             </p>
           )}
-          {(closed.length > 0 || unlinked.length > 0) && (
+          {(closed.length > 0 || unfilled.length > 0 || note) && (
             <p className="text-sm text-muted-foreground">
-              {closed.length > 0 && `Covered by your choices: ${closed.map(labelOf).join(", ")}.`}
-              {closed.length > 0 && unlinked.length > 0 && " "}
-              {unlinked.length > 0 && `No tool linked to your choices covers ${unlinked.map(labelOf).join(", ")}.`}
+              {[
+                closed.length > 0 && `Covered by your choices: ${closed.map(labelOf).join(", ")}.`,
+                unfilled.length > 0 && `Nothing linked to your choices covers ${unfilled.map(labelOf).join(", ")}.`,
+                note,
+              ].filter(Boolean).join(" ")}
             </p>
           )}
           <p className="text-xs text-muted-foreground">
             A suggestion covers a phase none of your choices covers and has a recorded integration, partnership or
-            bundling with one of them. A link is a sourced record, not a judgement of fit.
+            bundling with one of them. A platform, such as a code host or tracker, is not an AI tool; it is listed
+            because tools integrate with it. A link is a sourced record, not a judgement of fit.
           </p>
         </>
       )}

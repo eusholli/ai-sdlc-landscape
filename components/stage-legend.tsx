@@ -3,6 +3,7 @@ import { STAGES, layerColor } from "@/lib/format";
 const LAYERS = [
   { id: "agent-infra", label: "Agent infrastructure" },
   { id: "model", label: "Model providers" },
+  { id: "systems", label: "Platforms tools connect to" },
 ] as const;
 
 export function StageLegend({ className }: { className?: string }) {

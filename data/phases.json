@@ -96,6 +96,11 @@
    "id": "model",
    "label": "Model providers",
    "description": "Foundation model vendors that tools build on. Nodes for built_on_model edges, not scored as tools."
+  },
+  {
+   "id": "systems",
+   "label": "Platforms tools connect to",
+   "description": "Code hosts, trackers, editors and other products that tools on the map integrate with or ship inside. Listed so every integration has a page; not AI tools and never counted as tools."
   }
  ],
  "segments": [

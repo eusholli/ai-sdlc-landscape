@@ -1,0 +1,10 @@
+id: figma
+name: Figma
+company: Figma
+url: https://www.figma.com
+layer: systems
+phases: [design]
+summary: The full-stack creative canvas.
+sources:
+  - {field: summary, url: https://www.figma.com/, retrieved: 2026-10-26}
+  - {field: phases, url: https://www.figma.com/, retrieved: 2026-10-26}

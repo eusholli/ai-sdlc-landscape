@@ -86,8 +86,8 @@ export function ConnectionGroups({
 }) {
   const { groups, names } = connections;
   const labelOf = (g: ConnGroup) =>
-    g === "agent-infra" ? (refs.layers.find((l) => l.id === g)?.label ?? "Agent infrastructure") : (refs.phases.find((p) => p.id === g)?.label ?? g);
-  const colourOf = (g: ConnGroup) => (g === "agent-infra" ? layerColor(g) : phaseColor(g));
+    g === "agent-infra" || g === "systems" ? (refs.layers.find((l) => l.id === g)?.label ?? g) : (refs.phases.find((p) => p.id === g)?.label ?? g);
+  const colourOf = (g: ConnGroup) => (g === "agent-infra" || g === "systems" ? layerColor(g) : phaseColor(g));
 
   return (
     <section aria-labelledby="connections-heading" className="flex flex-col gap-3">

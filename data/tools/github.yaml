@@ -1,0 +1,10 @@
+id: github
+name: GitHub
+company: GitHub (Microsoft)
+url: https://github.com
+layer: systems
+phases: [plan, code, review, cicd]
+summary: With GitHub, developers, agents, and code come together on one platform.
+sources:
+  - {field: summary, url: https://github.com/, retrieved: 2026-10-26}
+  - {field: phases, url: https://github.com/, retrieved: 2026-10-26}

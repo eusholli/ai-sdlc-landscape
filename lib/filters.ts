@@ -84,7 +84,7 @@ export const filterParsers = {
   oss: parseAsBoolean.withDefault(false),
   moved: parseAsBoolean.withDefault(false), // only acquired or shut down
   recent: parseAsBoolean.withDefault(false), // only tools added in the last 30 days
-  layers: parseAsBoolean.withDefault(true), // show agent-infra and model bands
+  layers: parseAsBoolean.withDefault(true), // show the agent-infra, model and platform bands
   view: parseAsStringLiteral(VIEWS).withDefault("map"),
   tool: parseAsString, // open drawer
   compare: parseAsArrayOf(parseAsString).withDefault([]),

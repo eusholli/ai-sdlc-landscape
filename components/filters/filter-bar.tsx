@@ -65,8 +65,8 @@ function FilterBarContent({ tools, phases, segments }: FilterBarProps) {
     [facets, tools, state],
   );
 
-  // Counts cover the census tools; the model providers are context, not part of the count.
-  const census = useMemo(() => tools.filter((t) => t.layer !== "model"), [tools]);
+  // Counts cover the census tools; model providers and platforms are context, not part of the count.
+  const census = useMemo(() => tools.filter((t) => t.kind === "tool"), [tools]);
   const shown = useMemo(() => applyFilters(census, state).length, [census, state]);
   const anyNew = useMemo(() => tools.some((t) => t.isNew), [tools]);
 

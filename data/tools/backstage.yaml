@@ -1,0 +1,10 @@
+id: backstage
+name: Backstage
+company: CNCF
+url: https://backstage.io
+layer: systems
+phases: [platform]
+summary: Backstage is an open source framework for building developer portals.
+sources:
+  - {field: summary, url: https://backstage.io/docs/overview/what-is-backstage, retrieved: 2026-10-26}
+  - {field: phases, url: https://backstage.io/docs/overview/what-is-backstage, retrieved: 2026-10-26}

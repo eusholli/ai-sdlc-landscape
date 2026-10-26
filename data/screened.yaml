@@ -7,7 +7,6 @@
 #
 # url is what a scan matches on, by domain. The entries dated 2026-10-21 are from the first census.
 - {name: AdaCore, url: https://www.adacore.com, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
-- {name: Backstage, url: https://backstage.io, decision: rejected, reason: "no AI claim; kept as a relation target", date: 2026-10-21}
 - {name: Brainboard, url: https://www.brainboard.co, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}
 - {name: CodeMender (Google DeepMind), url: https://deepmind.google/discover/blog/introducing-codemender-an-ai-agent-for-code-security/, decision: rejected, reason: "a research agent, not a product", date: 2026-10-21}
 - {name: Dagger, url: https://dagger.io, decision: rejected, reason: "AI is not core to the product", date: 2026-10-21}

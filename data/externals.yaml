@@ -1,29 +1,16 @@
-# Display names for relation targets that are not tools in the landscape.
+# Display names for relation targets that have no record: companies, standards and products off the map.
 atlassian: Atlassian
 aws: Amazon Web Services
-azure-devops: Azure DevOps
-backstage: Backstage (CNCF)
-bitbucket: Bitbucket
 boost-security: Boost Security
 claude-managed-agents: Claude Managed Agents (Anthropic)
 clickup: ClickUp
-databricks: Databricks
-figma: Figma
 git: Git
-github: GitHub
-gitlab: GitLab
 glean: Glean
 google-co: Google
-jetbrains: JetBrains IDEs
-jira: Jira
 k6: Grafana k6
 mcp: Model Context Protocol
 microsoft: Microsoft
 openai-agents-api: OpenAI Agents API
 pact: Pact
-sap: SAP
-slack: Slack
 spacex: SpaceX
-stripe: Stripe
-vs-code: Visual Studio Code
 wix: Wix
