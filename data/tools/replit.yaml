@@ -18,6 +18,7 @@ last_round: $400M Series D at a $9B valuation (Mar 2026)
 relations:
   - {type: integrates_with, to: databricks, sources: [https://replit.com/]}
   - {type: integrates_with, to: stripe, sources: [https://replit.com/]}
+  - {type: integrates_with, to: linear, sources: [https://docs.replit.com/replitai/integrations]}
 sources:
   - {field: summary, url: https://replit.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://replit.com/, retrieved: 2026-10-21}
@@ -27,3 +28,4 @@ sources:
   - {field: deployment, url: https://replit.com/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://replit.com/, retrieved: 2026-10-21}
   - {field: last_round, url: https://replit.com/blog/replit-raises-400-million-dollars, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.replit.com/replitai/integrations, retrieved: 2026-10-25}

@@ -14,6 +14,8 @@ pricing_model: subscription plus usage (credits)
 entry_price: Free
 founded: 2023
 last_round: $400M Series C at a $13.3B valuation, led by Menlo Ventures
+relations:
+  - {type: integrates_with, to: linear, sources: [https://docs.lovable.dev/integrations/linear]}
 sources:
   - {field: gtm_partners, url: https://lovable.dev/partners, retrieved: 2026-10-21}
   - {field: summary, url: https://lovable.dev/pricing, retrieved: 2026-10-21}
@@ -22,3 +24,4 @@ sources:
   - {field: founded, url: https://www.vestbee.com/insights/articles/lovable-secures-400-m, retrieved: 2026-10-21}
   - {field: last_round, url: https://lovable.dev/blog/series-c, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.vestbee.com/insights/articles/lovable-secures-400-m, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.lovable.dev/integrations/linear, retrieved: 2026-10-25}
