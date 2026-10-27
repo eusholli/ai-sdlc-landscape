@@ -1,0 +1,27 @@
+id: entire
+name: Entire
+company: Entire
+url: https://entire.com
+primary_phase: understand
+phases: [understand, review, cicd]
+target_buyer: [developer]
+interface: [web, cli]
+summary: "The Git Forge for agent-human collaboration."
+open_source: true
+repo: https://github.com/entireio/cli
+last_round: $60M seed, led by Felicis, at a $300M valuation (2026)
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: openai-codex, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: cursor, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: github-copilot, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: opencode, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: factory, sources: [https://github.com/entireio/cli]}
+  - {type: integrates_with, to: github, sources: [https://github.com/entireio/cli]}
+sources:
+  - {field: summary, url: https://entire.com/, retrieved: 2026-10-27}
+  - {field: repo, url: https://entire.com/, retrieved: 2026-10-27}
+  - {field: open_source, url: https://github.com/entireio/cli, retrieved: 2026-10-27}
+  - {field: last_round, url: https://techcrunch.com/2026/02/10/former-github-ceo-raises-record-60m-dev-tool-seed-round-at-300m-valuation/, retrieved: 2026-10-27}
+  - {field: relations, url: https://github.com/entireio/cli, retrieved: 2026-10-27}
