@@ -5,7 +5,7 @@ url: https://linearb.io
 primary_phase: measure
 phases: [measure, review]
 target_buyer: [eng leader]
-interface: [web, pr-bot]
+interface: [web, pr-bot, mcp]
 summary: Helps engineering leaders prove AI improves throughput without losing delivery confidence, with automations for agents, teams and managers.
 customers: [SurveyMonkey, Syngenta, INGKA, Expedia, Peloton, Equinix, Norwegian Cruise Line]
 traction: Cycle time down 19% on average in the first year (company claim)
@@ -23,6 +23,7 @@ relations:
   - {type: integrates_with, to: bitbucket, sources: [https://linearb.io/pricing, https://linearb.io/compare/dx-vs-linearb]}
 sources:
   - {field: gtm_partners, url: https://linearb.io/pricing, retrieved: 2026-10-21}
+  - {field: interface, url: https://linearb.io/platform/mcp-server, retrieved: 2026-10-27}
   - {field: summary, url: https://linearb.io/, retrieved: 2026-10-21}
   - {field: customers, url: https://linearb.io/, retrieved: 2026-10-21}
   - {field: traction, url: https://linearb.io/, retrieved: 2026-10-21}
