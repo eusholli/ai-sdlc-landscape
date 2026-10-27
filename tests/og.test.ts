@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { markBars, markSvg, STAGE_HEX } from "@/lib/og";
 import { ico } from "@/scripts/favicon";
+import { markPadding, SOCIAL_ASSETS } from "@/scripts/social";
 
 describe("site mark", () => {
   it("lays six rising bars in the stage colours inside the square", () => {
@@ -34,5 +35,22 @@ describe("site mark", () => {
     expect(out.readUInt32LE(6 + 12)).toBe(38);
     expect(out.readUInt32LE(22 + 12)).toBe(41);
     expect(out.subarray(38)).toEqual(Buffer.concat([a, b]));
+  });
+
+  it("keeps every bar corner of a profile image inside the circle the networks cut", () => {
+    for (const a of SOCIAL_ASSETS.filter((x) => x.kind === "mark")) {
+      expect(a.width).toBe(a.height);
+      const c = a.width / 2;
+      for (const b of markBars(a.width, markPadding(a.width))) {
+        for (const [x, y] of [[b.x, b.y], [b.x + b.width, b.y], [b.x, b.y + b.height], [b.x + b.width, b.y + b.height]]) {
+          expect(Math.hypot(x - c, y - c)).toBeLessThanOrEqual(c);
+        }
+      }
+    }
+  });
+
+  it("draws the LinkedIn cover at its 6:1 display shape", () => {
+    const cover = SOCIAL_ASSETS.find((a) => a.file === "linkedin-cover.png")!;
+    expect(cover.width * 191).toBe(cover.height * 1128);
   });
 });

@@ -53,3 +53,6 @@ next-env.d.ts
 
 # screenshots from pnpm shots
 /.shots/
+
+# LinkedIn and X profile images from pnpm social
+/.social/

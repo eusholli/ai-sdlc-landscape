@@ -53,6 +53,7 @@ pnpm data:links       # fetch every source URL; --changed for records changed ag
                       # --refresh to stamp `retrieved` on each source that answered
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
 pnpm favicon          # redraw app/favicon.ico from the site mark (markBars in lib/og.ts)
+pnpm social           # draw the LinkedIn and X profile images from the site mark, into .social/
 pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
 pnpm digest [YYYY-MM] # last month's changes as a short post and a long version, in .digest/
 pnpm shots            # with `pnpm dev` running: screenshots of the main pages in both themes, in .shots/
