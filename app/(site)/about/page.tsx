@@ -64,8 +64,9 @@ export default function AboutPage() {
 
         <Section id="inclusion" title="What gets in">
           <p>
-            A tool is included when it is a shipping product with AI in the software lifecycle and has a public page.
-            Announcements, waitlists and research demos do not count. Model providers appear as a separate layer
+            A tool is included when it is a shipping product built for AI-driven software work and has a public page.
+            Either AI does the work, or the product is made for AI agents to build, run or check software with, and
+            the vendor says so in its own main claim. Announcements, waitlists and research demos do not count. Model providers appear as a separate layer
             because many tools build on them.
           </p>
         </Section>
@@ -97,7 +98,7 @@ export default function AboutPage() {
         <Section id="excluded" title="What is left out">
           <p>
             Anything that fails the bar above is out: products with no public page, products that have not shipped, and
-            tools where AI plays no part in software work. Companies that only appear as the other end of a relation,
+            tools that are not built for AI-driven software work. Companies that only appear as the other end of a relation,
             such as a platform a tool ships inside, are recorded as context. They are not counted as tools and have no
             page of their own.
           </p>

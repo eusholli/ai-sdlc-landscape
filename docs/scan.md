@@ -45,7 +45,7 @@ Work down from the top and stop when the rows stop being plausible. For each one
    - name: Example
      url: https://example.com
      decision: rejected   # or deferred
-     reason: a code review add-on for one IDE, not an AI-native product
+     reason: a code review add-on for one IDE, not built for AI-driven software work
      date: 2026-10-22
    ```
 

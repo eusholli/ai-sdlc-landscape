@@ -6,13 +6,20 @@ The landscape is only as good as its sources, so every fact needs one.
 
 A tool is in the landscape when all three hold:
 
-1. **AI is the core of the product**, not a feature added to an older one, and it works on some
-   part of building, shipping or running software.
+1. **It is built for AI-driven software work.** Either AI does the work, or the product is made
+   for AI agents to build, run or check software with. Either way it works on some part of
+   building, shipping or running software. The vendor says so in its own main claim (the line that
+   becomes `summary`), and the product works differently because of it: an AI feature added to an
+   older product, or a library whose only change is new copy about agents, is not enough. "It is
+   useful to people who build with AI" is not the test, since that holds for most software.
 2. **Anyone can use it today**: generally available or in public beta. A waitlist or early access
    programme is not enough yet.
 3. **Someone stands behind it**: a named company, or an open-source project in wide use.
 
 A site that writes about tools (a blog, an analyst, an agency, a listicle) is not a tool.
+
+The bar is a judgment, so the build cannot check it. A person applies it in triage and in each
+scan, and `data/screened.yaml` records every candidate turned down, with the reason.
 
 **Platforms** are the one exception. A code host, tracker, editor or other product that a tool on
 the map integrates with or ships inside can have a record with `layer: systems`, so the link has
