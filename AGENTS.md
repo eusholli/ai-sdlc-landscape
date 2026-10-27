@@ -52,6 +52,7 @@ pnpm vitest run tests/scan.test.ts -t "name"   # one file or one test; run `pnpm
 pnpm data:links       # fetch every source URL; --changed for records changed against origin/main,
                       # --refresh to stamp `retrieved` on each source that answered
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
+pnpm favicon          # redraw app/favicon.ico from the site mark (markBars in lib/og.ts)
 pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
 pnpm digest [YYYY-MM] # last month's changes as a short post and a long version, in .digest/
 pnpm shots            # with `pnpm dev` running: screenshots of the main pages in both themes, in .shots/
@@ -144,6 +145,7 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/scan.ts` | the repeatable search for new tools |
 | `scripts/check-links.ts` | source URL checker |
 | `scripts/fetch-logos.ts` | logo fetcher |
+| `scripts/favicon.ts` | draws `app/favicon.ico` from the site mark; `app/icon.tsx` and `app/apple-icon.tsx` draw the same mark |
 | `scripts/guard.ts` | fails when a client component imports the dataset |
 | `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
 | `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
