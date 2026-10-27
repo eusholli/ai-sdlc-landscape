@@ -1,0 +1,25 @@
+id: reboot
+name: Reboot
+company: Reboot, Inc.
+url: https://reboot.dev
+layer: agent-infra
+phases: [code, test]
+target_buyer: [developer]
+interface: [sdk, cli]
+summary: "The backend framework for apps your agent writes."
+pricing_model: free (open source); Reboot Cloud per app, by size
+entry_price: Reboot Cloud from $29/month (x-small)
+deployment: [saas, self-hosted]
+open_source: true
+repo: https://github.com/reboot-dev/reboot
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://reboot.dev/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://reboot.dev/]}
+sources:
+  - {field: summary, url: https://reboot.dev/, retrieved: 2026-10-27}
+  - {field: open_source, url: https://reboot.dev/, retrieved: 2026-10-27}
+  - {field: repo, url: https://reboot.dev/, retrieved: 2026-10-27}
+  - {field: pricing_model, url: https://reboot.dev/pricing, retrieved: 2026-10-27}
+  - {field: entry_price, url: https://reboot.dev/pricing, retrieved: 2026-10-27}
+  - {field: deployment, url: https://docs.reboot.dev/, retrieved: 2026-10-27}
+  - {field: relations, url: https://reboot.dev/, retrieved: 2026-10-27}
