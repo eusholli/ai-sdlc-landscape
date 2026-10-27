@@ -18,7 +18,6 @@ export interface ChangeItem {
   commit: string;
   date: string;
   text: string;
-  author: string;
   requestedBy: RequestCredit[];
   tools: TouchedTool[];
   /** The text of each change in the commit, for the "Show all" list. */
@@ -29,7 +28,6 @@ export interface LaunchItem {
   commit: string;
   date: string;
   text: string;
-  author: string;
   requestedBy: RequestCredit[];
 }
 
@@ -37,31 +35,45 @@ const LINK =
   "rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
 // Phones get a 44 px tall hit area; the text keeps its size.
 const LINK_TAP = `${LINK} max-md:inline-flex max-md:min-h-11 max-md:min-w-11 max-md:items-center max-md:justify-center`;
+// The same hit area with the text kept beside its label, for a short link such as "#7".
+const LINK_TAP_START = `${LINK} max-md:inline-flex max-md:min-h-11 max-md:min-w-11 max-md:items-center`;
 const MAX_LOGOS = 5;
 
-function Meta({ author, requestedBy, commit }: { author: string; requestedBy: RequestCredit[]; commit: string }) {
+function Meta({ requestedBy, commit }: { requestedBy: RequestCredit[]; commit: string }) {
+  const issues = [...new Set(requestedBy.map((credit) => credit.issue))];
   return (
     <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
-      <span>by {author}</span>
-      {requestedBy.map((credit) => (
-        <span key={`${credit.issue}-${credit.name}`}>
-          Requested by {credit.name} (
-          <a
-            href={`${REPO_URL}/issues/${credit.issue}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Issue ${credit.issue} by ${credit.name}, opens in a new tab`}
-            className={`${LINK_TAP} tabular-nums`}
-          >
-            #{credit.issue}
-          </a>
-          )
+      {issues.length > 0 && (
+        <span>
+          Issue:{" "}
+          {issues.map((issue, i) => (
+            <span key={issue}>
+              {i > 0 && ", "}
+              <a
+                href={`${REPO_URL}/issues/${issue}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Issue ${issue}, opens in a new tab`}
+                className={`${LINK_TAP_START} tabular-nums`}
+              >
+                #{issue}
+              </a>
+            </span>
+          ))}
         </span>
-      ))}
-      <a href={`${REPO_URL}/commit/${commit}`} target="_blank" rel="noopener noreferrer" className={LINK_TAP}>
-        commit
-        <span className="sr-only"> {commit.slice(0, 7)} (opens in a new tab)</span>
-      </a>
+      )}
+      <span>
+        Commit:{" "}
+        <a
+          href={`${REPO_URL}/commit/${commit}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${LINK_TAP} font-mono tabular-nums`}
+        >
+          {commit.slice(0, 7)}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </span>
     </p>
   );
 }
@@ -145,7 +157,7 @@ export function ChangeEntry({ item }: { item: ChangeItem }) {
           <p className="text-sm leading-snug text-pretty">{item.text}</p>
         )}
         <div className={item.tools.length > 0 ? "sm:pl-10" : undefined}>
-          <Meta author={item.author} requestedBy={item.requestedBy} commit={item.commit} />
+          <Meta requestedBy={item.requestedBy} commit={item.commit} />
         </div>
       </div>
     </div>
@@ -161,7 +173,7 @@ export function LaunchCard({ item }: { item: LaunchItem }) {
         <EntryDate date={item.date} />
       </div>
       <p className="mt-2 text-sm leading-relaxed text-pretty">{item.text}</p>
-      <Meta author={item.author} requestedBy={item.requestedBy} commit={item.commit} />
+      <Meta requestedBy={item.requestedBy} commit={item.commit} />
     </article>
   );
 }

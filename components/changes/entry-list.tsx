@@ -53,9 +53,9 @@ function toRow(entry: TimelineEntry, launchCommit: string | undefined): Row | nu
     return item ? { type: "move", key: `move-${entry.move.tool}-${entry.date}`, item } : null;
   }
 
-  const { date, commit, author, requestedBy, text } = entry;
+  const { date, commit, requestedBy, text } = entry;
   if (launchCommit && commit === launchCommit && entry.changes.some((c) => c.kind === "batch")) {
-    return { type: "launch", key: `launch-${commit}`, item: { commit, date, text, author, requestedBy } };
+    return { type: "launch", key: `launch-${commit}`, item: { commit, date, text, requestedBy } };
   }
   return {
     type: "change",
@@ -64,7 +64,6 @@ function toRow(entry: TimelineEntry, launchCommit: string | undefined): Row | nu
       commit,
       date,
       text,
-      author,
       requestedBy,
       tools: touchedTools(entry.changes),
       lines: entry.changes.map((c) => c.text),
