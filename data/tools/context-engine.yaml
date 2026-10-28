@@ -8,5 +8,11 @@ phases: [understand, code]
 target_buyer: [developer]
 interface: [mcp, cli]
 summary: "A headless IDE for coding agents: resolved types, real references and dependency APIs from the exact versions in use."
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://context-engine.app/]}
+  - {type: integrates_with, to: cursor, sources: [https://context-engine.app/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://context-engine.app/]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://context-engine.app/]}
 sources:
   - {field: summary, url: https://context-engine.app, retrieved: 2026-09-12}
+  - {field: relations, url: https://context-engine.app/, retrieved: 2026-10-28}

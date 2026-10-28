@@ -8,6 +8,10 @@ target_buyer: [cto, regulated enterprise]
 interface: [web]
 summary: "The semantic abstraction layer for AI-native development: natural-language intent becomes the source code."
 last_round: $14M seed (Sept 2026); MIT CSAIL spinout
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://g5labs.ai/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://g5labs.ai/]}
 sources:
   - {field: summary, url: https://g5labs.ai/, retrieved: 2026-10-21}
   - {field: last_round, url: https://g5labs.ai/press/seed-round, retrieved: 2026-10-21}
+  - {field: relations, url: https://g5labs.ai/, retrieved: 2026-10-28}

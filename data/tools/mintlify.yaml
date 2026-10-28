@@ -11,6 +11,8 @@ customers: [Coinbase, X, Harvey, AT&T, Dub]
 pricing_model: subscription plus credits
 entry_price: Free (Starter); Pro $450/month annual
 compliance: [SOC 2 Type II, GDPR]
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.mintlify.com/docs/deploy/github]}
 sources:
   - {field: summary, url: https://www.mintlify.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.mintlify.com/customers, retrieved: 2026-10-21}
@@ -21,3 +23,4 @@ sources:
   - {field: pricing_model, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}
   - {field: compliance, url: https://www.mintlify.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.mintlify.com/docs/deploy/github, retrieved: 2026-10-28}

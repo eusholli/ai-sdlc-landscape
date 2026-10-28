@@ -14,6 +14,18 @@ deployment: [saas, on-prem]
 compliance: [SOC 2 Type II]
 relations:
   - {type: competes_with, to: glean, sources: [https://getunblocked.com/compare/unblocked-vs-glean/]}
+  - {type: integrates_with, to: github, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: jira, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: linear, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: confluence, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: slack, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: sentry, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: claude-code, sources: [https://docs.getunblocked.com/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://docs.getunblocked.com/]}
 sources:
   - {field: summary, url: https://getunblocked.com/, retrieved: 2026-10-05}
   - {field: customers, url: https://getunblocked.com/customers/, retrieved: 2026-10-21}
@@ -25,3 +37,4 @@ sources:
   - {field: compliance, url: https://getunblocked.com/, retrieved: 2026-10-05}
   - {field: deployment, url: https://getunblocked.com/pricing/, retrieved: 2026-10-21}
   - {field: relations, url: https://getunblocked.com/compare/unblocked-vs-glean/, retrieved: 2026-09-04}
+  - {field: relations, url: https://docs.getunblocked.com/, retrieved: 2026-10-28}

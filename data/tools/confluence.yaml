@@ -1,0 +1,8 @@
+id: confluence
+name: Confluence
+company: Atlassian
+url: https://www.atlassian.com/software/confluence
+layer: systems
+summary: Start with context, not from scratch
+sources:
+  - {field: summary, url: https://www.atlassian.com/software/confluence, retrieved: 2026-10-28}

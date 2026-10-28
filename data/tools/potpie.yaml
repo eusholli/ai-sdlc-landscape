@@ -13,6 +13,16 @@ deployment: [vpc, on-prem]
 open_source: true
 repo: https://github.com/potpie-ai/potpie
 compliance: [SOC 2, ISO 27001]
+relations:
+  - {type: integrates_with, to: github, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: gitlab, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: jira, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: linear, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: confluence, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: sentry, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://potpie.ai/]}
+  - {type: integrates_with, to: claude-code, sources: [https://potpie.ai/]}
 sources:
   - {field: summary, url: https://potpie.ai/, retrieved: 2026-10-21}
   - {field: traction, url: https://potpie.ai/, retrieved: 2026-10-21}
@@ -20,3 +30,4 @@ sources:
   - {field: repo, url: https://potpie.ai, retrieved: 2026-10-23}
   - {field: compliance, url: https://potpie.ai/, retrieved: 2026-10-21}
   - {field: deployment, url: https://potpie.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://potpie.ai/, retrieved: 2026-10-28}

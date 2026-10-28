@@ -23,6 +23,7 @@ relations:
   - {type: integrates_with, to: datadog, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
   - {type: integrates_with, to: sentry, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
   - {type: integrates_with, to: microsoft-teams, sources: [https://cleric.ai/]}
+  - {type: integrates_with, to: confluence, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
 sources:
   - {field: summary, url: https://cleric.ai, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://cleric.ai/pricing, retrieved: 2026-10-21}
