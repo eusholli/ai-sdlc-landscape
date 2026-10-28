@@ -9,7 +9,16 @@ interface: [cli, web]
 summary: "Cloud devboxes for coding agents on computers you already own: isolated VMs sliced from your own machines."
 pricing_model: per active user plus hosted compute
 entry_price: Free for up to 3 people on your own machines
+relations:
+  - {type: integrates_with, to: sentry, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: linear, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: slack, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: opencode, sources: [https://www.amika.dev/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.amika.dev/]}
 sources:
   - {field: summary, url: https://www.amika.dev, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.amika.dev/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.amika.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.amika.dev/, retrieved: 2026-10-28}

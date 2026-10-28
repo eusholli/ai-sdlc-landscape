@@ -15,6 +15,12 @@ repo: https://github.com/Arize-ai/phoenix
 status: acquired (by Dynatrace for $915M, closed 1 Oct 2026)
 relations:
   - {type: acquired_by, to: dynatrace, sources: [https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, https://www.dynatrace.com/news/press-release/dynatrace-to-acquire-arize/]}
+  - {type: integrates_with, to: langchain, sources: [https://arize.com/docs/ax/integrations]}
+  - {type: integrates_with, to: claude-code, sources: [https://arize.com/docs/ax/integrations]}
+  - {type: integrates_with, to: cursor, sources: [https://arize.com/docs/ax/integrations]}
+  - {type: integrates_with, to: openai-codex, sources: [https://arize.com/docs/ax/integrations]}
+  - {type: integrates_with, to: github-copilot, sources: [https://arize.com/docs/ax/integrations]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://arize.com/docs/ax/integrations]}
 sources:
   - {field: summary, url: https://arize.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://arize.com/, retrieved: 2026-10-21}
@@ -26,3 +32,4 @@ sources:
   - {field: status, url: https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, retrieved: 2026-10-21}
   - {field: status, url: https://www.dynatrace.com/news/press-release/dynatrace-to-acquire-arize/, retrieved: 2026-10-21}
   - {field: relations, url: https://www.dynatrace.com/news/blog/dynatrace-completes-acquisition-of-arize/, retrieved: 2026-10-21}
+  - {field: relations, url: https://arize.com/docs/ax/integrations, retrieved: 2026-10-28}

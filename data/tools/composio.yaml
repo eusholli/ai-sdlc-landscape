@@ -11,6 +11,13 @@ customers: [Glean, Jam, Amazon (Quick)]
 pricing_model: subscription plus tool calls
 entry_price: Free (Hobby); $29/month
 compliance: [SOC 2 Type II, ISO 27001, HIPAA (BAA)]
+relations:
+  - {type: integrates_with, to: github, sources: [https://composio.dev/]}
+  - {type: integrates_with, to: slack, sources: [https://composio.dev/]}
+  - {type: integrates_with, to: notion, sources: [https://composio.dev/]}
+  - {type: integrates_with, to: cursor, sources: [https://composio.dev/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://composio.dev/]}
+  - {type: integrates_with, to: claude-code, sources: [https://docs.composio.dev/docs/claude-code-plugin]}
 sources:
   - {field: summary, url: https://composio.dev/, retrieved: 2026-10-21}
   - {field: customers, url: https://composio.dev/customers, retrieved: 2026-10-21}
@@ -18,3 +25,5 @@ sources:
   - {field: pricing_model, url: https://composio.dev/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://composio.dev/pricing, retrieved: 2026-10-21}
   - {field: compliance, url: https://composio.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://composio.dev/, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.composio.dev/docs/claude-code-plugin, retrieved: 2026-10-28}
