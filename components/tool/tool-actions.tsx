@@ -64,6 +64,7 @@ function CompareButtonInner({ id }: { id: string }) {
       type="button"
       variant="outline"
       size="sm"
+      className="max-md:h-11"
       aria-pressed={inSet}
       onClick={() => (inSet ? remove(id) : add(id))}
     >
@@ -77,7 +78,7 @@ export function CompareButton({ id }: { id: string }) {
   return (
     <Suspense
       fallback={
-        <Button type="button" variant="outline" size="sm" disabled>
+        <Button type="button" variant="outline" size="sm" className="max-md:h-11" disabled>
           <Plus aria-hidden />
           Add to choices
         </Button>

@@ -2,6 +2,7 @@ import { ArrowRightLeft, ArrowUpRight, Ban, ExternalLink, Info } from "lucide-re
 import Link from "next/link";
 import { NewBadge } from "@/components/new-badge";
 import { Button } from "@/components/ui/button";
+import { analyzeHref } from "@/lib/compare";
 import { formatDate, hostOf, notPublished } from "@/lib/format";
 import { REPO_URL, requestUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -99,6 +100,14 @@ export function ToolDetail({
           <div className="flex flex-wrap gap-2">
             {/* Analyze choices takes tools; a platform joins only as a suggestion for an empty phase. */}
             {tool.kind === "tool" && <CompareButton id={tool.id} />}
+            {tool.kind === "tool" && !isPage && (
+              <Button asChild variant="outline" size="sm" className="max-md:h-11">
+                <Link href={analyzeHref([tool.id])} prefetch={false}>
+                  Analyze choice
+                  <ArrowUpRight aria-hidden />
+                </Link>
+              </Button>
+            )}
             {!isPage && (
               <Button asChild variant="outline" size="sm" className="max-md:h-11">
                 <Link href={`/tools/${tool.id}`}>
