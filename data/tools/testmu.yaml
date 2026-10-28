@@ -12,6 +12,22 @@ traction: 3M+ users (company claim)
 pricing_model: subscription (credits)
 entry_price: $19/month
 deployment: [saas, dedicated, on-prem device cloud]
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: jira, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: slack, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: circleci, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: linear, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: pagerduty, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: new-relic, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: applitools, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: testrigor, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: katalon, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: tricentis, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.testmuai.com/integrations/]}
 sources:
   - {field: summary, url: https://www.testmu.ai/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.testmu.ai/customers/, retrieved: 2026-10-21}
@@ -21,3 +37,4 @@ sources:
   - {field: pricing_model, url: https://www.testmu.ai/pricing/, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.testmu.ai/pricing/, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.testmu.ai/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.testmuai.com/integrations/, retrieved: 2026-10-28}

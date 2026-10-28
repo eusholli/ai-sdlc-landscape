@@ -1,0 +1,8 @@
+id: supabase
+name: Supabase
+company: Supabase
+url: https://supabase.com
+layer: systems
+summary: Build in a weekend. Scale to millions.
+sources:
+  - {field: summary, url: https://supabase.com/, retrieved: 2026-10-28}

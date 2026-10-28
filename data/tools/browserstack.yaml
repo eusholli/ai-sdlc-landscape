@@ -13,6 +13,21 @@ pricing_model: seat
 entry_price: $19/month (Freelancer)
 compliance: [SOC 2 Type 2, GDPR, CCPA]
 last_round: $250M at a $4B valuation (2022)
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: figma, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: circleci, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: harness, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: katalon, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: tricentis, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: cursor, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: cline, sources: [https://www.browserstack.com/integrations]}
+  - {type: integrates_with, to: github-copilot, sources: [https://www.browserstack.com/integrations]}
 sources:
   - {field: summary, url: https://www.browserstack.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
@@ -21,3 +36,4 @@ sources:
   - {field: entry_price, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
   - {field: compliance, url: https://www.browserstack.com/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://sacra.com/c/browserstack/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.browserstack.com/integrations, retrieved: 2026-10-28}

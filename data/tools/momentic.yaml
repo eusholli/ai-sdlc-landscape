@@ -16,6 +16,8 @@ relations:
   - {type: competes_with, to: mabl, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
   - {type: competes_with, to: qa-wolf, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
   - {type: competes_with, to: ranger, sources: [https://momentic.ai/comparison/momentic-vs-mabl, https://momentic.ai/comparison/momentic-vs-qa-wolf]}
+  - {type: integrates_with, to: claude-code, sources: [https://momentic.ai/]}
+  - {type: integrates_with, to: cursor, sources: [https://momentic.ai/]}
 sources:
   - {field: summary, url: https://momentic.ai/, retrieved: 2026-10-21}
   - {field: traction, url: https://momentic.ai/, retrieved: 2026-10-21}
@@ -25,3 +27,4 @@ sources:
   - {field: relations, url: https://momentic.ai/comparison/momentic-vs-mabl, retrieved: 2026-10-21}
   - {field: relations, url: https://momentic.ai/comparison/momentic-vs-qa-wolf, retrieved: 2026-10-21}
   - {field: relations, url: https://momentic.ai/comparison/momentic-vs-ranger, retrieved: 2026-10-21}
+  - {field: relations, url: https://momentic.ai/, retrieved: 2026-10-28}

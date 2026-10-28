@@ -11,6 +11,19 @@ customers: [Saga, Hive, Liberty Latin America, Angler]
 gtm_partners: [Capgemini]
 deployment: [saas, on-prem (Runtime Engine)]
 compliance: [SOC 2 Type II]
+relations:
+  - {type: integrates_with, to: github, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: bitbucket, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: azure-devops, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: circleci, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: harness, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: browserstack, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: applitools, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: dynatrace, sources: [https://katalon.com/integrations]}
+  - {type: integrates_with, to: new-relic, sources: [https://katalon.com/integrations]}
 sources:
   - {field: gtm_partners, url: https://katalon.com/case-studies/lla, retrieved: 2026-10-21}
   - {field: summary, url: https://katalon.com/, retrieved: 2026-10-21}
@@ -20,3 +33,4 @@ sources:
   - {field: customers, url: https://katalon.com/case-studies/angler, retrieved: 2026-10-21}
   - {field: compliance, url: https://katalon.com/, retrieved: 2026-10-21}
   - {field: deployment, url: https://katalon.com/, retrieved: 2026-10-21}
+  - {field: relations, url: https://katalon.com/integrations, retrieved: 2026-10-28}

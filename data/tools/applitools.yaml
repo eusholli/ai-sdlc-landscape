@@ -14,6 +14,14 @@ last_round: $31M Series C, led by OpenView
 relations:
   - {type: competes_with, to: browserstack, sources: [https://applitools.com/compare/browserstack/, https://applitools.com/compare/testmu/]}
   - {type: competes_with, to: testmu, sources: [https://applitools.com/compare/browserstack/, https://applitools.com/compare/testmu/]}
+  - {type: integrates_with, to: github, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: gitlab, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: slack, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: circleci, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: katalon, sources: [https://applitools.com/platform/integrations/]}
+  - {type: integrates_with, to: tricentis, sources: [https://applitools.com/platform/integrations/]}
 sources:
   - {field: summary, url: https://applitools.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://applitools.com/case-studies/, retrieved: 2026-10-21}
@@ -24,3 +32,4 @@ sources:
   - {field: relations, url: https://applitools.com/compare/browserstack/, retrieved: 2026-10-21}
   - {field: relations, url: https://applitools.com/compare/testmu/, retrieved: 2026-10-21}
   - {field: last_round, url: https://applitools.com/blog/press-release-applitools-raises-31m/, retrieved: 2026-10-21}
+  - {field: relations, url: https://applitools.com/platform/integrations/, retrieved: 2026-10-28}

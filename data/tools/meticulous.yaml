@@ -10,7 +10,13 @@ autonomy: autonomous
 summary: Auto-generates and auto-maintains visual frontend browser tests, without anyone writing tests.
 customers: [Notion]
 last_round: $15M Series A, led by Chemistry
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.meticulous.ai/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.meticulous.ai/]}
+  - {type: integrates_with, to: vercel, sources: [https://www.meticulous.ai/]}
+  - {type: integrates_with, to: circleci, sources: [https://www.meticulous.ai/]}
 sources:
   - {field: summary, url: https://www.meticulous.ai/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.meticulous.ai/case-studies, retrieved: 2026-10-21}
   - {field: last_round, url: https://pulse2.com/meticulous-raises-15-million-series-a-led-by-chemistry/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.meticulous.ai/, retrieved: 2026-10-28}

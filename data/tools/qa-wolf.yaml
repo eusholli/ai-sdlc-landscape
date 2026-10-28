@@ -11,6 +11,15 @@ summary: AI testing platform that autonomously maps, writes and runs flake-free 
 customers: [Drata, Vesta, Regal, Xima]
 pricing_model: per test run
 last_round: $36M Series B, led by Scale Venture Partners
+relations:
+  - {type: integrates_with, to: slack, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: github, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: linear, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: jira, sources: [https://www.qawolf.com/]}
 sources:
   - {field: summary, url: https://www.qawolf.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.qawolf.com/customers/drata, retrieved: 2026-10-21}
@@ -19,3 +28,4 @@ sources:
   - {field: customers, url: https://www.qawolf.com/customers/xima, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.qawolf.com/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://sacra.com/c/qa-wolf/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.qawolf.com/, retrieved: 2026-10-28}

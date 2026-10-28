@@ -14,6 +14,14 @@ entry_price: Free; $19/month
 deployment: [saas, single-tenant]
 hq: Seattle
 last_round: $6.7M seed, led by Trilogy Equity Partners
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: trae, sources: [https://www.testsprite.com/]}
+  - {type: integrates_with, to: github, sources: [https://www.testsprite.com/]}
 sources:
   - {field: summary, url: https://www.testsprite.com/, retrieved: 2026-10-21}
   - {field: traction, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
@@ -22,3 +30,4 @@ sources:
   - {field: deployment, url: https://www.testsprite.com/pricing, retrieved: 2026-10-21}
   - {field: hq, url: https://www.geekwire.com/2024/seattle-startup-testsprite-which-automates-testing-of-apis-and-web-apps-raises-1-5m/, retrieved: 2026-10-21}
   - {field: last_round, url: https://techfundingnews.com/testsprite-raises-6-7m-seed-autonomous-ai-testing-platform/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.testsprite.com/, retrieved: 2026-10-28}

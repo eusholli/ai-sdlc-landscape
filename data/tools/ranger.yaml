@@ -10,9 +10,15 @@ summary: "QA for AI-generated code: a seamless testing experience so teams keep 
 pricing_model: seat
 entry_price: Free (5 reviews); Growth $50/month/user
 last_round: $8.9M, led by General Catalyst and XYZ
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://docs.ranger.net/]}
+  - {type: integrates_with, to: cursor, sources: [https://docs.ranger.net/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://docs.ranger.net/]}
+  - {type: integrates_with, to: opencode, sources: [https://docs.ranger.net/]}
 sources:
   - {field: summary, url: https://www.ranger.net, retrieved: 2026-10-21}
   - {field: summary, url: https://www.ranger.net/post/why-qa-matters-for-ai-generated-code, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.ranger.net/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.ranger.net/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.ranger.net/love, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.ranger.net/, retrieved: 2026-10-28}
