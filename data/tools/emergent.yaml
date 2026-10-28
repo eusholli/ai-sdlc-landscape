@@ -13,9 +13,19 @@ pricing_model: subscription
 entry_price: Free; Standard $20/month
 deployment: [saas, vpc (enterprise)]
 last_round: $130M Series C at a $1.5B valuation
+relations:
+  - {type: integrates_with, to: github, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: supabase, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: stripe, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: figma, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: notion, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://emergent.sh/integrations]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://emergent.sh/integrations]}
 sources:
   - {field: summary, url: https://emergent.sh, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
   - {field: deployment, url: https://emergent.sh/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.saasrise.com/deals/indian-ai-coding-startup-emergent-becomes-a-unicorn-with-130m-series-c-a35c7b87-3271-4587-8d53-bf9a593e6e14, retrieved: 2026-10-21}
+  - {field: relations, url: https://emergent.sh/integrations, retrieved: 2026-10-28}

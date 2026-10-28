@@ -14,6 +14,8 @@ entry_price: Free; paid from $16/month
 status: acquired
 relations:
   - {type: acquired_by, to: wix, sources: [https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267]}
+  - {type: integrates_with, to: github, sources: [https://docs.base44.com/]}
+  - {type: integrates_with, to: slack, sources: [https://docs.base44.com/]}
 sources:
   - {field: summary, url: https://base44.com/, retrieved: 2026-10-21}
   - {field: traction, url: https://base44.com/, retrieved: 2026-10-21}
@@ -21,3 +23,4 @@ sources:
   - {field: entry_price, url: https://base44.com/pricing, retrieved: 2026-10-21}
   - {field: status, url: https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, retrieved: 2026-10-21}
   - {field: relations, url: https://en.globes.co.il/en/article-wix-acquires-israeli-vibe-coding-co-base44-1001513267, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.base44.com/, retrieved: 2026-10-28}

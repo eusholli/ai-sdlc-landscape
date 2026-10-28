@@ -11,9 +11,13 @@ summary: Open-source, self-hosted AI coding assistant, including air-gapped depl
 deployment: [self-hosted, air-gapped]
 open_source: true
 repo: https://github.com/TabbyML/tabby
+relations:
+  - {type: integrates_with, to: vs-code, sources: [https://www.tabbyml.com/]}
+  - {type: integrates_with, to: jetbrains, sources: [https://www.tabbyml.com/]}
 sources:
   - {field: summary, url: https://www.tabbyml.com, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.tabbyml.com, retrieved: 2026-10-21}
   - {field: repo, url: https://www.tabbyml.com, retrieved: 2026-10-23}
   - {field: deployment, url: https://www.tabbyml.com, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.tabbyml.com/blog/deploy-tabby-in-air-gapped-environment-with-docker, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.tabbyml.com/, retrieved: 2026-10-28}

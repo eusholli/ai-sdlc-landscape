@@ -9,7 +9,10 @@ summary: Open-source AI code assistant for VS Code and JetBrains; the company ha
 status: acquired
 relations:
   - {type: acquired_by, to: cursor, sources: [https://www.continue.dev]}
+  - {type: integrates_with, to: vs-code, sources: [https://docs.continue.dev/]}
+  - {type: integrates_with, to: jetbrains, sources: [https://docs.continue.dev/]}
 sources:
   - {field: summary, url: https://www.continue.dev, retrieved: 2026-10-21}
   - {field: status, url: https://www.continue.dev, retrieved: 2026-10-21}
   - {field: relations, url: https://www.continue.dev, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.continue.dev/, retrieved: 2026-10-28}

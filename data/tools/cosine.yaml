@@ -15,6 +15,8 @@ entry_price: $19/month
 deployment: [saas, dedicated tenant, on-prem, air-gapped]
 founded: 2022
 last_round: $2.5M (2024)
+relations:
+  - {type: integrates_with, to: github, sources: [https://cosine.sh/docs]}
 sources:
   - {field: gtm_partners, url: https://cosine.sh/partner, retrieved: 2026-10-21}
   - {field: summary, url: https://cosine.sh, retrieved: 2026-10-21}
@@ -24,3 +26,4 @@ sources:
   - {field: deployment, url: https://cosine.sh, retrieved: 2026-10-21}
   - {field: founded, url: https://www.finsmes.com/2024/08/cosine-raises-2-5m-in-funding.html, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.finsmes.com/2024/08/cosine-raises-2-5m-in-funding.html, retrieved: 2026-10-21}
+  - {field: relations, url: https://cosine.sh/docs, retrieved: 2026-10-28}
