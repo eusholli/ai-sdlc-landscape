@@ -16,6 +16,7 @@ last_round: $356M Series D, led by Kleiner Perkins and IVP
 relations:
   - {type: competes_with, to: socket, sources: [https://www.chainguard.dev/compare/chainguard-vs-socket]}
   - {type: integrates_with, to: cursor, sources: [https://www.chainguard.dev/]}
+  - {type: integrates_with, to: wiz, sources: [https://www.chainguard.dev/]}
 sources:
   - {field: summary, url: https://www.chainguard.dev/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.chainguard.dev/, retrieved: 2026-10-21}

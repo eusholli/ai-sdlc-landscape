@@ -1,0 +1,8 @@
+id: wiz
+name: Wiz
+company: Wiz
+url: https://www.wiz.io
+layer: systems
+summary: Protect Everything You Build and Run
+sources:
+  - {field: summary, url: https://www.wiz.io/, retrieved: 2026-10-28}

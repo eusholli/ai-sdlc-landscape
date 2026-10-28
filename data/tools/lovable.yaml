@@ -18,6 +18,7 @@ relations:
   - {type: integrates_with, to: linear, sources: [https://docs.lovable.dev/integrations/linear]}
   - {type: integrates_with, to: slack, sources: [https://docs.lovable.dev/integrations/introduction]}
   - {type: integrates_with, to: supabase, sources: [https://docs.lovable.dev/integrations/introduction]}
+  - {type: integrates_with, to: notion, sources: [https://docs.lovable.dev/integrations/introduction]}
 sources:
   - {field: gtm_partners, url: https://lovable.dev/partners, retrieved: 2026-10-21}
   - {field: summary, url: https://lovable.dev/pricing, retrieved: 2026-10-21}

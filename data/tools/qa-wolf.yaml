@@ -20,6 +20,7 @@ relations:
   - {type: integrates_with, to: cursor, sources: [https://www.qawolf.com/]}
   - {type: integrates_with, to: linear, sources: [https://www.qawolf.com/]}
   - {type: integrates_with, to: jira, sources: [https://www.qawolf.com/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://www.qawolf.com/]}
 sources:
   - {field: summary, url: https://www.qawolf.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.qawolf.com/customers/drata, retrieved: 2026-10-21}

@@ -1,0 +1,7 @@
+id: microsoft-teams
+name: Microsoft Teams
+company: Microsoft
+url: https://www.microsoft.com/microsoft-teams
+layer: systems
+sources:
+  - {field: name, url: https://learn.microsoft.com/en-us/microsoftteams/teams-overview, retrieved: 2026-10-28}

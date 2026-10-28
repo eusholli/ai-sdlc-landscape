@@ -14,6 +14,7 @@ relations:
   - {type: integrates_with, to: jira, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
   - {type: integrates_with, to: github, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
   - {type: ships_inside, to: datadog, sources: [https://docs.datadoghq.com/bits_ai/]}
+  - {type: integrates_with, to: servicenow, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
 sources:
   - {field: summary, url: https://www.datadoghq.com/, retrieved: 2026-10-21}
   - {field: summary, url: https://www.datadoghq.com/pricing/, retrieved: 2026-10-21}

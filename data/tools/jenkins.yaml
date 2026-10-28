@@ -1,0 +1,8 @@
+id: jenkins
+name: Jenkins
+company: Jenkins
+url: https://www.jenkins.io
+layer: systems
+summary: Build great things at any scale
+sources:
+  - {field: summary, url: https://www.jenkins.io/, retrieved: 2026-10-28}

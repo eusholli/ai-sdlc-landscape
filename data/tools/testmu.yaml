@@ -28,6 +28,10 @@ relations:
   - {type: integrates_with, to: katalon, sources: [https://www.testmuai.com/integrations/]}
   - {type: integrates_with, to: tricentis, sources: [https://www.testmuai.com/integrations/]}
   - {type: integrates_with, to: vs-code, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: servicenow, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: jenkins, sources: [https://www.testmuai.com/integrations/]}
+  - {type: integrates_with, to: notion, sources: [https://www.testmuai.com/integrations/]}
 sources:
   - {field: summary, url: https://www.testmu.ai/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.testmu.ai/customers/, retrieved: 2026-10-21}

@@ -22,6 +22,7 @@ relations:
   - {type: integrates_with, to: new-relic, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
   - {type: integrates_with, to: datadog, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
   - {type: integrates_with, to: sentry, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://cleric.ai/]}
 sources:
   - {field: summary, url: https://cleric.ai, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://cleric.ai/pricing, retrieved: 2026-10-21}
@@ -29,3 +30,4 @@ sources:
   - {field: relations, url: https://cleric.ai/compare/datadog, retrieved: 2026-10-21}
   - {field: funding_total, url: https://www.apmdigest.com/cleric-launches-self-learning-ai-sre, retrieved: 2026-10-21}
   - {field: relations, url: https://docs.cleric.ai/integrations/supported-integrations.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://cleric.ai/, retrieved: 2026-10-28}

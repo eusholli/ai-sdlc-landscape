@@ -1,0 +1,7 @@
+id: servicenow
+name: ServiceNow
+company: ServiceNow
+url: https://www.servicenow.com
+layer: systems
+sources:
+  - {field: name, url: https://www.servicenow.com/docs/, retrieved: 2026-10-28}

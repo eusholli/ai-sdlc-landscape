@@ -24,6 +24,7 @@ relations:
   - {type: integrates_with, to: jetbrains, sources: [https://www.codeant.ai/integrations]}
   - {type: integrates_with, to: cursor, sources: [https://www.codeant.ai/integrations]}
   - {type: integrates_with, to: windsurf, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://www.codeant.ai/integrations]}
 sources:
   - {field: summary, url: https://codeant.ai/, retrieved: 2026-10-21}
   - {field: compliance, url: https://codeant.ai/, retrieved: 2026-10-21}

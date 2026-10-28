@@ -26,6 +26,8 @@ relations:
   - {type: integrates_with, to: endor-labs, sources: [https://www.armorcode.com/integrations]}
   - {type: integrates_with, to: checkmarx, sources: [https://www.armorcode.com/integrations]}
   - {type: integrates_with, to: veracode, sources: [https://www.armorcode.com/integrations]}
+  - {type: integrates_with, to: jenkins, sources: [https://www.armorcode.com/integrations]}
+  - {type: integrates_with, to: wiz, sources: [https://www.armorcode.com/integrations]}
 sources:
   - {field: summary, url: https://www.armorcode.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.armorcode.com/, retrieved: 2026-10-21}

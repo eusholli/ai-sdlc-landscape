@@ -26,6 +26,8 @@ relations:
   - {type: integrates_with, to: dynatrace, sources: [https://www.traversal.com/platform/integrations]}
   - {type: integrates_with, to: datadog, sources: [https://www.traversal.com/platform/integrations]}
   - {type: integrates_with, to: sentry, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://www.traversal.com/]}
+  - {type: integrates_with, to: servicenow, sources: [https://www.traversal.com/platform/integrations]}
 sources:
   - {field: summary, url: https://www.traversal.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.traversal.com/customer-stories/cloudways, retrieved: 2026-10-21}
@@ -36,3 +38,4 @@ sources:
   - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-rootly, retrieved: 2026-10-21}
   - {field: last_round, url: https://fortune.com/2025/06/18/traversal-emerges-from-stealth-with-48-million-from-sequoia-and-kleiner-perkins-to-reimagine-site-reliability-in-the-ai-era/, retrieved: 2026-10-21}
   - {field: relations, url: https://www.traversal.com/platform/integrations, retrieved: 2026-10-28}
+  - {field: relations, url: https://www.traversal.com/, retrieved: 2026-10-28}

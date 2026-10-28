@@ -1,0 +1,8 @@
+id: notion
+name: Notion
+company: Notion
+url: https://www.notion.com
+layer: systems
+summary: Where teams and agents Think together.
+sources:
+  - {field: summary, url: https://www.notion.com/, retrieved: 2026-10-28}
