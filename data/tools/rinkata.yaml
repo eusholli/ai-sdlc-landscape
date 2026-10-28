@@ -9,7 +9,14 @@ interface: [web, mcp]
 summary: "Where your team and your AI agents share one source of truth: goals, specs and decisions, so agents stay on track."
 pricing_model: seat
 entry_price: Free up to 10 seats
+relations:
+  - {type: integrates_with, to: github, sources: [https://rinkata.dev/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://rinkata.dev/]}
+  - {type: integrates_with, to: claude-code, sources: [https://rinkata.dev/docs]}
+  - {type: integrates_with, to: cursor, sources: [https://rinkata.dev/docs]}
 sources:
   - {field: summary, url: https://rinkata.dev/, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://rinkata.dev/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://rinkata.dev/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://rinkata.dev/, retrieved: 2026-10-28}
+  - {field: relations, url: https://rinkata.dev/docs, retrieved: 2026-10-28}

@@ -8,7 +8,18 @@ target_buyer: [eng leader]
 interface: [pr-bot]
 summary: AI code review platform that helps engineering teams ship better code faster.
 last_round: $9M extended seed (June 2026)
+relations:
+  - {type: integrates_with, to: github, sources: [https://baz.ai/docs/]}
+  - {type: integrates_with, to: gitlab, sources: [https://baz.ai/docs/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://baz.ai/docs/]}
+  - {type: integrates_with, to: datadog, sources: [https://baz.ai/docs/basics/integrations/datadog]}
+  - {type: integrates_with, to: claude-code, sources: [https://baz.ai/docs/basics/plugins]}
+  - {type: integrates_with, to: openai-codex, sources: [https://baz.ai/docs/basics/plugins]}
+  - {type: integrates_with, to: cursor, sources: [https://baz.ai/docs/basics/plugins]}
 sources:
   - {field: summary, url: https://baz.co, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.finsmes.com/2026/06/baz-technologies-raises-9m-in-extended-seed-funding.html, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/cl8og4qtn, retrieved: 2026-10-21}
+  - {field: relations, url: https://baz.ai/docs/, retrieved: 2026-10-28}
+  - {field: relations, url: https://baz.ai/docs/basics/integrations/datadog, retrieved: 2026-10-28}
+  - {field: relations, url: https://baz.ai/docs/basics/plugins, retrieved: 2026-10-28}

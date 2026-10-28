@@ -11,7 +11,17 @@ pricing_model: usage
 relations:
   - {type: competes_with, to: coderabbit, sources: [https://specstory.com/]}
   - {type: competes_with, to: greptile, sources: [https://specstory.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://specstory.com/specstory]}
+  - {type: integrates_with, to: github-copilot, sources: [https://specstory.com/specstory]}
+  - {type: integrates_with, to: vs-code, sources: [https://specstory.com/specstory]}
+  - {type: integrates_with, to: claude-code, sources: [https://docs.specstory.com/integrations/terminal-coding-agents]}
+  - {type: integrates_with, to: openai-codex, sources: [https://docs.specstory.com/integrations/terminal-coding-agents]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://docs.specstory.com/integrations/terminal-coding-agents]}
+  - {type: integrates_with, to: factory, sources: [https://docs.specstory.com/integrations/terminal-coding-agents]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://docs.specstory.com/integrations/terminal-coding-agents]}
 sources:
   - {field: summary, url: https://specstory.com/, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://specstory.com/runstory/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://specstory.com/, retrieved: 2026-10-21}
+  - {field: relations, url: https://specstory.com/specstory, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.specstory.com/integrations/terminal-coding-agents, retrieved: 2026-10-28}

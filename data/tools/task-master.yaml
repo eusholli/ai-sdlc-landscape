@@ -9,7 +9,15 @@ interface: [cli]
 summary: "Open-source, CLI-first tool that structures AI agent work: parse PRDs into tasks and subtasks with dependencies and acceptance criteria."
 open_source: true
 repo: https://github.com/eyaltoledano/claude-task-master
+relations:
+  - {type: integrates_with, to: cursor, sources: [https://tryhamster.com/research/taskmaster/mcp-server]}
+  - {type: integrates_with, to: vs-code, sources: [https://tryhamster.com/research/taskmaster/mcp-server]}
+  - {type: integrates_with, to: windsurf, sources: [https://tryhamster.com/research/taskmaster/mcp-server]}
+  - {type: integrates_with, to: claude-code, sources: [https://tryhamster.com/product/taskmaster]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://tryhamster.com/product/taskmaster]}
 sources:
   - {field: summary, url: https://www.task-master.dev, retrieved: 2026-10-21}
   - {field: open_source, url: https://www.task-master.dev, retrieved: 2026-10-21}
   - {field: repo, url: https://www.task-master.dev, retrieved: 2026-10-23}
+  - {field: relations, url: https://tryhamster.com/research/taskmaster/mcp-server, retrieved: 2026-10-28}
+  - {field: relations, url: https://tryhamster.com/product/taskmaster, retrieved: 2026-10-28}

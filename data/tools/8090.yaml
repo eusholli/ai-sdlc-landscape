@@ -11,6 +11,10 @@ summary: The AI-native software development platform that keeps business leaders
 customers: [BISSELL, Utopia Studio (Mentix), Red Oak Development, CMS ClaimsCore]
 founded: 2024
 last_round: $135M Series A, led by Salesforce Ventures (2026)
+relations:
+  - {type: integrates_with, to: cursor, sources: [https://8090.ai/]}
+  - {type: integrates_with, to: vs-code, sources: [https://8090.ai/]}
+  - {type: integrates_with, to: claude-code, sources: [https://8090.ai/]}
 sources:
   - {field: summary, url: https://8090.ai, retrieved: 2026-10-05}
   - {field: customers, url: https://8090.ai/customer-stories, retrieved: 2026-10-05}
@@ -20,3 +24,4 @@ sources:
   - {field: founded, url: https://blog.pebblous.ai/blog/agent-built-enterprise-software-oversight/en/, retrieved: 2026-10-21}
   - {field: last_round, url: https://blog.pebblous.ai/blog/agent-built-enterprise-software-oversight/en/, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.aol.com/articles/8090-raises-135m-series-accelerate-100000000.html, retrieved: 2026-10-21}
+  - {field: relations, url: https://8090.ai/, retrieved: 2026-10-28}

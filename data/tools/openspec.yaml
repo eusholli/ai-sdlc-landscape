@@ -12,9 +12,29 @@ open_source: true
 repo: https://github.com/Fission-AI/OpenSpec
 relations:
   - {type: competes_with, to: kiro, sources: [https://github.com/Fission-AI/OpenSpec]}
+  - {type: integrates_with, to: amazon-q-developer, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: augment-code, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: claude-code, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: cline, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: openai-codex, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: windsurf, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: continue, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: cursor, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: factory, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: github-copilot, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: jetbrains-junie, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: kilo-code, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: opencode, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: atlassian-rovo-dev, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: roo-code, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: trae, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
+  - {type: integrates_with, to: zed, sources: [https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md]}
 sources:
   - {field: summary, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
   - {field: open_source, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
   - {field: repo, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-23}
   - {field: pricing_model, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
   - {field: relations, url: https://github.com/Fission-AI/OpenSpec, retrieved: 2026-10-21}
+  - {field: relations, url: https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md, retrieved: 2026-10-28}

@@ -15,6 +15,19 @@ entry_price: $24/developer/month annual ($30 monthly)
 deployment: [saas, self-hosted (enterprise)]
 founded: 2023
 last_round: $60M Series B at a $550M valuation, led by Scale Venture Partners (Sept 2025)
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: jira, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: linear, sources: [https://docs.coderabbit.ai/platforms/overview.md]}
+  - {type: integrates_with, to: slack, sources: [https://docs.coderabbit.ai/slack-agent.md]}
+  - {type: integrates_with, to: vs-code, sources: [https://docs.coderabbit.ai/overview/ide-cli-review.md]}
+  - {type: integrates_with, to: cursor, sources: [https://docs.coderabbit.ai/overview/ide-cli-review.md]}
+  - {type: integrates_with, to: windsurf, sources: [https://docs.coderabbit.ai/overview/ide-cli-review.md]}
+  - {type: integrates_with, to: claude-code, sources: [https://docs.coderabbit.ai/overview/ide-cli-review.md]}
+  - {type: integrates_with, to: openai-codex, sources: [https://docs.coderabbit.ai/overview/ide-cli-review.md]}
 sources:
   - {field: summary, url: https://www.coderabbit.ai/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.coderabbit.ai/customers, retrieved: 2026-10-21}
@@ -24,3 +37,6 @@ sources:
   - {field: deployment, url: https://www.coderabbit.ai/pricing, retrieved: 2026-10-21}
   - {field: founded, url: https://sacra.com/c/coderabbit/, retrieved: 2026-10-21}
   - {field: last_round, url: https://techcrunch.com/2025/09/16/coderabbit-raises-60m-valuing-the-2-year-old-ai-code-review-startup-at-550m/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.coderabbit.ai/platforms/overview.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.coderabbit.ai/slack-agent.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.coderabbit.ai/overview/ide-cli-review.md, retrieved: 2026-10-28}

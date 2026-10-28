@@ -13,6 +13,11 @@ pricing_model: seat plus AI credits
 entry_price: Team $24/user/month annual
 deployment: [saas, self-hosted]
 models: [{BYOK: Anthropic}, OpenAI, Google]
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.deepsource.com/docs/platform/getting-started]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.deepsource.com/docs/platform/getting-started]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.deepsource.com/docs/platform/getting-started]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.deepsource.com/docs/platform/getting-started]}
 sources:
   - {field: gtm_partners, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
   - {field: summary, url: https://deepsource.com/, retrieved: 2026-10-21}
@@ -24,3 +29,4 @@ sources:
   - {field: entry_price, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
   - {field: models, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
   - {field: deployment, url: https://deepsource.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.deepsource.com/docs/platform/getting-started, retrieved: 2026-10-28}
