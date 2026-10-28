@@ -41,7 +41,7 @@ describe("build-data", () => {
     expect(nodes.length).toBe(records.length);
     expect((data!.relations as unknown[]).length).toBe(records.reduce((s, r) => s + (r.relations?.length ?? 0), 0));
     expect(nodes.reduce((s, n) => s + n.sources.length, 0)).toBe(records.reduce((s, r) => s + (r.sources?.length ?? 0), 0));
-  });
+  }, 30_000); // reads git history for every record, which grows with the dataset
 
   it("fails a value with no source", () => {
     const root = scratch(FIXTURE.replace(/\n {2}- \{field: entry_price,[^\n]*/, ""));
