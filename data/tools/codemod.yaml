@@ -10,8 +10,14 @@ autonomy: agent
 summary: Code intelligence and automation platform that gives agents compiler-aware context for framework upgrades, migrations and org-wide fixes.
 customers: [Zapier, Padoa]
 compliance: [SOC 2]
+relations:
+  - {type: integrates_with, to: claude-code, sources: [https://docs.codemod.com/enterprise/codemod-mcp.md]}
+  - {type: integrates_with, to: cursor, sources: [https://docs.codemod.com/enterprise/codemod-mcp.md]}
+  - {type: integrates_with, to: openai-codex, sources: [https://docs.codemod.com/enterprise/codemod-mcp.md]}
+  - {type: integrates_with, to: vs-code, sources: [https://docs.codemod.com/enterprise/codemod-mcp.md]}
 sources:
   - {field: summary, url: https://codemod.com, retrieved: 2026-10-21}
   - {field: customers, url: https://codemod.com, retrieved: 2026-10-21}
   - {field: customers, url: https://codemod.com/blog/padoa, retrieved: 2026-10-21}
   - {field: compliance, url: https://codemod.com/blog/soc2, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.codemod.com/enterprise/codemod-mcp.md, retrieved: 2026-10-28}

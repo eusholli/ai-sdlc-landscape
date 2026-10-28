@@ -11,6 +11,26 @@ customers: [Vanguard, DroneDeploy, Amplitude, Pinterest, Dropbox]
 status: acquired (by Atlassian, Sept 2025)
 relations:
   - {type: acquired_by, to: atlassian, sources: [https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, https://siliconangle.com/2025/09/18/atlassian-acquires-developer-productivity-startup-dx-1b/]}
+  - {type: integrates_with, to: github, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: gitlab, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: bitbucket, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: azure-devops, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: jira, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: linear, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: pagerduty, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: datadog, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: jenkins, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: circleci, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: backstage, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: github-copilot, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: cursor, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: claude-code, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: windsurf, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: sourcegraph, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: amazon-q-developer, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: servicenow, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: incident-io, sources: [https://getdx.com/connectors]}
+  - {type: integrates_with, to: sentry, sources: [https://getdx.com/connectors]}
 sources:
   - {field: summary, url: https://getdx.com, retrieved: 2026-10-21}
   - {field: customers, url: https://getdx.com/customers/, retrieved: 2026-10-21}
@@ -18,3 +38,4 @@ sources:
   - {field: status, url: https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, retrieved: 2026-10-21}
   - {field: status, url: https://siliconangle.com/2025/09/18/atlassian-acquires-developer-productivity-startup-dx-1b/, retrieved: 2026-10-21}
   - {field: relations, url: https://techcrunch.com/2025/09/18/atlassian-acquires-dx-a-developer-productivity-platform-for-1b/, retrieved: 2026-10-21}
+  - {field: relations, url: https://getdx.com/connectors, retrieved: 2026-10-28}

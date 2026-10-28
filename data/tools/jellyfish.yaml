@@ -12,6 +12,17 @@ traction: Benchmarked against 1,000+ engineering orgs; 100M+ pull requests, 90M+
 pricing_model: quote
 compliance: [SOC 1 Type II, SOC 2 Type II, GDPR, CCPA, CSA STAR]
 last_round: $71M Series C, led by Accel, Insight Partners and Tiger Global (2022)
+relations:
+  - {type: integrates_with, to: github, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: jira, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: linear, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: cursor, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: claude-code, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: gemini-code-assist, sources: [https://jellyfish.co/integrations/]}
+  - {type: integrates_with, to: amazon-q-developer, sources: [https://jellyfish.co/integrations/]}
 sources:
   - {field: summary, url: https://jellyfish.co/, retrieved: 2026-10-27}
   - {field: traction, url: https://jellyfish.co/, retrieved: 2026-10-27}
@@ -22,3 +33,4 @@ sources:
   - {field: compliance, url: https://jellyfish.co/, retrieved: 2026-10-21}
   - {field: last_round, url: https://jellyfish.co/newsroom/jellyfish-raises-71-million-series-c-funding-led-by-accel-insight-partners-and-tiger-global/, retrieved: 2026-10-21}
   - {field: last_round, url: https://techcrunch.com/2022/02/01/jellyfish-aims-to-do-for-engineering-what-salesforce-did-for-sales/, retrieved: 2026-10-21}
+  - {field: relations, url: https://jellyfish.co/integrations/, retrieved: 2026-10-28}

@@ -14,6 +14,12 @@ entry_price: $250K typical (up to about 1,000 developers)
 deployment: [hybrid saas]
 founded: 2020
 last_round: $30M Series B, led by Acrew Capital (Feb 2025)
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.moderne.io/administrator-documentation/moderne-platform/references/supported-scms]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.moderne.io/administrator-documentation/moderne-platform/references/supported-scms]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.moderne.io/administrator-documentation/moderne-platform/references/supported-scms]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.moderne.io/administrator-documentation/moderne-platform/references/supported-scms]}
+  - {type: integrates_with, to: jetbrains, sources: [https://docs.moderne.io/]}
 sources:
   - {field: gtm_partners, url: https://www.moderne.ai/partners, retrieved: 2026-10-21}
   - {field: summary, url: https://moderne.ai/, retrieved: 2026-10-21}
@@ -22,3 +28,5 @@ sources:
   - {field: deployment, url: https://moderne.ai/pricing, retrieved: 2026-10-21}
   - {field: founded, url: https://techcrunch.com/2025/02/11/moderne-raises-30m-to-solve-technical-debt-across-complex-codebases/, retrieved: 2026-10-21}
   - {field: last_round, url: https://techcrunch.com/2025/02/11/moderne-raises-30m-to-solve-technical-debt-across-complex-codebases/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.moderne.io/administrator-documentation/moderne-platform/references/supported-scms, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.moderne.io/, retrieved: 2026-10-28}

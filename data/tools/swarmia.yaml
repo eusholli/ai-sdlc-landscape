@@ -11,6 +11,22 @@ customers: [Matillion, Engine, TrueLayer, Miro, Smartly, Blinkist, Planning Cent
 gtm_partners: [GitHub Marketplace, Swarmia partner program]
 pricing_model: seat (free trial)
 last_round: $11M Series A
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: jira, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: linear, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: slack, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: pagerduty, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: incident-io, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: coderabbit, sources: [https://www.swarmia.com/integrations/]}
+  - {type: integrates_with, to: cognition-devin, sources: [https://www.swarmia.com/integrations/]}
 sources:
   - {field: gtm_partners, url: https://www.swarmia.com/pricing, retrieved: 2026-10-21}
   - {field: summary, url: https://www.swarmia.com, retrieved: 2026-10-21}
@@ -18,3 +34,4 @@ sources:
   - {field: customers, url: https://www.swarmia.com/customers, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.swarmia.com/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.swarmia.com/blog/series-a-funding/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.swarmia.com/integrations/, retrieved: 2026-10-28}

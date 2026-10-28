@@ -13,6 +13,12 @@ deployment: [saas, self-hosted, on-prem]
 compliance: [SOC 2 Type II, SOC 3]
 relations:
   - {type: competes_with, to: harness, sources: [https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/]}
+  - {type: integrates_with, to: github, sources: [https://waydev.co/integrations/]}
+  - {type: integrates_with, to: gitlab, sources: [https://waydev.co/integrations/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://waydev.co/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://waydev.co/integrations/]}
+  - {type: integrates_with, to: jira, sources: [https://waydev.co/integrations/]}
+  - {type: integrates_with, to: slack, sources: [https://waydev.co/integrations/]}
 sources:
   - {field: summary, url: https://waydev.co/, retrieved: 2026-10-21}
   - {field: customers, url: https://waydev.co/, retrieved: 2026-10-21}
@@ -21,3 +27,4 @@ sources:
   - {field: deployment, url: https://waydev.co/pricing/, retrieved: 2026-10-21}
   - {field: deployment, url: https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/, retrieved: 2026-10-21}
   - {field: relations, url: https://waydev.co/competitors/alternatives-to-harness-an-in-depth-comparative-analysis/, retrieved: 2026-10-21}
+  - {field: relations, url: https://waydev.co/integrations/, retrieved: 2026-10-28}
