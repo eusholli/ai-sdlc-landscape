@@ -16,6 +16,30 @@ relations:
   - {type: competes_with, to: opslevel, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
   - {type: competes_with, to: cortex, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
   - {type: competes_with, to: backstage, sources: [https://www.port.io/partners, https://www.port.io/compare/opslevel-vs-port]}
+  - {type: integrates_with, to: github, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: linear, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: datadog, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: sentry, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: new-relic, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: dynatrace, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: pagerduty, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: servicenow, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: jenkins, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: circleci, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: snyk, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: sonar, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: wiz, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: launchdarkly, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: checkmarx, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: rootly, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: incident-io, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: cursor, sources: [https://www.port.io/integrations]}
+  - {type: integrates_with, to: github-copilot, sources: [https://www.port.io/integrations]}
 sources:
   - {field: gtm_partners, url: https://www.port.io/partners, retrieved: 2026-10-21}
   - {field: summary, url: https://www.port.io, retrieved: 2026-10-21}
@@ -26,3 +50,4 @@ sources:
   - {field: relations, url: https://www.port.io/compare/backstage-vs-port, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.port.io/blog/port-100m-series-c, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/r1oppgdzzg, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.port.io/integrations, retrieved: 2026-10-28}

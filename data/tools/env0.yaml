@@ -10,8 +10,15 @@ autonomy: agent
 summary: "The autonomous cloud control plane for the AI era: unifies declared and discovered state so agents can reason and act with guardrails."
 customers: [Automation Anywhere]
 last_round: $35M Series A (extended), led by M12
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.envzero.com/guides/admin-guide/templates.md]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.envzero.com/guides/admin-guide/templates.md]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.envzero.com/guides/admin-guide/templates.md]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.envzero.com/guides/admin-guide/templates.md]}
+  - {type: integrates_with, to: pulumi, sources: [https://docs.envzero.com/guides/admin-guide/templates.md]}
 sources:
   - {field: summary, url: https://www.env0.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.env0.com, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.grovevc.com/news/env0-lands-17m-series-a/, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.calcalistech.com/ctechnews/article/b1t11mjwzh, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.envzero.com/guides/admin-guide/templates.md, retrieved: 2026-10-28}

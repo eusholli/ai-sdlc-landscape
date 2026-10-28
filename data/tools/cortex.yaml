@@ -14,6 +14,31 @@ relations:
   - {type: competes_with, to: port, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
   - {type: competes_with, to: opslevel, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
   - {type: competes_with, to: backstage, sources: [https://www.cortex.io/compare/cortex-vs-port, https://www.cortex.io/compare/cortex-vs-opslevel]}
+  - {type: integrates_with, to: github, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: pagerduty, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: servicenow, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: jenkins, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: circleci, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: sonar, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: sentry, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: launchdarkly, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: incident-io, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: rootly, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: dynatrace, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: new-relic, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: apiiro, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: checkmarx, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: semgrep, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: snyk, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: veracode, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
+  - {type: integrates_with, to: wiz, sources: [https://docs.cortex.io/ingesting-data-into-cortex/integrations]}
 sources:
   - {field: summary, url: https://www.cortex.io, retrieved: 2026-10-05}
   - {field: customers, url: https://www.cortex.io, retrieved: 2026-10-05}
@@ -23,3 +48,4 @@ sources:
   - {field: relations, url: https://www.cortex.io/compare/cortex-vs-opslevel, retrieved: 2026-09-16}
   - {field: relations, url: https://www.cortex.io/compare/spotify-backstage-break-up, retrieved: 2026-09-04}
   - {field: last_round, url: https://www.cortex.io/post/announcing-series-c, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.cortex.io/ingesting-data-into-cortex/integrations, retrieved: 2026-10-28}

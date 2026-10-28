@@ -10,6 +10,13 @@ autonomy: autonomous
 summary: "Autonomous operations factory for DevOps and SRE: Aiden agents provision, deploy and run infrastructure."
 customers: [Healthie, Innovaccer, greytHR, InMobi, Autodesk, Nielsen, PepsiCo, Lowe's]
 last_round: $12.3M seed, led by Thomvest Ventures (2024)
+relations:
+  - {type: integrates_with, to: servicenow, sources: [https://stackgen.com/product/aiden-for-devops]}
+  - {type: integrates_with, to: jira, sources: [https://stackgen.com/product/aiden-for-devops]}
+  - {type: integrates_with, to: linear, sources: [https://stackgen.com/product/aiden-for-devops]}
+  - {type: integrates_with, to: cursor, sources: [https://stackgen.com/product/aiden-for-infraops]}
+  - {type: integrates_with, to: claude-code, sources: [https://stackgen.com/product/aiden-for-infraops]}
+  - {type: integrates_with, to: kiro, sources: [https://stackgen.com/product/aiden-for-infraops]}
 sources:
   - {field: summary, url: https://stackgen.com, retrieved: 2026-10-21}
   - {field: customers, url: https://stackgen.com, retrieved: 2026-10-21}
@@ -17,3 +24,5 @@ sources:
   - {field: customers, url: https://stackgen.com/case-studies/innovaccer, retrieved: 2026-10-21}
   - {field: customers, url: https://stackgen.com/case-studies/greythr, retrieved: 2026-10-21}
   - {field: last_round, url: https://techcrunch.com/2024/09/10/stackgen-raises-12-3m-for-its-infrastructure-from-code-service/, retrieved: 2026-10-21}
+  - {field: relations, url: https://stackgen.com/product/aiden-for-devops, retrieved: 2026-10-28}
+  - {field: relations, url: https://stackgen.com/product/aiden-for-infraops, retrieved: 2026-10-28}

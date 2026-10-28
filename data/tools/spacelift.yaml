@@ -14,6 +14,17 @@ entry_price: Free
 deployment: [saas, self-hosted, on-prem, air-gapped]
 compliance: [FedRAMP (authorized SaaS)]
 last_round: $51M Series C (2025)
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: slack, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: pulumi, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: backstage, sources: [https://docs.spacelift.io/]}
+  - {type: integrates_with, to: servicenow, sources: [https://docs.spacelift.io/]}
 sources:
   - {field: gtm_partners, url: https://spacelift.io/pricing_b, retrieved: 2026-10-21}
   - {field: summary, url: https://spacelift.io, retrieved: 2026-10-21}
@@ -26,3 +37,4 @@ sources:
   - {field: deployment, url: https://spacelift.io, retrieved: 2026-10-21}
   - {field: deployment, url: https://spacelift.io/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.fiveelms.com/spacelift-raises-51m-series-c-to-redefine-enterprise-infrastructure-automation/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.spacelift.io/, retrieved: 2026-10-28}

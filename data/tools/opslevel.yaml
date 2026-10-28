@@ -10,8 +10,24 @@ summary: Internal developer portal that gives teams and their agents the same pi
 pricing_model: quote
 deployment: [saas, self-hosted]
 compliance: [SOC 2 Type II]
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: jira, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: slack, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: new-relic, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: pagerduty, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: circleci, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: snyk, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: sonar, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: wiz, sources: [https://docs.opslevel.com/docs/integrations.md]}
+  - {type: integrates_with, to: incident-io, sources: [https://docs.opslevel.com/docs/integrations.md]}
 sources:
   - {field: summary, url: https://www.opslevel.com, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}
   - {field: compliance, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.opslevel.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.opslevel.com/docs/integrations.md, retrieved: 2026-10-28}

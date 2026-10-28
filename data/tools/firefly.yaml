@@ -10,6 +10,21 @@ autonomy: agent
 summary: "Cloud resilience: codifies infrastructure, enforces policy with AI SRE and agent remediation, and recovers from attacks, outages and agent errors."
 customers: [Xvoucher, Comtech, Aspyr, Aqua Security]
 compliance: [DORA, NIS2, SOC 2, ISO (evidence)]
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: jira, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: slack, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: new-relic, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: pagerduty, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: servicenow, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: backstage, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: wiz, sources: [https://docs.firefly.ai/integrations/overview.md]}
+  - {type: integrates_with, to: env0, sources: [https://docs.firefly.ai/integrations/overview.md]}
 sources:
   - {field: summary, url: https://www.firefly.ai, retrieved: 2026-10-21}
   - {field: customers, url: https://www.firefly.ai/customers/xvoucher, retrieved: 2026-10-21}
@@ -17,3 +32,4 @@ sources:
   - {field: customers, url: https://www.firefly.ai/customers/aspyr, retrieved: 2026-10-21}
   - {field: customers, url: https://www.firefly.ai/customers/aqua, retrieved: 2026-10-21}
   - {field: compliance, url: https://www.firefly.ai, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.firefly.ai/integrations/overview.md, retrieved: 2026-10-28}

@@ -12,6 +12,24 @@ pricing_model: usage
 entry_price: Free ($0/month, unlimited seats)
 deployment: [saas, edge, self-hosted]
 compliance: [SOC 2, ISO, HIPAA]
+relations:
+  - {type: integrates_with, to: github, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: gitlab, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: jira, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: slack, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: microsoft-teams, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: datadog, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: sentry, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: new-relic, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: dynatrace, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: servicenow, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: circleci, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: jenkins, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: vs-code, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: jetbrains, sources: [https://launchdarkly.com/integrations/]}
+  - {type: integrates_with, to: vercel, sources: [https://launchdarkly.com/integrations/]}
 sources:
   - {field: summary, url: https://launchdarkly.com, retrieved: 2026-10-21}
   - {field: traction, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
@@ -19,3 +37,4 @@ sources:
   - {field: entry_price, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
   - {field: compliance, url: https://launchdarkly.com/pricing/, retrieved: 2026-10-21}
   - {field: deployment, url: https://launchdarkly.com/compare/launchdarkly-vs-unleash/, retrieved: 2026-10-21}
+  - {field: relations, url: https://launchdarkly.com/integrations/, retrieved: 2026-10-28}

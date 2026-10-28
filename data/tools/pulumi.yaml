@@ -14,6 +14,10 @@ repo: https://github.com/pulumi/pulumi
 compliance: [SOC 2 Type II]
 hq: Seattle
 last_round: $41M Series C (Oct 2023)
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.pulumi.com/docs/integrations/version-control/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.pulumi.com/docs/integrations/version-control/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.pulumi.com/docs/integrations/version-control/]}
 sources:
   - {field: summary, url: https://www.pulumi.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.pulumi.com/, retrieved: 2026-10-21}
@@ -22,3 +26,4 @@ sources:
   - {field: compliance, url: https://www.pulumi.com/, retrieved: 2026-10-21}
   - {field: hq, url: https://agentcommunity.org/m/pulumi, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.pulumi.com/about/newsroom/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.pulumi.com/docs/integrations/version-control/, retrieved: 2026-10-28}
