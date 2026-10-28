@@ -11,6 +11,9 @@ summary: "OpenTelemetry-native observability with AI agents: watches the agents 
 customers: [Digibee, Autonative, Understory, Bonhams]
 pricing_model: usage
 last_round: $110M Series B at a $1B valuation, led by Balderton Capital (Mar 2026)
+relations:
+  - {type: integrates_with, to: slack, sources: [https://www.dash0.com/integrations]}
+  - {type: integrates_with, to: vercel, sources: [https://www.dash0.com/integrations]}
 sources:
   - {field: summary, url: https://www.dash0.com/, retrieved: 2026-10-21}
   - {field: customers, url: https://www.dash0.com/customers/digibee-s-journey-from-10-to-100-apm-visibility-with-dash0, retrieved: 2026-10-21}
@@ -19,3 +22,4 @@ sources:
   - {field: customers, url: https://www.dash0.com/customers/bonhams-case-study-switching-to-dash0-for-50-savings, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.dash0.com/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.dash0.com/blog/dash0-raises-usd110m-series-b, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.dash0.com/integrations, retrieved: 2026-10-28}

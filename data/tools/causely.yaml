@@ -11,6 +11,13 @@ traction: Ops agents diagnose 63% faster (company claim)
 pricing_model: subscription
 entry_price: $2,000/month
 last_round: $8.8M seed (2023)
+relations:
+  - {type: integrates_with, to: github, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
+  - {type: integrates_with, to: slack, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
+  - {type: integrates_with, to: incident-io, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
+  - {type: integrates_with, to: dynatrace, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
+  - {type: integrates_with, to: backstage, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.causely.ai/getting-started/supported-technologies/]}
 sources:
   - {field: summary, url: https://www.causely.ai/, retrieved: 2026-10-21}
   - {field: traction, url: https://www.causely.ai/, retrieved: 2026-10-21}
@@ -18,3 +25,4 @@ sources:
   - {field: entry_price, url: https://www.causely.ai/pricing, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.causely.ai/blog/causely-raises-8-8m-in-seed-funding-to-deliver-it-industrys-first-causal-ai-platform, retrieved: 2026-10-21}
   - {field: last_round, url: https://siliconangle.com/2023/06/29/causal-ai-company-causely-raises-8-6m-automate-operations/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.causely.ai/getting-started/supported-technologies/, retrieved: 2026-10-28}

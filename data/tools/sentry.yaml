@@ -1,0 +1,8 @@
+id: sentry
+name: Sentry
+company: Sentry
+url: https://sentry.io
+layer: systems
+summary: Code breaks, fix it faster
+sources:
+  - {field: summary, url: https://sentry.io/welcome/, retrieved: 2026-10-28}

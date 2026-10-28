@@ -13,9 +13,19 @@ compliance: [SOC 2 Type II]
 funding_total: $9.8M seed, led by Vertex Ventures US
 relations:
   - {type: competes_with, to: datadog-bits, sources: [https://cleric.ai/compare/datadog]}
+  - {type: integrates_with, to: github, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: linear, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: jira, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: slack, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: pagerduty, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: incident-io, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: new-relic, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: datadog, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
+  - {type: integrates_with, to: sentry, sources: [https://docs.cleric.ai/integrations/supported-integrations.md]}
 sources:
   - {field: summary, url: https://cleric.ai, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://cleric.ai/pricing, retrieved: 2026-10-21}
   - {field: compliance, url: https://cleric.ai, retrieved: 2026-10-21}
   - {field: relations, url: https://cleric.ai/compare/datadog, retrieved: 2026-10-21}
   - {field: funding_total, url: https://www.apmdigest.com/cleric-launches-self-learning-ai-sre, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.cleric.ai/integrations/supported-integrations.md, retrieved: 2026-10-28}

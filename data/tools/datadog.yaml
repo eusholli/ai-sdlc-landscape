@@ -1,0 +1,8 @@
+id: datadog
+name: Datadog
+company: Datadog
+url: https://www.datadoghq.com
+layer: systems
+summary: See inside any stack, any app, at any scale, anywhere.
+sources:
+  - {field: summary, url: https://www.datadoghq.com/, retrieved: 2026-10-28}

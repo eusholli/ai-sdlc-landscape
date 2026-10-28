@@ -13,6 +13,12 @@ pricing_model: usage (credits)
 models: [bring your own LLMs]
 compliance: [SOC 2 Type II]
 last_round: $19.3M
+relations:
+  - {type: integrates_with, to: slack, sources: [https://neubird.ai/]}
+  - {type: integrates_with, to: pagerduty, sources: [https://neubird.ai/]}
+  - {type: integrates_with, to: dynatrace, sources: [https://neubird.ai/]}
+  - {type: integrates_with, to: cursor, sources: [https://neubird.ai/]}
+  - {type: integrates_with, to: datadog, sources: [https://neubird.ai/]}
 sources:
   - {field: summary, url: https://neubird.ai, retrieved: 2026-10-21}
   - {field: customers, url: https://neubird.ai/resources/customer-story-how-bedrock-analytics-resolves-incidents-faster, retrieved: 2026-10-21}
@@ -21,3 +27,4 @@ sources:
   - {field: compliance, url: https://neubird.ai, retrieved: 2026-10-21}
   - {field: models, url: https://neubird.ai, retrieved: 2026-10-21}
   - {field: last_round, url: https://pulse2.com/neubird-ai-19-3-million-raised-for-agentic-ai-platform-for-enterprise-production-operations/, retrieved: 2026-10-21}
+  - {field: relations, url: https://neubird.ai/, retrieved: 2026-10-28}

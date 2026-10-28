@@ -15,6 +15,17 @@ relations:
   - {type: competes_with, to: datadog-bits, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
   - {type: competes_with, to: resolve-ai, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
   - {type: competes_with, to: rootly, sources: [https://www.traversal.com/comparison/traversal-vs-datadog, https://www.traversal.com/comparison/traversal-vs-resolve-ai]}
+  - {type: integrates_with, to: github, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: linear, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: incident-io, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: rootly, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: new-relic, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: dynatrace, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: datadog, sources: [https://www.traversal.com/platform/integrations]}
+  - {type: integrates_with, to: sentry, sources: [https://www.traversal.com/platform/integrations]}
 sources:
   - {field: summary, url: https://www.traversal.com, retrieved: 2026-10-21}
   - {field: customers, url: https://www.traversal.com/customer-stories/cloudways, retrieved: 2026-10-21}
@@ -24,3 +35,4 @@ sources:
   - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-resolve-ai, retrieved: 2026-10-21}
   - {field: relations, url: https://www.traversal.com/comparison/traversal-vs-rootly, retrieved: 2026-10-21}
   - {field: last_round, url: https://fortune.com/2025/06/18/traversal-emerges-from-stealth-with-48-million-from-sequoia-and-kleiner-perkins-to-reimagine-site-reliability-in-the-ai-era/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.traversal.com/platform/integrations, retrieved: 2026-10-28}

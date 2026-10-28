@@ -9,8 +9,15 @@ interface: [web, slack]
 summary: Cloud monitoring and security platform; Bits AI runs incident tasks, writes postmortems and, as Bits AI Dev Agent, suggests tests for uncovered code.
 pricing_model: usage
 compliance: [PCI, HIPAA (logs)]
+relations:
+  - {type: integrates_with, to: slack, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
+  - {type: integrates_with, to: jira, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
+  - {type: integrates_with, to: github, sources: [https://www.datadoghq.com/product/ai/bits-ai-sre/]}
+  - {type: ships_inside, to: datadog, sources: [https://docs.datadoghq.com/bits_ai/]}
 sources:
   - {field: summary, url: https://www.datadoghq.com/, retrieved: 2026-10-21}
   - {field: summary, url: https://www.datadoghq.com/pricing/, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.datadoghq.com/pricing/list/, retrieved: 2026-10-21}
   - {field: compliance, url: https://www.datadoghq.com/pricing/list/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.datadoghq.com/product/ai/bits-ai-sre/, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.datadoghq.com/bits_ai/, retrieved: 2026-10-28}
