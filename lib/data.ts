@@ -181,10 +181,13 @@ export interface ToolConnections {
 
 const CONN_ORDER: ConnGroup[] = [...PHASE_ORDER, "agent-infra", "systems"];
 
-/** Tools and platforms linked to this one directly, and tools through one other tool, by phase, each step sourced. */
+/**
+ * Every phase and layer in order, empty ones included: the tools and platforms linked to this one
+ * directly, tools through one other tool, and tools sharing a platform with it, each step sourced.
+ */
 export function connectionsOf(id: string): ToolConnections {
-  const groups = connectionsFor(id, landscape.tools, landscape.relations, CONN_ORDER, nameOf);
-  const ids = new Set(groups.flatMap((g) => [...g.direct, ...g.twoStep]).flatMap((c) => [c.tool, ...c.paths.flatMap((p) => p.steps.flatMap((s) => [s.from, s.to]))]));
+  const groups = connectionsFor(id, landscape.tools, landscape.relations, CONN_ORDER, nameOf, { includeEmpty: true });
+  const ids = new Set(groups.flatMap((g) => [...g.direct, ...g.twoStep, ...g.shared]).flatMap((c) => [c.tool, ...c.paths.flatMap((p) => p.steps.flatMap((s) => [s.from, s.to]))]));
   return { groups, names: Object.fromEntries([...ids].map((x) => [x, nameOf(x)])) };
 }
 

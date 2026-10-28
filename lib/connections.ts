@@ -4,7 +4,8 @@
 // Only recorded links count. A direct link is one relation, to a tool or to a platform (a code
 // host, tracker or editor that tools integrate with). A two-step path is two relations joined at
 // another tool on the map, never at a platform: links are never inferred from a shared platform or
-// external, such as two tools that both integrate with GitHub, and nothing here ranks tools as a "fit".
+// external, and nothing here ranks tools as a "fit". Two tools that both integrate with the same
+// platform, such as GitHub, are listed apart as sharing it: a weaker tier, never counted as a link.
 import type { LayerId, NodeKind, PhaseId, RelationLite, RelationType } from "@/lib/types";
 
 /** Relation types that mean two tools work together. Competition, ownership and models do not. */
@@ -34,7 +35,13 @@ export interface ConnectionGroup<R extends RelationLite = RelationLite> {
   group: ConnGroup;
   direct: Connection<R>[];
   twoStep: Connection<R>[];
+  /** Tools that integrate with a platform this one links to directly; `via` is the platform. Not a link. */
+  shared: Connection<R>[];
 }
+
+/** How a tool is reached, strongest first: one relation, two through another tool, or a shared platform. */
+export type LinkTier = "direct" | "two-step" | "shared";
+export const TIERS: readonly LinkTier[] = ["direct", "two-step", "shared"];
 
 const groupOf = (n: ConnNode): ConnGroup | null =>
   n.primaryPhase ?? (n.layer === "agent-infra" || n.layer === "systems" ? n.layer : null);
@@ -71,10 +78,11 @@ function adjacency<R extends RelationLite>(nodes: Map<string, ConnNode>, rels: R
 const best = <R extends RelationLite>(rs: R[]) => [...rs].sort((x, y) => weight(y) - weight(x))[0];
 
 /**
- * Every tool or platform linked to `id` directly, and every tool linked through one other tool,
- * grouped by where each sits on the map, in `order`. A platform is never a step and is only listed
- * when linked directly. A tool reached directly is not repeated as a two-step path. Within a group,
- * the path with more sources comes first, then the name order of `nameOf`.
+ * Every tool or platform linked to `id` directly, every tool linked through one other tool, and
+ * every tool sharing a platform `id` links to, grouped by where each sits on the map, in `order`.
+ * A platform is never a step and is only listed when linked directly. A tool is listed once, in its
+ * strongest tier. Within a group, the path with more sources comes first, then the name order of
+ * `nameOf`. Groups with nothing are left out unless `includeEmpty` is set.
  */
 export function connectionsFor<R extends RelationLite>(
   id: string,
@@ -82,6 +90,7 @@ export function connectionsFor<R extends RelationLite>(
   rels: R[],
   order: ConnGroup[],
   nameOf: (id: string) => string = (x) => x,
+  { includeEmpty = false }: { includeEmpty?: boolean } = {},
 ): ConnectionGroup<R>[] {
   const nodes = new Map(nodeList.map((n) => [n.id, n]));
   const adj = adjacency(nodes, rels);
@@ -100,18 +109,44 @@ export function connectionsFor<R extends RelationLite>(
       two.set(tool, c);
     }
   }
+  const shared = new Map<string, Connection<R>>();
+  for (const [via, rs1] of first) {
+    if (nodes.get(via)?.kind !== "platform") continue;
+    for (const [tool, rs2] of adj.get(via) ?? []) {
+      if (tool === id || first.has(tool) || two.has(tool) || !isTool(tool)) continue;
+      const c = shared.get(tool) ?? { tool, paths: [] };
+      c.paths.push({ via, steps: [best(rs1), best(rs2)] });
+      shared.set(tool, c);
+    }
+  }
   const score = (p: Connection<R>["paths"][number]) => Math.min(...p.steps.map(weight));
-  for (const c of two.values()) c.paths.sort((a, b) => score(b) - score(a) || nameOf(a.via!).localeCompare(nameOf(b.via!)));
+  for (const c of [...two.values(), ...shared.values()])
+    c.paths.sort((a, b) => score(b) - score(a) || nameOf(a.via!).localeCompare(nameOf(b.via!)));
   const rank = (a: Connection<R>, b: Connection<R>) =>
     score(b.paths[0]) - score(a.paths[0]) || nameOf(a.tool).localeCompare(nameOf(b.tool));
+  const inGroup = (cs: Iterable<Connection<R>>, group: ConnGroup) =>
+    [...cs].filter((c) => groupOf(nodes.get(c.tool)!) === group).sort(rank);
 
   return order
-    .map((group) => ({
-      group,
-      direct: direct.filter((c) => groupOf(nodes.get(c.tool)!) === group).sort(rank),
-      twoStep: [...two.values()].filter((c) => groupOf(nodes.get(c.tool)!) === group).sort(rank),
-    }))
-    .filter((g) => g.direct.length || g.twoStep.length);
+    .map((group) => ({ group, direct: inGroup(direct, group), twoStep: inGroup(two.values(), group), shared: inGroup(shared.values(), group) }))
+    .filter((g) => includeEmpty || g.direct.length || g.twoStep.length || g.shared.length);
+}
+
+/** Tools sharing a platform, grouped under the platform of each one's first path, in first-seen order. */
+export function byPlatform<R extends RelationLite>(shared: Connection<R>[]): { platform: string; tools: Connection<R>[] }[] {
+  const out = new Map<string, Connection<R>[]>();
+  for (const c of shared) {
+    const p = c.paths[0].via!;
+    out.set(p, [...(out.get(p) ?? []), c]);
+  }
+  return [...out].map(([platform, tools]) => ({ platform, tools }));
+}
+
+/** The strongest tier each group is reached by, or null when it has nothing. */
+export function linkStrength(groups: ConnectionGroup[]): Partial<Record<ConnGroup, LinkTier | null>> {
+  return Object.fromEntries(
+    groups.map((g) => [g.group, g.direct.length ? "direct" : g.twoStep.length ? "two-step" : g.shared.length ? "shared" : null]),
+  );
 }
 
 /** For each phase in `phaseIds`, the stack tools that cover it, primary or not, in stack order. */
@@ -125,31 +160,57 @@ export function stackCoverage(stack: string[], nodeList: ConnNode[], phaseIds: P
 export const stackGaps = (stack: string[], nodeList: ConnNode[], phaseIds: PhaseId[]): PhaseId[] =>
   stackCoverage(stack, nodeList, phaseIds).filter((c) => c.tools.length === 0).map((c) => c.phase);
 
+/** A tool or platform that could fill an empty phase, and how it reaches the stack. */
+export interface Suggestion {
+  tool: string;
+  /** The stack entries it reaches. */
+  linkedTo: string[];
+  tier: LinkTier;
+  /** For two-step, the tools in between; for shared, the platforms shared. Empty when direct. */
+  through: string[];
+}
+
 /**
- * For each phase the stack leaves empty, the tools and platforms covering it that have a recorded
- * direct link to something in the stack, with the stack entries they link to.
+ * For each phase the stack leaves empty, the tools and platforms covering it that link straight to
+ * something in the stack, then the tools linked to one through another tool on the map, then the
+ * tools sharing a platform with one. Platforms are suggested only when linked directly. Each
+ * suggestion is listed once, in its strongest tier; within a tier, the most stack entries reached first.
  */
 export function gapFillers(
   stack: string[],
   gaps: PhaseId[],
   nodeList: ConnNode[],
   rels: RelationLite[],
-): { phase: PhaseId; tools: { tool: string; linkedTo: string[] }[] }[] {
+): { phase: PhaseId; tools: Suggestion[] }[] {
   const nodes = new Map(nodeList.map((n) => [n.id, n]));
   const adj = adjacency(nodes, rels);
   const inStack = new Set(stack);
-  return gaps.map((phase) => {
-    const found = new Map<string, Set<string>>();
-    for (const s of stack) {
-      for (const n of adj.get(s)?.keys() ?? []) {
-        if (inStack.has(n) || !phasesOf(nodes.get(n)!).includes(phase)) continue;
-        found.set(n, (found.get(n) ?? new Set()).add(s));
-      }
+  const kindOf = (n: string) => nodes.get(n)?.kind;
+  const found = new Map<string, { tier: LinkTier; linkedTo: Set<string>; through: Set<string> }>();
+  const note = (n: string, tier: LinkTier, s: string, through?: string) => {
+    if (inStack.has(n)) return;
+    const cur = found.get(n);
+    if (cur && TIERS.indexOf(cur.tier) < TIERS.indexOf(tier)) return;
+    const f = cur && cur.tier === tier ? cur : { tier, linkedTo: new Set<string>(), through: new Set<string>() };
+    f.linkedTo.add(s);
+    if (through) f.through.add(through);
+    found.set(n, f);
+  };
+  for (const s of stack) {
+    for (const [mid] of adj.get(s) ?? []) {
+      note(mid, "direct", s);
+      const tier = kindOf(mid) === "tool" ? "two-step" : kindOf(mid) === "platform" ? "shared" : null;
+      if (!tier) continue;
+      for (const [n] of adj.get(mid) ?? []) if (n !== s && kindOf(n) === "tool") note(n, tier, s, mid);
     }
-    const tools = [...found].map(([tool, to]) => ({ tool, linkedTo: [...to] }))
-      .sort((a, b) => b.linkedTo.length - a.linkedTo.length || a.tool.localeCompare(b.tool));
-    return { phase, tools };
-  });
+  }
+  const all = [...found].map(([tool, f]): Suggestion => ({ tool, linkedTo: [...f.linkedTo], tier: f.tier, through: [...f.through] }));
+  return gaps.map((phase) => ({
+    phase,
+    tools: all
+      .filter((t) => phasesOf(nodes.get(t.tool)!).includes(phase))
+      .sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || b.linkedTo.length - a.linkedTo.length || a.tool.localeCompare(b.tool)),
+  }));
 }
 
 /** The stack entries with no recorded link to any other tool or platform, in stack order. */
@@ -172,8 +233,8 @@ export interface PhaseChoice {
   tools: string[];
   /** True when no tool in the stack covers the phase; tools added from a suggestion do not count. */
   gap: boolean;
-  /** For a gap, the tools and platforms covering it that link straight to the stack, most links first. */
-  suggested: { tool: string; linkedTo: string[] }[];
+  /** For a gap, the tools and platforms covering it that reach the stack, strongest tier first (`gapFillers`). */
+  suggested: Suggestion[];
   /** The suggestions for this gap that are already chosen. */
   added: string[];
 }

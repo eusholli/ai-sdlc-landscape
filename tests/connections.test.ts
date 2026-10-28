@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
-  choiceCoverage, connectionsFor, gapFillers, phaseState, stackCoverage, stackGaps, unlinkedChoices, unlinkedNote, type ConnNode,
+  byPlatform, choiceCoverage, connectionsFor, gapFillers, linkStrength, phaseState, stackCoverage, stackGaps, unlinkedChoices, unlinkedNote,
+  type ConnNode,
 } from "@/lib/connections";
 import type { Relation } from "@/lib/types";
 
@@ -67,6 +68,12 @@ describe("connectionsFor", () => {
   it("returns nothing for a tool with no relations", () => {
     expect(connectionsFor("lonely", NODES, RELS, [...ORDER])).toEqual([]);
   });
+
+  it("lists every group in order, empty ones too, when asked", () => {
+    const all = connectionsFor("lonely", NODES, RELS, [...ORDER], undefined, { includeEmpty: true });
+    expect(all.map((g) => g.group)).toEqual([...ORDER]);
+    expect(all.every((g) => !g.direct.length && !g.twoStep.length && !g.shared.length)).toBe(true);
+  });
 });
 
 describe("stackCoverage and stackGaps", () => {
@@ -89,12 +96,21 @@ describe("stackCoverage and stackGaps", () => {
 
 describe("gapFillers", () => {
   it("names tools covering an empty phase that link straight to the stack", () => {
-    const out = gapFillers(["builder"], ["code", "cicd", "plan"], NODES, RELS);
+    const out = gapFillers(["builder"], ["code", "plan"], NODES, RELS);
     expect(out).toEqual([
-      { phase: "code", tools: [{ tool: "editor", linkedTo: ["builder"] }] },
-      { phase: "cicd", tools: [] },
+      { phase: "code", tools: [{ tool: "editor", linkedTo: ["builder"], tier: "direct", through: [] }] },
       { phase: "plan", tools: [] },
     ]);
+  });
+  it("then names tools linked to the stack through one other tool", () => {
+    expect(gapFillers(["builder"], ["cicd"], NODES, RELS)[0].tools).toEqual([
+      { tool: "ci", linkedTo: ["builder"], tier: "two-step", through: ["editor"] },
+    ]);
+  });
+  it("lists a tool once, in its strongest tier", () => {
+    // ci is two steps from builder but one from editor.
+    const tools = gapFillers(["builder", "editor"], ["cicd"], NODES, RELS)[0].tools;
+    expect(tools).toEqual([{ tool: "ci", linkedTo: ["editor"], tier: "direct", through: [] }]);
   });
   it("matches any phase a tool covers, not only its primary one", () => {
     expect(gapFillers(["builder"], ["review"], NODES, RELS)[0].tools.map((t) => t.tool)).toEqual(["editor"]);
@@ -110,7 +126,7 @@ describe("choiceCoverage", () => {
       phase: "code",
       tools: ["editor"],
       gap: true,
-      suggested: [{ tool: "editor", linkedTo: ["builder"] }],
+      suggested: [{ tool: "editor", linkedTo: ["builder"], tier: "direct", through: [] }],
       added: ["editor"],
     });
     expect(out.find((c) => c.phase === "design")).toMatchObject({ tools: ["builder"], gap: false, suggested: [], added: [] });
@@ -122,8 +138,10 @@ describe("choiceCoverage", () => {
   });
 
   it("works out suggestions from the stack only, not from the added tools", () => {
-    const cicd = choiceCoverage(["builder"], ["editor"], NODES, RELS, [...phases]).find((c) => c.phase === "cicd");
-    expect(cicd).toMatchObject({ gap: true, suggested: [] });
+    // scanner is one step from editor, two from builder: added tools do not make it direct.
+    const nodes = NODES.map((n) => (n.id === "scanner" ? { ...n, phases: ["cicd" as const] } : n));
+    const cicd = choiceCoverage(["builder"], ["editor"], nodes, RELS, [...phases]).find((c) => c.phase === "cicd");
+    expect(cicd?.suggested.map((s) => [s.tool, s.tier])).toEqual([["ci", "two-step"], ["scanner", "two-step"]]);
   });
 });
 
@@ -133,17 +151,19 @@ describe("phaseState", () => {
     choiceCoverage(stack, added, NODES, RELS, [...phases]).map((c) => [c.phase, phaseState(c)]);
 
   it("marks each phase covered, open or empty from the stack", () => {
-    expect(states(["builder"], [])).toEqual([["design", "covered"], ["code", "open"], ["review", "open"], ["cicd", "empty"]]);
+    expect(states(["builder"], [])).toEqual([["design", "covered"], ["code", "open"], ["review", "open"], ["cicd", "open"]]);
+    expect(states(["scanner"], [])).toEqual([["design", "open"], ["code", "open"], ["review", "open"], ["cicd", "open"]]);
+    expect(states(["lonely"], [])).toEqual([["design", "empty"], ["code", "empty"], ["review", "empty"], ["cicd", "empty"]]);
   });
 
   it("marks a phase filled by an added suggestion as via, in every phase the tool covers", () => {
-    expect(states(["builder"], ["editor"])).toEqual([["design", "covered"], ["code", "via"], ["review", "via"], ["cicd", "empty"]]);
+    expect(states(["builder"], ["editor"])).toEqual([["design", "covered"], ["code", "via"], ["review", "via"], ["cicd", "open"]]);
   });
 
   it("keeps a phase the stack covers as covered when an added tool covers it too", () => {
     const nodes = [...NODES, node("coder", "code")];
     const out = choiceCoverage(["builder", "coder"], ["editor"], nodes, RELS, [...phases]);
-    expect(out.map(phaseState)).toEqual(["covered", "covered", "via", "empty"]);
+    expect(out.map(phaseState)).toEqual(["covered", "covered", "via", "open"]);
     expect(out[1].tools).toEqual(["coder", "editor"]);
   });
 });
@@ -160,19 +180,46 @@ describe("platforms", () => {
 
   it("suggests a platform that covers an empty phase and links straight to the stack", () => {
     const out = gapFillers(["builder"], ["cicd"], NODES_P, RELS_P);
-    expect(out[0].tools).toEqual([{ tool: "host", linkedTo: ["builder"] }]);
+    expect(out[0].tools[0]).toEqual({ tool: "host", linkedTo: ["builder"], tier: "direct", through: [] });
   });
 
   it("never links two tools through a shared platform", () => {
-    expect(gapFillers(["deployer"], ["design"], NODES_P, RELS_P)[0].tools).toEqual([]);
+    expect(gapFillers(["deployer"], ["design"], NODES_P, RELS_P)[0].tools.filter((t) => t.tier !== "shared")).toEqual([]);
     const all = connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P]).flatMap((g) => [...g.direct, ...g.twoStep]);
     expect(all.map((c) => c.tool)).not.toContain("deployer");
     expect(all.flatMap((c) => c.paths.map((p) => p.via))).not.toContain("host");
   });
 
+  it("lists tools sharing a platform apart, after stronger tiers, never a platform", () => {
+    expect(gapFillers(["deployer"], ["design"], NODES_P, RELS_P)[0].tools).toEqual([
+      { tool: "builder", linkedTo: ["deployer"], tier: "shared", through: ["host"] },
+    ]);
+    const groups = connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P]);
+    const cicd = groups.find((g) => g.group === "cicd")!;
+    // ci is two steps away, so it is not repeated as sharing the host; deployer only shares it.
+    expect(cicd.twoStep.map((c) => c.tool)).toEqual(["ci"]);
+    expect(cicd.shared).toEqual([{ tool: "deployer", paths: [{ via: "host", steps: [RELS_P.at(-2), RELS_P.at(-1)] }] }]);
+    expect(groups.flatMap((g) => g.shared).map((c) => c.tool)).not.toContain("host");
+  });
+
+  it("groups tools sharing a platform under their first platform", () => {
+    const c = (tool: string, ...via: string[]) => ({ tool, paths: via.map((v) => ({ via: v, steps: [] })) });
+    expect(byPlatform([c("a", "host"), c("b", "tracker", "host"), c("d", "host")])).toEqual([
+      { platform: "host", tools: [c("a", "host"), c("d", "host")] },
+      { platform: "tracker", tools: [c("b", "tracker", "host")] },
+    ]);
+  });
+
+  it("names the strongest tier for each group", () => {
+    const strength = linkStrength(connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P], undefined, { includeEmpty: true }));
+    expect(strength).toMatchObject({ plan: null, code: "direct", cicd: "two-step", systems: "direct" });
+    const fromDeployer = linkStrength(connectionsFor("deployer", NODES_P, RELS_P, [...ORDER_P]));
+    expect(fromDeployer).toEqual({ design: "shared", systems: "direct" });
+  });
+
   it("lists a platform only as a direct link, in its own group", () => {
     const groups = connectionsFor("builder", NODES_P, RELS_P, [...ORDER_P]);
-    expect(groups.find((g) => g.group === "systems")).toMatchObject({ direct: [{ tool: "host" }], twoStep: [] });
+    expect(groups.find((g) => g.group === "systems")).toMatchObject({ direct: [{ tool: "host" }], twoStep: [], shared: [] });
     // editor reaches host only through builder: no two-step path ends at a platform.
     const fromEditor = connectionsFor("editor", NODES_P, RELS_P, [...ORDER_P]);
     expect(fromEditor.find((g) => g.group === "systems")).toBeUndefined();
