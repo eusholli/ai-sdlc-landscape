@@ -7,7 +7,7 @@ import { Logo } from "@/components/logo";
 import { ToolLink } from "@/components/tool/tool-actions";
 import { Button } from "@/components/ui/button";
 import { phaseColor } from "@/lib/format";
-import { phaseState, unlinkedNote, type PhaseChoice, type PhaseState } from "@/lib/connections";
+import { phaseState, unlinkedNote, type LinkTier, type PhaseChoice, type PhaseState, type Suggestion } from "@/lib/connections";
 import type { Phase, PhaseId, ToolLite } from "@/lib/types";
 
 /** How many suggestions a phase card lists before "Show more". Added ones are always listed. */
@@ -16,6 +16,9 @@ const CARD_SUGGESTIONS = 3;
 const LINK = "font-medium underline-offset-2 hover:underline";
 const TEXT_BUTTON =
   "self-start rounded-sm text-xs underline underline-offset-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:min-h-11";
+
+/** The tag after a suggestion reached by a weaker tier. A direct link has none. */
+const TIER_TAG: Record<Exclude<LinkTier, "direct">, string> = { "two-step": "Two steps", shared: "Shared platform" };
 
 /** What a phase card's corner says for each state. */
 const STATE_LABEL: Record<Exclude<PhaseState, "via">, string> = {
@@ -62,6 +65,14 @@ export function ChoicePanel({
 }) {
   const byId = new Map(tools.map((t) => [t.id, t]));
   const nameOf = (id: string) => byId.get(id)?.name ?? id;
+  const list = (ids: string[]) => ids.map(nameOf).join(", ");
+  /** How a suggestion reaches your choices, in its own words for each tier. */
+  const howLinked = (s: Suggestion) =>
+    s.tier === "direct"
+      ? `via ${list(s.linkedTo)}`
+      : s.tier === "two-step"
+        ? `via ${list(s.through)}, linked to ${list(s.linkedTo)}`
+        : `also on ${list(s.through)}, like ${list(s.linkedTo)}`;
   const labelOf = (id: PhaseId) => phases.find((p) => p.id === id)?.label ?? id;
   const chosen = ids.flatMap((id) => byId.get(id) ?? []);
   const covered = coverage.filter((c) => c.tools.length > 0).length;
@@ -99,9 +110,9 @@ export function ChoicePanel({
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed px-6 py-12 text-center">
           <p className="font-medium">No tools chosen yet</p>
           <p className="max-w-prose text-sm text-muted-foreground">
-            Add the tools you run or are weighing. For each phase none of them covers, you see the tools and
-            platforms with a recorded integration or partnership with one you chose, and can tick several to compare. You can also add a tool
-            from the map, the search or a tool&apos;s detail view.
+            Add the tools you run or are weighing. For each phase none of them covers, you see the tools linked to
+            one you chose: directly, through one other tool, or by sharing a platform such as GitHub. Tick several to
+            compare. You can also add a tool from the map, the search or a tool&apos;s detail view.
           </p>
         </div>
       ) : (
@@ -181,12 +192,12 @@ export function ChoicePanel({
                   {state === "covered" && compare}
 
                   {state === "empty" && (
-                    <p className="text-xs text-muted-foreground">Nothing linked to your choices covers this phase.</p>
+                    <p className="text-xs text-muted-foreground">Nothing recorded links to your choices here.</p>
                   )}
 
                   {(state === "open" || state === "via") && (
                     <>
-                      <p className="text-xs text-muted-foreground">Linked to your choices:</p>
+                      <p className="text-xs text-muted-foreground">Linked to your choices, strongest first:</p>
                       <ul className="flex flex-col gap-1">
                         {shown.map((s) => {
                           const added = c.added.includes(s.tool);
@@ -198,8 +209,13 @@ export function ChoicePanel({
                                 </ToolLink>{" "}
                                 {byId.get(s.tool)?.kind === "platform" && (
                                   <span className="rounded-sm border px-1 text-[0.6875rem] text-muted-foreground">Platform</span>
+                                )}
+                                {s.tier !== "direct" && (
+                                  <span className="rounded-sm border border-dashed px-1 text-[0.6875rem] whitespace-nowrap text-muted-foreground">
+                                    {TIER_TAG[s.tier]}
+                                  </span>
                                 )}{" "}
-                                <span className="text-xs text-muted-foreground">via {s.linkedTo.map(nameOf).join(", ")}</span>
+                                <span className="text-xs text-muted-foreground">{howLinked(s)}</span>
                               </span>
                               <Button
                                 type="button"
@@ -234,9 +250,11 @@ export function ChoicePanel({
           </ul>
           {note && <p className="text-sm text-muted-foreground">{note}</p>}
           <p className="text-xs text-muted-foreground">
-            A suggestion covers a phase none of your choices covers and has a recorded integration, partnership or
-            bundling with one of them. A platform, such as a code host or tracker, is not an AI tool; it is listed
-            because tools integrate with it. A link is a sourced record, not a judgement of fit.
+            A suggestion covers a phase none of your choices covers. A direct one has a recorded integration,
+            partnership or bundling with one of your choices. A two-step one is linked to another tool that is linked to
+            one of them. A shared-platform one integrates with a platform one of them uses, which is not a link between
+            the two. A platform, such as a code host or tracker, is not an AI tool; it is listed because tools integrate
+            with it. Each link is a sourced record, not a judgement of fit.
           </p>
         </>
       )}

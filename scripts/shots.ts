@@ -38,6 +38,8 @@ export const ROUTES = [
   "/changes",
   "/tools/cursor",
   "/tools/github",
+  "/tools/builder-io", // the lifecycle strip and every tier of connections
+  "/tools/lovable", // a tool with few links: empty phases
   "/phases/review",
   "/about",
   "/contribute",

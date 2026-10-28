@@ -106,11 +106,22 @@ then one card per phase of the lifecycle, in order, so the layout stays put as t
 card is in one of four states, named in its corner: covered (solid, listing the choices that cover
 it), filled via a link (solid, the added tools ticked above the other suggestions), not covered
 (dashed, the tools linked to a choice that cover it, each added with +) or nothing linked (dashed
-and muted). A suggestion shows a green tick once added; a tick takes it out again. Any card with
+and muted). Suggestions come in three tiers, strongest first: direct ("via Cursor"), two steps through
+another tool on the map ("via Linear, linked to Cursor", tagged "Two steps") and a shared platform
+("also on GitHub, like Cursor", tagged "Shared platform"). A tool is listed once, in its strongest
+tier. A shared platform is never called a link. A suggestion shows a green tick once added; a tick takes it out again. Any card with
 two or more choices in its phase, whatever its state, shows a "Compare tools" link. It opens Compare
 tools on just those choices (`focus=<phase>`) and scrolls to the table, where "Show all choices"
 widens it again. Two tabs in the same switcher style follow: Choose tools (the panel alone) and
-Compare tools (the choices side by side). An old `tab=stack` link opens Compare tools. A suggestion is a sourced link, never a judgement of fit. Green
+Compare tools (the choices side by side). An old `tab=stack` link opens Compare tools. A suggestion is a sourced link, never a judgement of fit.
+
+**Connections on a tool page.** The tool page and drawer list every phase of the lifecycle, then
+agent infrastructure and platforms, in order, so one tool shows its whole picture. A strip of 13
+segments on top marks the strongest tier reaching each phase: solid in the phase colour for a direct
+link, faded for two steps, outlined for a shared platform, muted for nothing recorded, with a legend.
+Each phase lists its direct links and two-step paths, each step with its source, then "Shares a
+platform, not a link", grouped by platform. An empty phase says "Nothing recorded". A link opens the
+tool in Analyze choices (`analyzeHref`), where `ChoicesUrlSync` asks before changing a saved selection. Green
 (`text-success`) is a status mark for an added tool, never a data colour.
 
 **Phase pages.** `/phases/<id>` gives each phase a page of its own that search engines and

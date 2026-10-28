@@ -26,7 +26,8 @@ the map integrates with or ships inside can have a record with `layer: systems`,
 a page and Analyze choices can suggest it for an empty phase. A platform is not an AI tool and is
 never counted as one. Its record has no `primary_phase` and no `segment`; its `phases` are optional
 and need a source when given; and at least one tool must have a relation to it. Two tools are never
-linked to each other through a platform they share.
+linked to each other through a platform they share. Tool pages and Analyze choices list such tools
+apart, as "also works with GitHub", a weaker tier below direct links and two-step paths.
 
 A candidate that fails the bar goes in `data/screened.yaml` with the reason, so the next person
 does not judge it again. `rejected` keeps it out of every future scan; `deferred` lists it at the

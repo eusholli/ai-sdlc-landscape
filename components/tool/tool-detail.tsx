@@ -136,7 +136,7 @@ export function ToolDetail({
       <PhaseCoverage tool={tool} phases={refs.phases} heading={heading} />
       <FactsGrid tool={tool} sourceNumbers={sourceNumbers} heading={heading} />
       <RelationGroups relations={relations} refs={refs} heading={heading} />
-      {data.connections && <ConnectionGroups name={tool.name} connections={data.connections} refs={refs} heading={heading} />}
+      {data.connections && <ConnectionGroups id={tool.id} name={tool.name} connections={data.connections} refs={refs} heading={heading} />}
       <SourceList toolId={tool.id} groups={sourceGroups} heading={heading} />
 
       <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 text-sm">
