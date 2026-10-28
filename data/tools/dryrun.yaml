@@ -9,6 +9,15 @@ interface: [pr-bot]
 autonomy: agent
 summary: "AI-native SAST agents: an independent security check on human and AI-generated code, with no rules and fast PR feedback."
 last_round: $8.7M seed, led by LiveOak Ventures
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: openai-codex, sources: [https://www.dryrun.security/]}
+  - {type: integrates_with, to: windsurf, sources: [https://www.dryrun.security/]}
 sources:
   - {field: summary, url: https://www.dryrun.security, retrieved: 2026-10-21}
   - {field: last_round, url: https://techfundingnews.com/ai-powered-appsec-dryrun-security-secures-8-7m-to-tackle-growing-code-risks/, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.dryrun.security/, retrieved: 2026-10-28}

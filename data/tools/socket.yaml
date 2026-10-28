@@ -16,6 +16,13 @@ relations:
   - {type: competes_with, to: snyk, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
   - {type: competes_with, to: endor-labs, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
   - {type: competes_with, to: semgrep, sources: [https://socket.dev/compare/socket-vs-snyk, https://socket.dev/compare/socket-vs-endor-labs]}
+  - {type: integrates_with, to: github, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: jira, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: slack, sources: [https://docs.socket.dev/]}
+  - {type: integrates_with, to: vs-code, sources: [https://docs.socket.dev/]}
 sources:
   - {field: summary, url: https://socket.dev/, retrieved: 2026-10-21}
   - {field: traction, url: https://socket.dev/, retrieved: 2026-10-21}
@@ -27,3 +34,4 @@ sources:
   - {field: founded, url: https://fintech.global/2026/05/21/open-source-security-gap-drives-sockets-60m-raise/, retrieved: 2026-10-21}
   - {field: last_round, url: https://socket.dev/blog/series-c, retrieved: 2026-10-21}
   - {field: last_round, url: https://fintech.global/2026/05/21/open-source-security-gap-drives-sockets-60m-raise/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.socket.dev/, retrieved: 2026-10-28}

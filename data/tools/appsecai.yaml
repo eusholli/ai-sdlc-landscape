@@ -9,7 +9,13 @@ interface: [web]
 summary: Turns findings from any code scanner into validated, tested code fixes your security team delivers; nothing fixed, nothing owed.
 traction: 97% accurate triage (company claim)
 pricing_model: per fix
+relations:
+  - {type: integrates_with, to: snyk, sources: [https://www.appsecai.io/]}
+  - {type: integrates_with, to: semgrep, sources: [https://www.appsecai.io/]}
+  - {type: integrates_with, to: checkmarx, sources: [https://www.appsecai.io/]}
+  - {type: integrates_with, to: sonar, sources: [https://www.appsecai.io/]}
 sources:
   - {field: summary, url: https://www.appsecai.io, retrieved: 2026-10-21}
   - {field: traction, url: https://www.appsecai.io, retrieved: 2026-10-21}
   - {field: pricing_model, url: https://www.appsecai.io/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.appsecai.io/, retrieved: 2026-10-28}

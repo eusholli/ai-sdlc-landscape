@@ -16,6 +16,16 @@ relations:
   - {type: competes_with, to: semgrep, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
   - {type: competes_with, to: checkmarx, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
   - {type: competes_with, to: endor-labs, sources: [https://www.aikido.dev/comparison/semgrep, https://www.aikido.dev/comparison/checkmarx]}
+  - {type: integrates_with, to: github, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: gitlab, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: jira, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: circleci, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: gemini-cli, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: google-antigravity, sources: [https://integrations.aikido.dev/]}
+  - {type: integrates_with, to: cursor, sources: [https://integrations.aikido.dev/]}
 sources:
   - {field: summary, url: https://www.aikido.dev, retrieved: 2026-10-21}
   - {field: customers, url: https://www.aikido.dev/blog/aikido-funding-series-b, retrieved: 2026-10-21}
@@ -26,3 +36,4 @@ sources:
   - {field: relations, url: https://www.aikido.dev/comparison/checkmarx, retrieved: 2026-10-21}
   - {field: relations, url: https://www.aikido.dev/comparison/endor-labs, retrieved: 2026-10-21}
   - {field: last_round, url: https://www.aikido.dev/blog/aikido-funding-series-b, retrieved: 2026-10-21}
+  - {field: relations, url: https://integrations.aikido.dev/, retrieved: 2026-10-28}

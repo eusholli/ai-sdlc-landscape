@@ -12,6 +12,16 @@ gtm_partners: [AWS Marketplace, Azure Marketplace, Google Cloud Marketplace]
 pricing_model: subscription
 entry_price: Free tier for individual developers (AURI)
 deployment: [saas, on-prem (Outpost)]
+relations:
+  - {type: integrates_with, to: github, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: jira, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: slack, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: claude-code, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: github-copilot, sources: [https://www.endorlabs.com/]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.endorlabs.com/]}
 sources:
   - {field: gtm_partners, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
   - {field: summary, url: https://www.endorlabs.com, retrieved: 2026-10-21}
@@ -20,3 +30,4 @@ sources:
   - {field: pricing_model, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
   - {field: entry_price, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.endorlabs.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.endorlabs.com/, retrieved: 2026-10-28}

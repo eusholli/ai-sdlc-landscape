@@ -9,8 +9,18 @@ interface: [web, pr-bot]
 summary: Finds, triages and fixes vulnerabilities across code, packages, infrastructure and containers.
 traction: 2x more true positives, 3x fewer false positives (company claim)
 last_round: $2.6M seed, led by Shorooq Partners (2024)
+relations:
+  - {type: integrates_with, to: github, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: gitlab, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: harness, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: vs-code, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: cursor, sources: [https://corgea.com/]}
+  - {type: integrates_with, to: jetbrains, sources: [https://corgea.com/]}
 sources:
   - {field: summary, url: https://corgea.com, retrieved: 2026-10-21}
   - {field: traction, url: https://corgea.com, retrieved: 2026-10-21}
   - {field: last_round, url: https://fintech.global/2024/11/08/ai-driven-cybersecurity-startup-corgea-raises-2-6m-in-seed-round/, retrieved: 2026-10-21}
   - {field: last_round, url: https://theaiinsider.tech/2024/11/06/shorooq-leads-corgeas-2-6m-seed-round-to-revolutionize-cybersecurity-with-ai-driven-vulnerability-remediation/, retrieved: 2026-10-21}
+  - {field: relations, url: https://corgea.com/, retrieved: 2026-10-28}

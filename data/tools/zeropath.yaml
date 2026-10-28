@@ -13,6 +13,14 @@ entry_price: $60/dev
 deployment: [saas, on-prem, self-hosted, private cloud]
 models: [BYOK]
 compliance: [CIS, PCI-DSS, HIPAA, SOC 2, NIST, GDPR (checks)]
+relations:
+  - {type: integrates_with, to: github, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: gitlab, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: bitbucket, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: azure-devops, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: jira, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: linear, sources: [https://zeropath.com/]}
+  - {type: integrates_with, to: slack, sources: [https://zeropath.com/]}
 sources:
   - {field: summary, url: https://zeropath.com, retrieved: 2026-10-21}
   - {field: summary, url: https://zeropath.com/compare, retrieved: 2026-10-21}
@@ -22,3 +30,4 @@ sources:
   - {field: compliance, url: https://zeropath.com/products/iac, retrieved: 2026-10-21}
   - {field: deployment, url: https://zeropath.com/pricing, retrieved: 2026-10-21}
   - {field: models, url: https://zeropath.com/pricing, retrieved: 2026-10-21}
+  - {field: relations, url: https://zeropath.com/, retrieved: 2026-10-28}

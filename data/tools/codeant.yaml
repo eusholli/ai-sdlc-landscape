@@ -14,6 +14,16 @@ relations:
   - {type: competes_with, to: qodo, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
   - {type: competes_with, to: snyk, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
   - {type: competes_with, to: aikido, sources: [https://codeant.ai/comparison/qodo, https://codeant.ai/comparison/snyk]}
+  - {type: integrates_with, to: github, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: gitlab, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: bitbucket, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: azure-devops, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: jira, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: slack, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: vs-code, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: jetbrains, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: cursor, sources: [https://www.codeant.ai/integrations]}
+  - {type: integrates_with, to: windsurf, sources: [https://www.codeant.ai/integrations]}
 sources:
   - {field: summary, url: https://codeant.ai/, retrieved: 2026-10-21}
   - {field: compliance, url: https://codeant.ai/, retrieved: 2026-10-21}
@@ -21,3 +31,4 @@ sources:
   - {field: relations, url: https://codeant.ai/comparison/qodo, retrieved: 2026-10-21}
   - {field: relations, url: https://codeant.ai/comparison/snyk, retrieved: 2026-10-21}
   - {field: relations, url: https://codeant.ai/comparison/aikido, retrieved: 2026-10-21}
+  - {field: relations, url: https://www.codeant.ai/integrations, retrieved: 2026-10-28}

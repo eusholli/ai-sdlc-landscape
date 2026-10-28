@@ -16,6 +16,16 @@ repo: https://github.com/semgrep/semgrep
 last_round: $100M Series D, led by Menlo Ventures (Feb 2025)
 relations:
   - {type: competes_with, to: snyk, sources: [https://docs.semgrep.dev/faq/comparisons/snyk]}
+  - {type: integrates_with, to: github, sources: [https://docs.semgrep.dev/deployment/core-deployment]}
+  - {type: integrates_with, to: gitlab, sources: [https://docs.semgrep.dev/deployment/core-deployment]}
+  - {type: integrates_with, to: bitbucket, sources: [https://docs.semgrep.dev/deployment/core-deployment]}
+  - {type: integrates_with, to: azure-devops, sources: [https://docs.semgrep.dev/deployment/core-deployment]}
+  - {type: integrates_with, to: slack, sources: [https://docs.semgrep.dev/deployment/core-deployment]}
+  - {type: integrates_with, to: claude-code, sources: [https://docs.semgrep.dev/semgrep-guardian/ide-setup/claude-code.md]}
+  - {type: integrates_with, to: cursor, sources: [https://docs.semgrep.dev/semgrep-guardian/ide-setup/cursor.md]}
+  - {type: integrates_with, to: github-copilot, sources: [https://docs.semgrep.dev/semgrep-guardian/ide-setup/github-copilot.md]}
+  - {type: integrates_with, to: vs-code, sources: [https://docs.semgrep.dev/semgrep-guardian/ide-setup/vscode.md]}
+  - {type: integrates_with, to: windsurf, sources: [https://docs.semgrep.dev/semgrep-guardian/ide-setup/devin-windsurf.md]}
 sources:
   - {field: summary, url: https://semgrep.dev, retrieved: 2026-10-21}
   - {field: customers, url: https://semgrep.dev, retrieved: 2026-10-21}
@@ -28,3 +38,9 @@ sources:
   - {field: entry_price, url: https://semgrep.dev/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://docs.semgrep.dev/faq/comparisons/snyk, retrieved: 2026-10-21}
   - {field: last_round, url: https://fintech.global/2025/02/06/semgrep-bags-100m-in-series-d-to-elevate-ai-driven-code-security-innovations/, retrieved: 2026-10-21}
+  - {field: relations, url: https://docs.semgrep.dev/deployment/core-deployment, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.semgrep.dev/semgrep-guardian/ide-setup/claude-code.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.semgrep.dev/semgrep-guardian/ide-setup/cursor.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.semgrep.dev/semgrep-guardian/ide-setup/github-copilot.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.semgrep.dev/semgrep-guardian/ide-setup/vscode.md, retrieved: 2026-10-28}
+  - {field: relations, url: https://docs.semgrep.dev/semgrep-guardian/ide-setup/devin-windsurf.md, retrieved: 2026-10-28}
