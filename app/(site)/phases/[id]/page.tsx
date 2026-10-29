@@ -4,9 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Logo } from "@/components/logo";
 import { SITE_CONTAINER } from "@/components/site-name";
-import { allTools, phases } from "@/lib/data";
+import { PostLinks } from "@/components/post-links";
+import { allTools, posts, phases } from "@/lib/data";
 import { phaseColor } from "@/lib/format";
 import { breadcrumbJsonLd, jsonLdText, phaseJsonLd } from "@/lib/jsonld";
+import { postsAbout } from "@/lib/blog";
 import { phaseCountLine, phasePage, phaseTitle } from "@/lib/phase-page";
 import { OPEN_GRAPH } from "@/lib/seo";
 import type { Tool } from "@/lib/types";
@@ -135,6 +137,8 @@ export default async function PhasePage({ params }: { params: Promise<{ id: stri
             <ToolRows tools={alsoCovers} />
           </section>
         )}
+
+        <PostLinks posts={postsAbout(posts(), { phase: id })} about="phase" />
 
         <nav aria-labelledby="phases-heading" className="flex flex-col gap-3 border-t pt-6">
           <h2 id="phases-heading" className="text-sm font-semibold">

@@ -1,6 +1,6 @@
 // The site's navigation, in one place: the landscape, analysing your choices, updating the tool
-// data, the latest updates and the pages about the site. The header, the phone menu and the footer all read it.
-import { BookOpen, Download, Info, Shield, type LucideIcon } from "lucide-react";
+// data, the latest updates and the pages about the site, the posts among them. The header, the phone menu and the footer all read it.
+import { BookOpen, Download, Info, NotebookPen, Shield, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   href: string;
@@ -29,6 +29,7 @@ export const NAV: NavGroup[] = [
     id: "about", label: "About",
     items: [
       { href: "/about", label: "About the landscape", blurb: "Method, sources and licences", Icon: Info },
+      { href: "/blog", label: "Blog", blurb: "What the records show, by date", Icon: NotebookPen },
       { href: "/ownership", label: "Software ownership", blurb: "The maintainer's thesis", Icon: BookOpen },
       { href: "/privacy", label: "Privacy", blurb: "What the site measures and keeps", Icon: Shield },
       { href: "/landscape.json", label: "Download the data", blurb: "Every record as JSON", Icon: Download, download: true },

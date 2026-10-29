@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { allTools, dataDate, phases } from "@/lib/data";
+import { allTools, dataDate, posts, phases } from "@/lib/data";
 import { digestMonths } from "@/lib/digest";
 import { getPaper } from "@/lib/paper";
 import { SITE_URL } from "@/lib/site";
@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1 },
     { path: "/analyze", priority: 0.7 },
     { path: "/ownership", priority: 0.8 },
+    { path: "/blog", priority: 0.6 },
     { path: "/changes", priority: 0.6 },
     { path: "/about", priority: 0.5 },
     { path: "/contribute", priority: 0.5 },
@@ -29,6 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/phases/${phase.id}`,
       lastModified,
       priority: 0.8,
+    })),
+    ...posts().map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      priority: 0.6,
     })),
     ...digestMonths().map((month) => ({
       url: `${SITE_URL}/changes/${month}`,

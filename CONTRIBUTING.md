@@ -107,6 +107,15 @@ renamed, the fields it changed or published for the first time, and the relation
 commit that adds more than 20 records at once, such as the first import, is one entry. A commit
 that changes no fact, such as a new comment, is left out.
 
+## Blog
+
+`/blog` holds short pieces in `content/blog/<slug>.md`. A data post (`kind: data`) reads the
+records and gives the data date it read as `as_of`. Its figures are a snapshot of that date, and the
+post names the command that reproduces them. It states what the records show, never which tool is
+better. A signed post (`kind: signed`) is one person's opinion and names its `author`. Like
+`/ownership`, it is not data, and no record may cite a post of either kind as a source. The build
+fails a post with a missing field or a tool or phase id that has no record.
+
 ## Freshness
 
 Each record shows how recently its sources were checked: the date of its oldest `retrieved`, and

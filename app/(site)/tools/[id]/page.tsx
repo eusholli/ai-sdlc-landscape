@@ -2,11 +2,13 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PostLinks } from "@/components/post-links";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { ToolDetail } from "@/components/tool/tool-detail";
 import { VendorBadge } from "@/components/tool/vendor-badge";
-import { allTools, changesFor, connectionsOf, isNew, placeLabel, relationsFor, toolById } from "@/lib/data";
+import { allTools, changesFor, connectionsOf, isNew, posts, placeLabel, relationsFor, toolById } from "@/lib/data";
 import { breadcrumbJsonLd, jsonLdText, toolJsonLd } from "@/lib/jsonld";
+import { postsAbout } from "@/lib/blog";
 import { OPEN_GRAPH, toolDescription, toolTitle } from "@/lib/seo";
 import { toolDetailRefs } from "@/lib/tool-refs";
 
@@ -62,6 +64,9 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
             refs={toolDetailRefs()}
             variant="page"
           />
+        </div>
+        <div className="mt-8">
+          <PostLinks posts={postsAbout(posts(), { tool: tool.id })} about="tool" />
         </div>
         {/* Only tools carry the "Listed on" badge; a platform is listed because tools link to it. */}
         {tool.kind === "tool" && <VendorBadge id={tool.id} name={tool.name} />}

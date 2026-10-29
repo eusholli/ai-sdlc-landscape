@@ -17,10 +17,11 @@ export const REDIRECTS = [
   { source: "/insights", destination: "/" },
 ];
 
-/** The Markdown of a tool or a phase sits at a guessable `.md` URL next to its page. */
+/** The Markdown of a tool, a phase or a post sits at a guessable `.md` URL next to its page. */
 export const MARKDOWN_REWRITES = [
   { source: "/tools/:id.md", destination: "/data/tools/:id.md" },
   { source: "/phases/:id.md", destination: "/data/phases/:id.md" },
+  { source: "/blog/:slug.md", destination: "/data/blog/:slug.md" },
 ];
 
 const nextConfig: NextConfig = {

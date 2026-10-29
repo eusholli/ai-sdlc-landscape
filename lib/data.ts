@@ -3,10 +3,12 @@
 // tool drawer fetches /data/tools/<id>.json. Do not import this file from a "use client" module.
 import "server-only";
 
+import { join } from "node:path";
 import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
 import { connectionsFor, type ConnGroup, type ConnectionGroup } from "@/lib/connections";
 import { PHASE_ORDER, pricingBucket, searchLite } from "@/lib/filters";
+import { type Post, readPosts } from "@/lib/blog";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
   Autonomy, Change, Contributor, External, Freshness, FreshnessBand, Landscape, Layer, LayerId, MarketMove,
@@ -117,6 +119,15 @@ export const dataDate = (): string => landscape.generated;
 /** Everyone whose request changed the data, in the order they first did. */
 export const contributors = (): Contributor[] => landscape.contributors;
 export const buildDate = (): string => landscape.built;
+
+let postsCache: Post[] | null = null;
+/** The posts in content/blog, newest first, checked against the ids in the data. */
+export const posts = (): Post[] =>
+  (postsCache ??= readPosts(join(process.cwd(), "content/blog"), {
+    tools: new Set(landscape.tools.map((t) => t.id)),
+    phases: new Set(landscape.phases.map((p) => p.id)),
+  }));
+export const postBySlug = (slug: string): Post | undefined => posts().find((n) => n.slug === slug);
 
 // ---------- Lookups ----------
 

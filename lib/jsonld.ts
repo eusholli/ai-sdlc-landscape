@@ -1,10 +1,11 @@
 // schema.org JSON-LD for search engines and agents: the WebSite and a Dataset for the site, a
 // SoftwareApplication per tool, a CollectionPage per phase, an Article per monthly digest,
-// breadcrumbs, and the thesis with its glossary. Server only; pages render the result in a
+// breadcrumbs, an Article per post, and the thesis with its glossary. Server only; pages render the result in a
 // <script type="application/ld+json"> with jsonLdText.
 import "server-only";
 
 import { allTools, dataDate, FIELD_LABELS, getLandscape, phases } from "@/lib/data";
+import type { Post } from "@/lib/blog";
 import { KEY_TERMS } from "@/lib/paper";
 import { DATA_LICENCE_URL, PAPER_PDF_PATH, REPO_URL, SITE_URL } from "@/lib/site";
 import type { Tool } from "@/lib/types";
@@ -128,6 +129,27 @@ export function toolJsonLd(t: Tool, placeLabel: string | null = null) {
     publisher: { "@type": "Organization", name: t.company },
     ...(t.history ? { datePublished: t.history.added } : {}),
     ...(t.lastVerified ? { dateModified: t.lastVerified } : {}),
+  };
+}
+
+/** A post as an Article. A signed post names its Person; a data post is the contributors' and is based on the dataset. */
+export function postJsonLd(n: Pick<Post, "slug" | "title" | "description" | "date" | "kind" | "author">) {
+  const url = `${SITE_URL}/blog/${n.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#post`,
+    headline: n.title,
+    description: n.description,
+    url,
+    datePublished: n.date,
+    dateModified: n.date,
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    author: n.kind === "signed" && n.author ? { "@type": "Person", name: n.author } : PUBLISHER,
+    publisher: PUBLISHER,
+    ...(n.kind === "data" ? { isBasedOn: { "@id": DATASET_ID } } : {}),
+    isPartOf: { "@type": "WebSite", "@id": WEBSITE_ID, name: SITE_NAME, url: SITE_URL },
   };
 }
 
