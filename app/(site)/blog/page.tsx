@@ -34,7 +34,8 @@ export default function BlogPage() {
             .
           </p>
         </header>
-        <ol className="flex flex-col divide-y border-y">
+        {all.length === 0 && <p className="border-y py-5 text-muted-foreground">No posts yet.</p>}
+        <ol className="flex flex-col divide-y border-y empty:hidden">
           {all.map((n) => (
             <li key={n.slug} className="flex flex-col gap-1 py-5">
               <h2 className="text-lg font-semibold tracking-tight">
