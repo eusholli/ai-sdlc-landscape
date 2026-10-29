@@ -18,6 +18,7 @@
     "data": "tsx scripts/build-data.ts",
     "data:check": "tsx scripts/build-data.ts --check",
     "data:links": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/check-links.ts",
+    "blog:fields": "pnpm data && tsx scripts/published-fields.ts",
     "digest": "pnpm data && NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-https://aisdlclandscape.org} tsx --conditions=react-server scripts/digest.ts",
     "scan": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/scan.ts",
     "favicon": "tsx scripts/favicon.ts",

@@ -40,6 +40,9 @@ into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly di
 The repo stands alone: it depends on no other repository.
 Nobody is selling anything on this site, so no company's view of the market belongs in the data
 or the copy. `/ownership` is the maintainer's signed thesis. It is not data, and no record may cite it.
+The same holds for a signed post at `/blog`: it names its author, and no record may cite it. A
+data post (`content/blog/<slug>.md`, `kind: data`) reads the records and states only what they
+showed on its `as_of` date, with no ranking and no view of the market.
 
 ## Commands
 
@@ -104,7 +107,7 @@ is a rule nobody follows.
 - `scripts/guard.ts`, part of `pnpm check`, fails when a `"use client"` file imports the dataset.
 - Navigation lives in `components/site-nav.ts`: Landscape (map, network, list and market moves
   views), Analyze choices (choose and compare tools), Update tool data (`/contribute`),
-  Latest updates and an About menu.
+  Latest updates and an About menu, which holds Blog.
   The header, the phone menu and the footer read it; a new page is added there once. The footer
   also lists every phase page.
 - Tool links use `ToolLink` (`components/tool/tool-actions.tsx`), which points at `/tools/<id>`
@@ -112,7 +115,9 @@ is a rule nobody follows.
 - Repo URLs and the request advice come from `lib/site.ts` and `lib/request-advice.ts`; never
   retype them.
 - Nothing in code, tests or copy hard-codes how many tools, relations or sources there are. The
-  dataset grows by issue and pull request; derive counts from the data.
+  dataset grows by issue and pull request; derive counts from the data. One exception: a data post
+  quotes figures as they stood on its `as_of` date, says that date beside them, and names the
+  command that reproduces them (`pnpm blog:fields`). It is a dated snapshot, never updated in place.
 - Analytics and `/privacy` change together, in one commit. Plausible and the `Engaged` event
   (`components/engaged.tsx`) load in `app/layout.tsx` only when `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL` is
   set, which is in production alone; Speed Insights sits beside them. None of it may write a cookie
@@ -154,14 +159,16 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/history.ts` | added and last-edited dates, authors and `Requested-by` credits, from git |
 | `scripts/schema.ts` | the JSON Schema for a record, served at `/schema/tool.json` |
 | `scripts/scan.ts` | the repeatable search for new tools |
+| `scripts/published-fields.ts` | `pnpm blog:fields`: the share of tool records with a published value per field, the figures a data post quotes |
 | `scripts/check-links.ts` | source URL checker |
 | `scripts/fetch-logos.ts` | logo fetcher |
 | `scripts/favicon.ts` | draws `app/favicon.ico` from the site mark; `app/icon.tsx` and `app/apple-icon.tsx` draw the same mark |
 | `scripts/guard.ts` | fails when a client component imports the dataset |
 | `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
 | `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
-| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), feed, badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) and how it is saved in the browser (`choices.ts`) |
-| `app/` | routes; `app/data/` serves per-tool and per-phase JSON and Markdown; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
+| `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), posts (`posts.ts`), the two Atom feeds (`feed.ts`), badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) and how it is saved in the browser (`choices.ts`) |
+| `content/blog/` | the posts, one Markdown file each, checked at build by `lib/blog.ts` |
+| `app/` | routes; `app/data/` serves per-tool and per-phase JSON and Markdown, and each post's Markdown; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
 | `components/` | UI components; `components/analyze/` is the Analyze choices page |
 | `tests/` | vitest suites |
 | `docs/design-brief.md` | the design and data contract |

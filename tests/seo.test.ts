@@ -119,6 +119,7 @@ describe("redirects and rewrites", () => {
     expect(MARKDOWN_REWRITES).toEqual([
       { source: "/tools/:id.md", destination: "/data/tools/:id.md" },
       { source: "/phases/:id.md", destination: "/data/phases/:id.md" },
+      { source: "/blog/:slug.md", destination: "/data/blog/:slug.md" },
     ]);
   });
 });

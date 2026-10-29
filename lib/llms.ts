@@ -1,10 +1,11 @@
 // The text surfaces for agents: /llms.txt (a map of the site, after llmstxt.org),
-// /llms-full.txt (every record as Markdown) and one Markdown file per tool and per phase. Built from the data at build time; counts are derived.
+// /llms-full.txt (every record as Markdown) and one Markdown file per tool and per phase. /llms.txt also lists the posts. Built from the data at build time; counts are derived.
 import "server-only";
 
-import { allTools, dataDate, getLandscape, nameOf, phases, placeLabel, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
+import { allTools, dataDate, getLandscape, nameOf, posts, phases, placeLabel, relationsFor, RELATION_LABELS, timeline } from "@/lib/data";
 import { digestMonths, monthTitle } from "@/lib/digest";
-import { notPublished } from "@/lib/format";
+import { formatDate, notPublished } from "@/lib/format";
+import { postLabel } from "@/lib/blog";
 import { getPaper, keyTerms } from "@/lib/paper";
 import { phaseCountLine, phasePage, phaseTitle } from "@/lib/phase-page";
 import { requestAdviceMarkdown } from "@/lib/request-advice";
@@ -66,6 +67,7 @@ export function llmsTxt(): string {
     `- [Full dataset as JSON](${SITE_URL}/landscape.json): phases, layers, segments, tools, externals, relations, contributors; \`null\` means not published`,
     `- [One tool as JSON](${SITE_URL}/data/tools/${example}.json): \`/data/tools/<id>.json\`, the tool and its relations`,
     `- [Changes feed](${SITE_URL}/changes.xml): Atom feed of every change to the records and the dated market moves`,
+    `- [Blog feed](${SITE_URL}/blog/rss.xml): RSS feed of the posts`,
     `- [Badge](${SITE_URL}/badge/${example}.svg): \`/badge/<id>.svg\`, a "Listed on" badge for each tool`,
     `- [Record schema](${SITE_URL}/schema/tool.json): JSON Schema for one source record in \`data/tools/<id>.yaml\``,
     `- [Source records](${REPO_URL}/tree/main/data/tools): the YAML the site is built from`,
@@ -77,6 +79,7 @@ export function llmsTxt(): string {
     `- [Phase pages](${SITE_URL}/phases/${phases()[0]?.id ?? "<id>"}): \`/phases/<id>\`, the tools in one lifecycle phase; \`/phases/<id>.md\` for Markdown`,
     `- [Changes](${SITE_URL}/changes): what changed in the data, newest first`,
     `- [Market moves](${SITE_URL}/?view=moves): acquisitions and shutdowns`,
+    `- [Blog](${SITE_URL}/blog): short pieces on what the records show, each dated to the data it read; \`/blog/<slug>.md\` for Markdown`,
     `- [Analyze choices](${SITE_URL}/analyze): pick tools from \`?compare=<id>,<id>\`; see the phases they cover, tools with a recorded link that cover the empty phases, and a side-by-side comparison (\`&tab=compare\`, or one phase's choices with \`&focus=<phase>\`)`,
     `- [Software ownership: the thesis](${SITE_URL}/ownership): the maintainer's paper on convergence, flow and accountability in agentic development, separate from the records; [PDF](${SITE_URL}${PAPER_PDF_PATH})`,
     ...paperTerms().map((line) => `  ${line}`),
@@ -96,6 +99,12 @@ export function llmsTxt(): string {
     `One line per record. Each links to its Markdown; the HTML page is the same URL without \`.md\`.`,
     "",
     ...tools.map((t) => `- [${t.name}](${SITE_URL}/tools/${t.id}.md): ${t.company}, ${placeLabel(t) ?? "not tied to one phase"}`),
+    "",
+    "## Blog",
+    "",
+    "A data post's figures are a snapshot of the records on its data date; the tool pages are current. A signed post is one person's opinion and not part of the data.",
+    "",
+    ...posts().map((n) => `- [${n.title}](${SITE_URL}/blog/${n.slug}.md): ${postLabel(n, formatDate)}. ${n.description}`),
     "",
     "## Monthly digests",
     "",

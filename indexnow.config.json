@@ -16,6 +16,15 @@
       ]
     },
     {
+      "match": "^content/blog/(.+)\\.md$",
+      "urls": [
+        "/blog/$1",
+        "/blog",
+        "/blog/rss.xml",
+        "/llms.txt"
+      ]
+    },
+    {
       "match": "^public/software-ownership\\.pdf$",
       "urls": [
         "/software-ownership.pdf"

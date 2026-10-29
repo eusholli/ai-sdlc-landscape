@@ -1,8 +1,8 @@
-// The Atom feed of the timeline at /changes.xml: every change to the records, grouped by commit,
-// and the dated market moves. Built from the data at build time.
+// Two Atom feeds, built at build time. /changes.xml is the timeline: every change to the records,
+// grouped by commit, and the dated market moves. /blog/rss.xml is the posts, newest first.
 import "server-only";
 
-import { buildDate, timeline } from "@/lib/data";
+import { buildDate, posts, timeline } from "@/lib/data";
 import { REPO_URL, SITE_URL } from "@/lib/site";
 import type { TimelineEntry } from "@/lib/types";
 
@@ -54,6 +54,37 @@ export function atomFeed(limit = 50): string {
       `  </entry>`,
     ].join("\n")),
     `</feed>`,
+    "",
+  ].join("\n");
+}
+
+/** The blog feed, RSS 2.0. An item's guid is the post's URL, so editing a post never makes it a new item. */
+export function blogFeed(): string {
+  const all = posts();
+  const rfc822 = (date: string) => new Date(stamp(date)).toUTCString();
+  return [
+    `<?xml version="1.0" encoding="utf-8"?>`,
+    `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">`,
+    `  <channel>`,
+    `    <title>AI SDLC Landscape: blog</title>`,
+    `    <link>${SITE_URL}/blog</link>`,
+    `    <description>Thoughts and opinions by experts.</description>`,
+    `    <language>en</language>`,
+    `    <atom:link rel="self" type="application/rss+xml" href="${SITE_URL}/blog/rss.xml"/>`,
+    `    <lastBuildDate>${rfc822(all[0]?.date ?? buildDate())}</lastBuildDate>`,
+    ...all.map((n) => [
+      `    <item>`,
+      `      <title>${esc(n.title)}</title>`,
+      `      <link>${SITE_URL}/blog/${n.slug}</link>`,
+      `      <guid isPermaLink="true">${SITE_URL}/blog/${n.slug}</guid>`,
+      `      <pubDate>${rfc822(n.date)}</pubDate>`,
+      ...(n.author ? [`      <dc:creator>${esc(n.author)}</dc:creator>`] : []),
+      `      <category>${n.kind}</category>`,
+      `      <description>${esc(n.description)}</description>`,
+      `    </item>`,
+    ].join("\n")),
+    `  </channel>`,
+    `</rss>`,
     "",
   ].join("\n");
 }
