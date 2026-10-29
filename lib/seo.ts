@@ -24,8 +24,30 @@ const byCompany = (t: Named) =>
     ? t.name
     : `${t.name} by ${t.company}`;
 
-/** "Cursor by Anysphere: Write code", shortened to fit, never "Replit by Replit". */
-export function toolTitle(t: Named, placeLabel: string | null): string {
+/** What people search for beside a tool's name, each claimed only when the page holds it. */
+export interface TitleFacets {
+  /** The record publishes a pricing model or an entry price. */
+  pricing: boolean;
+  /** The page lists other tools in the same main phase. */
+  alternatives: boolean;
+  /** The record lists at least one integration. */
+  integrations: boolean;
+}
+
+const FACETS = ["pricing", "alternatives", "integrations"] as const;
+const andList = (w: readonly string[]) => (w.length < 2 ? w.join("") : `${w.slice(0, -1).join(", ")} and ${w.at(-1)}`);
+
+/**
+ * "Cursor pricing, alternatives and integrations", the words a search uses, dropping facets from
+ * the end to fit. With no facet the page holds, "Cursor by Anysphere: Write code", shortened to
+ * fit, never "Replit by Replit".
+ */
+export function toolTitle(t: Named, placeLabel: string | null, facets?: TitleFacets): string {
+  const words = facets ? FACETS.filter((f) => facets[f]) : [];
+  for (let n = words.length; n > 0; n--) {
+    const title = `${t.name} ${andList(words.slice(0, n))}`;
+    if (title.length <= TITLE_MAX) return title;
+  }
   const base = byCompany(t);
   const full = placeLabel ? `${base}: ${placeLabel}` : base;
   if (full.length <= TITLE_MAX) return full;

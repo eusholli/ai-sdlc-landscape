@@ -2,14 +2,13 @@ import { ArrowLeft, ArrowRight, Map as MapIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Logo } from "@/components/logo";
 import { SITE_CONTAINER } from "@/components/site-name";
+import { ToolRows } from "@/components/tool-rows";
 import { allTools, phases } from "@/lib/data";
 import { phaseColor } from "@/lib/format";
 import { breadcrumbJsonLd, jsonLdText, phaseJsonLd } from "@/lib/jsonld";
 import { phaseCountLine, phasePage, phaseTitle } from "@/lib/phase-page";
 import { OPEN_GRAPH } from "@/lib/seo";
-import type { Tool } from "@/lib/types";
 
 export const dynamicParams = false;
 
@@ -38,31 +37,6 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 const LINK =
   "rounded-sm outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 max-md:min-h-11";
-
-function ToolRows({ tools }: { tools: Tool[] }) {
-  return (
-    <ul className="divide-y rounded-lg border">
-      {tools.map((tool) => (
-        <li key={tool.id}>
-          <Link
-            href={`/tools/${tool.id}`}
-            prefetch={false}
-            className="flex items-start gap-3 p-3 outline-none hover:bg-muted/50 focus-visible:ring-3 focus-visible:ring-ring/50"
-          >
-            <Logo name={tool.name} src={tool.logo} phase={tool.primaryPhase} size={36} />
-            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="text-sm font-semibold">{tool.name}</span>
-              <span className="text-xs text-muted-foreground">{tool.company}</span>
-              {tool.summary && (
-                <span className="text-sm text-pretty text-muted-foreground">{`“${tool.summary}”`}</span>
-              )}
-            </span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export default async function PhasePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

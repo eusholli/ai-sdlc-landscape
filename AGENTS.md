@@ -28,7 +28,9 @@ with JSON and Markdown from `app/data/phases/[id]/route.ts`. For agents,
 `/llms.txt`, `/llms-full.txt`, `/landscape.json`, `/schema/tool.json` and a Markdown copy of every
 tool and phase page (`/tools/<id>.md`, `/phases/<id>.md`, rewritten in `next.config.ts`) are built
 from the same data (`lib/llms.ts`, `scripts/schema.ts`). Pages carry schema.org JSON-LD
-(`lib/jsonld.ts`), and titles, descriptions and Open Graph fields come from `lib/seo.ts`. A route
+(`lib/jsonld.ts`), and titles, descriptions and Open Graph fields come from `lib/seo.ts`. A tool
+page's title names pricing, alternatives or integrations only where the page holds them, and the
+page lists the other tools in its main phase by name, never ranked. A route
 that is removed gets a permanent redirect in `REDIRECTS` in `next.config.ts`, in the same commit.
 The change log comes from git too (`changeLog` in `scripts/history.ts`). `lib/data.ts` turns it
 into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly digest

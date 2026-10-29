@@ -68,6 +68,26 @@ describe("tool titles and descriptions", () => {
     expect(toolTitle({ name: "Editor", company: "Acme" }, null)).toBe("Editor by Acme");
   });
 
+  it("names only the facets the page holds, in search order, dropping from the end to fit", () => {
+    const all = { pricing: true, alternatives: true, integrations: true };
+    const none = { pricing: false, alternatives: false, integrations: false };
+    expect(toolTitle({ name: "Cursor", company: "Anysphere" }, "Write code", all)).toBe("Cursor pricing, alternatives and integrations");
+    expect(toolTitle({ name: "Editor", company: "Acme" }, "Write code", { ...none, alternatives: true, integrations: true }))
+      .toBe("Editor alternatives and integrations");
+    expect(toolTitle({ name: "Editor", company: "Acme" }, "Write code", { ...none, pricing: true })).toBe("Editor pricing");
+    expect(toolTitle({ name: "A fairly long product name", company: "Acme" }, "Write code", all)).toBe("A fairly long product name pricing");
+    expect(toolTitle({ name: "Editor", company: "Acme" }, "Write code", none)).toBe("Editor by Acme: Write code");
+  });
+
+  it("never claims pricing for a real record that publishes none, and never runs past the limit", () => {
+    for (const t of allTools()) {
+      const facets = { pricing: Boolean(t.pricingModel || t.entryPrice), alternatives: true, integrations: true };
+      const title = toolTitle(t, "Write code", facets);
+      expect(title.length).toBeLessThanOrEqual(TITLE_MAX);
+      if (!facets.pricing) expect(title).not.toContain("pricing");
+    }
+  });
+
   it("drops parts rather than run past the limit", () => {
     const long = { name: "A very long product name here", company: "An equally long company name" };
     expect(toolTitle(long, "Code understanding and knowledge")).toBe(long.name);

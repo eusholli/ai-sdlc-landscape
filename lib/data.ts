@@ -7,6 +7,7 @@ import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
 import { connectionsFor, type ConnGroup, type ConnectionGroup } from "@/lib/connections";
 import { PHASE_ORDER, pricingBucket, searchLite } from "@/lib/filters";
+import { phasePage } from "@/lib/phase-page";
 import { DATA_LICENCE, DATA_LICENCE_URL, REPO_URL, SITE_URL } from "@/lib/site";
 import type {
   Autonomy, Change, Contributor, External, Freshness, FreshnessBand, Landscape, Layer, LayerId, MarketMove,
@@ -111,6 +112,12 @@ export const layers = (): Layer[] => landscape.layers;
 export const segments = (): Segment[] => landscape.segments;
 /** Every node: the tools, the model providers and the platforms. */
 export const allTools = (): Tool[] => landscape.tools;
+
+/** The other tools whose main phase is this tool's, by name, as its phase page lists them. */
+export function otherToolsInPhase(tool: Pick<Tool, "id" | "kind" | "layer" | "primaryPhase">): Tool[] {
+  if (tool.kind !== "tool" || tool.layer || !tool.primaryPhase) return [];
+  return phasePage(tool.primaryPhase, landscape.phases, landscape.tools)?.primary.filter((t) => t.id !== tool.id) ?? [];
+}
 export const externals = (): External[] => landscape.externals;
 export const relations = (): Relation[] => landscape.relations;
 export const dataDate = (): string => landscape.generated;
