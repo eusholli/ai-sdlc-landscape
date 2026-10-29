@@ -7,7 +7,7 @@ import { postLabel } from "@/lib/blog";
 import { OPEN_GRAPH } from "@/lib/seo";
 
 const DESCRIPTION =
-  "Short posts on what the landscape's records show, each dated to the data it read, and signed opinions kept apart from the data.";
+  "Thoughts and opinions by experts.";
 
 export const metadata: Metadata = {
   title: "Blog",

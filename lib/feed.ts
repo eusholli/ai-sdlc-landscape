@@ -68,7 +68,7 @@ export function blogFeed(): string {
     `  <channel>`,
     `    <title>AI SDLC Landscape: blog</title>`,
     `    <link>${SITE_URL}/blog</link>`,
-    `    <description>What the records show, dated to the data each post read, and signed opinions kept apart from the data.</description>`,
+    `    <description>Thoughts and opinions by experts.</description>`,
     `    <language>en</language>`,
     `    <atom:link rel="self" type="application/rss+xml" href="${SITE_URL}/blog/rss.xml"/>`,
     `    <lastBuildDate>${rfc822(all[0]?.date ?? buildDate())}</lastBuildDate>`,
