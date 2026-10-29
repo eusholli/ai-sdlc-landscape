@@ -26,9 +26,8 @@ export default function BlogPage() {
         <header className="flex flex-col gap-3">
           <h1 className="text-3xl font-semibold tracking-tight text-balance">Blog</h1>
           <p className="text-pretty text-muted-foreground">
-            A data post reads the records and gives the date of the data it read, so its figures are a snapshot. A
-            signed post is one person&apos;s opinion. It is not data, and no record cites it. New posts are also in
-            the{" "}
+            Posts and opinions on the market and the data, all opinions and statements are of the author. New posts
+            are also in the{" "}
             <a href="/blog/rss.xml" className={`underline ${LINK}`}>
               blog feed
             </a>
