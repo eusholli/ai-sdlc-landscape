@@ -29,7 +29,7 @@ export const NAV: NavGroup[] = [
     id: "about", label: "About",
     items: [
       { href: "/about", label: "About the landscape", blurb: "Method, sources and licences", Icon: Info },
-      { href: "/blog", label: "Blog", blurb: "What the records show, by date", Icon: NotebookPen },
+      { href: "/blog", label: "Blog", blurb: "Thoughts and opinions by experts", Icon: NotebookPen },
       { href: "/ownership", label: "Software ownership", blurb: "The maintainer's thesis", Icon: BookOpen },
       { href: "/privacy", label: "Privacy", blurb: "What the site measures and keeps", Icon: Shield },
       { href: "/landscape.json", label: "Download the data", blurb: "Every record as JSON", Icon: Download, download: true },
