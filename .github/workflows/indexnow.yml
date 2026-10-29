@@ -1,0 +1,27 @@
+# IndexNow on deploy. Copied into a site repo as .github/workflows/indexnow.yml by
+# site-ops launch mode, beside scripts/indexnow.mjs and indexnow.config.json.
+# It runs on the commit status the host posts when a deploy finishes, so it fires once
+# the build is live rather than when the push lands. Vercel posts its status under the
+# context "Vercel"; for another host, put its context in the condition below.
+name: indexnow
+on: status
+permissions:
+  contents: read
+  statuses: read
+jobs:
+  ping:
+    if: github.event.context == 'Vercel' && github.event.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/indexnow.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_SHA: ${{ github.event.sha }}
+          STATUS_CONTEXT: ${{ github.event.context }}

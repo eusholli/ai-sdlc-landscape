@@ -1,0 +1,55 @@
+{
+  "origin": "https://aisdlclandscape.org",
+  "key": "3c3f7899b291292de2aa6a96de57119b",
+  "branch": "main",
+  "rules": [
+    {
+      "match": "^data/tools/([^/]+)\\.yaml$",
+      "urls": [
+        "/tools/$1"
+      ]
+    },
+    {
+      "match": "^content/ownership\\.md$",
+      "urls": [
+        "/ownership"
+      ]
+    },
+    {
+      "match": "^public/software-ownership\\.pdf$",
+      "urls": [
+        "/software-ownership.pdf"
+      ]
+    },
+    {
+      "match": "^app/\\(site\\)/(about|contribute|privacy)/page\\.tsx$",
+      "urls": [
+        "/$1"
+      ]
+    },
+    {
+      "match": "^data/(tools/|phases\\.json$|externals\\.yaml$)",
+      "urls": [
+        "/",
+        "/changes",
+        "/changes/{month}",
+        "/changes.xml",
+        "/llms.txt",
+        "/llms-full.txt",
+        "/phases/plan",
+        "/phases/design",
+        "/phases/code",
+        "/phases/review",
+        "/phases/test",
+        "/phases/security",
+        "/phases/cicd",
+        "/phases/deploy",
+        "/phases/operate",
+        "/phases/maintain",
+        "/phases/understand",
+        "/phases/measure",
+        "/phases/platform"
+      ]
+    }
+  ]
+}

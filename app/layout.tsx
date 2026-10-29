@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
+import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { Providers } from "@/app/providers";
+import { Engaged } from "@/components/engaged";
 import { cn } from "@/lib/utils";
 import { allTools } from "@/lib/data";
 import { OPEN_GRAPH } from "@/lib/seo";
@@ -9,6 +12,10 @@ import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
+
+// Set in the production environment only, so local and preview builds send nothing. /privacy says
+// what runs; change the two together.
+const PLAUSIBLE_SRC = process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL;
 
 export const viewport: Viewport = {
   themeColor: [
@@ -32,7 +39,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="bg-background text-foreground antialiased">
         {/* Here, not in `metadata`: a page's own `alternates` would replace it. React puts it in <head>. */}
         <link rel="alternate" type="application/atom+xml" href="/changes.xml" title="AI SDLC Landscape: changes" />
+        {PLAUSIBLE_SRC && (
+          <>
+            {/* beforeInteractive puts both in the first HTML, where Plausible's install check looks. The stub queues calls made before the script loads. */}
+            <Script id="plausible-init" strategy="beforeInteractive">
+              {"window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()"}
+            </Script>
+            <Script src={PLAUSIBLE_SRC} strategy="beforeInteractive" async />
+            <Engaged />
+          </>
+        )}
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

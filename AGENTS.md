@@ -35,7 +35,7 @@ into `timeline()`, which feeds `/changes.xml` (`lib/feed.ts`) and the monthly di
 (`lib/digest.ts`, `pnpm digest`). Each tool has a "Listed on" badge at `/badge/<id>.svg`
 (`lib/badge.ts`).
 
-The repo stands alone. It depends on no other repository, and no other repository writes into it.
+The repo stands alone: it depends on no other repository.
 Nobody is selling anything on this site, so no company's view of the market belongs in the data
 or the copy. `/ownership` is the maintainer's signed thesis. It is not data, and no record may cite it.
 
@@ -111,6 +111,14 @@ is a rule nobody follows.
   retype them.
 - Nothing in code, tests or copy hard-codes how many tools, relations or sources there are. The
   dataset grows by issue and pull request; derive counts from the data.
+- Analytics and `/privacy` change together, in one commit. Plausible and the `Engaged` event
+  (`components/engaged.tsx`) load in `app/layout.tsx` only when `NEXT_PUBLIC_PLAUSIBLE_SCRIPT_URL` is
+  set, which is in production alone; Speed Insights sits beside them. None of it may write a cookie
+  or to browser storage: an analytics change that does brings back the consent banner this site avoids.
+- IndexNow tells Bing and the other IndexNow engines which pages a production deploy changed. Its
+  key file in `public/`, `indexnow.config.json`, `scripts/indexnow.mjs` and
+  `.github/workflows/indexnow.yml` stay. A new phase, or a new kind of page that changes with the data,
+  goes into `indexnow.config.json` in the same commit.
 - Tests never depend on the content of a real record. A test that needs a record uses a fixture
   it owns, as `tests/build-data.test.ts` does.
 
@@ -157,6 +165,6 @@ For UI copy, docs, commit messages and pull request text:
 | `docs/design-brief.md` | the design and data contract |
 | `docs/scan.md` | how to run a scan and judge what it finds |
 | `CONTRIBUTING.md` | the data rules for contributors |
-| `.github/` | CI and weekly scan workflows, the plain-language request form |
+| `.github/` | CI, weekly scan and IndexNow workflows, the plain-language request form |
 | `.claude/skills/triage/` | the local skill for working through request issues |
 | `.claude/skills/ui/` | the local skill for changing the visible UI |

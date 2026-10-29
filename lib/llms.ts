@@ -82,6 +82,7 @@ export function llmsTxt(): string {
     ...paperTerms().map((line) => `  ${line}`),
     `- [About](${SITE_URL}/about): the inclusion bar and the method`,
     `- [Contribute](${SITE_URL}/contribute): how to request a change`,
+    `- [Privacy](${SITE_URL}/privacy): what the site measures and what it keeps in your browser`,
     "",
     "## Phases",
     "",
