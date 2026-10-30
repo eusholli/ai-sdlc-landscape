@@ -5,8 +5,9 @@ import { CopyButton } from "@/components/copy-button";
 import { SITE_CONTAINER } from "@/components/site-name";
 import { Button } from "@/components/ui/button";
 import { allTools, contributors } from "@/lib/data";
+import { exampleRequestUrl } from "@/lib/llms";
 import { REQUEST_ADVICE, REQUEST_INTRO, REQUEST_OUTRO } from "@/lib/request-advice";
-import { DATA_LICENCE_URL, REPO, REPO_URL, REQUEST_URL } from "@/lib/site";
+import { DATA_LICENCE_URL, REPO, REPO_URL, REQUEST_FIELD, REQUEST_URL, REQUEST_URL_MAX } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Request a change",
@@ -19,6 +20,21 @@ const linkClass =
   "rounded-sm underline underline-offset-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
 
 const AGENT_COMMAND = `gh issue create --repo ${REPO} --title "<tool>: <what changes>" --body "<the request, with its public source>"`;
+
+const AGENT_LINK = `${REQUEST_URL}&title=<tool>: <what changes>&${REQUEST_FIELD}=<the request, with its public source>`;
+
+function CodeBlock({ code, label, copyLabel }: { code: string; label: string; copyLabel: string }) {
+  return (
+    <div className="flex flex-col gap-2 rounded-lg border bg-muted/40 p-3">
+      <pre className="overflow-x-auto" tabIndex={0} aria-label={label}>
+        <code className="font-mono text-[13px] leading-relaxed whitespace-pre">{code}</code>
+      </pre>
+      <div className="flex items-center justify-end">
+        <CopyButton text={code} label={copyLabel} />
+      </div>
+    </div>
+  );
+}
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -90,18 +106,21 @@ export default function ContributePage() {
 
         <Section id="agents" title="For agents">
           <p>The same request, filed as plain text from a terminal. No template or label is needed.</p>
-          <div className="flex flex-col gap-2 rounded-lg border bg-muted/40 p-3">
-            <pre className="overflow-x-auto" tabIndex={0} aria-label="Command to file a request">
-              <code className="font-mono text-[13px] leading-relaxed whitespace-pre">{AGENT_COMMAND}</code>
-            </pre>
-            <div className="flex items-center justify-end">
-              <CopyButton text={AGENT_COMMAND} label="command" />
-            </div>
-          </div>
+          <CodeBlock code={AGENT_COMMAND} label="Command to file a request" copyLabel="command" />
           <p>
             A chatbot that can&apos;t open issues can give you a link to the request form with your request already
-            written in it. Open it signed in to GitHub, check it, then submit. The link is described in{" "}
-            <Link href="/llms.txt" className={linkClass}>/llms.txt</Link>.
+            written in it. Open it signed in to GitHub, check it, then submit. To build the link, add the title and the
+            request to the form&apos;s address, both percent-encoded, and keep it under {REQUEST_URL_MAX} characters:
+          </p>
+          <CodeBlock code={AGENT_LINK} label="Link to a prefilled request" copyLabel="link" />
+          <p>
+            For example,{" "}
+            <ExternalLink href={exampleRequestUrl()}>this link opens a made-up request about a free tier</ExternalLink>.
+            The same steps are in{" "}
+            <Link href="/llms.txt" className={linkClass}>
+              /llms.txt
+            </Link>
+            .
           </p>
         </Section>
 
