@@ -58,6 +58,21 @@ describe("parsePost", () => {
     expect(() => parsePost("x", bad, REFS)).toThrow(/kind is "essay"[\s\S]*"gamma"[\s\S]*"ship"/);
   });
 
+  it("reads a cover, with its share PNG when the file is there", () => {
+    const withCover = SIGNED.replace("author: Fixture Author\n", "author: Fixture Author\ncover: cover.svg\ncover_alt: A drawing.\n");
+    const all = { ...REFS, hasFile: () => true };
+    expect(parsePost("an-opinion", SIGNED, all).cover).toBeNull();
+    expect(parsePost("an-opinion", withCover, all).cover).toEqual({ src: "/blog/an-opinion/cover.svg", png: "/blog/an-opinion/cover.png", alt: "A drawing." });
+    const svgOnly = { ...REFS, hasFile: (path: string) => path.endsWith(".svg") };
+    expect(parsePost("an-opinion", withCover, svgOnly).cover?.png).toBeNull();
+  });
+
+  it("refuses a cover that is missing, or has no alt text", () => {
+    const withCover = SIGNED.replace("author: Fixture Author\n", "author: Fixture Author\ncover: cover.svg\n");
+    expect(() => parsePost("x", withCover, { ...REFS, hasFile: () => false })).toThrow(/cover_alt is missing[\s\S]*no file at public\/blog\/x\/cover.svg/);
+    expect(() => parsePost("x", SIGNED.replace("kind: signed", "kind: signed\ncover_alt: Orphan."), REFS)).toThrow(/no cover/);
+  });
+
   it("refuses a file name that is not a slug", () => {
     expect(() => parsePost("Bad_Name", DATA, REFS)).toThrow(/file name/);
   });

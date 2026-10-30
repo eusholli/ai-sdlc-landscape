@@ -59,6 +59,7 @@ pnpm data:links       # fetch every source URL; --changed for records changed ag
 pnpm logos            # fetch missing logos into public/logos/ from each vendor's own site
 pnpm favicon          # redraw app/favicon.ico from the site mark (markBars in lib/og.ts)
 pnpm social           # draw the LinkedIn and X profile images from the site mark, into .social/
+pnpm cover <slug>     # render public/blog/<slug>/cover.svg to the cover.png that share cards use
 pnpm scan             # search for tools the landscape lacks; writes .scan/<date>.md (docs/scan.md)
 pnpm digest [YYYY-MM] # last month's changes as a short post and a long version, in .digest/
 pnpm shots            # with `pnpm dev` running: screenshots of the main pages in both themes, in .shots/
@@ -167,7 +168,8 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
 | `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
 | `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), posts (`posts.ts`), the two Atom feeds (`feed.ts`), badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) and how it is saved in the browser (`choices.ts`) |
-| `content/blog/` | the posts, one Markdown file each, checked at build by `lib/blog.ts` |
+| `content/blog/` | the posts, one Markdown file each, checked at build by `lib/blog.ts`; a post's optional `cover` and `cover_alt` name an SVG in `public/blog/<slug>/`, shown above the body |
+| `scripts/cover.ts` | `pnpm cover <slug>`: renders a post's `cover.svg` to `cover.png`, the 1200 x 630 Open Graph image |
 | `app/` | routes; `app/data/` serves per-tool and per-phase JSON and Markdown, and each post's Markdown; `app/llms.txt`, `app/llms-full.txt`, `app/schema` for agents |
 | `components/` | UI components; `components/analyze/` is the Analyze choices page |
 | `tests/` | vitest suites |

@@ -26,7 +26,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       ...OPEN_GRAPH, type: "article", description: post.description, url: `/blog/${post.slug}`, publishedTime: post.date,
       ...(post.author ? { authors: [post.author] } : {}),
+      ...(post.cover?.png ? { images: [{ url: post.cover.png, width: 1200, height: 630, alt: post.cover.alt }] } : {}),
     },
+    ...(post.cover?.png ? { twitter: { card: "summary_large_image", images: [post.cover.png] } } : {}),
   };
 }
 
@@ -65,6 +67,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </p>
           )}
         </header>
+        {post.cover && (
+          // eslint-disable-next-line @next/next/no-img-element -- an SVG drawing, served as is
+          <img src={post.cover.src} alt={post.cover.alt} width={1200} height={630} className="h-auto w-full rounded-md border" />
+        )}
         <div className="paper" dangerouslySetInnerHTML={{ __html: post.html }} />
         {about.length > 0 && (
           <nav aria-labelledby="post-about" className="flex flex-col gap-2 border-t pt-6 text-sm">

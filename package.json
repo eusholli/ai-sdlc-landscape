@@ -23,6 +23,7 @@
     "scan": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/scan.ts",
     "favicon": "tsx scripts/favicon.ts",
     "social": "tsx scripts/social.ts",
+    "cover": "tsx scripts/cover.ts",
     "logos": "NODE_OPTIONS=--max-http-header-size=65536 tsx scripts/fetch-logos.ts"
   },
   "dependencies": {

@@ -3,6 +3,7 @@
 // tool drawer fetches /data/tools/<id>.json. Do not import this file from a "use client" module.
 import "server-only";
 
+import { existsSync } from "node:fs";
 import { join } from "node:path";
 import raw from "@/data/landscape.json";
 import phaseFile from "@/data/phases.json";
@@ -133,6 +134,7 @@ export const posts = (): Post[] =>
   (postsCache ??= readPosts(join(process.cwd(), "content/blog"), {
     tools: new Set(landscape.tools.map((t) => t.id)),
     phases: new Set(landscape.phases.map((p) => p.id)),
+    hasFile: (path) => existsSync(join(process.cwd(), "public", path)),
   }));
 export const postBySlug = (slug: string): Post | undefined => posts().find((n) => n.slug === slug);
 

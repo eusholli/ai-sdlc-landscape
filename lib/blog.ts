@@ -25,6 +25,8 @@ export interface Post {
   /** Tool and phase ids the post is about; their pages link back to it. */
   tools: string[];
   phases: string[];
+  /** The cover drawn above the body, from public/blog/<slug>/; `png` is its share image. */
+  cover: { src: string; png: string | null; alt: string } | null;
   /** The Markdown body, without frontmatter. */
   body: string;
   html: string;
@@ -34,6 +36,8 @@ export interface Post {
 export interface PostRefs {
   tools: Set<string>;
   phases: Set<string>;
+  /** Whether a file exists under public/, by its site path. Without it, covers go unchecked. */
+  hasFile?: (path: string) => boolean;
 }
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -69,12 +73,22 @@ export function parsePost(slug: string, raw: string, refs: PostRefs): Post {
   const phases = ids(meta.phases);
   for (const t of tools) if (!refs.tools.has(t)) errors.push(`tools: no record has the id "${t}"`);
   for (const p of phases) if (!refs.phases.has(p)) errors.push(`phases: no phase has the id "${p}"`);
+  const coverFile = text("cover");
+  const coverAlt = text("cover_alt");
+  let cover: Post["cover"] = null;
+  if (coverFile) {
+    const src = `/blog/${slug}/${coverFile}`;
+    const png = src.replace(/\.[a-z]+$/, ".png");
+    if (!coverAlt) errors.push("cover_alt is missing; a cover says what it shows");
+    if (refs.hasFile && !refs.hasFile(src)) errors.push(`cover: no file at public${src}`);
+    cover = { src, png: !refs.hasFile || refs.hasFile(png) ? png : null, alt: coverAlt };
+  } else if (coverAlt) errors.push("cover_alt is set but there is no cover");
   if (errors.length) throw new Error(`content/blog/${slug}.md:\n  ${errors.join("\n  ")}`);
 
   const body = raw.slice(m[0].length).trim();
   return {
     slug, title, description, date, kind: kind as PostKind, author, asOf: kind === "data" ? asOf : null,
-    tools, phases, body, html: new Marked().parse(body, { async: false }),
+    tools, phases, cover, body, html: new Marked().parse(body, { async: false }),
   };
 }
 
