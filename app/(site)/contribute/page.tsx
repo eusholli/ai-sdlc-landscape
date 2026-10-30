@@ -98,6 +98,11 @@ export default function ContributePage() {
               <CopyButton text={AGENT_COMMAND} label="command" />
             </div>
           </div>
+          <p>
+            A chatbot that can&apos;t open issues can give you a link to the request form with your request already
+            written in it. Open it signed in to GitHub, check it, then submit. The link is described in{" "}
+            <Link href="/llms.txt" className={linkClass}>/llms.txt</Link>.
+          </p>
         </Section>
 
         <Section id="vendors" title="For vendors">

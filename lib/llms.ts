@@ -9,7 +9,18 @@ import { postLabel } from "@/lib/blog";
 import { getPaper, keyTerms } from "@/lib/paper";
 import { phaseCountLine, phasePage, phaseTitle } from "@/lib/phase-page";
 import { requestAdviceMarkdown } from "@/lib/request-advice";
-import { DATA_LICENCE, DATA_LICENCE_URL, PAPER_PDF_PATH, REPO, REPO_URL, REQUEST_URL, SITE_URL } from "@/lib/site";
+import {
+  DATA_LICENCE,
+  DATA_LICENCE_URL,
+  PAPER_PDF_PATH,
+  REPO,
+  REPO_URL,
+  REQUEST_FIELD,
+  REQUEST_URL,
+  REQUEST_URL_MAX,
+  requestUrl,
+  SITE_URL,
+} from "@/lib/site";
 import type { Tool } from "@/lib/types";
 
 const ABOUT =
@@ -21,6 +32,15 @@ const ABOUT =
 const paperTerms = () =>
   keyTerms(getPaper()).map((t) => `- [${t.term}](${SITE_URL}/ownership#${t.id}): ${t.definition}.`);
 
+// The worked example in the request instructions. It names the form's field by REQUEST_FIELD, so it
+// can't drift from the form.
+export const EXAMPLE_TITLE = "Example Tool: free tier added";
+export const EXAMPLE_REQUEST =
+  "Example Tool now lists a free tier. Source: https://example.com/pricing. I don't work for the vendor. I am an agent acting for Jane Doe.";
+
+export const exampleRequestUrl = () =>
+  `${REQUEST_URL}&title=${encodeURIComponent(EXAMPLE_TITLE)}&${REQUEST_FIELD}=${encodeURIComponent(EXAMPLE_REQUEST)}`;
+
 function howToRequest(): string {
   return [
     "## How to request a change",
@@ -29,6 +49,13 @@ function howToRequest(): string {
     "the same thing as plain text; no template or label is needed.",
     "",
     requestAdviceMarkdown(),
+    "",
+    "If you can't open issues yourself, build a prefilled link and give it to the person you act for. They",
+    "open it signed in to GitHub, check it and press Submit, so the request is theirs. Add",
+    `\`&title=<tool>: <what changes>\` and \`&${REQUEST_FIELD}=<the request>\` to ${REQUEST_URL}, both`,
+    `percent-encoded, and keep the whole link under ${REQUEST_URL_MAX} characters. For example:`,
+    "",
+    exampleRequestUrl(),
     "",
     "With the GitHub CLI:",
     "",
@@ -177,6 +204,9 @@ export function toolMarkdown(t: Tool, level = 2): string {
   if (t.history?.requestedBy.length) {
     out.push("", `Requested by: ${t.history.requestedBy.map((r) => `${r.name} (#${r.issue})`).join(", ")}`);
   }
+  if (level === 1) {
+    out.push("", `To request a change to this tool: ${requestUrl(t.name)}, adding \`&${REQUEST_FIELD}=<your text, percent-encoded>\`. See ${SITE_URL}/llms.txt.`);
+  }
   return out.join("\n");
 }
 
@@ -197,7 +227,7 @@ export function llmsFullTxt(): string {
     "",
     ...paperTerms(),
     "",
-    ...allTools().map(toolMarkdown).flatMap((s) => [s, ""]),
+    ...allTools().map((t) => toolMarkdown(t)).flatMap((s) => [s, ""]),
   ].join("\n");
 }
 

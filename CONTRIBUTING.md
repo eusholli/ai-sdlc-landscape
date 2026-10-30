@@ -65,8 +65,9 @@ end of each scan for another look, for a tool in early access or a site that ref
 Open an issue in plain words: [request a change](../../issues/new?template=request.yml). People
 and agents ask the same way. An agent can file plain text with
 `gh issue create --repo eusholli/ai-sdlc-landscape --title "<tool>: <what changes>" --body "..."`;
-no template or label is needed. The site's [/llms.txt](https://aisdlclandscape.org/llms.txt)
-says the same for agents.
+no template or label is needed. A chatbot that can't open issues can give the person a link to
+the form with the request already written in it (`&title=` and `&request=`), for them to check
+and submit. The site's [/llms.txt](https://aisdlclandscape.org/llms.txt) says the same for agents.
 
 Write it in your own words. A good request says:
 

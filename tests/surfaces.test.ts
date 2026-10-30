@@ -6,9 +6,9 @@ import { parse } from "yaml";
 import phases from "@/data/phases.json";
 import { allTools, getLandscape } from "@/lib/data";
 import { datasetJsonLd, jsonLdText, toolJsonLd } from "@/lib/jsonld";
-import { llmsFullTxt, llmsTxt } from "@/lib/llms";
+import { exampleRequestUrl, llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { REQUEST_ADVICE, REQUEST_INTRO, REQUEST_OUTRO } from "@/lib/request-advice";
-import { DATA_LICENCE, REQUEST_URL, requestUrl, SITE_URL } from "@/lib/site";
+import { DATA_LICENCE, REQUEST_FIELD, REQUEST_URL, REQUEST_URL_MAX, requestUrl, SITE_URL } from "@/lib/site";
 import { FIELDS_JUDGED, FIELDS_PLACEMENT, FIELDS_SOURCED, REL_TYPES } from "@/scripts/build-data";
 import { toolSchema } from "@/scripts/schema";
 
@@ -62,6 +62,12 @@ describe("request advice", () => {
     expect(requestUrl()).toBe(REQUEST_URL);
     expect(requestUrl("A & B")).toBe(`${REQUEST_URL}&title=A%20%26%20B%3A%20`);
   });
+
+  it("prefills the request text in the form's own field", () => {
+    expect(requestUrl("A & B", "x & y\nz")).toBe(`${REQUEST_URL}&title=A%20%26%20B%3A%20&request=x%20%26%20y%0Az`);
+    const form = parse(readFileSync(".github/ISSUE_TEMPLATE/request.yml", "utf8")) as { body: { id?: string }[] };
+    expect(form.body.map((b) => b.id)).toContain(REQUEST_FIELD);
+  });
 });
 
 describe("llms.txt", () => {
@@ -72,12 +78,17 @@ describe("llms.txt", () => {
     }
     expect(txt).toContain(REQUEST_URL);
     expect(txt).toContain("gh issue create --repo");
+    const example = exampleRequestUrl();
+    expect(txt).toContain(example);
+    expect(example.length).toBeLessThan(REQUEST_URL_MAX);
     expect(txt).toContain(REQUEST_ADVICE[0].body);
   });
 
   it("holds a section for every record in the full file", () => {
     const full = llmsFullTxt();
     for (const t of allTools()) expect(full).toContain(`- id: \`${t.id}\``);
+    expect(full).not.toContain("To request a change to this tool");
+    expect(full.match(/^#{3,} /m)).toBeNull();
     expect(full).not.toContain(": unknown\n");
   });
 });
