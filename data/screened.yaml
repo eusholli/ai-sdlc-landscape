@@ -24,3 +24,4 @@
 - {name: Octomind, url: https://www.octomind.dev, decision: deferred, reason: "screened out with no reason recorded; look again", date: 2026-10-21}
 - {name: System Initiative, url: https://www.systeminit.com, decision: deferred, reason: "screened out with no reason recorded; look again", date: 2026-10-21}
 - {name: Ezra, url: https://ezra.io, decision: deferred, reason: "early access only, so not generally available", date: 2026-10-21}
+- {name: Ryph, url: https://ryph.ai, decision: deferred, reason: "no named company and not yet in wide use (first public release 2026-11-04, 17 GitHub stars); look again once one holds", date: 2026-11-09}
