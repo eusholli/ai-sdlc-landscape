@@ -62,7 +62,9 @@ issue without their yes for that issue.
 7. **On no:** close with the reason, quoting the rule:
    `gh issue close <n> --repo eusholli/ai-sdlc-landscape --reason "not planned" --comment "<reason>"`.
    A new tool turned down for the inclusion bar also gets a `data/screened.yaml` entry
-   (`rejected` or `deferred`, with the reason and today's date), committed the same way.
+   (`rejected` or `deferred`, with the reason and today's date), committed the same way except
+   that the body says `Refs #<n>`, never `Closes #<n>`: a `Closes` line marks the issue completed
+   when it is pushed, and the `gh issue close` above is what closes it as not planned.
 8. Next issue. At the end, list what was accepted, rejected, skipped and left open.
 
 ## Writing the comments and commits
