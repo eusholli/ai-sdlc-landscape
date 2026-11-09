@@ -80,7 +80,7 @@ Write it in your own words. A good request says:
 One issue can hold several changes. Each is checked, then accepted, or the issue is closed with the reason.
 
 A maintainer checks each request against the rules above, using the triage skill in
-`.claude/skills/triage/`. An accepted change is committed to `main`, which deploys the site, with
+`.agents/skills/triage/`. An accepted change is committed to `main`, which deploys the site, with
 `Closes #<issue>` in the body and a `Requested-by: <name> (#<issue>)` trailer at the end. A
 rejected one is closed with the reason and the rule it fails; a new tool that fails the bar also
 goes in `data/screened.yaml`.

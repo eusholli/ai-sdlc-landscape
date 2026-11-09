@@ -1,8 +1,8 @@
 # AGENTS.md
 
-Every coding agent reads this file: Codex and Cline natively, Claude Code through `CLAUDE.md`,
-which imports it. It is the whole set of standing rules for this repo. Keep it short; detail
-belongs in the documents it points to.
+Every coding agent reads this file: Codex, Cline, Cursor and Copilot's coding agent natively,
+Claude Code through `CLAUDE.md`, which only imports it. It is the whole set of standing rules
+for this repo. Keep it short; detail belongs in the documents it points to.
 
 ## What this repo is
 
@@ -100,7 +100,7 @@ is a rule nobody follows.
 - Never import `data/landscape.json` or `@/lib/data` from a `"use client"` file. Client components
   get `ToolLite[]` and `RelationLite[]` as props; the drawer fetches `/data/tools/<id>.json`.
 - `null` means not published: render it with `notPublished()`, never an empty cell or a dash.
-- UI work is done by hand in this repo, following the `ui` skill in `.claude/skills/ui/`: edit,
+- UI work is done by hand in this repo, following the `ui` skill in `.agents/skills/ui/`: edit,
   look at it in `pnpm dev`, run `pnpm shots` (both themes, phone and desktop widths, fails on
   sideways scroll, console errors or a bad response), then `pnpm check` and `pnpm build`.
 - Logic that a page needs goes in `lib/` with a fixture test, not in a component. A change to the
@@ -139,6 +139,20 @@ For UI copy, docs, commit messages and pull request text:
   revolutionize, harness the power. No "not just X, but Y".
 - Short words, sentence case, active voice, and name the actor ("Vendors list 3 customers").
 
+## Agent setup
+
+The repo follows the cross-agent standards, so any coding agent finds the same rules and skills.
+
+- Rules go in `AGENTS.md` only. `CLAUDE.md` holds nothing but the `@AGENTS.md` import, for Claude
+  Code. No `GEMINI.md`, `.cursor/rules`, `.clinerules` or `.github/copilot-instructions.md`.
+- Skills go in `.agents/skills/<name>/SKILL.md` only, in the Agent Skills format
+  (https://agentskills.io/specification): `name` matches the folder, `description` says what the
+  skill does and when to use it. Codex reads `.agents/skills`.
+- `.claude/` holds only `skills`, a committed symlink to `../.agents/skills`, because Claude Code
+  and Cline read `.claude/skills` and not `.agents/skills`. On Windows, clone with
+  `git clone -c core.symlinks=true`.
+- `scripts/agents-guard.ts`, run by `scripts/guard.ts` in `pnpm check`, fails on any drift from this.
+
 ## Working discipline
 
 - Work on `main`. Pushing to `main` deploys to production on Vercel, so push only what has passed
@@ -164,7 +178,7 @@ For UI copy, docs, commit messages and pull request text:
 | `scripts/check-links.ts` | source URL checker |
 | `scripts/fetch-logos.ts` | logo fetcher |
 | `scripts/favicon.ts` | draws `app/favicon.ico` from the site mark; `app/icon.tsx` and `app/apple-icon.tsx` draw the same mark |
-| `scripts/guard.ts` | fails when a client component imports the dataset |
+| `scripts/guard.ts` | fails when a client component imports the dataset, and runs `scripts/agents-guard.ts` |
 | `scripts/shots.ts` | screenshots of the main pages in both themes and two widths, with checks |
 | `components/site-nav.ts` | the navigation; header, phone menu and footer read it |
 | `lib/` | data access (`data.ts`, server only), types, filters, formatting, site URLs, request advice, llms text, JSON-LD, titles and Open Graph (`seo.ts`), phase pages (`phase-page.ts`), posts (`posts.ts`), the two Atom feeds (`feed.ts`), badge, digest, connections across the lifecycle and stack coverage (`connections.ts`), the choices selection (`compare.ts`) and how it is saved in the browser (`choices.ts`) |
@@ -177,5 +191,7 @@ For UI copy, docs, commit messages and pull request text:
 | `docs/scan.md` | how to run a scan and judge what it finds |
 | `CONTRIBUTING.md` | the data rules for contributors |
 | `.github/` | CI, weekly scan and IndexNow workflows, the plain-language request form |
-| `.claude/skills/triage/` | the local skill for working through request issues |
-| `.claude/skills/ui/` | the local skill for changing the visible UI |
+| `.agents/skills/triage/` | the local skill for working through request issues |
+| `.agents/skills/ui/` | the local skill for changing the visible UI |
+| `.claude/skills` | a symlink to `.agents/skills`, for Claude Code and Cline |
+| `scripts/agents-guard.ts` | fails `pnpm check` when the agent setup drifts from `AGENTS.md` and `.agents/skills` |

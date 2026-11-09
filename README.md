@@ -42,7 +42,7 @@ enforces this.
 
 ## Changing the UI
 
-The UI is written by hand. The `ui` skill in `.claude/skills/ui/` sets out the loop for a person
+The UI is written by hand. The `ui` skill in `.agents/skills/ui/` sets out the loop for a person
 or an agent:
 
 ```bash

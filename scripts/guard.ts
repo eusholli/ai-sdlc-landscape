@@ -1,8 +1,10 @@
-// The client-bundle guard, run by `pnpm check`: `pnpm exec tsx scripts/guard.ts`.
+// The repo guard, run by `pnpm check`: `pnpm exec tsx scripts/guard.ts`.
 // Fails when a "use client" file imports the full dataset, which would ship every record and
-// source to the browser. Client components get the lite projections as props instead.
+// source to the browser; client components get the lite projections as props instead. Also
+// fails when the agent setup drifts from AGENTS.md and .agents/skills (scripts/agents-guard.ts).
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { agentsGuard } from "./agents-guard";
 
 function walk(dir: string, out: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
@@ -26,8 +28,8 @@ export function guard(): string[] {
   return problems;
 }
 
-if (process.argv[1]?.endsWith("guard.ts")) {
-  const problems = guard();
+if (process.argv[1]?.endsWith("/guard.ts")) {
+  const problems = [...guard(), ...agentsGuard(process.cwd())];
   if (problems.length) {
     console.error(problems.map((p) => `GUARD: ${p}`).join("\n"));
     process.exit(1);
