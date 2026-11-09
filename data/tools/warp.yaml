@@ -3,7 +3,7 @@ name: Warp
 company: Warp
 url: https://www.warp.dev
 primary_phase: code
-phases: [code, cicd, platform]
+phases: [code, review, test, cicd, platform]
 sub_kind: autonomous-agent
 target_buyer: [platform team, developer]
 interface: [cli, web]
@@ -26,3 +26,4 @@ sources:
   - {field: deployment, url: https://www.warp.dev, retrieved: 2026-10-21}
   - {field: deployment, url: https://www.warp.dev/pricing, retrieved: 2026-10-21}
   - {field: relations, url: https://www.warp.dev, retrieved: 2026-10-21}
+  - {field: phases, url: https://www.warp.dev/blog/agent-code-review-bottleneck, retrieved: 2026-11-09}
